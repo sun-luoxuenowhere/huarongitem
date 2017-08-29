@@ -25,6 +25,7 @@
     </el-menu>
 </template>
 
+
 <script> 
 	export default {
 		props:['navdata'],
