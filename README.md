@@ -13,6 +13,7 @@
 ### store 开发过程中提供一个仓库(Vuex)储存数据的使用；
 
 ###test
+
 # 项目启动说明
 	>电脑需要安装node，如果没有node_modules需要打开控制台 cmd npm install进行安装；
 	>启动项目npm run dev
