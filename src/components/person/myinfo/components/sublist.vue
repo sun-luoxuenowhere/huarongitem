@@ -1,0 +1,109 @@
+<template>
+	<div class="y-module"> 
+		<div class="y-title"> 
+			<div class="y-operate">
+				<yListBtns :status="status"
+					@handle="handleList"></yListBtns>
+			</div>
+			<span v-html="title"></span>
+		</div>
+		<div class="y-content">
+			<el-table class="y-table y-table-baseinfo" :data="tempData" style="width: 100%">
+				<template v-for="item in theaddata">
+					<el-table-column v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text"></el-table-column>
+					<el-table-column width="200" v-else-if="!item.required" :prop="item.param[0]" :label="item.text">
+						<template scope="scope">
+					        {{scope.row[item.param[0]]}}-{{scope.row[item.param[1]]}}
+					    </template>
+					</el-table-column>
+					<el-table-column v-else-if="item.required && typeof item.param == 'string'" :render-header="requiredCol" :prop="item.param" :label="item.text"></el-table-column>
+					<el-table-column width="200" v-else :render-header="requiredCol" :prop="item.param[0]" :label="item.text">
+						<template scope="scope">
+					        {{scope.row[item.param[0]]}}-{{scope.row[item.param[1]]}}
+					    </template>
+					</el-table-column>
+				</template> 
+				<el-table-column v-if="editabled && ( status == -1 || status == 0 || status == 2)" width="100">
+					<template scope="scope">   
+						<i style="color: #50CC7A;" class="iconfont icon-bianji1"  
+						@click="editRow(scope.$index, scope.row)"></i>  
+						<i  style="color: #49A7F5;" class="iconfont icon-shanchu"  
+						@click="deleteRow(scope.$index, scope.row)"></i>  
+					</template>
+				</el-table-column>
+			</el-table>
+			<div v-if="editabled && ( status == -1 || status == 0 || status == 2)" class="text-center">
+				<span style="color: #CC2123;" @click="addRow"><i class="iconfont icon-tianjia"></i>新增{{title}}</span> 
+			</div>
+		</div>
+	</div> 
+</template>
+<script> 
+import { deepCopyObj, deepCopyArry } from '@/assets/js/v-extend.js'; 
+import { ajaxData } from '@/assets/js/ajaxdata.js';
+import yListBtns from '@/components/public/ylistbtns';
+
+export default { 
+	//url: 数据源地址
+	 //editabled:是否可编辑 Boolean(true)
+	 //title: 模块标题 
+	 //theaddata: 表头显示
+	props: ['editabled', 'title', 'theaddata', 'infoSetCode'],
+	data() {
+		return {  
+			listdata: [],
+			EditInfo: false,
+			tempData: [],
+			status: -1 //列表状态, 控制操作按钮的类型
+		}
+	},  
+	components: { 
+		yListBtns //列表操作按钮区[根据列表的不同状态，动态显示不同的操作按钮 ]
+	},  
+	watch: {
+	    // 如果 listdata 发生改变，这个函数就会运行
+	    listdata: function ( data ) { 
+	    	this.tempData = deepCopyArry( data );
+	    }
+	},
+	created(){
+		this.loadData();
+	},
+	methods: {  
+		//动态加载数据
+		loadData(){ 
+			ajaxData(this.$store.state.Interface.information, {
+				"infoSetCode": this.infoSetCode,
+				"transType": 'psnInfoQuery',
+				"pk_psndoc": this.$store.state.UserInfo.pk_psndoc
+			}, ( res ) => {   
+				this.status = res.status;  
+				this.listdata = res.list; 
+	    	});  
+		}, 
+		//调用父组件的提交方法,弹出新增窗口
+		handleList( data ){
+			this.$emit( 'handle', [ data[0], this.infoSetCode] );  
+		},
+		//点击底部的新增按钮
+		addRow(){ 
+			this.$emit('add',["add", this.infoSetCode]);  //调用父组件的新增方法,弹出新增窗口
+		},
+		//点击删除按钮
+		deleteRow(index, row){
+			this.tempData.splice(index, 1);  
+		},
+		//点击编辑按钮
+		editRow( index, row ){
+			this.$emit('add', ["edit", this.infoSetCode, row ]);  //调用父组件的新增方法,弹出新增窗口
+		},
+		//列表必填列
+		requiredCol(createElement, { column }) {
+			return [ column.label, createElement('span', {
+					'class': 'text-red'
+				},'*') 
+			];
+		} 
+	}
+}
+</script> 
