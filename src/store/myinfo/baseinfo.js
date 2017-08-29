@@ -2,6 +2,15 @@ import axios from 'axios';
 import { validForm } from '@/assets/js/validform.js'; 
 export default {
     state: {
+    	baseFormInit: {
+    		"sex": '',
+    		"officephone": '',
+    		"mobile": '',
+    		"email": '',
+    		"nationality": '',
+    		"birthdate": '',
+    		"nativeplace": ''
+    	},
     	//基本信息[头像区域] 
     	baseInfo1: [{ "id": "photo", "text": "头像", "disabled": true },
 			{ "id": "name", "text": "姓名", "disabled": true },

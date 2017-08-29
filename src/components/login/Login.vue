@@ -20,6 +20,7 @@
 
 <script>
 	
+	
     export default {
         data: function(){
             return {
@@ -54,16 +55,15 @@
                 //发送请求
                 this.$http.get("static/datalogin.json",{
 //              this.$http.get("service/EHRWebSmServlet",{
-//              this.$http.get(this.url,{
+                //this.$http.get(this.url,{
 			    	params:{
 			    		'transType':'login',
 			    		"userCode":name,
 						"password":password
 			    	}
-		    	}).then(function (response) {
-					console.log(response);
+		    	}).then(function (response) { 
 					//返回数据成功跳转到首页
-					var _data=JSON.stringify(response.data)
+					var _data=JSON.stringify(response.data);
 					 
 					if(response.data.flag==0){
 						window.localStorage.setItem("userid",_data) 

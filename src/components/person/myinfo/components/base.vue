@@ -98,6 +98,7 @@
 		props: ['editabled'],
 		data() {
 			return {
+				aa: {},
 				rules: {},
 				formDataInit: {}, //初始状态的表单数据 
 				formData: {}, //当前表单数据
@@ -117,12 +118,13 @@
 					'email': 'icon-youjian'
 				}
 			}
-		},
+		}, 
 		components: {
 			yInput, //表单元素
 			yFormBtns //表单操作按钮区[根据表单的不同状态，动态显示不同的操作按钮 ]
 		},
-		created() {
+		created() { 
+			this.formData = this.$store.state.BaseInfo.baseFormInit; 
 			this.loadInfoData();
 			this.transferData(this.$store.state.BaseInfo.baseInfo1, this.formDataConfig1);
 			this.transferData(this.$store.state.BaseInfo.baseInfo2, this.formDataConfig2);
@@ -155,9 +157,10 @@
 					this.infoSetCode = res.infoSetCode;
 					 
 					_dataobj.photo = (_dataobj.photo == "" ? photoSrc : _dataobj.photo);
-					_dataobj.sex = _dataobj.sex.toString();
-					this.formDataInit = deepCopyObj(_dataobj);
-					this.formData = _dataobj;
+					_dataobj.sex = _dataobj.sex.toString(); 
+					this.formDataInit = Object.assign({}, this.formData, _dataobj);
+					this.formData = Object.assign({}, this.formData, _dataobj);
+					console.info( this.formData, this._dataobj)
 				});
 			},
 			//点击保存按钮
