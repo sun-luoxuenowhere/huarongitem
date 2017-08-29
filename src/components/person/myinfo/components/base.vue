@@ -1,5 +1,5 @@
 <template>
-	<el-form class="y-baseinfo-form" ref="myForm" :model="formData" :rules="rules" label-width="100px" label-position="left"> 
+	<el-form class="y-baseinfo-form" ref="myForm" :model="formData" :rules="rules" label-width="100px" label-position="left">
 		<!-- y-module-baseinfo begin 基本信息表单 [头像区域]-->
 		<div class="y-module y-module-baseinfo clearfix">
 			<!-- 按钮操作区域 begin -->
@@ -15,7 +15,7 @@
 			<div class="y-content">
 				<!-- 表单区域 begin -->
 				<el-row v-show="editBase1" :gutter="5">
-					<template v-for="(val,key) in formDataConfig1"> 
+					<template v-for="(val,key) in formDataConfig1">
 						<el-col v-if="iconForm.indexOf(val.id) > -1" :xs="24" :sm="12" :md="8" :lg="8"> 
 							<div class="y-icon-item">
 								<i class="iconfont" :class="iconCls[val.id]"></i>
@@ -34,7 +34,7 @@
 				
 				<!-- 视图区域 begin -->
 				<el-row v-show="!editBase1" :gutter="5">
-					<template v-for="(val,key) in formDataConfig1"> 
+					<template v-for="(val,key) in formDataConfig1">
 						<el-col v-if="iconForm.indexOf(val.id) > -1" :xs="24" :sm="12" :md="8" :lg="8"> 
 							<div class="y-icon-item">
 								<i class="iconfont" :class="iconCls[val.id]"></i>
@@ -98,7 +98,6 @@
 		props: ['editabled'],
 		data() {
 			return {
-				aa: {},
 				rules: {},
 				formDataInit: {}, //初始状态的表单数据 
 				formData: {}, //当前表单数据
@@ -118,12 +117,12 @@
 					'email': 'icon-youjian'
 				}
 			}
-		}, 
+		},
 		components: {
 			yInput, //表单元素
 			yFormBtns //表单操作按钮区[根据表单的不同状态，动态显示不同的操作按钮 ]
 		},
-		created() {  
+		created() {
 			this.loadInfoData();
 			this.transferData(this.$store.state.BaseInfo.baseInfo1, this.formDataConfig1);
 			this.transferData(this.$store.state.BaseInfo.baseInfo2, this.formDataConfig2);
@@ -156,11 +155,9 @@
 					this.infoSetCode = res.infoSetCode;
 					 
 					_dataobj.photo = (_dataobj.photo == "" ? photoSrc : _dataobj.photo);
-					_dataobj.sex = _dataobj.sex.toString(); 
-					 
-					this.formDataInit = deepCopyObj({}, this.$store.state.BaseInfo.baseFormInit, _dataobj );
-					this.formData = deepCopyObj({}, this.$store.state.BaseInfo.baseFormInit, _dataobj ); 
-					
+					_dataobj.sex = _dataobj.sex.toString();
+					this.formDataInit = deepCopyObj(_dataobj);
+					this.formData = _dataobj;
 				});
 			},
 			//点击保存按钮

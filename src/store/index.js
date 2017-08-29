@@ -16,8 +16,6 @@ export default new Vuex.Store({
     		'smserverlet': '/service/EHRWebSmServlet' //参照类型数据接口
     	},
     	UserInfo: {
-    		/*'pk_psndoc': JSON.parse(window.localStorage.getItem("userid")).pk_psndoc,
-    		'cuserid': JSON.parse(window.localStorage.getItem("userid")).cuserid*/
     		'pk_psndoc': '0001A310000000000JWA',
     		'cuserid': '1001A3100000000009CK'
     	},

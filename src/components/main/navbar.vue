@@ -23,7 +23,7 @@
 			</el-menu-item-group>
 		</el-submenu> 
     </el-menu>
-</template> 
+</template>
 
 <script> 
 	export default {

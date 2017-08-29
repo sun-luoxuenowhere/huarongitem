@@ -37,7 +37,8 @@ export default {
 	created(){ 
 		
 		//权限判断
-		var userid=JSON.parse(window.localStorage.getItem('userid')); 
+		var userid=JSON.parse(window.localStorage.getItem('userid'));
+		console.log(userid)
 		if(!userid.cuserid){
 			this.$router.push({
 	  			name:'/Login',
