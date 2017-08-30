@@ -176,8 +176,7 @@ import { ajaxData } from '@/assets/js/ajaxdata.js';
 
 import baseInfo from './components/base';
 import subList from './components/sublist'; 
-import subDialog from './components/subdialog'; //添加弹窗 
-
+import subDialog from './components/subdialog'; //弹窗 
 
 export default {
 	data() {
