@@ -178,6 +178,7 @@ import baseInfo from './components/base';
 import subList from './components/sublist'; 
 import subDialog from './components/subdialog'; //添加弹窗 
 
+
 export default {
 	data() {
 		return {    
