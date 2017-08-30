@@ -201,7 +201,7 @@
 				}; 
 			},
 			//点击提交、还原、收回按钮
-			handleBase( data ){ 
+			handleBase( data ){  
 				ajaxData(this.$store.state.Interface.information, {
 					"transType": 'psnInfoHandle',
 					"pk_psndoc": this.$store.state.UserInfo.pk_psndoc,
