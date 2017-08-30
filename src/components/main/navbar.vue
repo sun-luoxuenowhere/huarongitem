@@ -1,5 +1,5 @@
 <template>
-	<el-menu default-active="a" unique-opened collapse="true" class="el-menu-vertical-demo">
+	<el-menu default-active="a" class="el-menu-vertical-demo">
 		<router-link to='/Index'>
 			<el-menu-item index="a">
 				<span class="y-icon-box">
@@ -23,7 +23,7 @@
 			</el-menu-item-group>
 		</el-submenu> 
     </el-menu>
-</template>
+</template> 
 
 <script> 
 	export default {

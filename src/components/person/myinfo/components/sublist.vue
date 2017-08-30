@@ -44,7 +44,7 @@ import { ajaxData } from '@/assets/js/ajaxdata.js';
 import yListBtns from '@/components/public/ylistbtns';
 
 export default { 
-	//url: 数据源地址
+	//infoSetCode: 数据源
 	 //editabled:是否可编辑 Boolean(true)
 	 //title: 模块标题 
 	 //theaddata: 表头显示

@@ -1,17 +1,17 @@
 <template>  
-	<el-button-group v-if=" status == statusArry[1] ">
+	<div v-if=" status == statusArry[1] ">
 		<el-button size="small" type="text">{{statusMsg[1]}}</el-button>
 		<el-button size="small" @click="submit">提交</el-button>
   		<el-button size="small" @click="revert">还原</el-button> 
-	</el-button-group>
-	<el-button-group v-else-if=" status == statusArry[2] ">
+	</div>
+	<div v-else-if=" status == statusArry[2] ">
 		<el-button size="small" type="text">{{statusMsg[2]}}</el-button>
 		<el-button size="small" @click="callback">收回</el-button> 
-	</el-button-group> 
-	<el-button-group v-else-if=" status == statusArry[4] ">
+	</div> 
+	<div v-else-if=" status == statusArry[4] ">
 		<el-button size="small" type="text">{{statusMsg[4]}}</el-button> 
   		<el-button size="small" @click="revert">还原</el-button> 
-	</el-button-group>
+	</div>
 </template>
 
 <script>

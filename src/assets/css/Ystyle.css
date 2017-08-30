@@ -1,4 +1,4 @@
-/*=======================余桂林样式文件========== */
+/*=======================余桂林样式文件========== */ 
 /*==== 公共部分 ====*/ 
 .y-right{
   float: right;
@@ -33,6 +33,7 @@
 .y-text-bianji{
 	color: #CC2123;
 	display: inline-block;
+	font-weight: bold;
 }
 .y-text-bianji:hover{
 	animation: zoomIn 1s forwards;
