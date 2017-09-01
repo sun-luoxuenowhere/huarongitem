@@ -22,8 +22,10 @@ import Handlemessagelist from '@/components/messagecenter/handle/handlelist';
 import Mysalary from '@/components/salary/mysalary';
 
 //考核测评
-//import Examinationinquiry from '@/components/evaluation/examinationinquiry;
-//import markevaluation from '@/components/evaluation/examinationinquiry;
+import Assessmentlist from '@/components/assessment/assessmentlist';
+import Assessmentmsg from '@/components/assessment/assessmentmsg';
+
+
 
 Vue.use(Router)
 
@@ -84,6 +86,16 @@ export default new Router({
 		    	path: "/Mysalary",
 		    	name: '/Mysalary',
 		    	component: Mysalary 
+		    },
+		    {
+		    	path: "/Assessmentlist",
+		    	name: '/Assessmentlist',
+		    	component: Assessmentlist
+		    },
+		    {
+		    	path: "/Assessmentmsg",
+		    	name: '/Assessmentmsg',
+		    	component: Assessmentmsg 
 		    }
 		    
 		  ]  

@@ -6,6 +6,17 @@
 	display: block;
 	clear: both;
 }
+/*测试输入框的边框去掉*/
+.L_noborder .el-textarea__inner{
+		border: none;
+		resize: none;
+}
+.L_noborder .el-input__inner {
+	border: none;
+	padding: 0px;
+}
+/*测试输入框的边框去掉*/
+
 .iconfontsize {
 	font-size: 24px;
 }

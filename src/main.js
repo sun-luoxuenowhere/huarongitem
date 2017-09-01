@@ -7,7 +7,6 @@ import App from './App';
 import router from './router'; 
 import store from './store/'
 
-
 import 'babel-polyfill';
 import './assets/css/iconfont.css';
 //import Store from 'store';
