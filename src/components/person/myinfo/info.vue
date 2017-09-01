@@ -41,6 +41,7 @@
 					:editabled="true"  
 					:theaddata='jobTheadData' 
 					@add="openLvliDialog"
+					@delete="deleteList"
 					@handle="handleList"></subList>
 				<!-- 履历记录 end -->
 				<!-- 合同信息 begin -->
@@ -60,6 +61,7 @@
 					:editabled="true"  
 					:theaddata='xueliTheadData'
 					@add="openXueliDialog"
+					@delete="deleteList"
 					@handle="handleList"></subList>
 				<!-- 学历信息 end -->
 				<!-- 身份证件 begin -->
@@ -71,6 +73,7 @@
 					:editabled="true"  
 					:theaddata='psncertTheadData'
 					@add="openPsncertDialog"
+					@delete="deleteList"
 					@handle="handleList"></subList> 
 				<!-- 身份证件 end -->
 				<!-- 家庭信息 begin -->
@@ -82,6 +85,7 @@
 					:editabled="true"  
 					:theaddata='jiatingTheadData'
 					@add="openJiatingDialog"
+					@delete="deleteList"
 					@handle="handleList"></subList>
 				<!-- 家庭信息 end -->
 				<!-- 职称信息 begin -->
@@ -93,6 +97,7 @@
 					:editabled="true"   
 					:theaddata="zhichenTheadData"
 					@add="openZhichenDialog"
+					@delete="deleteList"
 					@handle="handleList"></subList>
 				<!-- 职称信息 end -->
 				<!-- 参加党派记录 begin -->
@@ -104,6 +109,7 @@
 					:editabled="true"   
 					:theaddata='dangpaiTheadData' 
 					@add="openDangpaiDialog"
+					@delete="deleteList"
 					@handle="handleList"></subList>
 				<!-- 参加党派记录 end --> 
 				<!-- 奖励情况 begin -->
@@ -115,6 +121,7 @@
 					:editabled="true"  
 					:theaddata='jiangliTheadData'
 					@add="openJiangliDialog"
+					@delete="deleteList"
 					@handle="handleList"></subList>
 				<!-- 奖励情况 end -->
 			</div> 
@@ -267,7 +274,7 @@ export default {
 			this.currentDialog.infoSetCode = data[1]; 
 		}, 
 		//保存履历 | 工作| 教育等信息
-		savePersonInfo( data ){    
+		savePersonInfo( data ){     
 			var _data = [data];  
 			var _code = this.currentDialog.infoSetCode;  
 			var _paramData = {
@@ -289,7 +296,7 @@ export default {
 					_paramData.status = 3;
 					_paramData.recordnum = this.currentDialog.index; 
 					break;
-			};  
+			};   
 			ajaxData( this.$store.state.Interface.information, _paramData, (res) => {   
 				this.hideDialog( _code ); 
 				this.$refs[ _code ].loadData(); 
@@ -322,7 +329,7 @@ export default {
 			};
 			
 		},
-		//提交履历 | 工作| 教育等信息
+		//还原提交收回履历 | 工作| 教育等信息
 		handleList( data ){  
 			var _code = data[1];
 			ajaxData(this.$store.state.Interface.information, {
@@ -335,6 +342,11 @@ export default {
 				this.$refs[_code].loadData();  
 			});
 			
+		},
+		//删除履历 | 工作| 教育等信息
+		deleteList( data ){ 
+			this.setCurrentDialog( data );
+			this.savePersonInfo( data[2] );
 		},
 		//打开履历操作弹窗
 		openLvliDialog( data ){

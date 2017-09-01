@@ -11,12 +11,13 @@ export function deepCopyArry( arr ){
 };
 
 export function deepCopyObj( obj ){  
-	var clone = {};
-    for(var i in obj) {
-        if(typeof(obj[i])=="object" && obj[i] != null)
-            clone[i] = deepCopyObj(obj[i]);
-        else
-            clone[i] = obj[i];
-    }; 
-    return clone;
+	var newO = {};
+	  if (obj instanceof Array) {
+	    newO = [];
+	  }
+	  for ( var key in obj) {
+	    var val = obj[key];
+	    newO[key] = typeof val === 'object' ? arguments.callee(val) : val;
+	  }
+	  return newO;
 };  

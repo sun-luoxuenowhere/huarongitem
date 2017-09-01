@@ -90,8 +90,8 @@ export default {
 			this.$emit('add',["add", this.infoSetCode]);  //调用父组件的新增方法,弹出新增窗口
 		},
 		//点击删除按钮
-		deleteRow(index, row){
-			this.tempData.splice(index, 1);  
+		deleteRow(index, row){ 
+			this.$emit('delete', ['remove', this.infoSetCode, row ]);  //调用父组件的新增方法,弹出新增窗口
 		},
 		//点击编辑按钮
 		editRow( index, row ){

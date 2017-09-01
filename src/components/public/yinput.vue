@@ -44,9 +44,7 @@
 	
 	<!-- 级联菜单 begin -->
 	<el-form-item class="y-input" v-else-if="inputData.type == inputType[4]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">  
-		<el-checkbox-group v-model="currentValue">
-			<el-checkbox :disabled="inputData.disabled" v-for="(key,val) in inputData.typedata[0]" :label="val">{{key}}</el-checkbox> 
-		</el-checkbox-group>
+		开发中
 	</el-form-item> 
 	
 	<!-- 文本框 begin -->
@@ -76,6 +74,7 @@ export default {
 		}
 	},
 	mounted() { 
+		//参照类型数据格式
 		if( this.inputData.type == this.inputType[1] ){
 			this.loadData();  
 		};
