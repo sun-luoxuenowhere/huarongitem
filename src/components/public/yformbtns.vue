@@ -14,6 +14,7 @@
 	<div v-else-if=" status== statusArry[2] ">
 		<el-button type="text">{{statusMsg[2]}}</el-button>
 		<el-button size="small" @click="callback">收回</el-button> 
+		<el-button class="y-btn-default" size="small" @click="cancle">取消</el-button> 
 	</div>
 	<div v-else-if=" status== statusArry[3] ">
 		<el-button type="text">{{statusMsg[3]}}</el-button>
@@ -23,6 +24,7 @@
 	<div v-else-if=" status== statusArry[4] ">
 		<el-button type="text">{{statusMsg[4]}}</el-button> 
   		<el-button size="small" @click="revert">还原</el-button> 
+  		<el-button class="y-btn-default" size="small" @click="cancle">取消</el-button> 
 	</div>
 </template>
 

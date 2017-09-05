@@ -64,7 +64,8 @@
 					<yFormBtns v-show="btnsBase2" 
 						:status="status" 
 						@save="saveBase"
-						@cancle="cancleBase2"></yFormBtns>
+						@cancle="cancleBase2"
+						@handle="handleBase"></yFormBtns>
 				</div>
 				基本信息
 			</div>
@@ -158,8 +159,7 @@
 			loadInfoData() {
 				ajaxData(this.$store.state.Interface.information, {
 					"infoSetCode": "bd_psndoc",
-					"transType": 'psnInfoQuery',
-					"pk_psndoc": this.$store.state.UserInfo.pk_psndoc
+					"transType": 'psnInfoQuery' 
 				}, (res) => { 
 					var _dataobj = res.list[0];
 					this.status = res.status;   
@@ -185,13 +185,13 @@
 				if( _formdatastr == JSON.stringify( this.formDataInit ) ){ //没有修改
 					this.btnsBase1 = false;
 					this.editBase1 = false;
+					this.btnsBase2 = false;
+					this.editBase2 = false;
 				}else{
 					this.$refs['myForm'].validate((valid) => {   
 						if (valid) {   
 							ajaxData(this.$store.state.Interface.information, {
-								"transType": "psnInfoSave", 
-								"pk_psndoc": this.$store.state.UserInfo.pk_psndoc,
-								"cuserid": this.$store.state.UserInfo.cuserid,
+								"transType": "psnInfoSave",  
 								"infoSetCode": this.infoSetCode,
 								"jsonStr": JSON.stringify( getUpdateParam( this.formDataInit, this.formData ) ) 
 							}, (res) => {   
@@ -208,9 +208,7 @@
 			//点击提交、还原、收回按钮
 			handleBase( data ){  
 				ajaxData(this.$store.state.Interface.information, {
-					"transType": 'psnInfoHandle',
-					"pk_psndoc": this.$store.state.UserInfo.pk_psndoc,
-					"cuserid": this.$store.state.UserInfo.cuserid,
+					"transType": 'psnInfoHandle', 
 					"infoSetCode": this.infoSetCode,
 					"way": data[0]
 				}, (res) => {  

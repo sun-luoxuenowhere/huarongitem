@@ -2,6 +2,7 @@ import axios from 'axios';
 import { validForm } from '@/assets/js/validform.js'; 
 export default {
     state: {
+    	//可编辑的基本信息字段
     	baseFormInit: {
     		"sex": '',
     		"officephone": '',

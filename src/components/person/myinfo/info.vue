@@ -278,9 +278,7 @@ export default {
 			var _data = [data];  
 			var _code = this.currentDialog.infoSetCode;  
 			var _paramData = {
-				"transType": "psnInfoSave", 
-				"pk_psndoc": this.$store.state.UserInfo.pk_psndoc,
-				"cuserid": this.$store.state.UserInfo.cuserid,
+				"transType": "psnInfoSave",  
 				"infoSetCode": _code,
 				"jsonStr": JSON.stringify( _data ) 
 			};
@@ -333,9 +331,7 @@ export default {
 		handleList( data ){  
 			var _code = data[1];
 			ajaxData(this.$store.state.Interface.information, {
-				"transType": 'psnInfoHandle',
-				"pk_psndoc": this.$store.state.UserInfo.pk_psndoc,
-				"cuserid": this.$store.state.UserInfo.cuserid,
+				"transType": 'psnInfoHandle', 
 				"infoSetCode": _code,
 				"way": data[0]
 			}, (res) => {   
@@ -379,7 +375,7 @@ export default {
 				"school": "",
 				"major": "",
 				"education": "",
-				"degree": "",
+				"pk_degree": "",
 				"studymode": "" 
 			}; 
 			switch( data[0] ){

@@ -74,8 +74,7 @@ export default {
 		loadData(){ 
 			ajaxData(this.$store.state.Interface.information, {
 				"infoSetCode": this.infoSetCode,
-				"transType": 'psnInfoQuery',
-				"pk_psndoc": this.$store.state.UserInfo.pk_psndoc
+				"transType": 'psnInfoQuery' 
 			}, ( res ) => {   
 				this.status = res.status;  
 				this.listdata = res.list; 

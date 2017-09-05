@@ -6,8 +6,7 @@ import homepage from '@/components/main/homepage';//主页内容
 //我的信息部分
 import Myinfo from '@/components/person/myinfo/info';
 import Employeelist from '@/components/person/employee/list';  
-import Employeeinfo from '@/components/person/employee/info';  
-import Validform from '@/components/person/validform';  
+import Employeeinfo from '@/components/person/employee/info';   
 //业务办理部分
 //import Fullapplicationlist from '@/components/Business/Fullapplication/Fullapplicationlist';
 //import Fullapplicationadd from '@/components/Business/Fullapplication/Fullapplicationadd';
@@ -56,12 +55,7 @@ export default new Router({
 		    	path: "/Employeelist",
 		    	name: '/Employeelist',
 		    	component: Employeelist 
-		    },
-		    {
-		    	path: "/Validform",
-		    	name: '/Validform',
-		    	component: Validform 
-		    },
+		    }, 
 		    {
 		    	path: "/Employeeinfo/:id",
 		    	name: '/Employeeinfo',

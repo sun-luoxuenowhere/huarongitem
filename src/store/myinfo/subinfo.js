@@ -48,7 +48,7 @@ export default {
 	    	{ param: 'school', text: '学校', required: true },
 	    	{ param: 'major', text: '专业' },
 	    	{ param: 'education', text: '学历' },
-	    	{ param: 'degree', text: '学位' },
+	    	{ param: 'pk_degree', text: '学位' },
 	    	{ param: 'studymode', text: '学习方式' }],
 	    //职称表头
 	    zhichenTheadData: [{ param: ['begindate','enddate'], text: '起止时间', required: true },
@@ -96,7 +96,7 @@ export default {
 	    	{ "id": "school", "text": "学校", "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
 	    	{ "id": "major", "text": "专业" },
 	    	{ "id": "education", "text": "学历", "type": "refer", "typedata": [{"code": "HR008_0xx"}] },
-	    	{ "id": "degree", "text": "学位", "type": "refer", "typedata": [{"code": "HR009_0xx"}] },
+	    	{ "id": "pk_degree", "text": "学位", "type": "refer", "typedata": [{"code": "HR009_0xx"}] },
 	    	{ "id": "studymode", "text": "学习方式", "type": "refer", "typedata": [{"code": "HR023_0xx"}] }],
 	    //身份证表单配置
 	    psncertFormConfig: [{ "id": "idtype", "text": "证件类型", "type": "refer", "typedata": [{"code": "idtype"}], "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
