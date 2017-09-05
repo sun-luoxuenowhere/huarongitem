@@ -134,11 +134,7 @@
 			this.formData = deepCopyObj( this.baseFormInit ); 
 			this.loadInfoData();
 			this.transferData(this.$store.state.BaseInfo.baseInfo1, this.formDataConfig1);
-			this.transferData(this.$store.state.BaseInfo.baseInfo2, this.formDataConfig2);
-			
-			console.log(this.formDataConfig1)
-			console.log(this.formDataConfig2)
-			
+			this.transferData(this.$store.state.BaseInfo.baseInfo2, this.formDataConfig2);  
 		},
 		methods: {
 			//批量数据处理，转换成能自动生成表单的数据格式
@@ -175,13 +171,12 @@
 						};
 					}; 
 					this.formDataInit = deepCopyObj(_dataobj);
-					this.formData = deepCopyObj(_dataobj);
-					console.log(this.formData)
+					this.formData = deepCopyObj(_dataobj); 
 				});
 			},
 			//点击保存按钮
 			saveBase(){ 
-				var _formdatastr = JSON.stringify( this.formData ); 
+				var _formdatastr = JSON.stringify( this.formData );  
 				if( _formdatastr == JSON.stringify( this.formDataInit ) ){ //没有修改
 					this.btnsBase1 = false;
 					this.editBase1 = false;
@@ -211,8 +206,7 @@
 					"transType": 'psnInfoHandle', 
 					"infoSetCode": this.infoSetCode,
 					"way": data[0]
-				}, (res) => {  
-					alert('操作成功');
+				}, (res) => {   
 					this.btnsBase1 = false;
 					this.editBase1 = false;
 					this.btnsBase2 = false;

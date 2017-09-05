@@ -39,7 +39,7 @@ export default {
 		//基本信息[头像下方区域] 
     	baseInfo2: [{ "id": "nationality", "text": "民族", "type": "refer", "typedata": [{"code": "HR002_0xx"}], /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/},
 			{ "id": "birthdate", "text": "出生日期", "type": "date", /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ },
-			{ "id": "nativeplace", "text": "籍贯", "type": "cascader", "typedata": [{"code": "HR005_0xx"}], /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }] */},
+			{ "id": "country", "text": "国籍/地区", "type": "refer", "typedata": [{"code": "country"}],/* "valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ }, 
 			{ "id": "idtype", "text": "证件类型", "disabled": true},
 			{ "id": "id", "text": "证件号码", "disabled": true },
 			{ "id": "marital", "text": "婚姻状况", "type": "refer", "typedata": [{"code": "HR001_0xx"}] },
@@ -48,7 +48,7 @@ export default {
 			{ "id": "joinworkdate", "text": "参加工作日期", "type": "date" },
 			{ "id": "health", "text": "健康状况", "type": "refer", "typedata": [{"code": "HR003_0xx"}] },
 			{ "id": "bloodtype", "text": "血型", "type": "refer", "typedata": [{"code": "bloodtype"}] },
-			{ "id": "country", "text": "国籍/地区", "type": "refer", "typedata": [{"code": "HR005_0xx"}],/* "valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ },
+			{ "id": "nativeplace", "text": "籍贯", "type": "cascader", "typedata": [{"code": "HR005_0xx"}], /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }] */},
 			{ "id": "permanreside", "text": "户口所在地", "type": "cascader", "typedata": [{"code": "HR005_0xx"}], },
 			{ "id": "characterrpr", "text": "户口性质", "type": "refer", "typedata": [{"code": "HR005_0xx"}], /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ },
 			{ "id": "fileaddress", "text": "档案所在地" },
