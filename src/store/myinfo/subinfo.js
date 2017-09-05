@@ -113,7 +113,7 @@ export default {
 	    zhichenFormConfig: [{ "id": "begindate", "text": "评定日期", "type": "date", "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
 	    	{ "id": "enddate", "text": "结束时间", "type": "date" },
 	    	{ "id": "pk_techposttitle", "text": "获得职称", "type": "refer", "typedata": [{"code": "HR019_0xx"}], "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
-	    	{ "id": "titlerank", "text": "职称等级", "typedata": [{"code": "HR025_0xx"}] },
+	    	{ "id": "titlerank", "text": "职称等级", "type": "refer", "typedata": [{"code": "HR025_0xx"}] },
 	    	{ "id": "assorg", "text": "评定机构" },
 	    	{ "id": "certifcode", "text": "证书编号" },
 	    	{ "id": "tiptop_flag", "text": "最高"}],

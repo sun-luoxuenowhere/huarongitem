@@ -1,11 +1,11 @@
 <template>
 	<div class="y-dialog"> 
 		<el-dialog :title="title" :show-close="showClose" :visible="visible" class="y-info-dialog">    
-		 	<el-form :model="formData" :rules="rules" ref="myForm" label-width="110px" class="clearfix"> 
+		 	<el-form :model="currentFormData" :rules="rules" ref="myForm" label-width="110px" class="clearfix"> 
 				<yInput v-for="(val,key) in formDataConfig"  
-					v-model="formData[key]" 
+					v-model="currentFormData[key]" 
 					:class="formDataConfig[key].type == 'date' ? 'y-date-formitem' : ''"
-					:inputData="formDataConfig[key]" :initVal="formData[key]"></yInput>  
+					:inputData="formDataConfig[key]" :initVal="currentFormData[key]"></yInput>  
 			</el-form> 
 			<div class="y-btn-box">
 				<el-button class="y-btn-danger" type="danger" @click="submitForm()">保存</el-button>
@@ -15,6 +15,7 @@
 	</div>
 </template>
 <script>  
+import { deepCopyObj } from '@/assets/js/v-extend.js';
 import yInput from '@/components/public/yinput';
 export default {
 	props: ["visible", "title", "formConfig", "formData"],  
@@ -28,32 +29,55 @@ export default {
 	components: {
 		yInput, //表单元素  
 	}, 
+	computed: {
+		currentFormData(){  //缓存初始进来的表单数据
+			return deepCopyObj( this.formData );
+		}
+	},
 	mounted(){
-		this.transferData();
+		this.transferData(); 
 	},
 	methods: { 
 		//确定操作
-		submitForm(){ 
-		 	this.$refs['myForm'].validate((valid) => {   
-				if (valid) {   
-					this.$emit('submit', this.formData );  
-					this.resetForm();
+		submitForm(){  
+		 	this.$refs['myForm'].validate((valid) => { 
+		 		var _changeData = this.postFormData(); 
+				if (valid ) {
+					if( _changeData ){
+						this.$emit('submit', _changeData );  
+						this.resetForm();
+					}else{
+						alert('没有任何修改');
+						return false;
+					};					
 				} else {
 					return false;
 				};
-	        });
-		 	
+	       }); 
+		},
+		//被提交到后台的表单数据
+		postFormData(){
+			var _current = this.currentFormData;  
+			var _change = false; //数据是否有变动
+			var _data = {};
+			
+			for( var i in _current ){ 
+				if( this.formData[i] != _current[i] ){
+					_change = true;
+					_data[i] = _current[i];
+				};
+			}; 
+			_data = ( _change ? _data : _change );
+			return _data; 
 		},
 		//取消操作
 		cancle() { 
-	        //this.resetForm();
+	        this.resetForm();
 	        this.$emit('close');
 	    },
 	    //重置表单
 	    resetForm(){
-	     	for(var i in this.formData ){
-	     		this.formData[i] = '';
-	     	};
+	     	this.currentFormData = deepCopyObj( this.formData );
 	     	this.$refs['myForm'].resetFields();
 	    }, 
 	    //表单数据批量处理
