@@ -40,16 +40,10 @@ export default {
 	methods: { 
 		//确定操作
 		submitForm(){  
-		 	this.$refs['myForm'].validate((valid) => { 
-		 		var _changeData = this.postFormData(); 
-				if (valid ) {
-					if( _changeData ){
-						this.$emit('submit', _changeData );  
-						this.resetForm();
-					}else{
-						alert('没有任何修改');
-						return false;
-					};					
+		 	this.$refs['myForm'].validate((valid) => {   
+				if (valid) {   
+					this.$emit('submit', this.formData );  
+					this.resetForm();
 				} else {
 					return false;
 				};
@@ -57,27 +51,18 @@ export default {
 		},
 		//被提交到后台的表单数据
 		postFormData(){
-			var _current = this.currentFormData;  
-			var _change = false; //数据是否有变动
-			var _data = {};
-			
-			for( var i in _current ){ 
-				if( this.formData[i] != _current[i] ){
-					_change = true;
-					_data[i] = _current[i];
-				};
-			}; 
-			_data = ( _change ? _data : _change );
-			return _data; 
+			 
 		},
 		//取消操作
 		cancle() { 
-	        this.resetForm();
+	        //this.resetForm();
 	        this.$emit('close');
 	    },
 	    //重置表单
 	    resetForm(){
-	     	this.currentFormData = deepCopyObj( this.formData );
+	     	for(var i in this.formData ){
+	     		this.formData[i] = '';
+	     	};
 	     	this.$refs['myForm'].resetFields();
 	    }, 
 	    //表单数据批量处理
