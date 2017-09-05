@@ -18,7 +18,7 @@
 	
 	<!-- 下拉菜单 begin -->
 	<el-form-item class="y-input" v-else-if="inputData.type == inputType[1]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
-		<el-select v-model="currentValue" :disabled="inputData.disabled" filterable placeholder="请选择">
+		<el-select v-model="currentValue" :disabled="inputData.disabled" @change="selectChange" filterable placeholder="请选择">
 		    <el-option
 			      v-for="item in optionsdata"
 			      :key="item.code"
@@ -56,13 +56,13 @@
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 export default {  
 	data(){
-		return {
+		return { 
 			inputType: ['date', 'refer', 'radio', 'checkbox', 'cascader'],
 			referCusStr: 'idtype,bloodtype', //自定义的参照字段集合
 			optionsdata: []
 		}
 	},
-	props:['value', 'inputData', 'initVal'],// 设置value为props属性-必须
+	props:['name', 'value', 'inputData', 'initVal'],// 设置value为props属性-必须
 	computed:{
 		currentValue: {// 动态计算currentValue的值
 			get:function() {
@@ -104,7 +104,10 @@ export default {
     		
     	},
     	dateChange( val ){
-    		this.currentValue = val;   
+    		this.currentValue = val;    
+    	},
+    	selectChange(){ 
+    		this.$emit('selectChange', this.name ); 
     	}
     }
 }
