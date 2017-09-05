@@ -53,9 +53,9 @@
                     return;  
                 }
                 //发送请求
-//              this.$http.get("static/datalogin.json",{
+             this.$http.get("static/datalogin.json",{
 //              this.$http.get("service/EHRWebSmServlet",{
-                this.$http.get(this.url,{
+//                 this.$http.get(this.url,{
 			    	params:{
 			    		'transType':'login',
 			    		"userCode":name,

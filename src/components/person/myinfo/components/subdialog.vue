@@ -4,11 +4,11 @@
 		 	<el-form :model="formData" :rules="rules" ref="myForm" label-width="110px" class="clearfix"> 
 				<yInput v-for="(val,key) in formDataConfig"  
 					v-model="formData[key]" 
-					:name="key"
-					:class="formDataConfig[key].type == 'date' ? 'y-date-formitem' : ''"
+					:class="formDataConfig[key].type == 'date' ? 'y-date-formitem' : ''"  
+					:name="key" 
+					:formData="formData"
 					:inputData="formDataConfig[key]" 
-					:initVal="formData[key]"
-					@selectChange="selectChange"></yInput>  
+					@inputChange="inputChange"></yInput>  
 			</el-form> 
 			<div class="y-btn-box">
 				<el-button class="y-btn-danger" type="danger" @click="submitForm()">保存</el-button>
@@ -25,7 +25,7 @@ export default {
 	data() {
 		return {   
 			showClose: false, //隐藏右上角关闭按钮     
-			changedReferKey: [], //被修改的参照字段
+			changedReferKey: [], //缓存被修改的参照字段
 			rules: { },
 			formDataConfig: { } 
 		}
@@ -37,22 +37,34 @@ export default {
 		this.transferData(); 
 	},
 	methods: { 
-		selectChange( data ){
-			this.changedReferKey.push( data ); 
+		inputChange( data ){
+			if( this.changedReferKey.join(',').indexOf( data ) < 0  ){
+				this.changedReferKey.push( data ); 
+			}; 
 		},
 		//确定操作
 		submitForm(){   
 		 	this.$refs['myForm'].validate((valid) => {    
+		 		var _postdata = this.postFormData(); 
 				if (valid) {   
-					this.$emit('submit', this.postFormData() );  
-					this.resetForm();
+					if( _postdata ){
+						debugger;
+						//this.$emit('submit', _postdata ); 
+						//this.resetForm();
+					}else{
+						alert('没有修改');
+						return false;
+					}; 
 				} else {
 					return false;
 				};
 	       }); 
 		},
 		//被提交到后台的表单数据
-		postFormData(){
+		postFormData(){ 
+			if( this.changedReferKey.join('') == ""  ){
+				return false;
+			};
 			var _current = deepCopyObj( this.formData );
 			var _config = this.formConfig;
 			for( var i = 0, l = _config.length; i < l; i++){

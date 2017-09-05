@@ -258,6 +258,7 @@
 	display: block;
 }
 .y-baseinfo-form .y-input .el-select,
+.y-baseinfo-form .y-input .el-cascader,
 .y-baseinfo-form .y-input .el-date-editor.el-input{
 	width: 100%;
 }

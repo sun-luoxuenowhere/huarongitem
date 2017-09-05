@@ -72,7 +72,11 @@
 			<div class="y-content">
 				<el-row v-show="editBase2" :gutter="5">
 					<el-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(val,key) in formDataConfig2">
-						<yInput :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" v-model="formData[key]" :inputData="formDataConfig2[key]" :initVal="formData[key]"></yInput>
+						<yInput  v-model="formData[key]" 
+							:class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" 
+							:name="key"
+							:formData="formData"
+							:inputData="formDataConfig2[key]" ></yInput>
 					</el-col>
 				</el-row>
 				<el-row v-show="!editBase2" :gutter="5">

@@ -116,7 +116,7 @@ export default {
 	    	{ "id": "titlerank", "text": "职称等级", "type": "refer", "typedata": [{"code": "HR025_0xx"}] },
 	    	{ "id": "assorg", "text": "评定机构" },
 	    	{ "id": "certifcode", "text": "证书编号" },
-	    	{ "id": "tiptop_flag", "text": "最高"}],
+	    	{ "id": "tiptop_flag", "text": "最高", "type": "checkbox", "typedata": [{"Y": "" }] }],
 	    //党派表单配置
 	    dangpaiFormConfig: [{ "id": "begindate", "text": "开始时间", "type": "date", "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
 	    	{ "id": "enddate", "text": "结束时间", "type": "date" },
