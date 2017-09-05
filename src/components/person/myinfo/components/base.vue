@@ -125,15 +125,19 @@
 		},
 		computed: {
 			baseFormInit(){
-				return this.$store.state.BaseInfo.baseFormInit;
+				return this.$store.state.BaseInfo.baseFormInit;//获取初始信息静态数据
 			}
 		},
 		created() {  
-			this.formDataInit = deepCopyObj( this.baseFormInit );
+			this.formDataInit = deepCopyObj( this.baseFormInit );//数据深拷贝
 			this.formData = deepCopyObj( this.baseFormInit ); 
 			this.loadInfoData();
 			this.transferData(this.$store.state.BaseInfo.baseInfo1, this.formDataConfig1);
 			this.transferData(this.$store.state.BaseInfo.baseInfo2, this.formDataConfig2);
+			
+			console.log(this.formDataConfig1)
+			console.log(this.formDataConfig2)
+			
 		},
 		methods: {
 			//批量数据处理，转换成能自动生成表单的数据格式
@@ -171,7 +175,8 @@
 						};
 					}; 
 					this.formDataInit = deepCopyObj(_dataobj);
-					this.formData = deepCopyObj(_dataobj);  
+					this.formData = deepCopyObj(_dataobj);
+					console.log(this.formData)
 				});
 			},
 			//点击保存按钮
