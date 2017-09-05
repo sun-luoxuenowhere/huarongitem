@@ -53,9 +53,9 @@
                     return;  
                 }
                 //发送请求
-                this.$http.get("static/datalogin.json",{
+//              this.$http.get("static/datalogin.json",{
 //              this.$http.get("service/EHRWebSmServlet",{
-//              this.$http.get(this.url,{
+                this.$http.get(this.url,{
 			    	params:{
 			    		'transType':'login',
 			    		"userCode":name,
@@ -67,16 +67,22 @@
 					var _data=JSON.stringify(response.data)
 					 
 					if(response.data.flag==0){
-						window.localStorage.setItem("userid",_data) 
+						window.localStorage.setItem("usermsg",_data) 
+						console.log(window.localStorage.getItem("usermsg"))
 						this.$router.push({
 				  			name:'/Index'
 
 				  		});
 					}else if(response.data.flag==-1){
 						this.$message({  
-	                        message : '该用户没有权限',  
+	                        message : response.data.des,  
 	                        type : 'error'  
 	                    })  
+					}else if(response.data.flag==1){
+						this.$message({  
+	                        message : response.data.des,  
+	                        type : 'error'  
+	                    }) 
 					}
 //					console.log(this.$route.params)调到首页可以把里面的值打印出来
 			   	}.bind(this)).catch(function (error1) {
