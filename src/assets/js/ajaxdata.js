@@ -6,7 +6,7 @@
 import axios from 'axios';  
 import Qs from 'qs';
 import store from 'store';
-
+var UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );
 export function ajaxData( url, param, call ){   
 	if( typeof(arguments[1] )=="function"){ //没有参数的时候发get请求
 		
@@ -30,30 +30,34 @@ export function ajaxData( url, param, call ){
 			};*/
 		});  
 		  
-	}else{  //有参数的时候发post请求   
-		param.pk_psndoc = '0001A310000000000JWA';
-    	param.cuserid = '1001A3100000000009CK';
-    	param.pk_group = '0001A3100000000007Q7';
-    	param.pk_org = '0001A310000000000JDR';
-		axios.post( url, Qs.stringify ( param ), {
-          	headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
-          	}
-      	}).then(( response ) => {  
-			var _data = response.data; 
-			if( _data.flag == "0" ){  
-				call( _data.data );
-			}else{
-				//alert( _data.des );
-			};   
-		}).catch((err) => { 
-			/*var _status = err.request.status;
-			if( _status == 500 ){
-				//alert( '网络错误' ); 
-			}else{
-				//alert( _status ); 
-			}; */
-		}); 
+	}else{  //有参数的时候发post请求     
+		if( UserInfo.pk_psndoc ){
+			param.pk_psndoc = UserInfo.pk_psndoc;
+	    	param.cuserid = UserInfo.cuserid;
+	    	param.pk_group = UserInfo.pk_group;
+	    	param.pk_org = UserInfo.pk_org;
+			axios.post( url, Qs.stringify ( param ), {
+	          	headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+	          	}
+	      	}).then(( response ) => {  
+				var _data = response.data; 
+				if( _data.flag == "0" ){  
+					call( _data.data );
+				}else{
+					//alert( _data.des );
+				};   
+			}).catch((err) => { 
+				/*var _status = err.request.status;
+				if( _status == 500 ){
+					//alert( '网络错误' ); 
+				}else{
+					//alert( _status ); 
+				}; */
+			}); 
+		}else{
+			alert('没有权限');
+		}; 
 	}; 
 }; 
 

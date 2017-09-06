@@ -7,7 +7,7 @@
                     <el-input v-model="ruleForm.username" placeholder="username"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input type="text"  placeholder="password" v-model="ruleForm.password" @keyup.enter.native="submitForm()"></el-input>
+                    <el-input type="password"  placeholder="password" v-model="ruleForm.password" @keyup.enter.native="submitForm()"></el-input>
                 </el-form-item>
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm()">登录</el-button>
@@ -53,9 +53,9 @@
                     return;  
                 }
                 //发送请求
-             this.$http.get("static/datalogin.json",{
+//             this.$http.get("static/datalogin.json",{
 //              this.$http.get("service/EHRWebSmServlet",{
-//                 this.$http.get(this.url,{
+                 this.$http.get(this.url,{
 			    	params:{
 			    		'transType':'login',
 			    		"userCode":name,

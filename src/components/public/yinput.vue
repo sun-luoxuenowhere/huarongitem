@@ -54,7 +54,7 @@
 			:source="cascFormData"  
 			:relinput="name"
 			:config="inputData" @close="showCasc = false"></yRegion>
-		<el-input :title="currentValue" :readonly="true" v-model="currentValue" icon="caret-bottom" @click="selectCascader"></el-input>  
+		<el-input :disabled="inputData.disabled" :title="currentValue" :readonly="true" v-model="currentValue" icon="caret-bottom" @click="selectCascader"></el-input>  
 	</el-form-item> 
 	
 	<!-- 文本框 begin -->
