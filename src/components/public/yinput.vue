@@ -4,7 +4,7 @@
 	描述：通过给表单配置文件指定不同的类型，动态生成对应的组件
 	支持：date(日期)、refer(参照)、radio(单选)、checkbox(复选)、默认input
 -->
-<template>  
+<template>   
 	<!-- 日期选择器 begin -->
 	<el-form-item class="y-input" v-if="inputData.type == inputType[0]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
 		<el-date-picker
@@ -18,7 +18,7 @@
 	
 	<!-- 下拉菜单 begin -->
 	<el-form-item class="y-input" v-else-if="inputData.type == inputType[1]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
-		<el-select v-model="currentValue" :disabled="inputData.disabled" @change="inputChange" filterable placeholder="请选择">
+		<el-select v-model="currentValue" :disabled="inputData.disabled" @change="selectChange" filterable placeholder="请选择">
 		    <el-option
 			      v-for="item in optionsdata"
 			      :key="item.code"
@@ -49,56 +49,56 @@
 	
 	<!-- 级联菜单 begin -->
 	<el-form-item class="y-input" v-else-if="inputData.type == inputType[4]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
-		<el-cascader v-model="currentValue" 
-		    :options="optionsdata"
-		    :props="inputData.typedata[0].props"
-		    filterable
-		    change-on-select 
-		    @change="inputChange"
-		></el-cascader>
+		<yCascader 
+			:visible="showCasc" 
+			:source="cascFormData"  
+			:config="inputData" @close="showCasc = false"></yCascader>
+		<el-input :readonly="true" v-model="currentValue" icon="caret-bottom" @click="selectCascader"></el-input>  
 	</el-form-item> 
 	
 	<!-- 文本框 begin -->
 	<el-form-item class="y-input" v-else :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">  
 		<el-input :disabled="inputData.disabled" v-model="currentValue" @change="inputChange"></el-input>  
-	</el-form-item> 
+	</el-form-item>  
 </template>
 <script>  
 import { ajaxData } from '@/assets/js/ajaxdata.js';
+import yCascader from './ycascader'; //省市区弹窗 
 export default {  
 	data(){
 		return { 
+			showCasc: false,
 			inputType: ['date', 'refer', 'radio', 'checkbox', 'cascader'],
 			referCusStr: 'idtype,bloodtype', //自定义的参照字段集合
+			cascFormData: {}, //级联菜单中使用的当前表单数据
+			cascPrev: '', //级联菜单的前置条件(例：国籍)
 			optionsdata: []
 		}
 	},
+	components: { 
+		yCascader //省市区弹窗
+	}, 
 	props:['name', 'value', 'inputData', 'formData'],// 设置value为props属性-必须
 	computed:{ 
 		currentValue: {// 动态计算currentValue的值
 			get:function() {
 				var _val = this.value;
-				if( this.inputData.type == this.inputType[3] || this.inputData.type == this.inputType[4] ){ 
-					_val = ( _val == "" ? [] : _val.split(',') );  
-					console.info('get', _val );
+				if( this.inputData.type == this.inputType[3] ){ 
+					_val = ( _val == "" ? [] : _val.split(',') );   
 				};
   				return _val;
   			},
   			set:function( val ) {  
-  				if( this.inputData.type == this.inputType[3] || this.inputData.type == this.inputType[4] ){
-					val = val.join(','); 
-					console.info('set', val );
+  				if( this.inputData.type == this.inputType[3] ){
+					val = val.join(',');  
 				}; 
   				this.$emit('input', val);
   			}
 		}
 	},
-	mounted() {  
-		
+	mounted() {   
 		if( this.inputData.type == this.inputType[1] ){  //参照类型数据格式 
 			this.loadData();   
-		}else if( this.inputData.type == this.inputType[4] ){  //级联类型数据格式
-			this.loadCascader(); 
 		};
     },
 	methods: { 
@@ -128,60 +128,25 @@ export default {
 					this.currentValue = this.formData[_name]; 
 		    	}); 
     		}; 
-    	},
-    	//加载级联类型数据
-    	loadCascader(){
-    		var _typedata = this.inputData.typedata[0]; 
-    		var _prevkey = _typedata.prevkey;
-    		setTimeout(( data ) => {  
-    			
-    			if( this.formData[_prevkey] == "" ){
-    				alert('请先选择国籍地区');
-    				return;
-    			};
-				ajaxData( this.$store.state.Interface.smserverlet, { 
-					"transType": _typedata.code, 
-					"pk_country": this.formData[_prevkey]
-				},( res ) => {  
-					this.optionsdata = this.toTreeData( res.list );    
-		    	}); 
-	    	}, 2000); 
-    	},
-    	//json格式转成树结构
-    	toTreeData( data, config ){ 
-	    	var _id = "pk_region";
-	    	var _pid = "pk_father"; 
-	    	var _children = "children";
-	    	if( config ){
-	    		_id = config.id; 
-	    	};
-	        var map = {}; //缓存当前数据的id object对应关系
-	        data.forEach(function (item) {
-	        	if( !item[_pid] ){
-	        		item[_pid] = '~';
-	        	};
-	        	var _idval = item[_id].toString(); 
-	            map[_idval] = item;
-	        });  
-	        var val = []; 
-	        data.forEach(function (item) { 
-	        	var _pidval = item[_pid].toString(); 
-	            var parent = map[ _pidval ]; 
-	            
-	            if (parent) { 
-	                (parent[_children] || ( parent[_children] = [] )).push(item); 
-	            } else { 
-	                val.push(item);
-	            };
-	        });  
-	        return val;
-	    },
+    	}, 
     	dateChange( val ){
     		this.currentValue = val;    
     		this.$emit('inputChange', this.name ); 
     	},
+    	selectChange( val ){
+    		var _typedata = this.inputData.typedata[0]; 
+    		var _cascPrevKey = _typedata.cascPrevKey;   
+    		if( _cascPrevKey && val.length == this.formData[_cascPrevKey].length ){  
+    			this.formData[_cascPrevKey] = val;
+    		};
+    		this.$emit('inputChange', this.name ); 
+    	},
     	inputChange( val ){   
     		this.$emit('inputChange', this.name ); 
+    	}, 
+    	selectCascader(){
+    		this.cascFormData = this.formData;  
+    		this.showCasc = true;
     	}
     }
 }

@@ -24,9 +24,9 @@ export function ajaxData( url, param, call ){
 		}).catch((err) => { 
 			var _status = err.request.status;
 			if( _status == 500 ){
-				alert( '网络错误' ); 
+				//alert( '网络错误' ); 
 			}else{
-				alert( _status ); 
+				//alert( _status ); 
 			};
 		});  
 		  
@@ -49,9 +49,9 @@ export function ajaxData( url, param, call ){
 		}).catch((err) => { 
 			var _status = err.request.status;
 			if( _status == 500 ){
-				alert( '网络错误' ); 
+				//alert( '网络错误' ); 
 			}else{
-				alert( _status ); 
+				//alert( _status ); 
 			}; 
 		}); 
 	}; 

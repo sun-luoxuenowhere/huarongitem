@@ -10,14 +10,18 @@ export function deepCopyArry( arr ){
     });
 };
 
-export function deepCopyObj( obj ){  
+export function deepCopyObj( obj ){   
 	var newO = {};
 	  if (obj instanceof Array) {
 	    newO = [];
-	  }
+	  };
 	  for ( var key in obj) {
 	    var val = obj[key];
-	    newO[key] = typeof val === 'object' ? arguments.callee(val) : val;
-	  }
+	    if( val instanceof Array ){
+	    	newO[key] = val;
+	    }else{
+	    	newO[key] = typeof val === 'object' ? arguments.callee(val) : val;  
+	    }; 
+	  };
 	  return newO;
 };  

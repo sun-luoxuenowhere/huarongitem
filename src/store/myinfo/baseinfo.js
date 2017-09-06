@@ -39,7 +39,7 @@ export default {
 		//基本信息[头像下方区域] 
     	baseInfo2: [{ "id": "nationality", "text": "民族", "type": "refer", "typedata": [{"code": "HR002_0xx"}], /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/},
 			{ "id": "birthdate", "text": "出生日期", "type": "date", /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ },
-			{ "id": "country", "text": "国籍/地区", "type": "refer", "typedata": [{"code": "country"}],/* "valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ }, 
+			{ "id": "country", "text": "国籍/地区", "type": "refer", "typedata": [{"code": "country", "cascPrevKey": 'pk_country'}],/* "valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ }, 
 			{ "id": "idtype", "text": "证件类型", "disabled": true},
 			{ "id": "id", "text": "证件号码", "disabled": true },
 			{ "id": "marital", "text": "婚姻状况", "type": "refer", "typedata": [{"code": "HR001_0xx"}] },
@@ -58,8 +58,7 @@ export default {
 				"prevkey": "pk_country", 
 				"props": {
 		          	"value": 'pk_region',
-		          	"label": 'name',
-		          	"children": 'nodes'
+		          	"label": 'name' 
 		        	}
 				}]
 			},
