@@ -22,12 +22,12 @@ export function ajaxData( url, param, call ){
 				//alert( _data.des );
 			};
 		}).catch((err) => { 
-			/*var _status = err.request.status;
-			if( _status == 500 ){
+			var _status = err.request.status;
+			if( _status && _status == 500 ){
 				//alert( '网络错误' ); 
 			}else{
 				//alert( _status ); 
-			};*/
+			};
 		});  
 		  
 	}else{  //有参数的时候发post请求     
@@ -36,7 +36,7 @@ export function ajaxData( url, param, call ){
 	    	param.cuserid = UserInfo.cuserid;
 	    	param.pk_group = UserInfo.pk_group;
 	    	param.pk_org = UserInfo.pk_org;
-			axios.post( url, Qs.stringify ( param ), {
+			axios.post( url, Qs.stringify ( param ), { 
 	          	headers: {
 	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
 	          	}
@@ -48,12 +48,12 @@ export function ajaxData( url, param, call ){
 					//alert( _data.des );
 				};   
 			}).catch((err) => { 
-				/*var _status = err.request.status;
-				if( _status == 500 ){
+				var _status = err.request.status;
+				if( _status && _status == 500 ){
 					//alert( '网络错误' ); 
 				}else{
 					//alert( _status ); 
-				}; */
+				};
 			}); 
 		}else{
 			alert('没有权限');

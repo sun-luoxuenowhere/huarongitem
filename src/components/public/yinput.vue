@@ -51,9 +51,8 @@
 	<el-form-item class="y-input" v-else-if="inputData.type == inputType[4]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
 		<yRegion 
 			:visible="showCasc" 
-			:source="cascFormData"  
-			:relinput="name"
-			:config="inputData" @close="showCasc = false"></yRegion>
+			:source="cascFormData"   
+			:config="inputData" @close="showCasc = false"></yRegion> 
 		<el-input :disabled="inputData.disabled" :title="currentValue" :readonly="true" v-model="currentValue" icon="caret-bottom" @click="selectCascader"></el-input>  
 	</el-form-item> 
 	

@@ -23,6 +23,7 @@ export default {
     		"fileaddress": '',
     		"censusaddr": '',
     		"addr": '',
+    		"addr_show": "",
     		"marriagedate": '' 
     	},
     	//基本信息[头像区域] 
@@ -53,7 +54,7 @@ export default {
 			{ "id": "characterrpr", "text": "户口性质", "type": "refer", "typedata": [{"code": "HR005_0xx"}], /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ },
 			{ "id": "fileaddress", "text": "档案所在地" },
 			{ "id": "censusaddr", "text": "户籍地址" },
-			{ "id": "addr", "text": "家庭住址", "disabled": true, "type": "region", "typedata": [{ "prevkey": "pk_country" }] },
+			{ "id": "addr_show", "text": "家庭住址", "type": "region", "typedata": [{ "prevkey": "pk_country", "valkey": "addr" }] },
 			{ "id": "marriagedate", "text": "结/离婚日期" }] 
     },
     mutations: {  

@@ -189,10 +189,14 @@
 				}else{
 					this.$refs['myForm'].validate((valid) => {   
 						if (valid) {   
+							var _param = JSON.parse( JSON.stringify( getUpdateParam( this.formDataInit, this.formData ) ) );
+							if( _param.addr_show ){
+								delete _param.addr_show;
+							}; 
 							ajaxData(this.$store.state.Interface.information, {
 								"transType": "psnInfoSave",  
 								"infoSetCode": this.infoSetCode,
-								"jsonStr": JSON.stringify( getUpdateParam( this.formDataInit, this.formData ) ) 
+								"jsonStr": JSON.stringify( _param ) 
 							}, (res) => {   
 								this.btnsBase1 = false;
 								this.editBase1 = false;

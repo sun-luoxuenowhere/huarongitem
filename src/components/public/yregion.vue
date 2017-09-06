@@ -31,10 +31,13 @@
 	</div>
 </template>
 <script>  
+import axios from 'axios';  
+import Qs from 'qs';
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 export default {  
 	data(){
 		return {   
+			userInfo: JSON.parse( window.localStorage.getItem("usermsg") ),
 			dataCache: {}, //缓存已经请求过的菜单数据 
 			props: { "value": 'pk_region', "label": 'name' }, //级联菜单的显示映射关系
 			regionForm: {
@@ -58,13 +61,11 @@ export default {
 			
 		}
 	},
-	props: ["visible", "source", "config", "relinput"],    
+	props: ["visible", "source", "config" ],    
 	methods: {  
 		ok(){
 			this.$refs['regionForm'].validate((valid) => {     
 				if (valid) {   
-					 	var _relinput = this.relinput; 
-						this.source[_relinput] = document.querySelector('.el-cascader .el-cascader__label').innerHTML.replace(/[^\u4e00-\u9fa5]/gi,"");
 						this.regionForm.country = this.getPk();
 						this.saveAddr( this.regionForm );  
 				} else {
@@ -84,24 +85,43 @@ export default {
 	  	saveAddr( data ){ 
 	  		var _sdata = JSON.parse(JSON.stringify(data)); 
 	  		_sdata.pks = _sdata.pks.join(','); 
-	  		
-	  		ajaxData( this.$store.state.Interface.information, { 
-				"transType": "psnInfoSave", 
+	  		var param = {
+	  			"pk_psndoc": this.userInfo.pk_psndoc,
+	  			"cuserid": this.userInfo.cuserid,
+	  			"pk_group": this.userInfo.pk_group,
+	  			"pk_org": this.userInfo.pk_org,
+	  			"transType": "psnInfoSave", 
 				"infoSetCode": "addr",
 				"jsonStr": JSON.stringify( _sdata )
-			},( res ) => { 
-				debugger;
-				if( res.flag == "0" ){
-					alert( res.addr );
-				};  
-	    	}); 
+	  		}; 
+			axios.post( this.$store.state.Interface.information, Qs.stringify ( param ), { 
+	          	headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+	          	}
+	      	}).then(( response ) => {  
+	      		var _data = response.data;
+	      		if( _data.flag == 0 ){ 
+	      			var _id = this.config.id; 
+	      			var _valkey = this.config.typedata[0].valkey; 
+	      			
+					this.source[_id] = document.querySelector('.el-cascader .el-cascader__label').innerHTML.replace(/[^\u4e00-\u9fa5]/gi,"");
+	      			
+	      			if( _valkey ){
+	      				this.source[_valkey] = _data.addr;
+	      			};
+	      			
+	      			
+	      			this.$emit('close');
+	      		}else{
+	      			alert(_data.msg);
+	      		}; 
+			}).catch((err) => { //网络异常
+				 
+			});  
 	  	},
     	//加载级联类型数据
     	loadCascader(){ 
-    		var _pk = this.getPk(); 
-    		console.info( this.dataCache[_pk] );
-    		debugger;
-			
+    		var _pk = this.getPk();   
 				if( _pk == "" ){
 					alert('请先选择国籍地区');
 					return;
@@ -110,10 +130,9 @@ export default {
 				ajaxData( this.$store.state.Interface.smserverlet, { 
 					"transType": "region", 
 					"pk_country": _pk
-				},( res ) => {  
-					debugger;
+				},( res ) => {   
 					this.optionsdata = this.toTreeData( res.list ); 
-					//this.dataCache[_pk] = this.optionsdata; 
+					this.dataCache[_pk] = this.optionsdata; 
 		    	}); 
 		    	
     	},
