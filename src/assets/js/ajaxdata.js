@@ -22,12 +22,12 @@ export function ajaxData( url, param, call ){
 				//alert( _data.des );
 			};
 		}).catch((err) => { 
-			var _status = err.request.status;
+			/*var _status = err.request.status;
 			if( _status == 500 ){
 				//alert( '网络错误' ); 
 			}else{
 				//alert( _status ); 
-			};
+			};*/
 		});  
 		  
 	}else{  //有参数的时候发post请求   
@@ -47,12 +47,12 @@ export function ajaxData( url, param, call ){
 				//alert( _data.des );
 			};   
 		}).catch((err) => { 
-			var _status = err.request.status;
+			/*var _status = err.request.status;
 			if( _status == 500 ){
 				//alert( '网络错误' ); 
 			}else{
 				//alert( _status ); 
-			}; 
+			}; */
 		}); 
 	}; 
 }; 

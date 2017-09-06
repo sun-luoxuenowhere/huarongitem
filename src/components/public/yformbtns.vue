@@ -1,3 +1,8 @@
+<!--
+	作者：yugl
+	时间：2017-09-06 
+	支持：表单状态操作按钮组件 
+-->
 <template> 
 	<div v-if=" status== statusArry[0] ">
 		<el-button type="text">{{statusMsg[0]}}</el-button>

@@ -1,3 +1,8 @@
+<!--
+	作者：yugl
+	时间：2017-09-06 
+	支持：列表状态操作按钮组件
+-->
 <template>  
 	<div v-if=" status == statusArry[1] ">
 		<el-button size="small" type="text">{{statusMsg[1]}}</el-button>

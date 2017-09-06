@@ -1,15 +1,15 @@
 <!--
 	作者：yugl
 	时间：2017-09-06 
-	支持：城市地区选择弹窗
+	支持：城市地区参照类型的选择弹窗
 -->
 <template>  
 	<div class="y-dialog"> 
 		<el-dialog class="y-info-dialog y-cascader-dialog" title="选择城市地区" :show-close="false" :visible="visible">   
-		 	<el-form :model="form" label-width="110px" class="clearfix"> 
-		 		<el-form-item class="y-input" label="城市地区">   
+		 	<el-form :model="regionForm" :rules="rules" ref="regionForm" label-width="110px" class="clearfix"> 
+		 		<el-form-item class="y-input" prop="pks" label="城市地区">   
 					<el-cascader
-						v-model="form.pks"
+						v-model="regionForm.pks"
 					    :options="optionsdata"
 					    :props="props" 
 					    filterable
@@ -17,10 +17,10 @@
 						></el-cascader>  
 				</el-form-item> 
 				<el-form-item class="y-input" label="详细地址">   
-					<el-input v-model="form.detailinfo"></el-input>  
+					<el-input v-model="regionForm.detailinfo"></el-input>  
 				</el-form-item> 
 				<el-form-item class="y-input" label="邮编">   
-					<el-input v-model="form.postcode"></el-input>  
+					<el-input v-model="regionForm.postcode"></el-input>  
 				</el-form-item> 
 			</el-form> 
 			<div class="y-btn-box">
@@ -35,33 +35,42 @@ import { ajaxData } from '@/assets/js/ajaxdata.js';
 export default {  
 	data(){
 		return {   
-			dataCache: {},
-			props: {
-	          	"value": 'pk_region',
-	          	"label": 'name' 
-		    },
-			form: {
-				pks: [],
-				detailinfo: '',
-				postcode: ''
+			dataCache: {}, //缓存已经请求过的菜单数据 
+			props: { "value": 'pk_region', "label": 'name' }, //级联菜单的显示映射关系
+			regionForm: {
+				pks: [], //省市区
+				detailinfo: '', //详细地址
+				postcode: '', //邮编
+				country: '' //国家
 			},
-			optionsdata: []
+			rules: { //校验省市区必输
+				pks: [{ type: 'array', required: true, message: '请选择城市', trigger: 'change' }]
+			},
+			optionsdata: [] //当前级联菜单的数据
 		}
 	},  
 	watch: {
 		visible( val ){
-			var _pk = this.getPk(); 
-			if( !this.dataCache[_pk] ){ 
-				this.loadCascader();
-			}; 
+			var _pk = this.getPk();  
+			if( !this.dataCache[_pk] ){
+				this.loadCascader(); 
+			};   
+			
 		}
 	},
 	props: ["visible", "source", "config", "relinput"],    
 	methods: {  
 		ok(){
-			var _relinput = this.relinput; 
-			this.source[_relinput] = document.querySelector('.el-cascader .el-cascader__label').innerHTML.replace(/[^\u4e00-\u9fa5]/gi,"");
-			this.$emit('close'); 
+			this.$refs['regionForm'].validate((valid) => {     
+				if (valid) {   
+					 	var _relinput = this.relinput; 
+						this.source[_relinput] = document.querySelector('.el-cascader .el-cascader__label').innerHTML.replace(/[^\u4e00-\u9fa5]/gi,"");
+						this.regionForm.country = this.getPk();
+						this.saveAddr( this.regionForm );  
+				} else {
+					return false;
+				};
+	      	});  
 		},
 		//取消操作
 		cancle() {  
@@ -72,22 +81,41 @@ export default {
     		var _prevkey = _typedata.prevkey;  
     		return this.source[_prevkey];
 	  	},
+	  	saveAddr( data ){ 
+	  		var _sdata = JSON.parse(JSON.stringify(data)); 
+	  		_sdata.pks = _sdata.pks.join(','); 
+	  		
+	  		ajaxData( this.$store.state.Interface.information, { 
+				"transType": "psnInfoSave", 
+				"infoSetCode": "addr",
+				"jsonStr": JSON.stringify( _sdata )
+			},( res ) => { 
+				debugger;
+				if( res.flag == "0" ){
+					alert( res.addr );
+				};  
+	    	}); 
+	  	},
     	//加载级联类型数据
     	loadCascader(){ 
-    		var _pk = this.getPk();
-    		
-    		if( _pk == "" ){
-				alert('请先选择国籍地区');
-				return;
-			}; 
+    		var _pk = this.getPk(); 
+    		console.info( this.dataCache[_pk] );
+    		debugger;
 			
-			ajaxData( this.$store.state.Interface.smserverlet, { 
-				"transType": "region", 
-				"pk_country": _pk
-			},( res ) => {  
-				this.optionsdata = this.toTreeData( res.list ); 
-				this.dataCache[_pk] = this.optionsdata; 
-	    	});  
+				if( _pk == "" ){
+					alert('请先选择国籍地区');
+					return;
+				}; 
+				
+				ajaxData( this.$store.state.Interface.smserverlet, { 
+					"transType": "region", 
+					"pk_country": _pk
+				},( res ) => {  
+					debugger;
+					this.optionsdata = this.toTreeData( res.list ); 
+					//this.dataCache[_pk] = this.optionsdata; 
+		    	}); 
+		    	
     	},
     	//json格式转成树结构
     	toTreeData( data, config ){ 
