@@ -43,7 +43,7 @@
 						</el-col>
 						<el-col v-else :xs="24" :sm="12" :md="12" :lg="12">
 							<div class="y-box-base y-box-photo" v-if="val.id == 'photo'">
-								<img :src="formData[key]" />
+								<img :src="'data:image/png;base64,' + formData[key]" />
 							</div> 
 							<el-form-item :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" v-else :label="val.text"> 
 								<el-input v-model="formDataConfig1[key].typedata[0][formData[key]]" v-if="formDataConfig1[key].type == 'radio'" :disabled="true"> </el-input>

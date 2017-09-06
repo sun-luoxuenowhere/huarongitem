@@ -474,6 +474,7 @@ export default {
 		},
 		//打开奖励弹窗
 		openJiangliDialog( data ){
+			
 			var initData = {
 				"encourdate": "",
 				"encourtype": "",
