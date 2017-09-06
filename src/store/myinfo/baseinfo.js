@@ -48,20 +48,12 @@ export default {
 			{ "id": "joinworkdate", "text": "参加工作日期", "type": "date" },
 			{ "id": "health", "text": "健康状况", "type": "refer", "typedata": [{"code": "HR003_0xx"}] },
 			{ "id": "bloodtype", "text": "血型", "type": "refer", "typedata": [{"code": "bloodtype"}] },
-			{ "id": "nativeplace", "text": "籍贯", /*"type": "cascader", "typedata": [{"code": "HR005_0xx"}],*/ /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }] */},
-			{ "id": "permanreside", "text": "户口所在地", /*"type": "cascader", "typedata": [{"code": "HR005_0xx"}],*/ },
-			{ "id": "characterrpr", "text": "户口性质", /*"type": "refer", "typedata": [{"code": "HR005_0xx"}], *//*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ },
+			{ "id": "nativeplace", "text": "籍贯", "type": "region", "typedata": [{ "prevkey": "pk_country" }]/*"valid": [{ required: true, message: '不能为空', trigger: 'change' }] */},
+			{ "id": "permanreside", "text": "户口所在地", "type": "region", "typedata": [{ "prevkey": "pk_country" }] },
+			{ "id": "characterrpr", "text": "户口性质", "type": "refer", "typedata": [{"code": "HR005_0xx"}], /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ },
 			{ "id": "fileaddress", "text": "档案所在地" },
 			{ "id": "censusaddr", "text": "户籍地址" },
-			{ "id": "addr", "text": "家庭住址", "type": "cascader", "typedata": [{
-				"code": "region", 
-				"prevkey": "pk_country", 
-				"props": {
-		          	"value": 'pk_region',
-		          	"label": 'name' 
-		        	}
-				}]
-			},
+			{ "id": "addr", "text": "家庭住址", "type": "region", "typedata": [{ "prevkey": "pk_country" }] },
 			{ "id": "marriagedate", "text": "结/离婚日期" }] 
     },
     mutations: {  

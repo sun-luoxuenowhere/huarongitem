@@ -275,7 +275,7 @@ export default {
 		}, 
 		//保存履历 | 工作| 教育等信息
 		savePersonInfo( data ){     
-			var _data = [data];  
+			var _data = data;  
 			var _code = this.currentDialog.infoSetCode;  
 			var _paramData = {
 				"transType": "psnInfoSave",  

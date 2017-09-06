@@ -2,7 +2,7 @@
 	作者：yugl
 	时间：2017-08-22
 	描述：通过给表单配置文件指定不同的类型，动态生成对应的组件
-	支持：date(日期)、refer(参照)、radio(单选)、checkbox(复选)、默认input
+	支持：date(日期)、refer(参照-一级的下拉菜单)、region(参照-城市地区选择弹窗)、radio(单选)、checkbox(复选)、默认input
 -->
 <template>   
 	<!-- 日期选择器 begin -->
@@ -18,7 +18,7 @@
 	
 	<!-- 下拉菜单 begin -->
 	<el-form-item class="y-input" v-else-if="inputData.type == inputType[1]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
-		<el-select v-model="currentValue" :disabled="inputData.disabled" @change="selectChange" filterable placeholder="请选择">
+		<el-select :title="currentValue" v-model="currentValue" :disabled="inputData.disabled" @change="selectChange" filterable placeholder="请选择">
 		    <el-option
 			      v-for="item in optionsdata"
 			      :key="item.code"
@@ -49,26 +49,28 @@
 	
 	<!-- 级联菜单 begin -->
 	<el-form-item class="y-input" v-else-if="inputData.type == inputType[4]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
-		<yCascader 
+		<yRegion 
 			:visible="showCasc" 
 			:source="cascFormData"  
-			:config="inputData" @close="showCasc = false"></yCascader>
-		<el-input :readonly="true" v-model="currentValue" icon="caret-bottom" @click="selectCascader"></el-input>  
+			:relinput="name"
+			:config="inputData" @close="showCasc = false"></yRegion>
+		<el-input :title="currentValue" :readonly="true" v-model="currentValue" icon="caret-bottom" @click="selectCascader"></el-input>  
 	</el-form-item> 
 	
 	<!-- 文本框 begin -->
 	<el-form-item class="y-input" v-else :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">  
-		<el-input :disabled="inputData.disabled" v-model="currentValue" @change="inputChange"></el-input>  
+		<el-input :title="currentValue" :disabled="inputData.disabled" v-model="currentValue" @change="inputChange"></el-input>  
 	</el-form-item>  
 </template>
 <script>  
 import { ajaxData } from '@/assets/js/ajaxdata.js';
-import yCascader from './ycascader'; //省市区弹窗 
+import yRegion from './yregion'; //省市区弹窗 
+
 export default {  
 	data(){
 		return { 
 			showCasc: false,
-			inputType: ['date', 'refer', 'radio', 'checkbox', 'cascader'],
+			inputType: ['date', 'refer', 'radio', 'checkbox', 'region'],
 			referCusStr: 'idtype,bloodtype', //自定义的参照字段集合
 			cascFormData: {}, //级联菜单中使用的当前表单数据
 			cascPrev: '', //级联菜单的前置条件(例：国籍)
@@ -76,7 +78,7 @@ export default {
 		}
 	},
 	components: { 
-		yCascader //省市区弹窗
+		yRegion //省市区弹窗
 	}, 
 	props:['name', 'value', 'inputData', 'formData'],// 设置value为props属性-必须
 	computed:{ 

@@ -1,26 +1,26 @@
 <!--
 	作者：yugl
 	时间：2017-09-06 
-	支持：级联
+	支持：城市地区选择弹窗
 -->
 <template>  
 	<div class="y-dialog"> 
-		<el-dialog class="y-info-dialog" title="选择城市地区" :show-close="false" :visible="visible">    
+		<el-dialog class="y-info-dialog y-cascader-dialog" title="选择城市地区" :show-close="false" :visible="visible">   
 		 	<el-form :model="form" label-width="110px" class="clearfix"> 
 		 		<el-form-item class="y-input" label="城市地区">   
 					<el-cascader
-						v-model="form.pk"
+						v-model="form.pks"
 					    :options="optionsdata"
-					    :props="config.typedata[0].props"
+					    :props="props" 
 					    filterable
-					    change-on-select  
+					    change-on-select   
 						></el-cascader>  
 				</el-form-item> 
 				<el-form-item class="y-input" label="详细地址">   
-					<el-input v-model="form.add"></el-input>  
+					<el-input v-model="form.detailinfo"></el-input>  
 				</el-form-item> 
 				<el-form-item class="y-input" label="邮编">   
-					<el-input v-model="form.youbian"></el-input>  
+					<el-input v-model="form.postcode"></el-input>  
 				</el-form-item> 
 			</el-form> 
 			<div class="y-btn-box">
@@ -34,48 +34,59 @@
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 export default {  
 	data(){
-		return {  
-			loaded: false, //是否已经加载过 
+		return {   
+			dataCache: {},
+			props: {
+	          	"value": 'pk_region',
+	          	"label": 'name' 
+		    },
 			form: {
-				pk: [],
-				add: '',
-				youbian: ''
+				pks: [],
+				detailinfo: '',
+				postcode: ''
 			},
 			optionsdata: []
 		}
 	},  
 	watch: {
 		visible( val ){
-			if( val && !this.loaded ){ 
+			var _pk = this.getPk(); 
+			if( !this.dataCache[_pk] ){ 
 				this.loadCascader();
 			}; 
 		}
 	},
-	props: ["visible", "source", "config"],   
+	props: ["visible", "source", "config", "relinput"],    
 	methods: {  
 		ok(){
-			this.$emit('close');
+			var _relinput = this.relinput; 
+			this.source[_relinput] = document.querySelector('.el-cascader .el-cascader__label').innerHTML.replace(/[^\u4e00-\u9fa5]/gi,"");
+			this.$emit('close'); 
 		},
 		//取消操作
 		cancle() {  
 	        this.$emit('close');
-	    },
-    	//加载级联类型数据
-    	loadCascader(){
-    		var _typedata = this.config.typedata[0]; 
+	  	}, 
+	  	getPk(){
+	  		var _typedata = this.config.typedata[0]; 
     		var _prevkey = _typedata.prevkey;  
+    		return this.source[_prevkey];
+	  	},
+    	//加载级联类型数据
+    	loadCascader(){ 
+    		var _pk = this.getPk();
     		
-    		if( this.source[_prevkey] == "" ){
+    		if( _pk == "" ){
 				alert('请先选择国籍地区');
 				return;
 			}; 
 			
 			ajaxData( this.$store.state.Interface.smserverlet, { 
-				"transType": _typedata.code, 
-				"pk_country": this.source[_prevkey]
+				"transType": "region", 
+				"pk_country": _pk
 			},( res ) => {  
-				this.optionsdata = this.toTreeData( res.list );     
-				this.loaded = true;
+				this.optionsdata = this.toTreeData( res.list ); 
+				this.dataCache[_pk] = this.optionsdata; 
 	    	});  
     	},
     	//json格式转成树结构

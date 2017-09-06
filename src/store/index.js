@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex' 
 import BaseInfo from './myinfo/baseinfo'
-import Information from './myinfo/subinfo'
+import Information from './myinfo/subinfo' 
 
 Vue.use(Vuex)
 
@@ -39,7 +39,7 @@ export default new Vuex.Store({
     	}
     },
     modules: { 
-        Information, //员工信息——工作履历
-        BaseInfo
+        Information, //员工信息子集相关配置数据
+        BaseInfo //员工基本信息配置数据 
     }
 });   

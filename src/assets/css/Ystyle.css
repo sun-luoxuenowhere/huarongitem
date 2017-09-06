@@ -304,6 +304,18 @@
 .y-icon-item .el-form-item__label{
 	display: none;
 }
+.y-cascader-dialog .el-dialog{
+	width: 500px;
+}
+.y-cascader-dialog .el-dialog .y-input{
+	width: 100%;
+}
+.el-form-item .y-cascader-dialog .el-form-item__content{
+	margin-left: 110px !important;
+}
+.el-form--label-left .y-cascader-dialog .el-form-item__label{
+	text-align: right;
+}
 .y-icon-item .el-form-item__content{
 	margin-left: 0!important; 
 }
@@ -322,6 +334,9 @@
 }
 .y-row-box .y-module .y-content{
 	padding: 20px;
+}
+.y-row-box .y-module .y-table{
+	margin-bottom: 10px;
 }
 .y-userinfo .iconfont{ 
   vertical-align: middle;

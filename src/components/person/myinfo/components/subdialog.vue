@@ -47,10 +47,9 @@ export default {
 		 	this.$refs['myForm'].validate((valid) => {    
 		 		var _postdata = this.postFormData(); 
 				if (valid) {   
-					if( _postdata ){
-						debugger;
-						//this.$emit('submit', _postdata ); 
-						//this.resetForm();
+					if( _postdata ){ 
+						this.$emit('submit', _postdata ); 
+						this.resetForm();
 					}else{
 						alert('没有修改');
 						return false;
@@ -78,8 +77,7 @@ export default {
 			return _current;
 		},
 		//取消操作
-		cancle() { 
-	        //this.resetForm();
+		cancle() {  
 	        this.$emit('close');
 	    },
 	    //重置表单

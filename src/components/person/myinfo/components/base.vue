@@ -38,7 +38,7 @@
 						<el-col v-if="iconForm.indexOf(val.id) > -1" :xs="24" :sm="12" :md="8" :lg="8"> 
 							<div class="y-icon-item">
 								<i class="iconfont" :class="iconCls[val.id]"></i>
-								<el-input v-model="formData[key]" :disabled="true"> </el-input>
+								<el-input v-model="formData[key]" :title="formData[key]" :disabled="true"> </el-input>
 							</div> 
 						</el-col>
 						<el-col v-else :xs="24" :sm="12" :md="12" :lg="12">
@@ -83,7 +83,7 @@
 					<el-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(val,key) in formDataConfig2">
 						<el-form-item :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" :label="val.text">
 							<el-input v-model="formDataConfig2[key].typedata[0][formData[key]]" v-if="formDataConfig2[key].type == 'radio'" :disabled="true"> </el-input>
-							<el-input v-model="formData[key]" v-else :disabled="true"> </el-input> 
+							<el-input v-model="formData[key]" :title="formData[key]" v-else :disabled="true"> </el-input> 
 						</el-form-item>
 					</el-col>
 				</el-row>
