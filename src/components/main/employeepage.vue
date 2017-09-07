@@ -248,7 +248,7 @@ export default{
 				};  
 	    	}).catch((err) => { 
 	    		 
-	    		this.$message.error( '待办事项加载数据失败' );  
+//	    		this.$message.error( '待办事项加载数据失败' );  
 			});        	
       }
       

@@ -17,7 +17,7 @@ export default{
 		employeePage
 	},
    created() {
-   	var userid=window.localStorage.getItem('userid');
+   	var userid=window.localStorage.getItem('usermsg');
    		//判断是领导还是员工还是经理。。。。。。
      	if(userid){
      		this.judgeyg=true;

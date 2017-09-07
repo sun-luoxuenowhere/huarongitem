@@ -43,9 +43,9 @@
         methods: {
         	
             submitForm(formName) {
-            	var name = this.ruleForm.username;  
+            	var username = this.ruleForm.username;  
                 var password = this.ruleForm.password;  
-                if(name == '' || password == ''){  
+                if(username == '' || password == ''){  
                     this.$message({  
                         message : '账号或密码为空！',  
                         type : 'error'  
@@ -58,7 +58,7 @@
                  this.$http.get(this.url,{
 			    	params:{
 			    		'transType':'login',
-			    		"userCode":name,
+			    		"userCode":username,
 						"password":password
 			    	}
 		    	}).then(function (response) {

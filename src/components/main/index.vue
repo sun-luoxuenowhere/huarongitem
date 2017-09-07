@@ -37,20 +37,20 @@ export default {
 	created(){ 
 		
 		//权限判断
-		var userid=JSON.parse(window.localStorage.getItem('userid'));
+		var userid=JSON.parse(window.localStorage.getItem('usermsg'));
+//		console.log(userid)
+//		if(!userid.cuserid){
+//			this.$router.push({
+//	  			name:'/Login',
+//	  		});
+//		}
 		console.log(userid)
-		if(!userid.cuserid){
-			this.$router.push({
-	  			name:'/Login',
-	  		});
-		}
-		
 		//左侧菜单权限设置；
 		var data=userid.func;
 		var data1={
 			"E90101":{"icon":"iconfont icon-renshihangzhengshi","url":"", id: 'E90101', pid: '0',text:'人事信息'},
 			"E9010101":{"icon":"","url":"/Information", id:'E9010101', pid: 'E90101',text:'我的信息'},
-			"E9010102":{"icon":"","url":"/Employeelist", id: "E9010102", pid: 'E90101',text:'人员信息'}
+			"E9010102":{"icon":"","url":"/Employeelist", id: "E9010102", pid: 'E90102',text:'人员信息'}
 		};
 		var _cachepid = [];
 		var _descdata = [];
@@ -67,7 +67,7 @@ export default {
 				_descdata.push( _pdata );
 			}; 
 		};
-		
+		console.log(_descdata)
 		var navdata=[];
 		for(var i = 0; i < _descdata.length; i++){
 			if(_descdata[i].pid==0){

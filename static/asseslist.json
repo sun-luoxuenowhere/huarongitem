@@ -2,20 +2,17 @@
 	"flag":"0",
 	"data":[{
       "date": "1",
-      "id":"wanghui",
-      "name": "王辉",
-      "kaohebiao": "人力项目-成员-建设项目考核表",
-      "status":"未评分",
+      "name": "2017",
+      "kaohebiao": "王辉",
       "fen":"100",
-      "caozuo":"打分"
+      "pingfen":""
     },{
       "date": "2",
-      "id":"liuping",
-      "name": "刘平",
-      "kaohebiao": "人力项目-成员-建设项目考核表",
+      "name": "2356",
+      "kaohebiao": "焦阳",
       "status":"未评分",
       "fen":"100",
-      "caozuo":"打分"
+      "pingfen":""
     }]
 
 }

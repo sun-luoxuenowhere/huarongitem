@@ -3,6 +3,10 @@
 .y-right{
   float: right;
 }
+.ltext-blue {
+	color: blue;
+	font-size: 20px;
+}
 .y-hide{
   display: none;
 }

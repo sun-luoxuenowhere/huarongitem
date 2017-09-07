@@ -7,7 +7,7 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/wbalone/',
+    assetsPublicPath: '/hrweb/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
@@ -30,8 +30,8 @@ module.exports = {
     proxyTable: {
     	'/service/': { 
     		//target: 'http://10.4.120.26:8090', //lzw
-    		target: 'http://10.4.120.29:8080', //zyl 
-      	//target: 'http://10.15.0.216:6007', //服务器
+    		//target: 'http://10.4.120.29:8080', //zyl 
+      	target: 'http://10.15.0.216:6007', //服务器
         changeOrigin:true 
     	} 
     },
