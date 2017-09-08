@@ -7,6 +7,7 @@ import axios from 'axios';
 import Qs from 'qs';
 import store from 'store';
 var UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );
+console.log(UserInfo)
 export function ajaxData( url, param, call ){   
 	if( typeof(arguments[1] )=="function"){ //没有参数的时候发get请求
 		

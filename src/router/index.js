@@ -29,6 +29,7 @@ import zzpfmsg from '@/components/assessment/zzpfmsg';
 import zzpfmsgls from '@/components/assessment/zzpfmsgls';
 import zzpfyg from '@/components/assessment/zzpfyg';
 import hbgxlist from '@/components/assessment/hbgxlist';
+import mdshlist from '@/components/assessment/mdshlist';
 
 
 
@@ -126,6 +127,11 @@ export default new Router({
 		    	path: "/hbgxlist",
 		    	name: '/hbgxlist',
 		    	component: hbgxlist
+		    },
+		    {
+		    	path: "/mdshlist",
+		    	name: '/mdshlist',
+		    	component: mdshlist
 		    }
 		    
 		  ]  

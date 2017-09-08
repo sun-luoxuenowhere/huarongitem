@@ -9,21 +9,15 @@
 			</el-breadcrumb>
 		</div>
 		
-		<div class="L_kaohe clearfix">
-			<div style="float: left;">
-			</div>
-			<div @click="morelist()" style="width: 200px; float: right;margin-right: 30px;color: dodgerblue;">
+		
+		<div class="L_inner">
+			<div @click="morelist()" style="width: 150px;height: 40px;font-size: 14px; float: right;margin-right: 0px;color: dodgerblue;">
 				查看历史考核信息>
 			</div>
-				
-		</div>
-		
-		<div class="L_inner clearfix">  
 			<template>
 			  <el-table
 			    :data="tableData"
 			    stripe
-			    @row-click="onRowClick"
 			    style="width: 100%">
 			    <el-table-column
 			      prop="jixiao"
@@ -40,7 +34,15 @@
 			      label="考核对象组"
 			      >
 			    </el-table-column>
-			    
+			     <el-table-column
+			      prop="caozuo"
+			      fixed="right"
+			      label="操作">
+			      <template scope="scope">
+			         <el-button  type="text" size="small">收回</el-button>
+        			<el-button @click="onRowClick" type="text" size="small">测评</el-button>
+			      </template>
+			    </el-table-column>
 			    <el-table-column
 			      prop="kaohezhuantai"
 			      label="考核状态"

@@ -20,18 +20,55 @@
 				
 		</div>
 		
-		<div class="L_inner clearfix">  
+		<div class="L_inner clearfix"> 
+			<el-popover
+			  ref="popover1"
+			  placement="top-start"
+			  title="品行/作风"
+			  width="200"
+			  trigger="hover"
+			  content="具有较高政策水平与学识水平xxxxxxxxxxxxxx">
+			</el-popover>
+			<el-popover
+			  ref="popover2"
+			  placement="top-start"
+			  title="业务能力"
+			  width="200"
+			  trigger="hover"
+			  content="具有较高政策水平与学识水平xxxxxxxxxxxxxx">
+			</el-popover>
+			<el-popover
+			  ref="popover3"
+			  placement="top-start"
+			  title="组织管理能力"
+			  width="200"
+			  trigger="hover"
+			  content="具有较高政策水平与学识水平xxxxxxxxxxxxxx">
+			</el-popover>
+			<el-popover
+			  ref="popover4"
+			  placement="top-start"
+			  title="协调沟通能力"
+			  width="200"
+			  trigger="hover"
+			  content="具有较高政策水平与学识水平xxxxxxxxxxxxxx">
+			</el-popover>
+			
+			<el-row :gutter="20">
+			  <el-col :span="6"><div v-popover:popover1 class="assedetails"><span>品行/作风</span><span class="Ldetails">(详情)</span></div></el-col>
+			  <el-col :span="6"><div v-popover:popover2 class="assedetails"><span>业务能力</span><span class="Ldetails">(详情)</span></div></el-col>
+			  <el-col :span="6"><div v-popover:popover3 class="assedetails"><span>组织管理能力</span><span class="Ldetails">(详情)</span></div></el-col>
+			  <el-col :span="6"><div v-popover:popover4 class="assedetails"><span>协调沟通能力</span><span class="Ldetails">(详情)</span></div></el-col>
+			</el-row>
+
 			<template>
 			  <el-table
 			    :data="tableData"
 			    stripe
-			    @row-click="onRowClick"
-			    
 			    style="width: 100%">
 			    <el-table-column
 			      prop="xuhao"
 			      label="序号"
-			      width="80"
 			      >
 			    </el-table-column>
 			    <el-table-column
@@ -43,11 +80,14 @@
 			      prop="name"
 			      label="姓名"
 			      width="80">
+			      <template scope="scope">
+			      		<el-button @click.native.prevent="menrouter(scope.row)" type="text" >{{scope.row.name}}</el-button>
+				  </template>
 			    </el-table-column>
 			    <el-table-column
 			      prop="pingxing"
 			      label="品行/作风(25%)"
-			      width="100"
+			      width="140"
 			      >
 			      <template scope="scope">
 					    <el-input v-model.number="scope.row.pingxing"  placeholder=""></el-input>
@@ -57,7 +97,7 @@
 			    <el-table-column
 			      prop="yewu"
 			      label="业务能力(25%)"
-			      width="100">
+			      width="140">
 			      <template scope="scope">
 					    <el-input v-model.number="scope.row.yewu"  placeholder=""></el-input>
 				  </template>
@@ -65,7 +105,7 @@
 			    <el-table-column
 			      prop="zuzhi"
 			      label="组织管理能力(25%)"
-			      width="100">
+			      width="140">
 			      <template scope="scope">
 					    <el-input v-model.number="scope.row.zuzhi"  placeholder=""></el-input>
 				  </template>
@@ -73,7 +113,7 @@
 			    <el-table-column
 			      prop="xietiao"
 			      label="协调沟通能力(25%)"
-			      width="100">
+			      width="140">
 			      <template scope="scope">
 					    <el-input v-model="scope.row.xietiao"  placeholder=""></el-input>
 				  </template>
@@ -82,25 +122,14 @@
 			      prop="zongfen"
 			      label="总分"
 			      width="100"
-			      :render-header="requiredCol">
+			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="zhuangtai"
 			      label="状态"
 			      width="100">
 			    </el-table-column>
-			    <el-table-column
-			      prop="caozuo"
-			      label="操作">
-			      <template scope="scope">
-			        <el-button
-			          @click.native.prevent="deleteRow(scope.row.id)"
-			          type="text"
-			          size="small" >
-			          	收回
-			        </el-button>
-			      </template>
-			    </el-table-column>
+			    
 			  </el-table>
 			</template>
 			
@@ -111,9 +140,7 @@
 
 <script>   
 	import Qs from 'qs';
-
 	export default { 
-		
 		data(){
 			return {
 				tableData:[
@@ -127,7 +154,7 @@
 			      "xietiao":"80",
 			      "zongfen":'86',
 			      "zhuangtai":"已考核",
-			      "caozuo":"收回"
+			     
 			  },
 			  {
 			      "xuhao": "1",
@@ -139,7 +166,7 @@
 			      "xietiao":"80",
 			      "zongfen":'86',
 			      "zhuangtai":"已考核",
-			      "caozuo":"收回"
+			      
 			  },
 			  {
 			      "xuhao": "1",
@@ -151,7 +178,7 @@
 			      "xietiao":"80",
 			      "zongfen":'86',
 			      "zhuangtai":"已考核",
-			      "caozuo":"收回"
+			     
 			  },
 			  {
 			      "xuhao": "1",
@@ -163,7 +190,7 @@
 			      "xietiao":"80",
 			      "zongfen":'86',
 			      "zhuangtai":"已考核",
-			      "caozuo":"收回"
+			      
 			  },
 			  {
 			      "xuhao": "1",
@@ -175,7 +202,7 @@
 			      "xietiao":"80",
 			      "zongfen":'86',
 			      "zhuangtai":"已考核",
-			      "caozuo":"收回"
+			      
 			  },
 			  {
 			      "xuhao": "1",
@@ -187,9 +214,8 @@
 			      "xietiao":"80",
 			      "zongfen":'86',
 			      "zhuangtai":"已考核",
-			      "caozuo":"收回"
-			   }
-				]
+			      
+			  }]
 			}
 		},
 		methods:{  
@@ -207,17 +233,28 @@
 		          type: 'success'
 		        });
 			},
-		      onRowClick(arg) {//跳转员工评分页面
+		      menrouter(arg) {//跳转员工评分页面
 		        this.$router.push({
 		  			name:'/zzpfyg'
 		  		});
 		    },
-	    	requiredCol(createElement, { column }) {
-				return [ column.label, createElement('span', {
-						'class': 'ltext-blue'
-					},'↓') 
-				];
-			} 
+		    deleteRow(){
+		    	this.$message({
+		          showClose: true,
+		          message: '恭喜你，收回成功',
+		          type: 'success'
+		        });
+		    },
+		    hovertip(){
+		    	alert("222")
+		    },
+//	    	requiredCol(createElement, { column }) {
+//				return [ column.label, createElement('span', {
+//						'class': 'ltext-blue'
+//					},'↓') 
+//				];
+//			}
+			
 		    
 		},
 		created(){ 
@@ -240,5 +277,16 @@
 		background: #fff;
 		padding: 20px 20px 20px 20px;
 	}
-	
+	.assedetails {
+		border: 1px solid #DDDDDD;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		margin-bottom: 5px;
+		cursor: pointer;
+	}
+	.assedetails .Ldetails {
+		padding-left: 2px;
+		color: #20A0FF;
+	}
 </style>

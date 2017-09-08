@@ -14,7 +14,7 @@
 				<span style="padding-left: 20px;">测评方案：2017年7月一般员工年度测评</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>信息科技部</span>
 			</div>
 			<div style="width: 200px; float: right;margin-right: 30px;"><el-input
-			  placeholder="请选择日期"
+			  placeholder="查询人员"
 			  icon="search">
 			</el-input></div>
 				

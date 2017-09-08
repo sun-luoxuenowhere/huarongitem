@@ -10,11 +10,7 @@
 		</div>
 		
 		<div class="L_kaohe">
-			<el-button type="primary">新增</el-button>
-			<el-button type="primary">删除</el-button>
-			<el-button type="primary">升级</el-button>
-			<el-button type="primary">降级</el-button>
-			<el-button type="primary">上报</el-button>
+			<el-button type="primary">审核</el-button>
 			
 		</div>
 		
