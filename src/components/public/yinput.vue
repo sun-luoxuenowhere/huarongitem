@@ -64,7 +64,7 @@
 <script>  
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 import yRegion from './yregion'; //省市区弹窗 
-
+var UserInfo;
 export default {  
 	data(){
 		return { 
@@ -97,6 +97,9 @@ export default {
   			}
 		}
 	},
+	created(){
+		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+	},
 	mounted() {   
 		if( this.inputData.type == this.inputType[1] ){  //参照类型数据格式 
 			this.loadData();   
@@ -113,6 +116,10 @@ export default {
 				this.currentValue = this.formData[_name]; 
     		}else if( _code == 'country' ){ //国籍地区
     			ajaxData( this.$store.state.Interface.smserverlet, { 
+	    			"pk_psndoc":UserInfo.pk_psndoc,
+			    	"cuserid":UserInfo.cuserid,
+			    	"pk_group":UserInfo.pk_group,
+			    	"param.pk_org": UserInfo.pk_org,
 					"transType": 'country' 
 				},( res ) => {   
 					this.optionsdata =  res.list;  
@@ -120,7 +127,11 @@ export default {
 					this.currentValue = this.formData[_name]; 
 		    	}); 
     		}else{
-    			ajaxData( this.$store.state.Interface.smserverlet, { 
+    			ajaxData( this.$store.state.Interface.smserverlet, {
+    				"pk_psndoc":UserInfo.pk_psndoc,
+			    	"cuserid":UserInfo.cuserid,
+			    	"pk_group":UserInfo.pk_group,
+			    	"param.pk_org": UserInfo.pk_org,
 					"transType": 'defdoc', 
 					"defdoclistCode": this.inputData.typedata[0].code
 				},( res ) => {   

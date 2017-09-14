@@ -24,7 +24,7 @@
 						</el-col>
 						<el-col v-else :xs="24" :sm="12" :md="12" :lg="12" >
 							<div class="y-box-base y-box-photo" v-if="val.id == 'photo'">
-								<img :src="formData[key]" />
+								<img :src="'data:image/png;base64,' + formData[key]" />
 							</div> 
 							<yInput v-else :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" v-model="formData[key]" :inputData="formDataConfig1[key]" :initVal="formData[key]"></yInput>
 						</el-col>	
@@ -98,7 +98,7 @@
 	import photoSrc from '../../../../assets/img/user.png';
 	import yInput from '@/components/public/yinput';
 	import yFormBtns from '@/components/public/yformbtns';
-
+	var UserInfo;
 	export default {
 		props: ['editabled'],
 		data() {
@@ -133,7 +133,9 @@
 				return this.$store.state.BaseInfo.baseFormInit;//获取初始信息静态数据
 			}
 		},
-		created() {  
+		created() { 
+			UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+			
 			this.formDataInit = deepCopyObj( this.baseFormInit );//数据深拷贝
 			this.formData = deepCopyObj( this.baseFormInit ); 
 			this.loadInfoData();
@@ -158,6 +160,10 @@
 			//动态加载基本信息数据
 			loadInfoData() {
 				ajaxData(this.$store.state.Interface.information, {
+					"pk_psndoc":UserInfo.pk_psndoc,
+			    	"cuserid":UserInfo.cuserid,
+			    	"pk_group":UserInfo.pk_group,
+			    	"param.pk_org": UserInfo.pk_org,
 					"infoSetCode": "bd_psndoc",
 					"transType": 'psnInfoQuery' 
 				}, (res) => { 

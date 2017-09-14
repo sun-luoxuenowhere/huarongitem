@@ -285,6 +285,10 @@
 .y-operate .el-button-group{
 	display: inline;
 }
+
+.y-content .el-table__fixed-header-wrapper thead div {
+	background-color: #fff;
+}
 /*== 基本信息带图标的表单元素区域 ==*/
 .y-icon-item{ 
 	position: relative;

@@ -10,20 +10,20 @@
 		<div class="y-content">
 			<el-table class="y-table y-table-baseinfo" :data="tempData" style="width: 100%">
 				<template v-for="item in theaddata">
-					<el-table-column v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text"></el-table-column>
-					<el-table-column width="200" v-else-if="!item.required" :prop="item.param[0]" :label="item.text">
+					<el-table-column width="200" show-overflow-tooltip  v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text"></el-table-column>
+					<el-table-column width="200"  v-else-if="!item.required" :prop="item.param[0]" :label="item.text">
 						<template scope="scope">
 					        {{scope.row[item.param[0]]}}-{{scope.row[item.param[1]]}}
 					    </template>
 					</el-table-column>
-					<el-table-column v-else-if="item.required && typeof item.param == 'string'" :render-header="requiredCol" :prop="item.param" :label="item.text"></el-table-column>
+					<el-table-column width="200" show-overflow-tooltip v-else-if="item.required && typeof item.param == 'string'" :render-header="requiredCol" :prop="item.param" :label="item.text"></el-table-column>
 					<el-table-column width="200" v-else :render-header="requiredCol" :prop="item.param[0]" :label="item.text">
 						<template scope="scope">
 					        {{scope.row[item.param[0]]}}-{{scope.row[item.param[1]]}}
 					    </template>
 					</el-table-column>
 				</template> 
-				<el-table-column v-if="editabled && ( status == -1 || status == 0 || status == 2)" width="100">
+				<el-table-column v-if="editabled && ( status == -1 || status == 0 || status == 2)" fixed="right" label="操作"  width="100">
 					<template scope="scope">   
 						<i style="color: #50CC7A;" class="iconfont icon-bianji1"  
 						@click="editRow(scope.$index, scope.row)"></i>  
@@ -32,6 +32,7 @@
 					</template>
 				</el-table-column>
 			</el-table>
+			
 			<div v-if="editabled && ( status == -1 || status == 0 || status == 2)" class="text-center">
 				<span style="color: #CC2123;" @click="addRow"><i class="iconfont icon-tianjia"></i>新增{{title}}</span> 
 			</div>
@@ -42,7 +43,7 @@
 import { deepCopyObj, deepCopyArry } from '@/assets/js/v-extend.js'; 
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 import yListBtns from '@/components/public/ylistbtns';
-
+var UserInfo;
 export default { 
 	//infoSetCode: 数据源
 	 //editabled:是否可编辑 Boolean(true)
@@ -67,12 +68,17 @@ export default {
 	    }
 	},
 	created(){
+		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
 		this.loadData();
 	},
 	methods: {  
 		//动态加载数据
 		loadData(){ 
 			ajaxData(this.$store.state.Interface.information, {
+				"pk_psndoc":UserInfo.pk_psndoc,
+		    	"cuserid":UserInfo.cuserid,
+		    	"pk_group":UserInfo.pk_group,
+		    	"param.pk_org": UserInfo.pk_org,
 				"infoSetCode": this.infoSetCode,
 				"transType": 'psnInfoQuery' 
 			}, ( res ) => {   

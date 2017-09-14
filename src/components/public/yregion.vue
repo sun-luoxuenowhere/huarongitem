@@ -34,6 +34,7 @@
 import axios from 'axios';  
 import Qs from 'qs';
 import { ajaxData } from '@/assets/js/ajaxdata.js';
+var UserInfo;
 export default {  
 	data(){
 		return {   
@@ -61,7 +62,10 @@ export default {
 			
 		}
 	},
-	props: ["visible", "source", "config" ],    
+	props: ["visible", "source", "config" ],
+	created(){
+		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+	},
 	methods: {  
 		ok(){
 			this.$refs['regionForm'].validate((valid) => {     
@@ -128,6 +132,10 @@ export default {
 				}; 
 				
 				ajaxData( this.$store.state.Interface.smserverlet, { 
+					"pk_psndoc":UserInfo.pk_psndoc,
+			    	"cuserid":UserInfo.cuserid,
+			    	"pk_group":UserInfo.pk_group,
+			    	"param.pk_org": UserInfo.pk_org,
 					"transType": "region", 
 					"pk_country": _pk
 				},( res ) => {   
