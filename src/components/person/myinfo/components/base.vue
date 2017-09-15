@@ -167,6 +167,7 @@
 					"infoSetCode": "bd_psndoc",
 					"transType": 'psnInfoQuery' 
 				}, (res) => { 
+					
 					var _dataobj = res.list[0];
 					this.status = res.status;   
 					this.alterFields = (res.alterFields ? res.alterFields : ''); 

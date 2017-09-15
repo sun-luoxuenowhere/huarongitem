@@ -20,25 +20,27 @@
 			>
 			</el-pagination>
 		</div>
-		<MessageDialog :dialogvisible="openDialog" :data="msgdata" 
+		<MessageDialog :dialogvisible="openDialog" :data="msgdata" :judgedialog="judgedialog"
 			@close="openDialog = false"
-			@read="msgRead">
+			@read="msgRead" >
 		</MessageDialog> 
 	</div>
 </template> 
 <script>   
+import Qs from 'qs';
+
 import MessageDialog from '@/components/messagecenter/dialogmsg';
 export default { 
-	props: ['url', 'param'],  
+	props: ['url', 'param','judgedialog'],  
 	components: { 
 		MessageDialog
 	}, 
 	mounted(){ 
-		this.param.pagesize = this.pagesize;
+		this.param.pageSize = this.pagesize;
 		this.loadData( this.param );
 	}, 
 	data(){
-		return {  
+		return { 
 			msgdata: '', //消息数据 
 			openDialog: false, //默认关闭对话框
 			pagesize: 5, //每页显示多少条
@@ -62,14 +64,15 @@ export default {
 		//加载列表数据
 		loadData( param ){   
 			var _param = this.deepClone( param, {} );  
-			_param.isread = _param.isread ? 'Y' : 'N'; 
-			_param.ishandled = _param.ishandled ? 'Y' : 'N'; 
+			_param.isRead = _param.isRead ? 'Y' : 'N'; 
+			_param.isHandled = _param.isHandled ? 'Y' : 'N'; 
 			
-			 
-			this.$http.get( this.url, {
-				params: _param
-			}).then((response) => {  
-				
+			//获取列表数据；
+			this.$http.post( this.url, Qs.stringify ( _param ), { 
+	          	headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+	          	}
+	      	}).then(( response ) => {  
 				var _data = response.data; 
 				if( _data.flag == "1" ){ //操作失败
 					this.$message.error( _data.des );
@@ -77,11 +80,12 @@ export default {
 					this.tableData = _data.msglist;
 					this.totalcount = parseInt( _data.totalcount );  
 				}; 
-				 
-	    	}).catch((err) => { 
-	    		this.$message.error( err );
-	    		 
-			});  
+			}).catch((err) => { 
+				this.$message.error( err );
+			}); 
+		
+			
+			
 		},
 		//对象深拷贝 initalObj: 原始对象，finalObj：需要被赋值的目标对象
 		deepClone( initalObj, finalObj ) {

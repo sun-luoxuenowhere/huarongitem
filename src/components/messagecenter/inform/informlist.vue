@@ -34,7 +34,7 @@
 				</el-form-item>
 			</el-form>	 
 			<!-- y-search-form end --> 			
-			<MessageTable ref="InfoMsg" :url="url" :param="searchform"></MessageTable>  
+			<MessageTable ref="InfoMsg" :url="url" :param="searchform" :judgedialog="judgedialog"></MessageTable>  
 		</div>
 		<!-- y-inner end --> 
 	</div>
@@ -52,6 +52,7 @@
 		},
 		data(){
 			return {
+				judgedialog:'inform',
 				searchform: {
 					sendStr: '',
 					isRead: false,

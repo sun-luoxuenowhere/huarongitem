@@ -34,7 +34,7 @@
 				</el-form-item>
 			</el-form>	 
 			<!-- y-search-form end --> 			
-			<MessageTable ref="InfoMsg" :url="url" :param="searchform"></MessageTable>  
+			<MessageTable ref="InfoMsg" :url="url" :param="searchform" :judgedialog="judgedialog"></MessageTable>  
 		</div>
 		<!-- y-inner end -->   
 	</div>
@@ -42,6 +42,7 @@
 
 <script>   
 	import MessageTable from '@/components/messagecenter/messagelist';
+	
 	export default { 
 		components: { 
 			MessageTable
@@ -50,10 +51,12 @@
 			url(){ 
 				//this.$store.state.Interface.msglist
 				return this.$store.state.Interface.msglist;
-			}
+			},
+			
 		},
 		data(){
 			return {
+				judgedialog:'warning',
 				searchform: {
 					sendStr: '',
 					isRead: false,

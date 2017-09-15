@@ -10,9 +10,10 @@ export default new Vuex.Store({
     state: {
     	//数据接口   获取方法：[this.$store.state.Interface.information] 
     	Interface: {
-    		'msglist': '/service/EHRWebHiServlet',
-    		'msglogin': '/service/EHRWebSmServlet',
-    		'information': '/service/EHRWebHiServlet',
+//  		'msglist': '/service/EHRWebHiServlet',
+    		'msglist': '/service/EHRWebMsgServlet',//消息中心接口
+    		'msglogin': '/service/EHRWebSmServlet',//登录接口
+    		'information': '/service/EHRWebHiServlet',//人员信息
     		'smserverlet': '/service/EHRWebSmServlet' //参照类型数据接口
     	},
     	UserInfo: {
