@@ -430,3 +430,33 @@ header {
 color: #CC2123;
 	font-weight: bold;
 }
+
+/*消息中心*/
+/*消息中心弹框样式*/
+.y-dialog-body .dialogimg {
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+}
+.y-dialog-body .dialoghistop {
+	text-indent: 34px;
+}
+.y-dialog-body .dialogpingyu {
+	padding: 5px 5px 2px 5px;
+	width:90%;
+	margin-left: 24px;
+	background: #fff;
+	float: left;
+	border-radius: 5px;
+	position: relative;
+}
+.y-dialog-body .dialogsanjiao {
+	position: absolute;
+	top: 5px;
+	left: -5px;
+	width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-right: 5px solid #fff;
+    border-bottom: 5px solid transparent;
+}

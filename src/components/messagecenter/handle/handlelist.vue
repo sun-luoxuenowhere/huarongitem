@@ -60,7 +60,7 @@
 				searchform: {
 					sendStr: '',
 					isRead: false,
-					userCode: '00030',
+					receiver: '1001A3100000000009CK',
 					transType: 'msglist',
 					msgType: 'worklist', 
 					pageIndex: 0,

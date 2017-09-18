@@ -115,7 +115,23 @@ export default {
 	    onRowClick( row ) { 
 	    	this.openDialog = true; 
 	    	this.msgdata = row;
-	    	this.msgdata.msgtype = this.param.msgtype;
+	    	this.msgdata.msgType = this.param.msgType;
+//	    	console.log(this.param.msgType)
+	    	//判断是通知消息还是代办消息
+	    	if(this.param.msgType=='worklist'){
+	    		//判断单据的类型，是离职、转正、等
+	    		
+	    		
+	    	}else if(this.param.msgType=='notice'){
+	    		//如果是通知需要判断通知的类型，是消息还是单据
+	    		
+	    		
+	    	}else if(this.param.msgType=='prealert'){
+	    		this.openDialog = true; 
+		    	this.msgdata = row;
+		    	this.msgdata.msgType = this.param.msgType;
+	    	}
+	    	
 	    },
 	    //消息被置为已读
 	    msgRead(){  
