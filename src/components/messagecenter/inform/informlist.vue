@@ -56,7 +56,7 @@
 				searchform: {
 					sendStr: '',
 					isRead: false,
-					receiver: '1001A3100000000009CK',
+					receiver: '',
 					transType: 'msglist',
 					msgType: 'notice', 
 					pageIndex: 0,
@@ -88,6 +88,8 @@
 		    } 
 		},
 		created(){ 
+			var UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+			this.searchform.receiver=UserInfo.cuserid;
 		}
 	}
 </script>

@@ -30,12 +30,14 @@
 import Qs from 'qs';
 
 import MessageDialog from '@/components/messagecenter/dialogmsg';
+var UserInfo;
 export default { 
 	props: ['url', 'param','judgedialog'],  
 	components: { 
 		MessageDialog
 	}, 
 	mounted(){ 
+		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
 		this.param.pageSize = this.pagesize;
 		this.loadData( this.param );
 	}, 
@@ -113,17 +115,77 @@ export default {
 		}, 
 		//点击行列表
 	    onRowClick( row ) { 
-	    	this.openDialog = true; 
-	    	this.msgdata = row;
-	    	this.msgdata.msgType = this.param.msgType;
+//	    	this.openDialog = true; 
+//	    	this.msgdata = row;
+//	    	this.msgdata.msgType = this.param.msgType;
 //	    	console.log(this.param.msgType)
 	    	//判断是通知消息还是代办消息
 	    	if(this.param.msgType=='worklist'){
 	    		//判断单据的类型，是离职、转正、等
+	    		this.$http.post( this.url, Qs.stringify ({
+					transType:'msgBill',
+					pk_psndoc:UserInfo.pk_psndoc,
+					billId:row.billId,
+					billType:row.billType
+				}), {
+		          	headers: {
+		                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+		          	}
+		      	}).then(( response ) => {  
+					var _data = response.data; 
+					if( _data.flag == "1" ){ //操作失败
+						this.$message.error( _data.des );
+					}else{
+						console.log(_data)
+						this.openDialog = true; 
+						this.msgdata = row;
+		    			this.msgdata.msgType = this.param.msgType;
+		    			this.msgdata.Datalist = JSON.parse(_data.data).headMsg;
+		    			this.msgdata.Hisapprove = _data.hisapprove;
+		    			console.log(this.msgdata)
+					}; 
+				}).catch((err) => { 
+					this.$message.error( err );
+				}); 
+	    		
 	    		
 	    		
 	    	}else if(this.param.msgType=='notice'){
 	    		//如果是通知需要判断通知的类型，是消息还是单据
+	    		if(row.msgsourcetype=='notice'){
+	    			//通知判断为空的时候
+	    			this.openDialog = true; 
+			    	this.msgdata = row;
+			    	this.msgdata.msgType = this.param.msgType;
+	    		}else if(row.msgsourcetype=='worklist' || row.msgsourcetype=='pfbizmsg'){
+	    			//不为空的时候需要向后端发送请求显示字段的详细信息；
+	    			//获取列表数据；
+					this.$http.post( this.url, Qs.stringify ({
+						transType:'msgBill',
+						pk_psndoc:UserInfo.pk_psndoc,
+						billId:row.billId,
+						billType:row.billType
+					}), {
+			          	headers: {
+			                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+			          	}
+			      	}).then(( response ) => {  
+						var _data = response.data; 
+						if( _data.flag == "1" ){ //操作失败
+							this.$message.error( _data.des );
+						}else{
+							console.log(_data)
+							this.openDialog = true; 
+							this.msgdata = row;
+			    			this.msgdata.msgType = this.param.msgType;
+			    			this.msgdata.Datalist = JSON.parse(_data.data).headMsg;
+			    			this.msgdata.Hisapprove = _data.hisapprove;
+			    			console.log(this.msgdata)
+						}; 
+					}).catch((err) => { 
+						this.$message.error( err );
+					}); 
+	    		}
 	    		
 	    		
 	    	}else if(this.param.msgType=='prealert'){

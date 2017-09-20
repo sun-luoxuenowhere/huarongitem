@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex' 
 import BaseInfo from './myinfo/baseinfo'
 import Information from './myinfo/subinfo' 
+import Msgdata from './msgdata/dialogshow' 
 
 Vue.use(Vuex)
 
@@ -41,6 +42,7 @@ export default new Vuex.Store({
     },
     modules: { 
         Information, //员工信息子集相关配置数据
-        BaseInfo //员工基本信息配置数据 
+        BaseInfo,//员工基本信息配置数据
+        Msgdata
     }
 });   

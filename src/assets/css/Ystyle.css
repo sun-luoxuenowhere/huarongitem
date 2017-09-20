@@ -490,6 +490,23 @@
 	padding: 15px 20px;
   background-color: #FCFCFC;
 }
+.y-msg-dialog .y-dialogsubmit-body{
+	padding:0px 20px;
+  background-color: #ccc;
+}
+.y-dialogmit .el-dialog__footer {
+	background: #ccc;
+}
+.y-dialogmit .el-dialog__header {
+		padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #ccc;
+    color:#000;
+}
+.y-dialogmit .el-dialog__title {
+	color: #000;
+}
 .y-msg-dialog .y-dialog-footer{
 	padding: 20px;
 	text-align: center;
