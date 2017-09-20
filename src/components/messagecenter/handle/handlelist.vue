@@ -17,7 +17,7 @@
 			<!-- y-search-form begin -->
 			<el-form :inline="true" :model="searchform" class="demo-form-inline y-search-form">
 				<el-form-item label="发送日期">
-					<el-select class="y-select" v-model="searchform.sendstr" placeholder="请输入查询时间">
+					<el-select class="y-select" v-model="value" placeholder="请输入查询时间">
 					    <el-option class="y-option"
 					      v-for="item in options"
 					      :key="item.value"
@@ -26,14 +26,14 @@
 					    </el-option>
 					</el-select> 
 				</el-form-item> 
-				<el-form-item>
+				<!--<el-form-item>
 					<el-checkbox class="y-checkbox" v-model="searchform.isread">包含已读</el-checkbox> 
+				</el-form-item> -->
+				<el-form-item>
+					<el-checkbox class="y-checkbox" v-model="isHandled">包含已处理</el-checkbox> 
 				</el-form-item> 
 				<el-form-item>
-					<el-checkbox class="y-checkbox" v-model="searchform.ishandled">包含已处理</el-checkbox> 
-				</el-form-item> 
-				<el-form-item>
-					<el-button  class="y-btn-search" type="danger" @click="onSearch">查询</el-button>
+					<el-button  class="y-btn-searchp" type="danger" @click="onSearch">查询</el-button>
 				</el-form-item>
 			</el-form>	 
 			<!-- y-search-form end --> 			
@@ -81,12 +81,18 @@
 		        }, {
 		          value: 'year',
 		          label: '一年内'
-		        }] 
+		        }],
+		        value:"",
+		        isHandled:""
 			}
 		},
 		methods:{  
 		    //点击“查询”
 		    onSearch(){ 
+		    	
+		    	this.searchform.isHandled=this.isHandled;//查询的时候将设置是否为处理状态
+		    	this.searchform.sendStr=this.value;//查询的时间
+		    	console.log(this.searchform)
 		    	this.$refs.InfoMsg.loadData( this.searchform );  //调用子组件的加载方法
 		    } 
 		},

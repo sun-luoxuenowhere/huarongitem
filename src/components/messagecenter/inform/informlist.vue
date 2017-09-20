@@ -27,10 +27,10 @@
 					</el-select> 
 				</el-form-item> 
 				<el-form-item>
-					<el-checkbox class="y-checkbox" v-model="searchform.isread">包含已处理</el-checkbox> 
+					<el-checkbox class="y-checkbox" v-model="searchform.isread">包含已读</el-checkbox> 
 				</el-form-item> 
 				<el-form-item>
-					<el-button class="y-btn-search" type="danger" @click="onSearch">查询</el-button>
+					<el-button class="y-btn-searchp" type="danger" @click="onSearch">查询</el-button>
 				</el-form-item>
 			</el-form>	 
 			<!-- y-search-form end --> 			
