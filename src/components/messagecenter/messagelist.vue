@@ -1,6 +1,8 @@
 <template>  
 	<div>
+		
 		<el-table class="y-table" stripe  
+			 v-loading='loadingFlag'
     		element-loading-text="拼命加载中" 
     		:data="tableData" 
     		:row-class-name='setunReadRow'
@@ -48,7 +50,7 @@ export default {
 			pagesize: 5, //每页显示多少条
 			totalcount: 0, //总条目数
     		tableData: [],
-    		loadingFlag: false
+    		loadingFlag: true
 		}
 	},
 	methods:{  
@@ -76,11 +78,14 @@ export default {
 	          	}
 	      	}).then(( response ) => {  
 				var _data = response.data; 
-				if( _data.flag == "1" ){ //操作失败
-					this.$message.error( _data.des );
-				}else{
+				
+				if( _data.flag == "0" ){ //操作失败
+					this.loadingFlag=false;
 					this.tableData = _data.msglist;
 					this.totalcount = parseInt( _data.totalcount );  
+					
+				}else{
+					this.$message.error( _data.des );
 				}; 
 			}).catch((err) => { 
 				this.$message.error( err );

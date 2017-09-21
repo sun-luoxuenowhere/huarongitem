@@ -231,7 +231,10 @@
 						  						<span>[<span>{{val.spzk}}</span>]</span>
 							  					<span>{{val.checkman}}</span>
 						  					</div>
-							  				<div style="float: right;"><span>{{val.ApproveTime}}</span></div>
+							  				<div style="float: right;">
+							  					<span>{{val.ApproveTime}}</span>
+							  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+							  				</div>
 						  				</div>
 						  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
 						  			</div>
@@ -245,7 +248,7 @@
 				    	<!--<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>-->
 				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus=='0'" @click="approve()">批准</el-button>
 				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'" @click="reject()">驳回</el-button>
-				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus!='0'" @click="abandoned()">驳回</el-button>
+				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus!='0'" @click="abandoned()">弃审</el-button>
 				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'" type="danger" @click="sign()">加签</el-button>
 				  	</div>
 				</div>
@@ -353,6 +356,8 @@
 				<div v-show="data.msgsourcetype=='pfbizmsg'||data.msgsourcetype=='worklist'">
 					<!--判断通知消息-->
 					
+					
+					
 				</div>
 			</el-dialog>
 		</div>
@@ -364,22 +369,55 @@
 			  	<!--书写理由-->
 			  	<textarea placeholder="请输入审批意见" style="width:100%;height:100px;border:none;resize:none;outline:none;overflow-x:hidden;overflow-y:hidden">{{sumreason}}</textarea>
 			  	<!--判断是否加签-->
-			    <div v-show="signshow">
-			    	<template>
-					  <el-select v-model="value5" filterable multiple placeholder="请选择加签用户">
-					    <el-option
-					      v-for="item in options"
-					      :key="item.value"
-					      :label="item.label"
-					      :value="item.value">
-					    </el-option>
-					  </el-select>
-				    </template>
+			    <!--判断是批准-->
+			    <div v-show="judgbutton=='approveb'">
+			    	<div v-show="options.length!='0'">
+				    	<template>
+						  <el-select v-model="value5" filterable multiple placeholder="请选择指派人">
+						    <el-option
+						      v-for="item in options"
+						      :key="item.user_id"
+						      :label="item.user_name"
+						      :value="item.user_id">
+						    </el-option>
+						  </el-select>
+					    </template>
+				    </div>
 			    </div>
+			    <!--判断是驳回-->
+			    <div v-show="judgbutton=='rejectb'">
+			    	<div>
+				    	<template>
+						  <el-select v-model="value5" filterable multiple placeholder="请选择指派人">
+						    <el-option
+						      v-for="item in options"
+						      :key="item.user_id"
+						      :label="item.user_name"
+						      :value="item.user_id">
+						    </el-option>
+						  </el-select>
+					    </template>
+				    </div>
+			    </div>
+			    <!--判断是加签-->
+			    <div v-show="judgbutton=='signb'">
+			    	<div>
+				    	<template>
+						  <el-select v-model="value5" filterable multiple placeholder="请选择指派人">
+						    <el-option
+						      v-for="item in options"
+						      :key="item.user_id"
+						      :label="item.user_name"
+						      :value="item.user_id">
+						    </el-option>
+						  </el-select>
+					    </template>
+				    </div>
+			    </div>
+			    
 			  </div>
-			  
 			  <div slot="footer" class="dialog-footer">
-			    <el-button class="y-btn-searchp" type="danger"  @click="dialogFormVisible = false">提交</el-button>
+			    <el-button class="y-btn-searchp" type="danger"  @click="submit">提交</el-button>
 			    <el-button class="y-btn-searchb" type="danger" @click="dialogFormVisible = false">取 消</el-button>
 			  </div>
 			</el-dialog>
@@ -414,9 +452,8 @@ export default {
 			if(this.data==''){
 				return '';
 			}else{
-				var diaoborder=document.getElementsByClassName('y-dialog-border');
-				
-				console.log(diaoborder)
+//				var diaoborder=document.getElementsByClassName('y-dialog-border');
+//				console.log(diaoborder)
 				
 				var objdata="";
 //				console.log(this.data)
@@ -448,29 +485,15 @@ export default {
 	data(){
 		return {
 			dialogFormVisible:false,
+			judgbutton:'',
 			borderkey:'',//流程历史最后一个不显示边框
 			titleObj: {
 				"notice": "通知消息",
 				"prealert": "预警消息",
 				"worklist": "待办消息"
 			},
-			options: [{
-	          value: '选项1',
-	          label: '黄金糕'
-	        }, {
-	          value: '选项2',
-	          label: '双皮奶'
-	        }, {
-	          value: '选项3',
-	          label: '蚵仔煎'
-	        }, {
-	          value: '选项4',
-	          label: '龙须面'
-	        }, {
-	          value: '选项5',
-	          label: '北京烤鸭'
-	        }],
-	        value5: [],//加签的值
+			options:'',
+	        value5:[],//加签的值
 	        sumreason:"",
 	        signshow:false
 	        
@@ -482,21 +505,63 @@ export default {
 		},
 		approve(){
 			this.sumreason='同意';
+			this.judgbutton='approveb';
 			this.dialogFormVisible=true;
+			this.assignman('0');//获取指派人数据
+
 		},
 		reject(){
 			this.sumreason='驳回';
+			this.judgbutton='rejectb';
 			this.dialogFormVisible=true;
-			
+			this.assignman('2');//获取指派人数据
 		},
 		sign(){
-			
-//			this.signshow=true;
+			this.sumreason='加签';
+			this.judgbutton='signb';
 			this.dialogFormVisible=true;
+			this.assignman('3');//获取指派人数据
 		},
 		abandoned(){
 			alert('弃审')
-			
+		},
+		submit(){
+//			console.log(this.sumreason,'\\',this.value5)
+			if(this.judgbutton=='approveb'){//如果有指派人也是必须填写
+				if(this.options.length!='0'){
+					if(this.value5==''){
+						this.$message.error("指派人不能为空");
+					}else{
+						var dispath='';
+						for(var i in this.value5){
+							dispath+=this.value5[i]+';';
+						}
+						this.submitdata('0',dispath,this.sumreason,'')
+					}
+				}else{
+					this.submitdata('0','',this.sumreason,'')
+				}
+				
+			}else if(this.judgbutton=='rejectb'){//驳回指派人是可有可无的
+				
+				var dispath='';
+				for(var i in this.value5){
+					dispath+=this.value5[i]+';';
+				}
+				this.submitdata('2','',this.sumreason,dispath);
+				
+			}else if(this.judgbutton=='signb'){//加签指派人必须有
+				
+				if(this.value5==''){
+					this.$message.error("指派人不能为空");
+				}else{
+					var dispath='';
+					for(var i in this.value5){
+						dispath+=this.value5[i]+';';
+					}
+					this.submitdata('3','',this.sumreason,dispath)
+				}
+			}
 		},
 		beRead(){ 
 //			var _msgpk = this.data.msgpk;
@@ -520,8 +585,55 @@ export default {
 //			}).catch((err) => { 
 //				this.$message.error( err );
 //			}); 
+		},
+		assignman(arg){
+			this.$http.post( this.url, Qs.stringify ({
+				transType:'dispatch',
+				pk_group:UserInfo.pk_group,
+				billId:this.data.billId,
+				cuserid:UserInfo.cuserid,
+				opflag:arg,
+				taskId:this.data.pk_detail
+			}), {
+	          	headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+	          	}
+	      	}).then(( response ) => {  
+	      		
+				if(response.data.flag=='0'){
+					this.options=JSON.parse(response.data.data);
+					console.log(this.options)
+				}else{
+					this.$message.error(response.data.des );
+				}
+			
+			}).catch((err) => { 
+				this.$message.error( err );
+			});
+		},
+		submitdata(arg,asg,rea,ject){//封装审批提交数据
+			this.$http.post( this.url, Qs.stringify ({
+				transType:'billHandler',
+				billId:this.data.billId,
+				cuserid:UserInfo.cuserid,
+				pk_group:UserInfo.pk_group,
+				taskId:this.data.pk_detail,
+				opflag:arg,
+				dispatchId:asg,//指派人
+				checkNote:rea,//审批意见
+				nodeId:ject//驳回传驳回节点
+			})).then(( response ) => {
+//				var _data = response.data; 
+//				
+//				if(_data.flag == "0"){ //操作失败
+//					console.log(_data.result.data)
+//				}else{
+//					this.$message.error( _data.des );
+//				}; 
+			}).catch((err) => { 
+				this.$message.error( err );
+			});
 		}
-		
 	} 
 };
 </script> 
