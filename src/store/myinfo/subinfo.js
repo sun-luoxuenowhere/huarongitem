@@ -148,6 +148,18 @@ export default {
 	    	{ param: 'encourmatter', text: '奖励事由', required: true },
 	    	{ param: 'encourmeas', text: '奖励措施', required: true }],
 	    	
+	    //华融人员组织关系表头
+	    psnOrgTheadData: [
+	    	{ param: 'empforms', text: '用工形式'},
+	    	{ param: 'begindate', text: '进入当前单位时间'},
+	    	{ param: 'orgglbdef2', text: '司龄' },
+	    	{ param: 'joinsysdate', text: '进入华融时间'},
+	    	{ param: 'corpworkage', text: '华融工龄' }],
+	    	
+	    //考核记录表头
+	    assTheadData: [
+	    	{ param: 'pk_perank', text: '绩效等级'},
+	    	{ param: 'period_year', text: '绩效年度'}],
 	    	
 	    //履历表单配置
 	    jobFormConfig: [{ "id": "begindate", "text": "开始日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }]},
@@ -270,7 +282,8 @@ export default {
 	    	{ "id": "encourrank", "text": "奖励级别", "type": "refer", "typedata": [{"code": "HR026_0xx"}], "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
 	    	{ "id": "encourorg", "text": "奖励机构", "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
 	    	{ "id": "encourmatter", "text": "奖励事由", "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
-	    	{ id: 'encourmeas', text: '奖励措施' }]
+	    	{ id: 'encourmeas', text: '奖励措施' }],
+	    
     },
     mutations: { 
         SET_BASE_INFO( state, { list } ){

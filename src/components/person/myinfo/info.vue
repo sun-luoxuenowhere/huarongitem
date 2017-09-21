@@ -19,6 +19,9 @@
 						<li> <a scroll-href="#zhicheng">职称信息</a> </li>
 						<li> <a scroll-href="#dangpai">参加党派记录</a> </li>
 						<li> <a scroll-href="#jiangli">奖励情况</a> </li>
+						<li> <a scroll-href="#psnOrg">华融人员组织关系</a> </li>
+						
+						<li> <a scroll-href="#ass">考核记录</a> </li>
 					</ul>
 				</div>
 				<!-- 基本信息 begin -->
@@ -124,6 +127,25 @@
 					@delete="deleteList"
 					@handle="handleList"></subList>
 				<!-- 奖励情况 end -->
+				<!-- 华融人员组织关系 begin -->
+				<subList
+					data-scroll="psnOrg"
+					title='华融人员组织关系'  
+					:infoSetCode="subDialogConfig.psnOrg.infoSetCode"
+					:editabled="false"
+					:theaddata='psnOrgTheadData'></subList> 
+				<!-- 华融人员组织关系 end -->
+				
+				<!-- 考核记录 begin -->
+				<subList
+					data-scroll="ass"
+					title='考核记录' 
+					:ref="subDialogConfig.ass.infoSetCode"
+					:infoSetCode="subDialogConfig.ass.infoSetCode"
+					:editabled="false"  
+					:theaddata='assTheadData'>
+					</subList>
+				<!-- 考核记录 end -->
 			</div> 
 		</div>
 		<subDialog 
@@ -175,6 +197,7 @@
 			:formData="jiangliFormData" 
 			@close="subDialogConfig.jiangli.visible = false" 
 			@submit="savePersonInfo"></subDialog> 
+			
 	</div>
 </template>
 <script>
@@ -196,6 +219,8 @@ export default {
 			zhichenFormData: '', //职称初始数据 
 			dangpaiFormData: '', //党派初始数据  
 			jiangliFormData: '', //奖励初始数据   
+			
+			assFormData: '', //考核记录初始数据   
 			currentDialog: { //当前显示的子集弹窗相关数据
 				infoSetCode: '',  //弹窗类型
 				operate: '', //弹窗操作
@@ -210,7 +235,9 @@ export default {
 				jiating: {  infoSetCode: "hi_psndoc_family", visible: false},
 				zhicheng: { infoSetCode: "hi_psndoc_title", visible: false},
 				dangpai: { infoSetCode: "hi_psndoc_partylog", visible: false},
-				jiangli: { infoSetCode: "hi_psndoc_enc", visible: false}
+				jiangli: { infoSetCode: "hi_psndoc_enc", visible: false},
+				psnOrg: { infoSetCode: "hi_psnorg"},
+				ass: { infoSetCode: "hi_psndoc_ass"},
 			}
 		}
 	},
@@ -257,6 +284,12 @@ export default {
 		//奖励
 		jiangliTheadData(){ return this.getData("jiangliTheadData"); }, //表头
 		jiangliFormConfig(){ return this.getData("jiangliFormConfig"); }, //表单
+		
+		//华融人员组织关系
+		psnOrgTheadData(){ return this.getData("psnOrgTheadData"); }, //表头
+		
+		//考核记录
+		assTheadData(){ return this.getData("assTheadData"); }, //表头
 	},  
 	components: {
 		baseInfo, //基本信息
@@ -332,6 +365,7 @@ export default {
 				case 'hi_psndoc_enc':
 					this.subDialogConfig.jiangli.visible = false; 
 				break;
+				
 			};
 			
 		},
@@ -551,6 +585,7 @@ export default {
 			this.setCurrentDialog( data );
 			this.subDialogConfig.jiangli.visible = true;  
 		},
+		
 		//编辑子集信息表单时候的数据补全
 		editFormData( sdata, cdata ){
 			var _obj = {};
