@@ -15,7 +15,7 @@
 	</div> 
 	<div v-else-if=" status == statusArry[4] ">
 		<el-button size="small" type="text">{{statusMsg[4]}}</el-button> 
-  		<el-button size="small" @click="revert">还原</el-button> 
+  		<el-button size="small" @click="noupdate">还原</el-button> 
 	</div>
 </template>
 
@@ -34,6 +34,9 @@
 			},
 			revert(){
 				this.$emit('handle', ['revert']);
+			},
+			noupdate(){
+				this.$emit('handle', ['noupdate']);
 			},
 			callback(){
 				this.$emit('handle', ['callback']);

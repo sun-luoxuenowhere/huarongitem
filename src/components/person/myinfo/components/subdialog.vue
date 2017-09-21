@@ -7,8 +7,7 @@
 					:class="formDataConfig[key].type == 'date' ? 'y-date-formitem' : ''"  
 					:name="key" 
 					:formData="formData"
-					:inputData="formDataConfig[key]" 
-					@inputChange="inputChange"></yInput>  
+					:inputData="formDataConfig[key]"></yInput>  
 			</el-form> 
 			<div class="y-btn-box">
 				<el-button class="y-btn-danger" type="danger" @click="submitForm()">保存</el-button>
@@ -27,28 +26,34 @@ export default {
 			showClose: false, //隐藏右上角关闭按钮     
 			changedReferKey: [], //缓存被修改的参照字段
 			rules: { },
-			formDataConfig: { } 
+			formDataConfig: { },
+			addFlag: true, //当前是新增操作
+			initFormData: '' //缓存初始状态的表单字段
 		}
 	},  
 	components: {
 		yInput, //表单元素  
 	},  
-	mounted(){
-		this.transferData(); 
+	mounted(){  
+		this.transferData();  
 	},
-	methods: { 
-		inputChange( data ){
-			if( this.changedReferKey.join(',').indexOf( data ) < 0  ){
-				this.changedReferKey.push( data ); 
+	watch: {
+		formData: function( val ){
+			if( this.initFormData == "" ){ 
+				this.initFormData = JSON.stringify( val );
 			}; 
-		},
+		}
+	},
+	methods: {  
 		//确定操作
 		submitForm(){   
 		 	this.$refs['myForm'].validate((valid) => {    
 		 		var _postdata = this.postFormData(); 
 				if (valid) {   
-					if( _postdata ){ 
-						this.$emit('submit', _postdata ); 
+					if( _postdata ){    
+						this.initFormData = "";
+						alert( JSON.stringify(_postdata) );
+						this.$emit('submit', _postdata );  
 						this.resetForm();
 					}else{
 						alert('没有修改');
@@ -61,20 +66,24 @@ export default {
 		},
 		//被提交到后台的表单数据
 		postFormData(){ 
-			if( this.changedReferKey.join('') == ""  ){
-				return false;
-			};
-			var _current = deepCopyObj( this.formData );
-			var _config = this.formConfig;
-			for( var i = 0, l = _config.length; i < l; i++){
-				var _d = _config[i];
-				var _id = _d.id; 
-				 
-				if( _d.type == "refer" && this.changedReferKey.join(',').indexOf(_id) < 0 ){ 
-					delete _current[_id]; 
+			var _postdata = {};
+			var _initdata = JSON.parse( this.initFormData ); 
+			for(var i in _initdata){
+				var _val = this.formData[i];
+				if( _initdata[i] != _val ){
+					_postdata[i] = _val;
+				};
+				if( _initdata[i] != ""){
+					this.addFlag = false; //编辑操作
 				};
 			}; 
-			return _current;
+			if( JSON.stringify( _postdata ) == "{}" ){
+				return false;
+			};
+			if( this.addFlag ){ //当前是新增操作
+				return this.formData;
+			};
+			return _postdata; 
 		},
 		//取消操作
 		cancle() {  

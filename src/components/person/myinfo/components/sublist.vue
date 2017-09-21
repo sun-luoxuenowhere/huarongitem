@@ -10,13 +10,21 @@
 		<div class="y-content">
 			<el-table class="y-table y-table-baseinfo" :data="tempData" style="width: 100%">
 				<template v-for="item in theaddata">
-					<el-table-column width="200" show-overflow-tooltip  v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text"></el-table-column>
+					<el-table-column width="200" v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text">
+						<template scope="scope">
+					        <span :title="scope.row[item.param]">{{scope.row[item.param]}}</span>
+					    </template>
+					</el-table-column>
 					<el-table-column width="200"  v-else-if="!item.required" :prop="item.param[0]" :label="item.text">
 						<template scope="scope">
 					        {{scope.row[item.param[0]]}}-{{scope.row[item.param[1]]}}
 					    </template>
 					</el-table-column>
-					<el-table-column width="200" show-overflow-tooltip v-else-if="item.required && typeof item.param == 'string'" :render-header="requiredCol" :prop="item.param" :label="item.text"></el-table-column>
+					<el-table-column width="200" v-else-if="item.required && typeof item.param == 'string'" :render-header="requiredCol" :prop="item.param" :label="item.text">
+						<template scope="scope">
+					        <span :title="scope.row[item.param]">{{scope.row[item.param]}}</span>
+					    </template>
+					</el-table-column>
 					<el-table-column width="200" v-else :render-header="requiredCol" :prop="item.param[0]" :label="item.text">
 						<template scope="scope">
 					        {{scope.row[item.param[0]]}}-{{scope.row[item.param[1]]}}
@@ -78,10 +86,10 @@ export default {
 				"pk_psndoc":UserInfo.pk_psndoc,
 		    	"cuserid":UserInfo.cuserid,
 		    	"pk_group":UserInfo.pk_group,
-		    	"param.pk_org": UserInfo.pk_org,
+		    	"pk_org": UserInfo.pk_org,
 				"infoSetCode": this.infoSetCode,
 				"transType": 'psnInfoQuery' 
-			}, ( res ) => {   
+			}, ( res ) => {    
 				this.status = res.status;  
 				this.listdata = res.list; 
 	    	});  
