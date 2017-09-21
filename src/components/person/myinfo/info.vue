@@ -384,7 +384,8 @@ export default {
 				"major": "",
 				"education": "",
 				"pk_degree": "",
-				"studymode": "" 
+				"studymode": "",
+				"lasteducation": ""
 			}; 
 			switch( data[0] ){
 				case "add": 

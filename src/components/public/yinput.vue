@@ -10,6 +10,7 @@
 		<el-date-picker
 	      	v-model="currentValue"
 	      	placeholder="选择日期"
+	      	:editable="false"
 	      	:disabled="inputData.disabled"
 	      	:type="( inputData.typedata ? inputData.typedata[0].type : 'date')"
 	      	@change="dateChange">
@@ -58,7 +59,7 @@
 	
 	<!-- 文本框 begin -->
 	<el-form-item class="y-input" v-else :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">  
-		<el-input :title="currentValue" :disabled="inputData.disabled" v-model="currentValue" @change="inputChange"></el-input>  
+		<el-input :title="currentValue" :disabled="inputData.disabled" v-model="currentValue" @blur="inputChange"></el-input>  
 	</el-form-item>  
 </template>
 <script>  
@@ -119,19 +120,19 @@ export default {
 	    			"pk_psndoc":UserInfo.pk_psndoc,
 			    	"cuserid":UserInfo.cuserid,
 			    	"pk_group":UserInfo.pk_group,
-			    	"param.pk_org": UserInfo.pk_org,
+			    	"pk_org": UserInfo.pk_org,
 					"transType": 'country' 
 				},( res ) => {   
 					this.optionsdata =  res.list;  
 					var _name = this.name; 
 					this.currentValue = this.formData[_name]; 
 		    	}); 
-    		}else{
+    		}else{ //从后台取数据的参照类型
     			ajaxData( this.$store.state.Interface.smserverlet, {
     				"pk_psndoc":UserInfo.pk_psndoc,
 			    	"cuserid":UserInfo.cuserid,
 			    	"pk_group":UserInfo.pk_group,
-			    	"param.pk_org": UserInfo.pk_org,
+			    	"pk_org": UserInfo.pk_org,
 					"transType": 'defdoc', 
 					"defdoclistCode": this.inputData.typedata[0].code
 				},( res ) => {   

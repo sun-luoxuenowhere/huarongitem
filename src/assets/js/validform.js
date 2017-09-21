@@ -31,10 +31,36 @@ export const validForm = {
             callback();
         };
     }, 
+    //年月日 yyyy-mm-dd格式 
+    ymd: (rule, value, callback) => {  
+    	if( rule.type == typeof value ){ 
+    		if( rule.required ){ //是必输的
+    			if( !validForm.pattresult["ymd"].test(value) ){  
+		            callback(new Error('请输入有效的日期'));
+		        }else{
+		            callback();
+		        };
+    		}else{
+    			callback();
+    		};
+    	}else{
+    		callback();
+    	}; 
+    }, 
+    //证件号：只能输数字和字母
+    cardno: (rule, value, callback) => {  
+    	if( !validForm.pattresult["cardno"].test(value) ){  
+            callback(new Error('请输入有效的证件号'));
+        }else{
+            callback();
+        }; 
+    }, 
     pattresult: {
         "email": /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
         "chinese": /^[\u4e00-\u9fa5]{0,}$/,
         "phone": /^1[34578]\d{9}$/,
-        "tel": /^([0-9]{3,4}-)?[0-9]{7,8}$/
+        "tel": /^([0-9]{3,4}-)?[0-9]{7,8}$/,
+        "ymd": /^\d{4}\-\d{2}\-\d{2}$/,
+        "cardno":  /^[0-9a-zA-Z]*$/
     }
 };

@@ -6,7 +6,7 @@
 import axios from 'axios';  
 import Qs from 'qs';
 import store from 'store';
-//var UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );
+
 //console.log(UserInfo)
 export function ajaxData( url, param, call ){   
 	if( typeof(arguments[1] )=="function"){ //没有参数的时候发get请求
@@ -33,13 +33,14 @@ export function ajaxData( url, param, call ){
 		  
 	}else{  //有参数的时候发post请求     
 //		if( UserInfo.pk_psndoc ){
-//			param.pk_psndoc = UserInfo.pk_psndoc;
-//	    	param.cuserid = UserInfo.cuserid;
-//	    	param.pk_group = UserInfo.pk_group;
-//	    	param.pk_org = UserInfo.pk_org;
+			var UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );
+			param.pk_psndoc = UserInfo.pk_psndoc;
+	    	param.cuserid = UserInfo.cuserid;
+	    	param.pk_group = UserInfo.pk_group;
+	    	param.pk_org = UserInfo.pk_org;
 			axios.post( url, Qs.stringify ( param ), { 
 	          	headers: {
-	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+	                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 	          	}
 	      	}).then(( response ) => {  
 				var _data = response.data; 

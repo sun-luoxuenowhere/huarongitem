@@ -52,10 +52,10 @@ export default {
 			{ "id": "nativeplace", "text": "籍贯", "disabled": true, "type": "region", "typedata": [{ "prevkey": "pk_country" }]/*"valid": [{ required: true, message: '不能为空', trigger: 'change' }] */},
 			{ "id": "permanreside", "text": "户口所在地", "disabled": true, "type": "region", "typedata": [{ "prevkey": "pk_country" }] },
 			{ "id": "characterrpr", "text": "户口性质", "type": "refer", "typedata": [{"code": "HR005_0xx"}], /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ },
-			{ "id": "fileaddress", "text": "档案所在地" },
+			{ "id": "fileaddress", "text": "档案所在地", "disabled": true, "type": "region", "typedata": [{ "prevkey": "pk_country" }] },
 			{ "id": "censusaddr", "text": "户籍地址" },
 			{ "id": "addr_show", "text": "家庭住址", "type": "region", "typedata": [{ "prevkey": "pk_country", "valkey": "addr" }] },
-			{ "id": "marriagedate", "text": "结/离婚日期" }] 
+			{ "id": "marriagedate", "text": "结/离婚日期", "type": "date" }] 
     },
     mutations: {  
     },
