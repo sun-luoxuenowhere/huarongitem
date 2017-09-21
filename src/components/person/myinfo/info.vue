@@ -362,7 +362,15 @@ export default {
 				"workpost": "",
 				"workjob": "",
 				"certifier": "",
-				"memo": ""
+				"memo": "",
+				"workduty":"",
+				"glbdef2":"",
+				"glbdef3":"",
+				"workachive":"",
+				"work_addr":"",
+				"dimission_reason":"",
+				"linkphone":"",
+				"certiphone":""
 			};
 			switch( data[0] ){
 				case "add":
@@ -381,12 +389,24 @@ export default {
 				"enddate": "",
 				"begindate": "",
 				"school": "",
+				"schooltype": "",
+				"glbdef2": "",
 				"major": "",
+				"majortype": "",
 				"education": "",
 				"pk_degree": "",
 				"studymode": "",
-				"lasteducation": ""
-			}; 
+				"lasteducation": "",
+				"edusystem": "",
+				"degreedate": "",
+				"degreeunit": "",
+				"educationctifcode": "",
+				"certifcode": "",
+				"memo": "",
+				"glbdef5": "",
+				"glbdef3": "",
+				"glbdef4": "",
+				"glbdef1": "",}; 
 			switch( data[0] ){
 				case "add": 
 					this.xueliFormData = initData;
@@ -405,7 +425,10 @@ export default {
 				"id": "",
 				"begindate": "",
 				"enddate": "",
-				"extend_org": "" 
+				"extend_org": "" ,
+				"iseffect": "",
+				"isstart": "",
+				"memo": ""
 			};
 			switch( data[0] ){
 				case "add":
@@ -424,7 +447,22 @@ export default {
 				"mem_relation": "",
 				"mem_name": "",
 				"mem_birthday": "",
-				"mem_corp": "" 
+				"mem_corp": "",
+				"glbdef1": "",
+				"glbdef2": "",
+				"glbdef3": "",
+				"glbdef4": "",
+				"glbdef5": "",
+				"glbdef9": "",
+				"glbdef8": "",
+				"glbdef6": "",
+				"mem_job": "",
+				"glbdef10": "",
+				"relaaddr": "",
+				"profession": "",
+				"politics": "",
+				"glbdef7": "",
+				"memo": ""
 			};
 			switch( data[0] ){
 				case "add":
@@ -446,7 +484,11 @@ export default {
 				"titlerank": "",
 				"assorg": "", 
 				"certifcode": "", 
-				"tiptop_flag": "" 
+				"tiptop_flag": "",
+				"achive": "",
+				"strongsuit": "",
+				"summ": "",
+				"glbdef1": ""
 			};
 			switch( data[0] ){
 				case "add":
@@ -468,7 +510,13 @@ export default {
 				"partyname": "",
 				"partyunit": "", 
 				"partypsn": "", 
-				"partyduedate": "" 
+				"partyduedate": "", 
+				"exreason": "", 
+				"exsort": "", 
+				"glbdef4": "", 
+				"glbdef1": "", 
+				"glbdef2": "", 
+				"glbdef3": ""
 			};
 			switch( data[0] ){
 				case "add":
@@ -489,7 +537,8 @@ export default {
 				"encourtype": "",
 				"encourrank": "",
 				"encourorg": "",
-				"encourmatter": "" 
+				"encourmatter": "",
+				"encourmeas": ""				
 			};
 			switch( data[0] ){
 				case "add":

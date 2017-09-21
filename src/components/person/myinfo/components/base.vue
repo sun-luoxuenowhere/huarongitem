@@ -1,5 +1,5 @@
 <template>
-	<el-form class="y-baseinfo-form" ref="myForm" :model="formData" :rules="rules" label-width="100px" label-position="left">   
+	<el-form class="y-baseinfo-form" ref="myForm" :model="formData" :rules="rules" label-position="left">   
 		<!-- y-module-baseinfo begin 基本信息表单 [头像区域]-->
 		<div class="y-module y-module-baseinfo clearfix">
 			<!-- 按钮操作区域 begin -->
