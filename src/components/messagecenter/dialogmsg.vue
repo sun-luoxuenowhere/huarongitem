@@ -246,10 +246,11 @@
 					</div> 
 				  	<div slot="footer" class="y-dialog-footer">
 				    	<!--<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>-->
-				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus=='0'" @click="approve()">批准</el-button>
-				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'" @click="reject()">驳回</el-button>
-				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus!='0'" @click="abandoned()">弃审</el-button>
-				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'" type="danger" @click="sign()">加签</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="approve()">批准</el-button>
+				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
+				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
+				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
 				<div v-else-if="data.billType=='6101'">
@@ -493,7 +494,7 @@ export default {
 				"worklist": "待办消息"
 			},
 			options:'',
-	        value5:[],//加签的值
+	        value5:'',//加签的值
 	        sumreason:"",
 	        signshow:false
 	        
@@ -508,7 +509,6 @@ export default {
 			this.judgbutton='approveb';
 			this.dialogFormVisible=true;
 			this.assignman('0');//获取指派人数据
-
 		},
 		reject(){
 			this.sumreason='驳回';
@@ -546,9 +546,9 @@ export default {
 				
 				var dispath='';
 				for(var i in this.value5){
-					dispath+=this.value5[i]+';';
+					dispath+=this.value5[i];
 				}
-				this.submitdata('2','',this.sumreason,dispath);
+				this.submitdata('2','',this.sumreason,dispath);//驳回的时候只能选择一个人，并且传的值不能带分好；
 				
 			}else if(this.judgbutton=='signb'){//加签指派人必须有
 				
@@ -562,6 +562,9 @@ export default {
 					this.submitdata('3','',this.sumreason,dispath)
 				}
 			}
+		},
+		dialognone(){//取消按钮
+			this.$emit('close');
 		},
 		beRead(){ 
 //			var _msgpk = this.data.msgpk;
@@ -599,19 +602,16 @@ export default {
 	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
 	          	}
 	      	}).then(( response ) => {  
-	      		
 				if(response.data.flag=='0'){
 					this.options=JSON.parse(response.data.data);
-					console.log(this.options)
 				}else{
 					this.$message.error(response.data.des );
 				}
-			
 			}).catch((err) => { 
 				this.$message.error( err );
 			});
 		},
-		submitdata(arg,asg,rea,ject){//封装审批提交数据
+		submitdata(arg,asg,rea,ject){//封装审批驳回加签提交数据
 			this.$http.post( this.url, Qs.stringify ({
 				transType:'billHandler',
 				billId:this.data.billId,
@@ -623,13 +623,20 @@ export default {
 				checkNote:rea,//审批意见
 				nodeId:ject//驳回传驳回节点
 			})).then(( response ) => {
-//				var _data = response.data; 
-//				
-//				if(_data.flag == "0"){ //操作失败
-//					console.log(_data.result.data)
-//				}else{
-//					this.$message.error( _data.des );
-//				}; 
+				if(response.data.flag=='0'){//提交数据成功函数
+					this.$message({
+			          message: response.data.des,
+			          type: 'success'
+			        });
+			        this.dialogFormVisible=false;
+			        this.$emit('read');
+			        this.value5=[];
+			        this.sumreason='';
+					
+				}else{
+					this.$message.error( response.data.des );
+				}
+
 			}).catch((err) => { 
 				this.$message.error( err );
 			});

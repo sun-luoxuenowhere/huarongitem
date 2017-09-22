@@ -48,9 +48,13 @@ export default {
 		//左侧菜单权限设置；
 		var data=userid.func;
 		var data1={
-			"E90101":{"icon":"iconfont icon-renshihangzhengshi","url":"", id: 'E90101', pid: '0',text:'人事信息'},
-			"E9010101":{"icon":"","url":"/Information", id:'E9010101', pid: 'E90101',text:'我的信息'},
-			"E9010102":{"icon":"","url":"/Employeelist", id: "E9010102", pid: 'E90102',text:'人员信息'}
+			"E90102":{"icon":"iconfont icon-xiaoxi","url":"", id: 'E90102', pid: '0',text:'消息中心'},
+			"E9010202":{"icon":"iconfont icon-renshihangzhengshi","url":"/Informmessagelist", id: 'E9010202', pid: 'E90102',text:'通知消息'},
+			"E9010204":{"icon":"iconfont icon-renshihangzhengshi","url":"/Handlemessagelist", id: 'E9010204', pid: 'E90102',text:'工作任务'},
+			"E9010206":{"icon":"iconfont icon-renshihangzhengshi","url":"/Warningmessagelist", id: 'E9010206', pid: 'E90102',text:'预警消息'},
+			"E90104":{"icon":"iconfont icon-renshihangzhengshi","url":"", id: 'E90104', pid: '0',text:'人员信息'},
+			"E9010402":{"icon":"","url":"/Information", id:'E9010402', pid: 'E90104',text:'我的信息'}
+			
 		};
 		var _cachepid = [];
 		var _descdata = [];
