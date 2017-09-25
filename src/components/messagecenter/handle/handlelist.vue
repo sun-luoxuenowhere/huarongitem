@@ -30,7 +30,7 @@
 					<el-checkbox class="y-checkbox" v-model="searchform.isread">包含已读</el-checkbox> 
 				</el-form-item> -->
 				<el-form-item>
-					<el-checkbox class="y-checkbox" v-model="isHandled">包含已处理</el-checkbox> 
+					<el-checkbox class="y-checkbox" v-model="isHandled">已处理</el-checkbox> 
 				</el-form-item> 
 				<el-form-item>
 					<el-button  class="y-btn-searchp" type="danger" @click="onSearch">查询</el-button>
@@ -89,10 +89,16 @@
 		methods:{  
 		    //点击“查询”
 		    onSearch(){ 
-		    	
-		    	this.searchform.isHandled=this.isHandled;//查询的时候将设置是否为处理状态
 		    	this.searchform.sendStr=this.value;//查询的时间
-		    	console.log(this.searchform)
+		    	this.searchform.isHandled=this.isHandled;//查询的时候将设置是否为处理状态
+		    	
+		    	console.log(this.searchform.isHandled)
+		    	if(this.searchform.isHandled==true){
+		    		this.searchform.isRead=true
+		    		console.log(this.searchform.isRead)
+		    	}else if(this.searchform.isHandled==false){
+		    		this.searchform.isRead=false
+		    	}
 		    	this.$refs.InfoMsg.loadData( this.searchform );  //调用子组件的加载方法
 		    } 
 		},

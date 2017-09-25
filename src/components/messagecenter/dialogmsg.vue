@@ -43,170 +43,134 @@
 			<el-dialog :title="title"  :show-close="false" :visible="dialogvisible" size="tiny">
 				<div v-if="data.billType=='6111'">
 					<div class="y-dialog-body">
-						<el-row :gutter="20" >
-						  <el-col :span="8" v-for="(val,key) in newDatalist"><span>{{val}}</span>：<span>{{data.Datalist[key]}}</span></el-col>
-						  
+						<el-row :gutter="20">
+						  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
 						</el-row>
+						<!--审批进度-->
 						<el-row :gutter="20">
 						  <el-col :span="4"><span>审批进度：</span></el-col>
 						  <el-col :span="20">
-						  	<div >
-						  		<div class="dialoghistop" >主管审核</div>
-						  		<div class="clearfix" style="border-left:1px dashed #999999;position: relative;padding-bottom: 12px;">
+						  	<div v-for="(val,key) in data.Hisapprove">
+						  		<!--y-dialog-border-->
+						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" src="../../assets/img/user.jpg"/>
+						  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
 						  				<div class="clearfix">
 						  					<div style="float: left;">
-						  						<i class="iconfont icon-shouye"></i>
-							  					<span>刘晓丽</span>
+						  						<span>[<span>{{val.spzk}}</span>]</span>
+							  					<span>{{val.checkman}}</span>
 						  					</div>
-							  				<div style="float: right;"><span>2017-08-09 16:30:20</span></div>
+							  				<div style="float: right;">
+							  					<span>{{val.ApproveTime}}</span>
+							  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+							  				</div>
 						  				</div>
-						  				<div><span>驳回理由</span>：<span>项目比较急，过两天再批过两天</span></div>
+						  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
 						  			</div>
 						  		</div>
 						  	</div>
 						  	
-						  	<div >
-						  		<div class="dialoghistop" style="border-left:1px dashed #999999;">主管审核</div>
-						  		<div class="clearfix" style="position: relative;">
-						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" src="../../assets/img/user.jpg"/>
-						  			</div>
-						  			<div class="dialogpingyu">
-						  				<div class="dialogsanjiao"></div>
-						  				<div class="clearfix">
-						  					<div style="float: left;">
-						  						<i class="iconfont icon-shouye"></i>
-							  					<span>刘晓丽</span>
-						  					</div>
-							  				<div style="float: right;"><span>2017-08-09 16:30:20</span></div>
-						  				</div>
-						  				<div><span>驳回理由</span>：<span>项目比较急，过两天再批过两天</span></div>
-						  			</div>
-						  		</div>
-						  	</div>
 						  </el-col>
 						</el-row>
 					</div> 
 				  	<div slot="footer" class="y-dialog-footer">
 				    	<!--<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>-->
-				    	<el-button class="y-btn-search" type="danger" >我知道了</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="approve()">批准</el-button>
+				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
+				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
 				<div v-else-if="data.billType=='6117'">
 					<div class="y-dialog-body">
-						<el-row :gutter="20" >
-						  <el-col :span="8" v-for="(val,key) in newDatalist"><span>{{val}}</span>：<span>{{data.Datalist[key]}}</span></el-col>
-						  
+						<el-row :gutter="20">
+						  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
 						</el-row>
+						<!--审批进度-->
 						<el-row :gutter="20">
 						  <el-col :span="4"><span>审批进度：</span></el-col>
 						  <el-col :span="20">
-						  	<div >
-						  		<div class="dialoghistop" >主管审核</div>
-						  		<div class="clearfix" style="border-left:1px dashed #999999;position: relative;padding-bottom: 12px;">
+						  	<div v-for="(val,key) in data.Hisapprove">
+						  		<!--y-dialog-border-->
+						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" src="../../assets/img/user.jpg"/>
+						  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
 						  				<div class="clearfix">
 						  					<div style="float: left;">
-						  						<i class="iconfont icon-shouye"></i>
-							  					<span>刘晓丽</span>
+						  						<span>[<span>{{val.spzk}}</span>]</span>
+							  					<span>{{val.checkman}}</span>
 						  					</div>
-							  				<div style="float: right;"><span>2017-08-09 16:30:20</span></div>
+							  				<div style="float: right;">
+							  					<span>{{val.ApproveTime}}</span>
+							  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+							  				</div>
 						  				</div>
-						  				<div><span>驳回理由</span>：<span>项目比较急，过两天再批过两天</span></div>
+						  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
 						  			</div>
 						  		</div>
 						  	</div>
 						  	
-						  	<div >
-						  		<div class="dialoghistop" style="border-left:1px dashed #999999;">主管审核</div>
-						  		<div class="clearfix" style="position: relative;">
-						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" src="../../assets/img/user.jpg"/>
-						  			</div>
-						  			<div class="dialogpingyu">
-						  				<div class="dialogsanjiao"></div>
-						  				<div class="clearfix">
-						  					<div style="float: left;">
-						  						<i class="iconfont icon-shouye"></i>
-							  					<span>刘晓丽</span>
-						  					</div>
-							  				<div style="float: right;"><span>2017-08-09 16:30:20</span></div>
-						  				</div>
-						  				<div><span>驳回理由</span>：<span>项目比较急，过两天再批过两天</span></div>
-						  			</div>
-						  		</div>
-						  	</div>
 						  </el-col>
 						</el-row>
 					</div> 
 				  	<div slot="footer" class="y-dialog-footer">
 				    	<!--<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>-->
-				    	<el-button class="y-btn-search" type="danger" >我知道了</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="approve()">批准</el-button>
+				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
+				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
 				<div v-else-if="data.billType=='6115'">
 					<div class="y-dialog-body">
-						<el-row :gutter="20" >
-						  <el-col :span="8" v-for="(val,key) in newDatalist"><span>{{val}}</span>：<span>{{data.Datalist[key]}}</span></el-col>
-						  
+						<el-row :gutter="20">
+						  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
 						</el-row>
+						<!--审批进度-->
 						<el-row :gutter="20">
 						  <el-col :span="4"><span>审批进度：</span></el-col>
 						  <el-col :span="20">
-						  	<div >
-						  		<div class="dialoghistop" >主管审核</div>
-						  		<div class="clearfix" style="border-left:1px dashed #999999;position: relative;padding-bottom: 12px;">
+						  	<div v-for="(val,key) in data.Hisapprove">
+						  		<!--y-dialog-border-->
+						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" src="../../assets/img/user.jpg"/>
+						  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
 						  				<div class="clearfix">
 						  					<div style="float: left;">
-						  						<i class="iconfont icon-shouye"></i>
-							  					<span>刘晓丽</span>
+						  						<span>[<span>{{val.spzk}}</span>]</span>
+							  					<span>{{val.checkman}}</span>
 						  					</div>
-							  				<div style="float: right;"><span>2017-08-09 16:30:20</span></div>
+							  				<div style="float: right;">
+							  					<span>{{val.ApproveTime}}</span>
+							  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+							  				</div>
 						  				</div>
-						  				<div><span>驳回理由</span>：<span>项目比较急，过两天再批过两天</span></div>
+						  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
 						  			</div>
 						  		</div>
 						  	</div>
 						  	
-						  	<div >
-						  		<div class="dialoghistop" style="border-left:1px dashed #999999;">主管审核</div>
-						  		<div class="clearfix" style="position: relative;">
-						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" src="../../assets/img/user.jpg"/>
-						  			</div>
-						  			<div class="dialogpingyu">
-						  				<div class="dialogsanjiao"></div>
-						  				<div class="clearfix">
-						  					<div style="float: left;">
-						  						<i class="iconfont icon-shouye"></i>
-							  					<span>刘晓丽</span>
-						  					</div>
-							  				<div style="float: right;"><span>2017-08-09 16:30:20</span></div>
-						  				</div>
-						  				<div><span>驳回理由</span>：<span>项目比较急，过两天再批过两天</span></div>
-						  			</div>
-						  		</div>
-						  	</div>
 						  </el-col>
 						</el-row>
 					</div> 
 				  	<div slot="footer" class="y-dialog-footer">
 				    	<!--<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>-->
-				    	<el-button class="y-btn-search" type="danger" >我知道了</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="approve()">批准</el-button>
+				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
+				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
 				<div v-else-if="data.billType=='6113'">
@@ -248,65 +212,53 @@
 				    	<!--<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>-->
 				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="approve()">批准</el-button>
 				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
-				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
 				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
 				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
 				<div v-else-if="data.billType=='6101'">
 					<div class="y-dialog-body">
-						<el-row :gutter="20" >
-						  <el-col :span="8" v-for="(val,key) in newDatalist"><span>{{val}}</span>：<span>{{data.Datalist[key]}}</span></el-col>
-						  
+						<el-row :gutter="20">
+						  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
 						</el-row>
+						<!--审批进度-->
 						<el-row :gutter="20">
 						  <el-col :span="4"><span>审批进度：</span></el-col>
 						  <el-col :span="20">
-						  	<div >
-						  		<div class="dialoghistop" >主管审核</div>
-						  		<div class="clearfix" style="border-left:1px dashed #999999;position: relative;padding-bottom: 12px;">
+						  	<div v-for="(val,key) in data.Hisapprove">
+						  		<!--y-dialog-border-->
+						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" src="../../assets/img/user.jpg"/>
+						  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
 						  				<div class="clearfix">
 						  					<div style="float: left;">
-						  						<i class="iconfont icon-shouye"></i>
-							  					<span>刘晓丽</span>
+						  						<span>[<span>{{val.spzk}}</span>]</span>
+							  					<span>{{val.checkman}}</span>
 						  					</div>
-							  				<div style="float: right;"><span>2017-08-09 16:30:20</span></div>
+							  				<div style="float: right;">
+							  					<span>{{val.ApproveTime}}</span>
+							  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+							  				</div>
 						  				</div>
-						  				<div><span>驳回理由</span>：<span>项目比较急，过两天再批过两天</span></div>
+						  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
 						  			</div>
 						  		</div>
 						  	</div>
 						  	
-						  	<div >
-						  		<div class="dialoghistop" style="border-left:1px dashed #999999;">主管审核</div>
-						  		<div class="clearfix" style="position: relative;">
-						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" src="../../assets/img/user.jpg"/>
-						  			</div>
-						  			<div class="dialogpingyu">
-						  				<div class="dialogsanjiao"></div>
-						  				<div class="clearfix">
-						  					<div style="float: left;">
-						  						<i class="iconfont icon-shouye"></i>
-							  					<span>刘晓丽</span>
-						  					</div>
-							  				<div style="float: right;"><span>2017-08-09 16:30:20</span></div>
-						  				</div>
-						  				<div><span>驳回理由</span>：<span>项目比较急，过两天再批过两天</span></div>
-						  			</div>
-						  		</div>
-						  	</div>
 						  </el-col>
 						</el-row>
 					</div> 
 				  	<div slot="footer" class="y-dialog-footer">
 				    	<!--<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>-->
-				    	<el-button class="y-btn-search" type="danger" >我知道了</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="approve()">批准</el-button>
+				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
+				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
 				<div v-else>
@@ -323,7 +275,7 @@
 		<div v-else-if="judgedialog=='inform'">
 			
 			<el-dialog :title="title"  :show-close="false" :visible="dialogvisible" size="tiny">
-				<div v-show="data.msgsourcetype=='notice'">
+				<div v-if="data.msgsourcetype=='notice'">
 					<div class="y-dialog-body">
 						<table class="y-info-list">
 							<tr>
@@ -354,12 +306,214 @@
 				    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button> 
 				  	</div>
 				</div>
-				<div v-show="data.msgsourcetype=='pfbizmsg'||data.msgsourcetype=='worklist'">
+				
+				<div v-else-if="data.msgsourcetype=='pfbizmsg'||data.msgsourcetype=='worklist'">
 					<!--判断通知消息-->
-					
-					
-					
+					<div v-if="data.billType=='6111'">
+						<div class="y-dialog-body">
+							<el-row :gutter="20">
+							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
+							</el-row>
+							<!--审批进度-->
+							<el-row :gutter="20">
+							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="20">
+							  	<div v-for="(val,key) in data.Hisapprove">
+							  		<!--y-dialog-border-->
+							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  			<div style="float: left;position: absolute;left: -16px;">
+							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  			</div>
+							  			<div class="dialogpingyu">
+							  				<div class="dialogsanjiao"></div>
+							  				<div class="clearfix">
+							  					<div style="float: left;">
+							  						<span>[<span>{{val.spzk}}</span>]</span>
+								  					<span>{{val.checkman}}</span>
+							  					</div>
+								  				<div style="float: right;">
+								  					<span>{{val.ApproveTime}}</span>
+								  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+								  				</div>
+							  				</div>
+							  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
+							  			</div>
+							  		</div>
+							  	</div>
+							  	
+							  </el-col>
+							</el-row>
+						</div> 
+					  	<div slot="footer" class="y-dialog-footer">
+					    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>
+					  	</div>
+					</div>
+					<div v-else-if="data.billType=='6117'">
+						<div class="y-dialog-body">
+							<el-row :gutter="20">
+							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
+							</el-row>
+							<!--审批进度-->
+							<el-row :gutter="20">
+							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="20">
+							  	<div v-for="(val,key) in data.Hisapprove">
+							  		<!--y-dialog-border-->
+							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  			<div style="float: left;position: absolute;left: -16px;">
+							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  			</div>
+							  			<div class="dialogpingyu">
+							  				<div class="dialogsanjiao"></div>
+							  				<div class="clearfix">
+							  					<div style="float: left;">
+							  						<span>[<span>{{val.spzk}}</span>]</span>
+								  					<span>{{val.checkman}}</span>
+							  					</div>
+								  				<div style="float: right;">
+								  					<span>{{val.ApproveTime}}</span>
+								  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+								  				</div>
+							  				</div>
+							  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
+							  			</div>
+							  		</div>
+							  	</div>
+							  	
+							  </el-col>
+							</el-row>
+						</div> 
+					  	<div slot="footer" class="y-dialog-footer">
+					    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>
+					  	</div>
+					</div>
+					<div v-else-if="data.billType=='6115'">
+						<div class="y-dialog-body">
+							<el-row :gutter="20">
+							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
+							</el-row>
+							<!--审批进度-->
+							<el-row :gutter="20">
+							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="20">
+							  	<div v-for="(val,key) in data.Hisapprove">
+							  		<!--y-dialog-border-->
+							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  			<div style="float: left;position: absolute;left: -16px;">
+							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  			</div>
+							  			<div class="dialogpingyu">
+							  				<div class="dialogsanjiao"></div>
+							  				<div class="clearfix">
+							  					<div style="float: left;">
+							  						<span>[<span>{{val.spzk}}</span>]</span>
+								  					<span>{{val.checkman}}</span>
+							  					</div>
+								  				<div style="float: right;">
+								  					<span>{{val.ApproveTime}}</span>
+								  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+								  				</div>
+							  				</div>
+							  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
+							  			</div>
+							  		</div>
+							  	</div>
+							  	
+							  </el-col>
+							</el-row>
+						</div> 
+					  	<div slot="footer" class="y-dialog-footer">
+					    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>
+					  	</div>
+					</div>
+					<div v-else-if="data.billType=='6113'">
+						<div class="y-dialog-body">
+							<el-row :gutter="20">
+							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
+							</el-row>
+							<!--审批进度-->
+							<el-row :gutter="20">
+							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="20">
+							  	<div v-for="(val,key) in data.Hisapprove">
+							  		<!--y-dialog-border-->
+							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  			<div style="float: left;position: absolute;left: -16px;">
+							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  			</div>
+							  			<div class="dialogpingyu">
+							  				<div class="dialogsanjiao"></div>
+							  				<div class="clearfix">
+							  					<div style="float: left;">
+							  						<span>[<span>{{val.spzk}}</span>]</span>
+								  					<span>{{val.checkman}}</span>
+							  					</div>
+								  				<div style="float: right;">
+								  					<span>{{val.ApproveTime}}</span>
+								  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+								  				</div>
+							  				</div>
+							  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
+							  			</div>
+							  		</div>
+							  	</div>
+							  	
+							  </el-col>
+							</el-row>
+						</div> 
+					  	<div slot="footer" class="y-dialog-footer">
+					    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>
+					  	</div>
+					</div>
+					<div v-else-if="data.billType=='6101'">
+						<div class="y-dialog-body">
+							<el-row :gutter="20">
+							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
+							</el-row>
+							<!--审批进度-->
+							<el-row :gutter="20">
+							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="20">
+							  	<div v-for="(val,key) in data.Hisapprove">
+							  		<!--y-dialog-border-->
+							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  			<div style="float: left;position: absolute;left: -16px;">
+							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  			</div>
+							  			<div class="dialogpingyu">
+							  				<div class="dialogsanjiao"></div>
+							  				<div class="clearfix">
+							  					<div style="float: left;">
+							  						<span>[<span>{{val.spzk}}</span>]</span>
+								  					<span>{{val.checkman}}</span>
+							  					</div>
+								  				<div style="float: right;">
+								  					<span>{{val.ApproveTime}}</span>
+								  					<!--<span>到达时间：{{val.strSendTime}}</span>-->
+								  				</div>
+							  				</div>
+							  				<div><span>审批意见</span>：<span>{{val.result}}</span></div>
+							  			</div>
+							  		</div>
+							  	</div>
+							  	
+							  </el-col>
+							</el-row>
+						</div> 
+					  	<div slot="footer" class="y-dialog-footer">
+					    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>
+					  	</div>
+					</div>
+					<div v-else>
+						<div class="y-dialog-body">
+							开发中。。。
+						</div> 
+					  	<div slot="footer" class="y-dialog-footer">
+					    	<el-button class="y-btn-search" type="danger" @click="dialognone">我知道了</el-button>
+					  	</div>
+					</div>
 				</div>
+				
 			</el-dialog>
 		</div>
 		
@@ -418,7 +572,7 @@
 			    
 			  </div>
 			  <div slot="footer" class="dialog-footer">
-			    <el-button class="y-btn-searchp" type="danger"  @click="submit">提交</el-button>
+			    <el-button class="y-btn-searchp" type="danger"  @click="submit('Y')">提交</el-button>
 			    <el-button class="y-btn-searchb" type="danger" @click="dialogFormVisible = false">取 消</el-button>
 			  </div>
 			</el-dialog>
@@ -523,9 +677,34 @@ export default {
 			this.assignman('3');//获取指派人数据
 		},
 		abandoned(){
-			alert('弃审')
+			this.$http.post( this.url, Qs.stringify ({
+				transType:'approveBack',
+				pk_group:UserInfo.pk_group,
+				cuserid:UserInfo.cuserid,
+				taskId:this.data.pk_detail
+			}), {
+	          	headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+	          	}
+	      	}).then(( response ) => {  
+				
+				console.log(response);
+				if(response.data.flag=='0'){
+					this.$message({
+			          message: response.data.des,
+			          type: 'success'
+			        });
+			        this.$emit('read');
+				}else{
+					this.$message.error( response.data.des );
+				}
+				
+			}).catch((err) => { 
+				this.$message.error( err );
+			});
+			
 		},
-		submit(){
+		submit(isflag){
 //			console.log(this.sumreason,'\\',this.value5)
 			if(this.judgbutton=='approveb'){//如果有指派人也是必须填写
 				if(this.options.length!='0'){
@@ -536,10 +715,10 @@ export default {
 						for(var i in this.value5){
 							dispath+=this.value5[i]+';';
 						}
-						this.submitdata('0',dispath,this.sumreason,'')
+						this.submitdata('0',dispath,this.sumreason,'',isflag)
 					}
 				}else{
-					this.submitdata('0','',this.sumreason,'')
+					this.submitdata('0','',this.sumreason,'',isflag)
 				}
 				
 			}else if(this.judgbutton=='rejectb'){//驳回指派人是可有可无的
@@ -548,7 +727,7 @@ export default {
 				for(var i in this.value5){
 					dispath+=this.value5[i];
 				}
-				this.submitdata('2','',this.sumreason,dispath);//驳回的时候只能选择一个人，并且传的值不能带分好；
+				this.submitdata('2','',this.sumreason,dispath,isflag);//驳回的时候只能选择一个人，并且传的值不能带分好；
 				
 			}else if(this.judgbutton=='signb'){//加签指派人必须有
 				
@@ -559,7 +738,7 @@ export default {
 					for(var i in this.value5){
 						dispath+=this.value5[i]+';';
 					}
-					this.submitdata('3','',this.sumreason,dispath)
+					this.submitdata('3','',this.sumreason,dispath,isflag)
 				}
 			}
 		},
@@ -567,27 +746,27 @@ export default {
 			this.$emit('close');
 		},
 		beRead(){ 
-//			var _msgpk = this.data.msgpk;
-//			
-//			//点击我知道了发送已读信息；
-//			this.$http.post( this.url, Qs.stringify ({
-//				"transType":'markreaded',
-//				"msgpk": _msgpk
-//			}), { 
-//	          	headers: {
-//	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
-//	          	}
-//	      	}).then(( response ) => {  
-//				var _data = response.data;
-//				if( _data.flag == "0" ){
-//					this.$emit('read'); 
-//				}else{
-//					this.$message.error( _data.des );
-//					this.$emit('close'); 
-//				}; 
-//			}).catch((err) => { 
-//				this.$message.error( err );
-//			}); 
+			var _msgpk = this.data.msgpk;
+			
+			//点击我知道了发送已读信息；
+			this.$http.post( this.url, Qs.stringify ({
+				"transType":'markreaded',
+				"msgpk": _msgpk
+			}), { 
+	          	headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+	          	}
+	      	}).then(( response ) => {  
+				var _data = response.data;
+				if( _data.flag == "0" ){
+					this.$emit('read'); 
+				}else{
+					this.$message.error( _data.des );
+					this.$emit('close'); 
+				}; 
+			}).catch((err) => { 
+				this.$message.error( err );
+			}); 
 		},
 		assignman(arg){
 			this.$http.post( this.url, Qs.stringify ({
@@ -611,18 +790,21 @@ export default {
 				this.$message.error( err );
 			});
 		},
-		submitdata(arg,asg,rea,ject){//封装审批驳回加签提交数据
+		submitdata(arg,asg,rea,ject,flag){//封装审批驳回加签提交数据
 			this.$http.post( this.url, Qs.stringify ({
 				transType:'billHandler',
 				billId:this.data.billId,
 				cuserid:UserInfo.cuserid,
 				pk_group:UserInfo.pk_group,
 				taskId:this.data.pk_detail,
+				isflag:flag,
+				pk_org:UserInfo.pk_org,
 				opflag:arg,
 				dispatchId:asg,//指派人
 				checkNote:rea,//审批意见
 				nodeId:ject//驳回传驳回节点
 			})).then(( response ) => {
+				console.log(response)
 				if(response.data.flag=='0'){//提交数据成功函数
 					this.$message({
 			          message: response.data.des,
@@ -633,6 +815,17 @@ export default {
 			        this.value5=[];
 			        this.sumreason='';
 					
+				}else if(response.data.flag=='3'){
+					
+					this.$confirm(response.data.des, '提示', {
+			          confirmButtonText: '确定',
+			          cancelButtonText: '取消',
+			          type: 'warning'
+			        }).then(() => {
+						this.submit('N')		         
+			        }).catch(() => {
+			          
+			        });
 				}else{
 					this.$message.error( response.data.des );
 				}

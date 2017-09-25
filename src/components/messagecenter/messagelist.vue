@@ -144,7 +144,7 @@ export default {
 						console.log(_data)
 						this.openDialog = true; 
 						this.msgdata = row;
-		    			this.msgdata.msgType = this.param.msgType;
+//		    			this.msgdata.msgType = this.param.msgType;
 		    			this.msgdata.Datalist = JSON.parse(_data.data).headMsg;
 		    			this.msgdata.Hisapprove = _data.hisapprove;
 		    			console.log(this.msgdata)
@@ -161,7 +161,8 @@ export default {
 	    			//通知判断为空的时候
 	    			this.openDialog = true; 
 			    	this.msgdata = row;
-			    	this.msgdata.msgType = this.param.msgType;
+//			    	this.msgdata.msgType = this.param.msgType;
+			    	 
 	    		}else if(row.msgsourcetype=='worklist' || row.msgsourcetype=='pfbizmsg'){
 	    			//不为空的时候需要向后端发送请求显示字段的详细信息；
 	    			//获取列表数据；
@@ -196,7 +197,7 @@ export default {
 	    	}else if(this.param.msgType=='prealert'){
 	    		this.openDialog = true; 
 		    	this.msgdata = row;
-		    	this.msgdata.msgType = this.param.msgType;
+//		    	this.msgdata.msgType = this.param.msgType;
 	    	}
 	    	
 	    },
