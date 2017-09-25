@@ -171,7 +171,7 @@ export default {
 	    	{ "id": "certifier", "text": "证明人" }, 
 	    	{ "id": "memo", "text": "备注" },
 	    	{ "id": "workduty", "text": "主要职责" },
-	    	{ "id": "glbdef2", "text": "是否兼职" },
+	    	{ "id": "glbdef2", "text": "是否兼职", "type": "radio", "typedata": [{"Y": "是", "N": "否" }] },
 	    	{ "id": "glbdef3", "text": "兼职所在机构" },
 	    	{ "id": "workachive", "text": "主要业绩" },
 	    	{ "id": "work_addr", "text": "工作地址" },
@@ -219,7 +219,7 @@ export default {
 		    { id: 'glbdef5', text: '最高', "type": "radio", "typedata": [{"Y": "是", "N": "否" }]  },
 		    { id: 'glbdef3', text: '非全日制最高学历' },
 		    { id: 'glbdef4', text: '非全日制最高学位' },
-		    { id: 'glbdef1', text: '非全日制最高' }
+		    { id: 'glbdef1', text: '非全日制最高', "type": "radio", "typedata": [{"Y": "是", "N": "否" }] }
 	    ],
 	    //身份证表单配置
 	    psncertFormConfig: [{ "id": "idtype", "text": "证件类型", "type": "refer", "typedata": [{"code": "idtype"}], "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },

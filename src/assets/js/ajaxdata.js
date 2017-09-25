@@ -50,12 +50,14 @@ export function ajaxData( url, param, call ){
 					//alert( _data.des );
 				};   
 			}).catch((err) => { 
-				var _status = err.request.status;
-				if( _status && _status == 500 ){
-					//alert( '网络错误' ); 
-				}else{
-					alert( _status ); 
-				};
+				if(err.request){
+					var _status = err.request.status;
+					if( _status && _status == 500 ){
+						//alert( '网络错误' ); 
+					}else{
+						alert( _status ); 
+					};
+				}; 
 			}); 
 //		}else{
 //			alert('没有权限');
