@@ -54,7 +54,11 @@
 						  		<!--y-dialog-border-->
 						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+						  				
+						  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  				<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
+						  				
+						  			
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
@@ -525,7 +529,7 @@
 			  	<textarea placeholder="请输入审批意见" style="width:100%;height:100px;border:none;resize:none;outline:none;overflow-x:hidden;overflow-y:hidden">{{sumreason}}</textarea>
 			  	<!--判断是否加签-->
 			    <!--判断是批准-->
-			    <div v-show="judgbutton=='approveb'">
+			    <div v-if="judgbutton=='approveb'">
 			    	<div v-show="options.length!='0'">
 				    	<template>
 						  <el-select v-model="value5" filterable multiple placeholder="请选择指派人">
@@ -540,10 +544,10 @@
 				    </div>
 			    </div>
 			    <!--判断是驳回-->
-			    <div v-show="judgbutton=='rejectb'">
+			    <div v-else-if="judgbutton=='rejectb'">
 			    	<div>
 				    	<template>
-						  <el-select v-model="value5" filterable multiple placeholder="请选择指派人">
+						  <el-select v-model="value5" placeholder="请选择指派人" filterable>
 						    <el-option
 						      v-for="item in options"
 						      :key="item.user_id"
@@ -555,7 +559,7 @@
 				    </div>
 			    </div>
 			    <!--判断是加签-->
-			    <div v-show="judgbutton=='signb'">
+			    <div v-else-if="judgbutton=='signb'">
 			    	<div>
 				    	<template>
 						  <el-select v-model="value5" filterable multiple placeholder="请选择指派人">
@@ -584,7 +588,8 @@
 <script>   
 	
 import Qs from 'qs';
-//import SubmitDialog from '@/components/messagecenter/dialogsubmit';
+import Image from '@/assets/img/peple.png';
+
 var UserInfo;
 export default {  
 	props: ['dialogvisible','data','judgedialog'], 
@@ -636,6 +641,7 @@ export default {
 	},
 	mounted(){
 		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+		
 	},
 	data(){
 		return {
@@ -650,7 +656,8 @@ export default {
 			options:'',
 	        value5:'',//加签的值
 	        sumreason:"",
-	        signshow:false
+	        signshow:false,
+	        Img:Image
 	        
 		}
 	},
@@ -812,15 +819,14 @@ export default {
 			        });
 			        this.dialogFormVisible=false;
 			        this.$emit('read');
-			        this.value5=[];
+			        this.value5='';
 			        this.sumreason='';
 					
 				}else if(response.data.flag=='3'){
 					
 					this.$confirm(response.data.des, '提示', {
 			          confirmButtonText: '确定',
-			          cancelButtonText: '取消',
-			          type: 'warning'
+			          cancelButtonText: '取消'
 			        }).then(() => {
 						this.submit('N')		         
 			        }).catch(() => {

@@ -312,8 +312,17 @@
 .y-icon-item .el-form-item__label{
 	display: none;
 }
+.el-message-box__wrapper .el-button--primary {
+	background-color:#ff4949 ;
+	border-color: #ff4949;
+}
+
+
 .y-cascader-dialog .el-dialog{
 	width: 500px;
+}
+.el-dialog__wrapper {
+	overflow-x:hidden ;
 }
 .y-cascader-dialog .el-dialog .y-input{
 	width: 100%;
