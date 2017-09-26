@@ -382,6 +382,10 @@
 	position: relative;
 	padding-left: 130px;
 }
+.y-baseinfo-form .y-cascader-dialog .el-form-item,
+.y-baseinfo-form .y-icon-item .el-form-item{
+	padding-left: 0;
+}
 .y-baseinfo-form .el-form-item__label{
 	position: absolute;
 	width: 120px;

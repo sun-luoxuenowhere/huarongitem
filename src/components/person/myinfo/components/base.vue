@@ -1,5 +1,5 @@
 <template>
-	<el-form class="y-baseinfo-form" ref="myForm" :model="formData" :rules="rules" label-position="left">   
+	<el-form class="y-baseinfo-form" ref="myForm" :model="formData" :rules="rules" label-position="left">    
 		<!-- y-module-baseinfo begin 基本信息表单 [头像区域]-->
 		<div class="y-module y-module-baseinfo clearfix">
 			<!-- 按钮操作区域 begin -->
@@ -166,23 +166,23 @@
 			    	"param.pk_org": UserInfo.pk_org,
 					"infoSetCode": "bd_psndoc",
 					"transType": 'psnInfoQuery' 
-				}, (res) => { 
-					
-					var _dataobj = res.list[0];
+				}, (res) => {  
+					var _dataobj = res.list[0]; 
 					this.status = res.status;   
 					this.alterFields = (res.alterFields ? res.alterFields : ''); 
 					this.infoSetCode = res.infoSetCode;
 					 
-					_dataobj.photo = (_dataobj.photo == "" ? photoSrc : _dataobj.photo);
-					_dataobj.sex = _dataobj.sex.toString(); 
-					
+					_dataobj.photo = (_dataobj.photo == "" ? photoSrc : _dataobj.photo); 
+					if( _dataobj.sex ){
+						_dataobj.sex = _dataobj.sex.toString(); 
+					}; 
 					for(var i in this.baseFormInit ){ 
 						if( !_dataobj[i] ){
 							_dataobj[i] = this.baseFormInit[i];
 						};
 					}; 
 					this.formDataInit = deepCopyObj(_dataobj);
-					this.formData = deepCopyObj(_dataobj); 
+					this.formData = deepCopyObj(_dataobj);  
 				});
 			},
 			//点击保存按钮

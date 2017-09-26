@@ -35,7 +35,7 @@ export default {
     	//基本信息[头像区域] 
     	baseInfo1: [{ "id": "photo", "text": "头像", "disabled": true },
 			{ "id": "name", "text": "姓名", "disabled": true },
-			{ "id": "sex", "text": "性别", "disabled": true, "type": "radio", "typedata": [{"1": "男", "2": "女"}], "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
+			{ "id": "sex", "text": "性别", "disabled": true, "type": "radio", "typedata": [{"1": "男", "2": "女"}] },
 			//{ "id": "deptname", "text": "部门", "disabled": true },
 			//{ "id": "jobname", "text": "职务", "disabled": true },
 			//{ "id": "code", "text": "人员编码", "disabled": true },

@@ -52,7 +52,6 @@ export default {
 				if (valid) {   
 					if( _postdata ){    
 						this.initFormData = "";
-						alert( JSON.stringify(_postdata) );
 						this.$emit('submit', _postdata );  
 						this.resetForm();
 					}else{
