@@ -55,7 +55,7 @@ export default {
 						this.$emit('submit', _postdata );  
 						this.resetForm();
 					}else{
-						alert('没有修改');
+//						alert('没有修改');
 						return false;
 					}; 
 				} else {

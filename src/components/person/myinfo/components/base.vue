@@ -141,6 +141,8 @@
 			this.loadInfoData();
 			this.transferData(this.$store.state.BaseInfo.baseInfo1, this.formDataConfig1);
 			this.transferData(this.$store.state.BaseInfo.baseInfo2, this.formDataConfig2);  
+			
+//			console.log('ddd'+this.formDataConfig1)
 		},
 		methods: {
 			//批量数据处理，转换成能自动生成表单的数据格式

@@ -19,10 +19,11 @@
 						<li> <a scroll-href="#zhicheng">职称信息</a> </li>
 						<li> <a scroll-href="#dangpai">参加党派记录</a> </li>
 						<li> <a scroll-href="#jiangli">奖励情况</a> </li>
-						<li> <a scroll-href="#psnOrg">华融人员组织关系</a> </li>
+						<li> <a scroll-href="#psnOrg">人员组织关系</a> </li>
 						<li> <a scroll-href="#ass">考核记录</a> </li>
 						<li> <a scroll-href="#zhiye">职业资格</a> </li>
-						
+						<li> <a scroll-href="#jinji">紧急联系人</a> </li>
+						<li> <a scroll-href="#yuyan">语言能力</a> </li>
 					</ul>
 				</div>
 				<!-- 基本信息 begin -->

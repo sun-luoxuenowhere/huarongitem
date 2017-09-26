@@ -47,7 +47,7 @@ export function ajaxData( url, param, call ){
 				if( _data.flag == "0" ){  
 					call( _data.data );
 				}else{
-					//alert( _data.des );
+					this.$message.error(_data.des);
 				};   
 			}).catch((err) => { 
 				if(err.request){
