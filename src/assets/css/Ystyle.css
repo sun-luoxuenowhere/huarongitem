@@ -188,12 +188,12 @@
 }
 .y-userinfo .y-menu li{
 	position: relative; 
-	padding: 10px 0 10px 10px;
+	padding: 0px 0 10px 10px;
 }
 .y-userinfo .y-menu li:before{
 	position: absolute;
 	left: 0;
-	top: 20px;
+	top: 17px;
 	content: '';
 	width: 2px;
 	height: 100%; 

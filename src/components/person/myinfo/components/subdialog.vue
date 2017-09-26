@@ -8,7 +8,7 @@
 					:name="key" 
 					:formData="formData"
 					:inputData="formDataConfig[key]"></yInput>  
-			</el-form> 
+			</el-form>
 			<div class="y-btn-box">
 				<el-button class="y-btn-danger" type="danger" @click="submitForm()">保存</el-button>
 	  			<el-button class="y-btn-default" @click="cancle()">取消</el-button> 

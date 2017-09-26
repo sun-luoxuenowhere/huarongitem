@@ -31,6 +31,23 @@ export const validForm = {
             callback();
         };
     }, 
+    //数字
+    num: (rule, value, callback) => {   
+        if( !validForm.pattresult["num"].test(value) ){
+            callback(new Error('只能输入汉字'));
+        }else{
+            callback();
+        };
+    },
+    //传真
+    cz: (rule, value, callback) => {   
+        if( !validForm.pattresult["cz"].test(value) ){
+            callback(new Error('请输入正确的传真号'));
+        }else{
+            callback();
+        };
+    },
+    
     //年月日 yyyy-mm-dd格式 
     ymd: (rule, value, callback) => {  
     	if( rule.type == typeof value ){ 
@@ -61,6 +78,8 @@ export const validForm = {
         "phone": /^1[34578]\d{9}$/,
         "tel": /^([0-9]{3,4}-)?[0-9]{7,8}$/,
         "ymd": /^\d{4}\-\d{2}\-\d{2}$/,
-        "cardno":  /^[0-9a-zA-Z]*$/
+        "cardno":  /^[0-9a-zA-Z]*$/,
+        "num":/^[0-9]*$ /,
+        "cz":/^(\d{3,4}-)?\d{7,8}$/
     }
 };
