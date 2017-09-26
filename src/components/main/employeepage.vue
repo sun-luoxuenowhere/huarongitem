@@ -45,7 +45,7 @@
 					<el-tabs v-model="activeName" @tab-click="handleClick">
 						
 					    <el-tab-pane  name="first">
-					    	 <span slot="label">工作内容<i v-show="totalshow==0" class="iconfont iconfontmain icon-xiaoxi"><span class="messagetatal">{{listdata.totalcount}}</span></i></span>
+					    	 <span slot="label">工作任务<i v-show="totalshow==0" class="iconfont iconfontmain icon-xiaoxi"><span class="messagetatal">{{listdata.totalcount}}</span></i></span>
 					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist" >
 					    		<span class="L-order">{{index+1}}.</span>
 					    		<span class="L-listtitle">
