@@ -52,13 +52,10 @@
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
-						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+						  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				
 						  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
 						  				<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
-						  				
-						  			
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
@@ -100,9 +97,10 @@
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
-						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+						  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+						  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  				<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
@@ -144,9 +142,10 @@
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
-						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+						  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+						  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  				<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
@@ -188,9 +187,10 @@
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
-						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+						  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+						  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  				<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
@@ -232,9 +232,10 @@
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
-						  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+						  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 						  			<div style="float: left;position: absolute;left: -16px;">
-						  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+						  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  				<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
 						  			</div>
 						  			<div class="dialogpingyu">
 						  				<div class="dialogsanjiao"></div>
@@ -324,9 +325,10 @@
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->
-							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 							  			<div style="float: left;position: absolute;left: -16px;">
-							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  					<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
 							  			</div>
 							  			<div class="dialogpingyu">
 							  				<div class="dialogsanjiao"></div>
@@ -363,9 +365,10 @@
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->
-							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 							  			<div style="float: left;position: absolute;left: -16px;">
-							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  					<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
 							  			</div>
 							  			<div class="dialogpingyu">
 							  				<div class="dialogsanjiao"></div>
@@ -402,9 +405,10 @@
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->
-							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 							  			<div style="float: left;position: absolute;left: -16px;">
-							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  					<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
 							  			</div>
 							  			<div class="dialogpingyu">
 							  				<div class="dialogsanjiao"></div>
@@ -441,9 +445,10 @@
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->
-							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 							  			<div style="float: left;position: absolute;left: -16px;">
-							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  					<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
 							  			</div>
 							  			<div class="dialogpingyu">
 							  				<div class="dialogsanjiao"></div>
@@ -480,9 +485,10 @@
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->
-							  		<div class="clearfix y-dialog-border"  style="position: relative;padding-bottom: 12px;" >
+							  		<div class="clearfix" :class="data.Hisapprove.length==key+1? 'y-dialog-border1' :'y-dialog-border'"  style="position: relative;padding-bottom: 12px;" >
 							  			<div style="float: left;position: absolute;left: -16px;">
-							  				<img class="dialogimg" :src="'data:image/png;base64,'+val.img"/>
+							  				<img class="dialogimg" v-if="!val.img" :src="Img"/>
+						  					<img class="dialogimg" v-else :src="'data:image/png;base64,'+val.img"/>
 							  			</div>
 							  			<div class="dialogpingyu">
 							  				<div class="dialogsanjiao"></div>

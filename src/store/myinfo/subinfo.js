@@ -147,6 +147,8 @@ export default {
 	    	{ param: 'encourorg', text: '奖励机构', required: true },
 	    	{ param: 'encourmatter', text: '奖励事由', required: true },
 	    	{ param: 'encourmeas', text: '奖励措施', required: true }],
+	    
+	    
 	    	
 	    //华融人员组织关系表头
 	    psnOrgTheadData: [
@@ -155,12 +157,42 @@ export default {
 	    	{ param: 'orgglbdef2', text: '司龄' },
 	    	{ param: 'joinsysdate', text: '进入华融时间'},
 	    	{ param: 'corpworkage', text: '华融工龄' }],
+	   //考核记录
+	    assTheadData:[
+	    	{ param: 'workname', text: '绩效等级'},
+	    	{ param: 'period_year', text: '绩效年度'}],		
+	    
+	    //职业资格
+	    zhiyeTheadData:[
+	    	{ param: 'pk_perank', text: '职业资格'},
+	    	{ param: 'occupation', text: '职业'},
+	    	{ param: 'worklevel', text: '资格等级'},
+	    	{ param: 'certificatenum', text: '证书编号'},
+	    	{ param: 'workunitname', text: '评定机构'},
+	    	{ param: 'workdate', text: '获得时间'},
+	    	{ param: 'glbdef1', text: '失效日期'},
+	    	{ param: 'istop', text: '是否最高'},
+	    	{ param: 'remark', text: '备注'}],
 	    	
-	    //考核记录表头
-	    assTheadData: [
-	    	{ param: 'pk_perank', text: '绩效等级'},
-	    	{ param: 'period_year', text: '绩效年度'}],
-	    	
+	    //紧急联系人
+	    jinjiTheadData: [{ param: 'linkman', text: '联系人' },
+		    { param: 'relation', text: '与联系人关系' },
+		    { param: 'ismain', text: '主要联系人' },
+		    { param: 'linkaddr', text: '联系地址' },
+		    { param: 'postalcode', text: '邮政编码' },
+		    { param: 'officephone', text: '办公电话' },
+		    { param: 'homephone', text: '家庭电话' },
+		    { param: 'mobile', text: '手机' },
+		    { param: 'fax', text: '传真' },
+		    { param: 'email', text: '电子邮件' }],
+	    //语言能力
+	    yuyanTheadData: [{ param: 'langsort', text: '语种' },
+		    { param: 'langskill', text: '语种熟练程度' },
+		    { param: 'langlev', text: '掌握语种水平的级别' },
+		    { param: 'certifname', text: '证书名称' },
+		    { param: 'certifcode', text: '证书编号' },
+		    { param: 'certifdate', text: '获证日期' },
+		    { param: 'memo', text: '备注' }],
 	    //履历表单配置
 	    jobFormConfig: [{ "id": "begindate", "text": "开始日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }]},
 	    	{ "id": "enddate", "text": "结束日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }]},
@@ -284,6 +316,25 @@ export default {
 	    	{ "id": "encourmatter", "text": "奖励事由", "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
 	    	{ id: 'encourmeas', text: '奖励措施' }],
 	    
+	    //紧急联系人表单配置
+	    jinjiFormConfig: [{ id: 'linkman', text: '联系人' },
+		    { id: 'relation', text: '与联系人关系' },
+		    { id: 'ismain', text: '主要联系人' },
+		    { id: 'linkaddr', text: '联系地址' },
+		    { id: 'postalcode', text: '邮政编码' },
+		    { id: 'officephone', text: '办公电话' },
+		    { id: 'homephone', text: '家庭电话' },
+		    { id: 'mobile', text: '手机' },
+		    { id: 'fax', text: '传真' },
+		    { id: 'email', text: '电子邮件' }],
+	    //语言能力表单配置
+	    yuyanFormConfig: [{ id: 'langsort', text: '语种' },
+		    { id: 'langskill', text: '语种熟练程度' },
+		    { id: 'langlev', text: '掌握语种水平的级别' },
+		    { id: 'certifname', text: '证书名称' },
+		    { id: 'certifcode', text: '证书编号' },
+		    { id: 'certifdate', text: '获证日期' },
+		    { id: 'memo', text: '备注' }]
     },
     mutations: { 
         SET_BASE_INFO( state, { list } ){

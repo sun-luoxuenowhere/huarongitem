@@ -20,8 +20,9 @@
 						<li> <a scroll-href="#dangpai">参加党派记录</a> </li>
 						<li> <a scroll-href="#jiangli">奖励情况</a> </li>
 						<li> <a scroll-href="#psnOrg">华融人员组织关系</a> </li>
-						
 						<li> <a scroll-href="#ass">考核记录</a> </li>
+						<li> <a scroll-href="#zhiye">职业资格</a> </li>
+						
 					</ul>
 				</div>
 				<!-- 基本信息 begin -->
@@ -144,8 +145,45 @@
 					:infoSetCode="subDialogConfig.ass.infoSetCode"
 					:editabled="false"  
 					:theaddata='assTheadData'>
-					</subList>
+				</subList>
 				<!-- 考核记录 end -->
+				
+				<!--职业资格begin-->
+				<subList
+					data-scroll="zhiye"
+					title='职业资格' 
+					:ref="subDialogConfig.zhiye.infoSetCode"
+					:infoSetCode="subDialogConfig.zhiye.infoSetCode"
+					:editabled="false"  
+					:theaddata='zhiyeTheadData'>
+				</subList>
+				
+				<!-- 职业资格 end -->
+				<!-- 紧急联系人 begin -->
+				<subList
+					data-scroll="jinji"
+					title='紧急联系人' 
+					:ref="subDialogConfig.jinji.infoSetCode"
+					:infoSetCode="subDialogConfig.jinji.infoSetCode"
+					:editabled="true"  
+					:theaddata='jinjiTheadData'
+					@add="openjinjiDialog"
+					@delete="deleteList"
+					@handle="handleList"></subList>
+				<!-- 紧急联系人 end -->
+				
+				<!-- 语言能力 begin -->
+				<subList
+					data-scroll="yuyan"
+					title='语言能力' 
+					:ref="subDialogConfig.yuyan.infoSetCode"
+					:infoSetCode="subDialogConfig.yuyan.infoSetCode"
+					:editabled="true"  
+					:theaddata='yuyanTheadData'
+					@add="openyuyanDialog"
+					@delete="deleteList"
+					@handle="handleList"></subList>
+				<!-- 语言能力 end -->
 			</div> 
 		</div>
 		<subDialog 
@@ -196,7 +234,23 @@
 			:formConfig="jiangliFormConfig"
 			:formData="jiangliFormData" 
 			@close="subDialogConfig.jiangli.visible = false" 
-			@submit="savePersonInfo"></subDialog> 
+			@submit="savePersonInfo"></subDialog>
+			
+		<subDialog 
+			title="紧急联系人"
+			:visible="subDialogConfig.jinji.visible" 
+			:formConfig="jinjiFormConfig"
+			:formData="jinjiFormData" 
+			@close="subDialogConfig.jinji.visible = false" 
+			@submit="savePersonInfo"></subDialog>
+		
+		<subDialog 
+			title="语言能力"
+			:visible="subDialogConfig.yuyan.visible" 
+			:formConfig="yuyanFormConfig"
+			:formData="yuyanFormData" 
+			@close="subDialogConfig.yuyan.visible = false" 
+			@submit="savePersonInfo"></subDialog>
 			
 	</div>
 </template>
@@ -219,8 +273,10 @@ export default {
 			zhichenFormData: '', //职称初始数据 
 			dangpaiFormData: '', //党派初始数据  
 			jiangliFormData: '', //奖励初始数据   
+			jinjiFormData: '', //紧急联系人初始数据 
+			yuyanFormData: '', //语言初始数据 
 			
-			assFormData: '', //考核记录初始数据   
+			
 			currentDialog: { //当前显示的子集弹窗相关数据
 				infoSetCode: '',  //弹窗类型
 				operate: '', //弹窗操作
@@ -238,6 +294,9 @@ export default {
 				jiangli: { infoSetCode: "hi_psndoc_enc", visible: false},
 				psnOrg: { infoSetCode: "hi_psnorg"},
 				ass: { infoSetCode: "hi_psndoc_ass"},
+				zhiye: { infoSetCode: "hi_psndoc_nationduty"},
+				jinji: { infoSetCode: "hi_psndoc_linkman", visible: false},
+				yuyan: { infoSetCode: "hi_psndoc_langability", visible: false}
 			}
 		}
 	},
@@ -290,6 +349,14 @@ export default {
 		
 		//考核记录
 		assTheadData(){ return this.getData("assTheadData"); }, //表头
+		//职业资格
+		zhiyeTheadData(){ return this.getData("zhiyeTheadData"); }, //表头
+		//紧急联系人
+		jinjiTheadData(){ return this.getData("jinjiTheadData"); }, //表头
+		jinjiFormConfig(){ return this.getData("jinjiFormConfig"); }, //表单
+		//语言能力
+		yuyanTheadData(){ return this.getData("yuyanTheadData"); }, //表头
+		yuyanFormConfig(){ return this.getData("yuyanFormConfig"); }, //表单
 	},  
 	components: {
 		baseInfo, //基本信息
@@ -318,7 +385,7 @@ export default {
 				"pk_psndoc":UserInfo.pk_psndoc,
 		    	"cuserid":UserInfo.cuserid,
 		    	"pk_group":UserInfo.pk_group,
-		    	"param.pk_org": UserInfo.pk_org,
+		    	"pk_org": UserInfo.pk_org,
 				"transType": "psnInfoSave",  
 				"infoSetCode": _code,
 				"jsonStr": JSON.stringify( _data ) 
@@ -364,6 +431,12 @@ export default {
 				break;
 				case 'hi_psndoc_enc':
 					this.subDialogConfig.jiangli.visible = false; 
+				break;
+				case 'hi_psndoc_linkman':
+					this.subDialogConfig.jinji.visible = false; 
+				break;
+				case 'hi_psndoc_langability':
+					this.subDialogConfig.yuyan.visible = false; 
 				break;
 				
 			};
@@ -584,6 +657,56 @@ export default {
 			}; 
 			this.setCurrentDialog( data );
 			this.subDialogConfig.jiangli.visible = true;  
+		},
+		//打开紧急弹窗
+		openjinjiDialog( data ){
+			
+			var initData = {
+				"linkman": "",
+				"relation": "",
+				"ismain": "",
+				"linkaddr": "",
+				"postalcode": "",
+				"officephone": "",
+				"homephone": "",
+				"mobile": "",
+				"fax": "",
+				"email": ""
+				
+			};
+			switch( data[0] ){
+				case "add":
+					this.jinjiFormData = initData;
+					break;
+				case 'edit': 
+					this.jinjiFormData = this.editFormData( initData,  data[2]); 
+					break;
+			}; 
+			this.setCurrentDialog( data );
+			this.subDialogConfig.jinji.visible = true;  
+		},
+		//打开语言弹窗
+		openyuyanDialog( data ){
+			
+			var initData = {
+				"langsort": "",
+				"langskill": "",
+				"langlev": "",
+				"certifname": "",
+				"certifcode": "",
+				"certifdate": "",	
+				"memo": ""
+			};
+			switch( data[0] ){
+				case "add":
+					this.yuyanFormData = initData;
+					break;
+				case 'edit': 
+					this.yuyanFormData = this.editFormData( initData,  data[2]); 
+					break;
+			}; 
+			this.setCurrentDialog( data );
+			this.subDialogConfig.yuyan.visible = true;  
 		},
 		
 		//编辑子集信息表单时候的数据补全

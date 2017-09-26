@@ -55,7 +55,7 @@ export function ajaxData( url, param, call ){
 					if( _status && _status == 500 ){
 						//alert( '网络错误' ); 
 					}else{
-						alert( _status ); 
+						//alert( _status ); 
 					};
 				}; 
 			}); 

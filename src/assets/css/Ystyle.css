@@ -536,6 +536,9 @@
 .y-dialog-border{
 	border-left: 1px dashed #999;
 }
+.y-dialog-border1{
+	border-left: none;
+}
 .y-btn-searchp {
 	background: #CC2123;
 	border: none;
