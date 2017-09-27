@@ -1,6 +1,6 @@
 <template>
 	<div class="y-dialog"> 
-		<el-dialog :title="title" :show-close="showClose" :visible="visible" class="y-info-dialog">    
+		<el-dialog :title="title" :show-close="showClose" :before-close="handleClose" :visible="visible" class="y-info-dialog">    
 		 	<el-form :model="formData" :rules="rules" ref="myForm" label-width="110px" class="clearfix"> 
 				<yInput v-for="(val,key) in formDataConfig"  
 					v-model="formData[key]" 
@@ -23,7 +23,7 @@ export default {
 	props: ["visible", "title", "formConfig", "formData"],  
 	data() {
 		return {   
-			showClose: false, //隐藏右上角关闭按钮     
+			showClose: true, //隐藏右上角关闭按钮     
 			changedReferKey: [], //缓存被修改的参照字段
 			rules: { },
 			formDataConfig: { },
@@ -88,6 +88,9 @@ export default {
 		//取消操作
 		cancel() {  
 	        this.$emit('close');
+	    },
+	    handleClose(){
+	    	this.$emit('close');
 	    },
 	    //重置表单
 	    resetForm(){

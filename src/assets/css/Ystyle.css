@@ -127,6 +127,10 @@
 	border-color: #CC2123;
   background: #CC2123;
 }
+.el-dialog__headerbtn .el-dialog__close {
+	color: #fff;
+	margin-top: 13px;
+}
 .y-dialog .el-radio__inner:hover,
 .y-dialog .el-checkbox__inner:hover{
 	border-color: #CC2123;
@@ -550,6 +554,9 @@
 .y-btn-searchp {
 	background: #CC2123;
 	border: none;
+}
+.y-btn-searchp:hover{
+	background: #E6282A;
 }
 .y-btn-searchb{
 	background: #999999;

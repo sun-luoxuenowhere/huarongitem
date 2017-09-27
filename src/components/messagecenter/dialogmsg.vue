@@ -83,7 +83,8 @@
 				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
 				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
 				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
-				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.billStatus=='-1'"  @click="beRead()">我知道了</el-button>
 				  	</div>
 				</div>
 				<div v-else-if="billType=='6117'">
@@ -128,7 +129,8 @@
 				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
 				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
 				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
-				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.billStatus=='-1'" @click="beRead()">我知道了</el-button>
 				  	</div>
 				</div>
 				<div v-else-if="billType=='6115'">
@@ -173,7 +175,8 @@
 				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
 				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
 				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
-				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.billStatus=='-1'" @click="beRead()">我知道了</el-button>
 				  	</div>
 				</div>
 				<div v-else-if="billType=='6113'">
@@ -218,7 +221,8 @@
 				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
 				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
 				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
-				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.billStatus=='-1'" @click="beRead()">我知道了</el-button>
 				  	</div>
 				</div>
 				<div v-else-if="billType=='6101'">
@@ -263,7 +267,8 @@
 				    	<el-button class="y-btn-searchb" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="reject()">驳回</el-button>
 				    	<el-button class="y-btn-searchp" type="danger" v-show="data.approveStatus!='0'&&data.billStatus!='-1'" @click="abandoned()">弃审</el-button>
 				    	<el-button class="y-btn-searchj" v-show="data.isaddsign=='true'&&data.billStatus!='-1'" type="danger" @click="sign()">加签</el-button>
-				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchj" type="danger" v-show="data.approveStatus=='0'&&data.billStatus!='-1'" @click="dialognone()">取消</el-button>
+				    	<el-button class="y-btn-searchp" type="danger" v-show="data.billStatus=='-1'" @click="beRead()">我知道了</el-button>
 				  	</div>
 				</div>
 				<div v-else>
@@ -314,7 +319,7 @@
 				
 				<div v-else-if="data.msgsourcetype=='pfbizmsg'||data.msgsourcetype=='worklist'">
 					<!--判断通知消息-->
-					<div v-if="data.billType=='6111'">
+					<div v-if="billType=='6111'">
 						<div class="y-dialog-body">
 							<el-row :gutter="20">
 							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
@@ -354,7 +359,7 @@
 					    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>
 					  	</div>
 					</div>
-					<div v-else-if="data.billType=='6117'">
+					<div v-else-if="billType=='6117'">
 						<div class="y-dialog-body">
 							<el-row :gutter="20">
 							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
@@ -394,7 +399,7 @@
 					    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>
 					  	</div>
 					</div>
-					<div v-else-if="data.billType=='6115'">
+					<div v-else-if="billType=='6115'">
 						<div class="y-dialog-body">
 							<el-row :gutter="20">
 							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
@@ -434,7 +439,7 @@
 					    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>
 					  	</div>
 					</div>
-					<div v-else-if="data.billType=='6113'">
+					<div v-else-if="billType=='6113'">
 						<div class="y-dialog-body">
 							<el-row :gutter="20">
 							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
@@ -474,7 +479,7 @@
 					    	<el-button class="y-btn-search" type="danger" @click="beRead">我知道了</el-button>
 					  	</div>
 					</div>
-					<div v-else-if="data.billType=='6101'">
+					<div v-else-if="billType=='6101'">
 						<div class="y-dialog-body">
 							<el-row :gutter="20">
 							  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>

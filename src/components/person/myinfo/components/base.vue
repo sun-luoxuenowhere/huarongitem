@@ -4,7 +4,7 @@
 		<div class="y-module y-module-baseinfo clearfix">
 			<!-- 按钮操作区域 begin -->
 			<div class="y-operate">
-				<i @click="showBtnsBase1" v-show="!btnsBase1" class="iconfont icon-bianji y-text-bianji"></i>
+				<i @click="showBtnsBase1" v-show="!btnsBase1" class="iconfont icon-ai-edit y-text-bianji"></i>
 				<yFormBtns v-show="btnsBase1" 
 					:status="status" 
 					@save="saveBase"
@@ -62,7 +62,7 @@
 		<div class="y-module y-module-baseinfo2" data-scroll="jibenxinxi">
 			<div class="y-title">
 				<div class="y-operate">
-					<i @click="showBtnsBase2" v-show="!btnsBase2" class="iconfont icon-bianji y-text-bianji"></i>
+					<i @click="showBtnsBase2" v-show="!btnsBase2" class="iconfont icon-ai-edit y-text-bianji"></i>
 					<yFormBtns v-show="btnsBase2" 
 						:status="status" 
 						@save="saveBase"
