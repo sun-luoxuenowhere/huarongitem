@@ -43,6 +43,10 @@ export const validForm = {
     },
     //传真
     cz: (rule, value, callback) => {   
+    	if( !rule.required ){
+    		callback();
+    		return;
+    	}; 
         if( !validForm.pattresult["cz"].test(value) ){
             callback(new Error('请输入正确的传真号'));
         }else{
