@@ -12,7 +12,7 @@
 				<template v-for="item in theaddata">
 					<el-table-column  v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text">
 						<template scope="scope">
-					        <span :title="scope.row[item.param]">{{scope.row[item.param]}}</span>
+					        <span :title="scope.row[item.param]">{{scope.row[item.param] | YNChinese}}</span>
 					    </template>
 					</el-table-column>
 					<el-table-column   v-else-if="!item.required" :prop="item.param[0]" :label="item.text">
@@ -22,7 +22,7 @@
 					</el-table-column>
 					<el-table-column  v-else-if="item.required && typeof item.param == 'string'" :render-header="requiredCol" :prop="item.param" :label="item.text">
 						<template scope="scope">
-					        <span :title="scope.row[item.param]">{{scope.row[item.param]}}</span>
+					        <span :title="scope.row[item.param]">{{scope.row[item.param] | YNChinese}}</span>
 					    </template>
 					</el-table-column>
 					<el-table-column  v-else :render-header="requiredCol" :prop="item.param[0]" :label="item.text">
@@ -78,6 +78,18 @@ export default {
 	created(){
 		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
 		this.loadData();
+	},
+	filters: {
+		YNChinese: function( val ){
+			var _val = val;
+			if( _val == "Y"){
+				_val = "是";
+			};
+			if( _val == "N"){
+				_val = "否";
+			};
+			return _val;
+		}
 	},
 	methods: {  
 		//动态加载数据
