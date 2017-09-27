@@ -41,7 +41,7 @@
 		<!--待办消息弹框-->
 		<div v-else-if="judgedialog=='handle'">
 			<el-dialog :title="title"  :show-close="false" :visible="dialogvisible" size="tiny">
-				<div v-if="data.billType=='6111'">
+				<div v-if="billType=='6111'">
 					<div class="y-dialog-body">
 						<el-row :gutter="20">
 						  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
@@ -86,7 +86,7 @@
 				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
-				<div v-else-if="data.billType=='6117'">
+				<div v-else-if="billType=='6117'">
 					<div class="y-dialog-body">
 						<el-row :gutter="20">
 						  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
@@ -131,7 +131,7 @@
 				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
-				<div v-else-if="data.billType=='6115'">
+				<div v-else-if="billType=='6115'">
 					<div class="y-dialog-body">
 						<el-row :gutter="20">
 						  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
@@ -176,7 +176,7 @@
 				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
-				<div v-else-if="data.billType=='6113'">
+				<div v-else-if="billType=='6113'">
 					<div class="y-dialog-body">
 						<el-row :gutter="20">
 						  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
@@ -221,7 +221,7 @@
 				    	<el-button class="y-btn-searchj" type="danger" @click="dialognone()">取消</el-button>
 				  	</div>
 				</div>
-				<div v-else-if="data.billType=='6101'">
+				<div v-else-if="billType=='6101'">
 					<div class="y-dialog-body">
 						<el-row :gutter="20">
 						  <el-col :span="8"  v-for="(val,key) in newDatalist"><span class="y-dialog-line">{{val}}</span>：<span class="y-dialog-line">{{data.Datalist[key]}}</span></el-col>
@@ -613,6 +613,13 @@ export default {
 				return this.titleObj['worklist'];
 			}
 		},
+		billType(){
+			if(this.data==''){
+				return '';
+			}else{
+				return this.data.billType.slice(0,4);
+			}
+		},
 		newDatalist(){
 			
 			if(this.data==''){
@@ -622,21 +629,25 @@ export default {
 //				console.log(diaoborder)
 				
 				var objdata="";
-//				console.log(this.data)
+				//console.log(this.data)
 				//处理弹框为显示的字段
-				if(this.data.billType=="6101"){//入职申请
+				
+				var billType=this.data.billType.slice(0,4);
+				
+				
+				if(billType=="6101"){//入职申请
 					objdata=this.$store.state.Msgdata.entryrequest;
 					return objdata;
-				}else if(this.data.billType=="6111"){//转正申请
+				}else if(billType=="6111"){//转正申请
 					objdata=this.$store.state.Msgdata.becomerequest;
 					return objdata;
-				}else if(this.data.billType=="6113"){//调配申请
+				}else if(billType=="6113"){//调配申请
 					objdata=this.$store.state.Msgdata.tunerequest;
 					return objdata;
-				}else if(this.data.billType=="6117"){//兼职申请
+				}else if(billType=="6117"){//兼职申请
 					objdata=this.$store.state.Msgdata.partjobrequest;
 					return objdata;
-				}else if(this.data.billType=="6115"){//离职申请
+				}else if(billType=="6115"){//离职申请
 					objdata=this.$store.state.Msgdata.leaverequest;
 					return objdata;
 				}

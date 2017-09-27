@@ -32,7 +32,6 @@ module.exports = {
       		target: 'http://10.4.120.29:80', //zyl
     		//target: 'http://10.4.120.26:80', //lzw
     		//target: 'http://125.35.5.243:6007', //服务器
-//    	target: 'http://10.15.0.216:6007', //服务器
         changeOrigin:true 
     	} 
     },
