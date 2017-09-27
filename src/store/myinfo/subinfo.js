@@ -4,7 +4,7 @@ export default {
     state: {
     	baseInfo: [], //基本信息 
     	//工作记录表头
-    	workTheadData: [{ param: ['begindate','enddate'], text: '发送时间' },
+    	workTheadData: [{ param: ['begindate','enddate'], text: '起止时间' },
     		{ param: 'jobglbdef2', text: '任职终止日期' },
 	    	{ param: 'org_name', text: '组织' },
 	    	{ param: 'dept_name', text: '部门' },
