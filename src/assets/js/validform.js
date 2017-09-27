@@ -1,15 +1,22 @@
 export const validForm = { 
 	//手机号
 	phone: (rule, value, callback) => { 
-		
+		if( !rule.required) {
+			callback();
+			return;
+		}
         if( !validForm.pattresult["phone"].test(value) ){
             callback(new Error('请输入有效的手机号码'));
         }else{
             callback();
         };
     },
-    //手机号
+    //电话号码
 	tel: (rule, value, callback) => {   
+		if( !rule.required) {
+			callback();
+			return;
+		}
         if( !validForm.pattresult["tel"].test(value) ){
             callback(new Error('请输入有效的电话号码'));
         }else{
@@ -18,7 +25,10 @@ export const validForm = {
     },
     //邮箱
     email: (rule, value, callback) => { 
-    	
+    	if( !rule.required) {
+			callback();
+			return;
+		}
         if( !validForm.pattresult["email"].test(value) ){
             callback(new Error('请输入正确的邮箱'));
         }else{
@@ -27,6 +37,10 @@ export const validForm = {
     },
     //汉字
     chinese: (rule, value, callback) => {   
+    	if( !rule.required) {
+			callback();
+			return;
+		}
         if( !validForm.pattresult["chinese"].test(value) ){
             callback(new Error('只能输入汉字'));
         }else{
@@ -34,21 +48,13 @@ export const validForm = {
         };
     }, 
     //数字
-    num: (rule, value, callback) => {   
+    num: (rule, value, callback) => {  
+    	if( !rule.required) {
+			callback();
+			return;
+		}
         if( !validForm.pattresult["num"].test(value) ){
-            callback(new Error('只能输入汉字'));
-        }else{
-            callback();
-        };
-    },
-    //传真
-    cz: (rule, value, callback) => {   
-    	if( !rule.required ){
-    		callback();
-    		return;
-    	}; 
-        if( !validForm.pattresult["cz"].test(value) ){
-            callback(new Error('请输入正确的传真号'));
+            callback(new Error('只能输入数字'));
         }else{
             callback();
         };
@@ -56,7 +62,6 @@ export const validForm = {
     
     //年月日 yyyy-mm-dd格式 
     ymd: (rule, value, callback) => {  
-    	console.log(rule)
     	if( rule.type == typeof value ){ 
     		if( rule.required ){ //是必输的
     			if( !validForm.pattresult["ymd"].test(value) ){  
@@ -72,7 +77,11 @@ export const validForm = {
     	}; 
     }, 
     //证件号：只能输数字和字母
-    cardno: (rule, value, callback) => {  
+    cardno: (rule, value, callback) => { 
+    	if( !rule.required) {
+			callback();
+			return;
+		}
     	if( !validForm.pattresult["cardno"].test(value) ){  
             callback(new Error('请输入有效的证件号'));
         }else{
@@ -86,7 +95,6 @@ export const validForm = {
         "tel": /^([0-9]{3,4}-)?[0-9]{7,8}$/,
         "ymd": /^\d{4}\-\d{2}\-\d{2}$/,
         "cardno":  /^[0-9a-zA-Z]*$/,
-        "num":/^[0-9]*$ /,
-        "cz":/^(\d{3,4}-)?\d{7,8}$/
+        "num":/^[0-9]*$/
     }
 };

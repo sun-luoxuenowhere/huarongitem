@@ -147,8 +147,6 @@ export default {
 	    	{ param: 'encourorg', text: '奖励机构', required: true },
 	    	{ param: 'encourmatter', text: '奖励事由', required: true },
 	    	{ param: 'encourmeas', text: '奖励措施', required: true }],
-	    
-	    
 	    	
 	    //华融人员组织关系表头
 	    psnOrgTheadData: [
@@ -193,6 +191,9 @@ export default {
 		    { param: 'certifcode', text: '证书编号' },
 		    { param: 'certifdate', text: '获证日期' },
 		    { param: 'memo', text: '备注' }],
+		    
+		    
+		//--------以下是弹框卡片--------    
 	    //履历表单配置
 	    jobFormConfig: [{ "id": "begindate", "text": "开始日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }]},
 	    	{ "id": "enddate", "text": "结束日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }]},
@@ -306,7 +307,7 @@ export default {
 	    	{ "id": "partypsn", "text": "介绍人" },
 	    	{ id: 'exreason', text: '异常原因' },
 		    { id: 'exsort', text: '异常类别',"type": "refer", "typedata": [{"code": "HR013_0xx"}]},
-		    { id: 'glbdef4', text: '党龄' },
+		    { id: 'glbdef4', text: '党龄', "valid": [{ required: false,validator: validForm.num, trigger: 'change' }]},
 		    { id: 'glbdef1', text: '介绍人1' },
 		    { id: 'glbdef2', text: '介绍人2' },
 		    { id: 'glbdef3', text: '介绍人3' }],
@@ -327,7 +328,7 @@ export default {
 		    { id: 'officephone', text: '办公电话',"valid": [{required: false,validator: validForm.tel, trigger: 'change' }] },
 		    { id: 'homephone', text: '家庭电话',"valid": [{required: false, validator: validForm.tel, trigger: 'change' }] },
 		    { id: 'mobile', text: '手机',"valid": [{ required: false,validator: validForm.phone,trigger: 'change' }]},
-		    { id: 'fax', text: '传真',"valid": [{ required: false,validator: validForm.cz, trigger: 'change' }] },
+		    { id: 'fax', text: '传真',"valid": [{ required: false,validator: validForm.tel, trigger: 'change' }] },
 		    { id: 'email', text: '电子邮件',"valid": [{ required: false,validator: validForm.email, trigger: 'change' }] }],
 	    //语言能力表单配置
 	    yuyanFormConfig: [
