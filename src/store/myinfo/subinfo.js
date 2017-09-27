@@ -4,7 +4,7 @@ export default {
     state: {
     	baseInfo: [], //基本信息 
     	//工作记录表头
-    	workTheadData: [{ param: ['begindate','enddate'], text: '发送时间' },
+    	workTheadData: [{ param: ['begindate','enddate'], text: '起止时间' },
     		{ param: 'jobglbdef2', text: '任职终止日期' },
 	    	{ param: 'org_name', text: '组织' },
 	    	{ param: 'dept_name', text: '部门' },
@@ -29,8 +29,8 @@ export default {
 	    //履历记录表头
 	    jobTheadData: [{ param: ['begindate','enddate'], text: '起止时间', required: true },
 	    	{ param: 'workcorp', text: '工作单位', required: true },
-	    	{ param: 'workdept', text: '部门' },
-	    	{ param: 'workpost', text: '岗位' },
+	    	{ param: 'workdept', text: '部门', required: true },
+	    	{ param: 'workpost', text: '岗位' , required: true},
 	    	{ param: 'workjob', text: '职务' },
 	    	{ param: 'workduty', text: '主要职责' },
 	    	{ param: 'glbdef2', text: '是否兼职' },
@@ -43,8 +43,8 @@ export default {
 	    	{ param: 'certiphone', text: '证明人电话' },
 	    	{ param: 'memo', text: '备注' }], 
 	    //身份证表头
-	    psncertTheadData: [{ param: 'idtype', text: '证件类型' },
-	    	{ param: 'id', text: '证件号码' },
+	    psncertTheadData: [{ param: 'idtype', text: '证件类型', required: true},
+	    	{ param: 'id', text: '证件号码', required: true },
 	    	{ param: 'begindate', text: '发证日期' },
 	    	{ param: 'enddate', text: '有效期限' },
 	    	{ param: 'extend_org', text: '发证机构' },
@@ -53,8 +53,8 @@ export default {
 		    { param: "memo", "text": "说明" }],
 	    //家庭信息表头
 	    jiatingTheadData: [
-	    	{ param: 'mem_relation', text: '与本人关系' },
-	    	{ param: 'mem_name', text: '家庭成员姓名' },
+	    	{ param: 'mem_relation', text: '与本人关系' ,required: true},
+	    	{ param: 'mem_name', text: '家庭成员姓名' ,required: true},
 	    	{ param: 'mem_birthday', text: '出生日期' },
 	    	{ param: 'mem_corp', text: '工作单位' },
 	    	{ param: 'glbdef1', text: '称谓' },
@@ -147,8 +147,6 @@ export default {
 	    	{ param: 'encourorg', text: '奖励机构', required: true },
 	    	{ param: 'encourmatter', text: '奖励事由', required: true },
 	    	{ param: 'encourmeas', text: '奖励措施', required: true }],
-	    
-	    
 	    	
 	    //华融人员组织关系表头
 	    psnOrgTheadData: [
@@ -193,6 +191,9 @@ export default {
 		    { param: 'certifcode', text: '证书编号' },
 		    { param: 'certifdate', text: '获证日期' },
 		    { param: 'memo', text: '备注' }],
+		    
+		    
+		//--------以下是弹框卡片--------    
 	    //履历表单配置
 	    jobFormConfig: [{ "id": "begindate", "text": "开始日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }]},
 	    	{ "id": "enddate", "text": "结束日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }]},
@@ -300,13 +301,13 @@ export default {
 	    dangpaiFormConfig: [{ "id": "begindate", "text": "开始时间", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }] },
 	    	{ "id": "enddate", "text": "结束时间", "type": "date", "valid": [{ validator: validForm.ymd, trigger: 'blur' }] },
 	    	{ "id": "partydate", "text": "参加时间", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }] },
-	    	{ "id": "partyduedate", "text": "转正时间", "type": "date", "valid": [{ validator: validForm.ymd, trigger: 'blur' }]},
+	    	{ "id": "partyduedate", "text": "转正时间", "type": "date", "valid": [{required: true, validator: validForm.ymd, trigger: 'blur' }]},
 	    	{ "id": "partyname", "text": "政治面貌及党籍情况", "type": "refer", "typedata": [{"code": "HR011_0xx"}], "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
-	    	{ "id": "partyunit", "text": "参加党派时所在单位" },
-	    	{ "id": "partypsn", "text": "介绍人" },
+	    	{ "id": "partyunit", "text": "参加党派时所在单位", "valid": { required: true} },
+	    	{ "id": "partypsn", "text": "介绍人","valid": { required: true}},
 	    	{ id: 'exreason', text: '异常原因' },
 		    { id: 'exsort', text: '异常类别',"type": "refer", "typedata": [{"code": "HR013_0xx"}]},
-		    { id: 'glbdef4', text: '党龄' },
+		    { id: 'glbdef4', text: '党龄', "valid": [{ required: false,validator: validForm.num, trigger: 'change' }]},
 		    { id: 'glbdef1', text: '介绍人1' },
 		    { id: 'glbdef2', text: '介绍人2' },
 		    { id: 'glbdef3', text: '介绍人3' }],
@@ -327,7 +328,7 @@ export default {
 		    { id: 'officephone', text: '办公电话',"valid": [{required: false,validator: validForm.tel, trigger: 'change' }] },
 		    { id: 'homephone', text: '家庭电话',"valid": [{required: false, validator: validForm.tel, trigger: 'change' }] },
 		    { id: 'mobile', text: '手机',"valid": [{ required: false,validator: validForm.phone,trigger: 'change' }]},
-		    { id: 'fax', text: '传真',"valid": [{ required: false,validator: validForm.cz, trigger: 'change' }] },
+		    { id: 'fax', text: '传真',"valid": [{ required: false,validator: validForm.tel, trigger: 'change' }] },
 		    { id: 'email', text: '电子邮件',"valid": [{ required: false,validator: validForm.email, trigger: 'change' }] }],
 	    //语言能力表单配置
 	    yuyanFormConfig: [
@@ -339,11 +340,13 @@ export default {
 		    { id: 'certifdate', text: '获证日期',"type": "date" },
 		    { id: 'memo', text: '备注' }]
     },
+    
     mutations: { 
         SET_BASE_INFO( state, { list } ){
         	state.baseInfo = list;
         } 
     },
+    
     actions: {
     	//请求基本信息数据
     	loadbaseinfo({commit}, url) { 

@@ -23,7 +23,7 @@ export default {
     		"fileaddress": '',
     		"censusaddr": '',
     		"addr": '',
-    		"addr_show": "",
+    		"addr_show": '',
     		"marriagedate": '',
     		"glbdef14": '',
     		"glbdef3": '',
@@ -32,6 +32,7 @@ export default {
     		"usedname": '',
     		"penelauth": ''
     	},
+    	
     	//基本信息[头像区域] 
     	baseInfo1: [{ "id": "photo", "text": "头像", "disabled": true },
 			{ "id": "name", "text": "姓名", "disabled": true },
@@ -41,10 +42,11 @@ export default {
 			//{ "id": "jobname", "text": "职务", "disabled": true },
 			//{ "id": "code", "text": "人员编码", "disabled": true },
 			//{ "id": "postname", "text": "岗位", "disabled": true },
-			{ "id": "officephone", "text": "电话", /*"valid": [{ validator: validForm.tel, required: true, trigger: 'change' }]*/ },
-			{ "id": "mobile", "text": "手机", /*"valid": [{ validator: validForm.phone, required: true, trigger: 'change' }]*/ },
+			{ "id": "officephone", "text": "电话", "valid": [{ validator: validForm.tel, required: true, trigger: 'change' }] },
+			{ "id": "mobile", "text": "手机", "valid": [{ validator: validForm.phone, required: true, trigger: 'change' }] },
 			//{ "id": "email", "text": "邮箱", /*"valid": [{ validator: validForm.email, required: true, trigger: 'change' }] */}
 			],
+			
 		//基本信息[头像下方区域] 
     	baseInfo2: [{ "id": "nationality", "text": "民族", "type": "refer", "typedata": [{"code": "HR002_0xx"}], /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/},
 			{ "id": "birthdate", "text": "出生日期(身份证)", "type": "date", /*"valid": [{ required: true, message: '不能为空', trigger: 'change' }]*/ },

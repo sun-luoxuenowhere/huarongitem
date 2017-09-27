@@ -11,7 +11,7 @@
 			</el-form>
 			<div class="y-btn-box">
 				<el-button class="y-btn-danger" type="danger" @click="submitForm()">保存</el-button>
-	  			<el-button class="y-btn-default" @click="cancle()">取消</el-button> 
+	  			<el-button class="y-btn-default" @click="cancel()">取消</el-button> 
   			</div>
 		</el-dialog>
 	</div>
@@ -55,8 +55,9 @@ export default {
 						this.$emit('submit', _postdata );  
 						this.resetForm();
 					}else{
-//						alert('没有修改');
-						return false;
+//						alert('没有任何修改，请取消返回');
+						// Edit By zhangyl5 保存时，若无修改信息，关闭弹框 2017-09-27
+						this.cancel();
 					}; 
 				} else {
 					return false;
@@ -85,7 +86,7 @@ export default {
 			return _postdata; 
 		},
 		//取消操作
-		cancle() {  
+		cancel() {  
 	        this.$emit('close');
 	    },
 	    handleClose(){
