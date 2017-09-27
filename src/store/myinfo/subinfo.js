@@ -340,11 +340,13 @@ export default {
 		    { id: 'certifdate', text: '获证日期',"type": "date" },
 		    { id: 'memo', text: '备注' }]
     },
+    
     mutations: { 
         SET_BASE_INFO( state, { list } ){
         	state.baseInfo = list;
         } 
     },
+    
     actions: {
     	//请求基本信息数据
     	loadbaseinfo({commit}, url) { 
