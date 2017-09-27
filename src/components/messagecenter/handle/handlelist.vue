@@ -12,7 +12,7 @@
 		<!-- y-inner begin -->
 		<div class="y-inner">
 			<div class="y-maintitle">
-				待办消息
+				工作任务
 			</div>
 			<!-- y-search-form begin -->
 			<el-form :inline="true" :model="searchform" class="demo-form-inline y-search-form">

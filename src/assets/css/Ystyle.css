@@ -48,6 +48,14 @@
 	display: inline-block;
     margin-top: 15px;
 }
+/*ie浏览器下解决兼容问题begin*/
+.y-baseinfo-form .el-input, .y-baseinfo-form  .el-input__inner {
+	float: left;
+}
+.y-baseinfo-form  .el-select>.el-input {
+	display: inline-block;
+}
+/*ie浏览器下解决兼容问题end*/
 @keyframes zoomIn{
 	from {
 		transform:scale(1,1);

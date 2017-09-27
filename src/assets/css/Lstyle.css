@@ -77,12 +77,11 @@ header {
 }
 
 .headerdesgiter {
-	margin-right: 50px;
+	margin-right: 2px;
 	float: right;
 }
 .headerdesgiter .el-input {
 	top: 17px;
-
 }
 .headerdesgiter .el-input__inner {
 	height: 30px;

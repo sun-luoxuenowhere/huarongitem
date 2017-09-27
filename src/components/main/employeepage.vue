@@ -27,7 +27,7 @@
 			  <el-col :span="6" class="L-mainmangestyle">
 			  	<div @click="temporary()">
 				  	<div class="circle L-blue"><i class="iconfont iconfontsize icon-guoqi_flag"></i></div>
-				  	<div id="fontstyle">绩效测评</div>
+				  	<div id="fontstyle">考核测评</div>
 			  	</div>
 			  </el-col>
 

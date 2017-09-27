@@ -17,7 +17,7 @@
 					</el-table-column>
 					<el-table-column   v-else-if="!item.required" :prop="item.param[0]" :label="item.text">
 						<template scope="scope">
-					        {{scope.row[item.param[0]]}}-{{scope.row[item.param[1]]}}
+					        {{scope.row[item.param[0]]}}~{{scope.row[item.param[1]]}}
 					    </template>
 					</el-table-column>
 					<el-table-column  v-else-if="item.required && typeof item.param == 'string'" :render-header="requiredCol" :prop="item.param" :label="item.text">
@@ -27,7 +27,7 @@
 					</el-table-column>
 					<el-table-column  v-else :render-header="requiredCol" :prop="item.param[0]" :label="item.text">
 						<template scope="scope">
-					        {{scope.row[item.param[0]]}}-{{scope.row[item.param[1]]}}
+					        {{scope.row[item.param[0]]}}~{{scope.row[item.param[1]]}}
 					    </template>
 					</el-table-column>
 				</template> 

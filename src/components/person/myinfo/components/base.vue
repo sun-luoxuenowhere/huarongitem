@@ -24,7 +24,8 @@
 						</el-col>
 						<el-col v-else :xs="24" :sm="12" :md="12" :lg="12" >
 							<div class="y-box-base y-box-photo" v-if="val.id == 'photo'">
-								<img :src="'data:image/png;base64,' + formData[key]" />
+								<img class="dialogimg" v-if="!formData[key]" :src="Img"/>
+						  		<img v-else :src="'data:image/png;base64,'+formData[key]"/>
 							</div> 
 							<yInput v-else :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" v-model="formData[key]" :inputData="formDataConfig1[key]" :initVal="formData[key]"></yInput>
 						</el-col>	
@@ -43,7 +44,8 @@
 						</el-col>
 						<el-col v-else :xs="24" :sm="12" :md="12" :lg="12">
 							<div class="y-box-base y-box-photo" v-if="val.id == 'photo'">
-								<img :src="'data:image/png;base64,' + formData[key]" />
+								<img class="dialogimg" v-if="!formData[key]" :src="Img"/>
+						  		<img v-else :src="'data:image/png;base64,'+formData[key]"/>
 							</div> 
 							<el-form-item :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" v-else :label="val.text"> 
 								<el-input v-model="formDataConfig1[key].typedata[0][formData[key]]" v-if="formDataConfig1[key].type == 'radio'" :disabled="true"> </el-input>
@@ -98,6 +100,7 @@
 	import photoSrc from '../../../../assets/img/user.png';
 	import yInput from '@/components/public/yinput';
 	import yFormBtns from '@/components/public/yformbtns';
+	import Image from '@/assets/img/peple.png';
 	var UserInfo;
 	export default {
 		props: ['editabled'],
@@ -121,7 +124,8 @@
 					'officephone': 'icon-dianhua1',
 					'mobile': 'icon-dianhua',
 					'email': 'icon-youjian'
-				}
+				},
+				Img:Image
 			}
 		}, 
 		components: {

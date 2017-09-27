@@ -1,6 +1,7 @@
 export const validForm = { 
 	//手机号
-	phone: (rule, value, callback) => {   
+	phone: (rule, value, callback) => { 
+		
         if( !validForm.pattresult["phone"].test(value) ){
             callback(new Error('请输入有效的手机号码'));
         }else{
@@ -16,7 +17,8 @@ export const validForm = {
         };
     },
     //邮箱
-    email: (rule, value, callback) => {   
+    email: (rule, value, callback) => { 
+    	
         if( !validForm.pattresult["email"].test(value) ){
             callback(new Error('请输入正确的邮箱'));
         }else{
@@ -50,6 +52,7 @@ export const validForm = {
     
     //年月日 yyyy-mm-dd格式 
     ymd: (rule, value, callback) => {  
+    	console.log(rule)
     	if( rule.type == typeof value ){ 
     		if( rule.required ){ //是必输的
     			if( !validForm.pattresult["ymd"].test(value) ){  
