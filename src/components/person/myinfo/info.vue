@@ -517,6 +517,9 @@ export default {
 				"glbdef1": "",}; 
 			switch( data[0] ){
 				case "add": 
+					initData.lasteducation = 'N';
+					initData.glbdef5 = 'N';
+					initData.glbdef1 = 'N';
 					this.xueliFormData = initData;
 					break;
 				case 'edit': 
