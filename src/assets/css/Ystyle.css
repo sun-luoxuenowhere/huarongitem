@@ -122,21 +122,21 @@
 .y-search-form .el-input__inner{
 	border-color: #ccc;
 } 
-.y-radio .el-radio__input.is-checked .el-radio__inner,
-.y-checkbox .el-checkbox__input.is-checked .el-checkbox__inner{
+.y-dialog .el-radio__input.is-checked .el-radio__inner,
+.y-dialog .el-checkbox__input.is-checked .el-checkbox__inner{
 	border-color: #CC2123;
   background: #CC2123;
 }
-.y-radio .el-radio__inner:hover,
-.y-checkbox .el-checkbox__inner:hover{
+.y-dialog .el-radio__inner:hover,
+.y-dialog .el-checkbox__inner:hover{
 	border-color: #CC2123;
 } 
 .y-option.selected,
 .y-option.selected.hover{
-	background-color: #cc2123;
+	background-color: #CC2123;
 }
-.y-select .el-input__inner:focus{
-	border-color: #cc2123;
+.y-dialog .el-input__inner:focus{
+	border-color: #CC2123;
 } 
 .y-btn-primary{
 	background-color: #0074B0;
@@ -189,7 +189,7 @@
 	right: 20px;
 	width: 140px;
 	background: #fff;
-	font-size: 16px;
+	font-size: 14px;
 }
 .y-userinfo .y-menu ul{
 	padding: 10px 0 10px 15px; 
