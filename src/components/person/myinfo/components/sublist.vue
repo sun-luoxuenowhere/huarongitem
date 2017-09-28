@@ -9,29 +9,52 @@
 		</div>
 		<div class="y-content">
 			<el-table class="y-table y-table-baseinfo" :data="tempData" style="width: 100%">
-				<template v-for="item in theaddata">
+				
+				<el-table-column type='expand'>
+					<template scope="props">
+						<el-form label-position="left" inline>
+							<template  v-for="item in theaddata">
+								<el-form-item  v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text+':'">
+								        <span :title="props.row[item.param]">{{props.row[item.param] | YNChinese}}</span>
+								</el-form-item>
+								<el-form-item   v-else-if="!item.required" :prop="item.param[0]" :label="item.text">
+								        {{props.row[item.param[0]]}}~{{props.row[item.param[1]]}}
+								</el-form-item>
+								<el-form-item  v-else-if="item.required && typeof item.param == 'string'" :render-header="requiredCol" :prop="item.param" :label="item.text+':'">
+								        <span :title="props.row[item.param]">{{props.row[item.param] | YNChinese}}</span>
+								</el-form-item>
+								<el-form-item  v-else :render-header="requiredCol" :prop="item.param[0]" :label="item.text+':'">
+								        {{props.row[item.param[0]]}}~{{props.row[item.param[1]]}}
+								</el-form-item>
+							</template>
+						</el-form>
+					</template>
+				</el-table-column> 
+
+				<template  v-for="item in theaddata.slice(0,5)">
 					<el-table-column  v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text">
-						<template scope="scope">
-					        <span :title="scope.row[item.param]">{{scope.row[item.param] | YNChinese}}</span>
-					    </template>
+					        <template scope="scope">
+					        	<span :title="scope.row[item.param]">{{scope.row[item.param] | YNChinese}}</span>
+					        </template>	
 					</el-table-column>
 					<el-table-column   v-else-if="!item.required" :prop="item.param[0]" :label="item.text">
 						<template scope="scope">
 					        {{scope.row[item.param[0]]}}~{{scope.row[item.param[1]]}}
-					    </template>
+					    </template>	
 					</el-table-column>
 					<el-table-column  v-else-if="item.required && typeof item.param == 'string'" :render-header="requiredCol" :prop="item.param" :label="item.text">
-						<template scope="scope">
+					    <template scope="scope">   
 					        <span :title="scope.row[item.param]">{{scope.row[item.param] | YNChinese}}</span>
-					    </template>
+					    </template>	
 					</el-table-column>
 					<el-table-column  v-else :render-header="requiredCol" :prop="item.param[0]" :label="item.text">
-						<template scope="scope">
+					    <template scope="scope">   
 					        {{scope.row[item.param[0]]}}~{{scope.row[item.param[1]]}}
-					    </template>
+					    </template>   
 					</el-table-column>
-				</template> 
-				<el-table-column v-if="editabled && ( status == -1 || status == 0 || status == 2)" fixed="right" label="操作"  width="100">
+				</template>
+
+				<el-table-column v-if="editabled && ( status == -1 || status == 0 || status == 2)"  label="操作"  width="100">
 					<template scope="scope">   
 						<i style="color: #50CC7A;" class="iconfont icon-bianji1"  
 						@click="editRow(scope.$index, scope.row)"></i>  
@@ -73,11 +96,13 @@ export default {
 	    // 如果 listdata 发生改变，这个函数就会运行
 	    listdata: function ( data ) { 
 	    	this.tempData = deepCopyArry( data );
+	    	console.log(this.tempData)
 	    }
 	},
 	created(){
 		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
 		this.loadData();
+		
 	},
 	filters: {
 		YNChinese: function( val ){
