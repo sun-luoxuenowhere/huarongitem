@@ -36,10 +36,12 @@
 				<!-- 视图区域 begin -->
 				<el-row v-show="!editBase1" :gutter="5">
 					<template v-for="(val,key) in formDataConfig1"> 
-						<el-col v-if="iconForm.indexOf(val.id) > -1" :xs="24" :sm="12" :md="8" :lg="8"> 
-							<div class="y-icon-item">
-								<i class="iconfont" :class="iconCls[val.id]"></i>
-								<el-input v-model="formData[key]" :title="formData[key]" :disabled="true"> </el-input>
+						<el-col v-if="iconForm.indexOf(val.id) > -1" :xs="24" :sm="12" :md="12" :lg="12"> 
+							<div class="y-baseinfo-tel">
+								<div class="y-icon-item">
+									<i class="iconfont" :class="iconCls[val.id]"></i>
+									<el-input v-model="formData[key]" :title="formData[key]" :disabled="true"> </el-input>
+								</div>
 							</div> 
 						</el-col>
 						<el-col v-else :xs="24" :sm="12" :md="12" :lg="12">
@@ -61,19 +63,19 @@
 		<!-- 基本信息表单 [头像下方区域]-->
 		<div class="y-module y-module-baseinfo2" data-scroll="jibenxinxi">
 			<div class="y-title">
-				<div class="y-operate">
+				<!--<div class="y-operate">
 					<i @click="showBtnsBase2" v-show="!btnsBase2" class="iconfont icon-ai-edit y-text-bianji"></i>
 					<yFormBtns v-show="btnsBase2" 
 						:status="status" 
 						@save="saveBase"
 						@cancle="cancleBase2"
 						@handle="handleBase"></yFormBtns>
-				</div>
+				</div>-->
 				基本信息
 			</div>
 			<div class="y-content">
-				<el-row v-show="editBase2" :gutter="5">
-					<el-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(val,key) in formDataConfig2">
+				<el-row v-show="editBase1" :gutter="5">
+					<el-col :xs="24" :sm="12" :md="12" :lg="12" v-for="(val,key) in formDataConfig2">
 						<yInput  v-model="formData[key]" 
 							:class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" 
 							:name="key"
@@ -81,8 +83,8 @@
 							:inputData="formDataConfig2[key]" ></yInput>
 					</el-col>
 				</el-row>
-				<el-row v-show="!editBase2" :gutter="5">
-					<el-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(val,key) in formDataConfig2">
+				<el-row v-show="!editBase1" :gutter="5">
+					<el-col :xs="24" :sm="12" :md="12" :lg="12" v-for="(val,key) in formDataConfig2">
 						<el-form-item :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" :label="val.text">
 							<el-input v-model="formDataConfig2[key].typedata[0][formData[key]]" v-if="formDataConfig2[key].type == 'radio'" :disabled="true"> </el-input>
 							<el-input v-model="formData[key]" :title="formData[key]" v-else :disabled="true"> </el-input> 

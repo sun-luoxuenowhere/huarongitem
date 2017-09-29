@@ -50,8 +50,11 @@
 }
 /*ie浏览器下解决兼容问题begin*/
 .y-baseinfo-form .el-input, .y-baseinfo-form  .el-input__inner {
+	width: 200px;
+	height: 36px;
 	float: left;
 }
+
 .y-baseinfo-form  .el-select>.el-input {
 	display: inline-block;
 }
@@ -276,7 +279,9 @@
 .y-baseinfo-form .y-input .el-select,
 .y-baseinfo-form .y-input .el-cascader,
 .y-baseinfo-form .y-input .el-date-editor.el-input{
-	width: 100%;
+	
+	width: 200px;
+	height: 36px;
 }
 .y-baseinfo-form .y-input .el-input.is-disabled .el-input__inner,
 .y-baseinfo-form .y-input .el-input.is-disabled .el-input__inner:focus,
@@ -304,7 +309,9 @@
 /*== 基本信息带图标的表单元素区域 ==*/
 .y-icon-item{ 
 	position: relative;
+	left: -6px;
 }
+
 .y-icon-item .iconfont{
 	display: block;
 	position: absolute;
@@ -353,7 +360,7 @@
 }
 .y-box-photo{
 	position: absolute;
-	width: 170px;
+	width: 130px;
 	height: 170px;
 	left: -200px; 
 	overflow: hidden;
@@ -362,6 +369,7 @@
 	width: 100%;
 }
 .y-row-box .y-module .y-content{
+	margin-top: 20px;
 	padding: 20px;
 }
 .y-row-box .y-module .y-table{
@@ -373,10 +381,10 @@
   font-size: 20px;
 }
 .y-userinfo .el-form-item{
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 } 
 .y-module-baseinfo2 .el-form-item{
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 } 
 .y-date-formitem{
 	display: inline-block;
@@ -387,21 +395,54 @@
     color: #333;
     cursor: default;
 }
+.y-module-baseinfo2 .y-input .el-input.is-disabled .el-input__inner,
+.y-module-baseinfo2 .y-input .el-input.is-disabled .el-input__inner:focus,
+.y-module-baseinfo2 .y-input .el-input.is-disabled .el-input__inner:hover{
+
+	background: #F5F5F5;
+		border: 1px solid #CCCCCC;
+		border-radius: 4px;
+   	cursor: not-allowed;
+}
+
 .y-operate{
 	float: right;
 } 
 .y-baseinfo-form .el-form-item{
 	position: relative;
-	padding-left: 130px;
+	padding-left: 70px;
+}
+.y-module-baseinfo2 .el-form-item{
+	position: relative;
+	padding-left: 100px;
 }
 .y-baseinfo-form .y-cascader-dialog .el-form-item,
 .y-baseinfo-form .y-icon-item .el-form-item{
 	padding-left: 0;
 }
+
 .y-baseinfo-form .el-form-item__label{
 	position: absolute;
 	width: 120px;
 	left: 0;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	color: #666;
+}
+.y-module-baseinfo2 .el-form-item__label{
+	position: absolute;
+	width: 215px;
+	text-align: right;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	color: #666;
+}
+.y-module-baseinfo2 .el-form-item__content {
+	height: 42px;
+		line-height: 36px;
+    position: relative;
+    left: 107px;
+    font-size: 14px;
 }
 /*==== 基本信息弹窗 ====*/
 .y-info-dialog .el-dialog__header{
@@ -446,11 +487,12 @@
 	background-color: transparent;
 }
 .y-table.el-table{
+	border: none;
 	border-color: transparent;
 	background-color: #fafafa;
 }
 .y-table.el-table th{
-	background-color: #fff;
+	background-color: #FBFBFB;
 	font-size: 16px;
 	padding-top: 14px;
 	padding-bottom: 14px;
@@ -468,15 +510,32 @@
 	font-weight: normal;
 }
 .y-table .el-table__header-wrapper thead div{
+	font-size: 14px;
 	background-color: inherit;
+	font-family: MicrosoftYaHei;
+	color: #333333;
 }
 .y-table.el-table td,
 .y-table.el-table th.is-leaf{
 	height: 45px;
 	border-bottom: 1px solid #f0f0f0;
 } 
+.y-demo-table-expand {
+    font-size: 0;
+  }
+  .y-demo-table-expand label {
+    width: 128px;
+    text-align:center;
+    color: #99a9bf;
+  }
+  .y-demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
 .y-table.el-table td .cell{
-	padding-top: 13px;
+	height: 40px;
+	padding-top: 10px;
 	padding-bottom: 13px;
 	white-space: nowrap;
 }
@@ -486,7 +545,9 @@
 .y-table.el-table--striped .el-table__body tr.el-table__row--striped td{
 	background-color: #fff;
 }
-
+.y-table .el-table__expand-icon {
+	top:-10px;
+}
 /*==消息中心未读列 ==*/
 .y-unread-row .y-col-subject .cell{
 	position: relative; 
