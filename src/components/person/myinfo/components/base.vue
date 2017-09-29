@@ -171,7 +171,7 @@
 					"pk_psndoc":UserInfo.pk_psndoc,
 			    	"cuserid":UserInfo.cuserid,
 			    	"pk_group":UserInfo.pk_group,
-			    	"param.pk_org": UserInfo.pk_org,
+			    	"pk_org": UserInfo.pk_org,
 					"infoSetCode": "bd_psndoc",
 					"transType": 'psnInfoQuery' 
 				}, (res) => {  
