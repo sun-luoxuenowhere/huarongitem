@@ -5,6 +5,7 @@
 			<!-- 按钮操作区域 begin -->
 			<div class="y-operate">
 				<i @click="showBtnsBase1" v-show="!btnsBase1" class="iconfont icon-ai-edit y-text-bianji"></i>
+				
 				<yFormBtns v-show="btnsBase1" 
 					:status="status" 
 					@save="saveBase"
@@ -119,6 +120,7 @@
 				editBase2: false, //默认不显示基本信息 头像下方区域的 编辑框
 				btnsBase2: true, //默认隐藏操作按钮
 				status: -1,
+				status1:'0',
 				infoSetCode: '', //信息集编码(保存操作的时候需要传给后台)
 				alterFields: '', //被修改的字段名称(后台传入)
 				iconForm: 'officephone,mobile,email',
@@ -199,8 +201,8 @@
 				if( _formdatastr == JSON.stringify( this.formDataInit ) ){ //没有修改
 					this.btnsBase1 = false;
 					this.editBase1 = false;
-					this.btnsBase2 = false;
-					this.editBase2 = false;
+//					this.btnsBase2 = false;
+//					this.editBase2 = false;
 				}else{
 					this.$refs['myForm'].validate((valid) => {   
 						if (valid) {   
@@ -228,17 +230,22 @@
 			},
 			//点击提交、还原、收回按钮
 			handleBase( data ){  
-				ajaxData(this.$store.state.Interface.information, {
-					"transType": 'psnInfoHandle', 
-					"infoSetCode": this.infoSetCode,
-					"way": data[0]
-				}, (res) => {   
-					this.btnsBase1 = false;
-					this.editBase1 = false;
-					this.btnsBase2 = false;
-					this.editBase2 = false;
-					this.loadInfoData();
-				});
+				if(data[0]=='modify'){
+					this.editBase1 = true;
+					this.editBase2 = true;
+				}else{
+					ajaxData(this.$store.state.Interface.information, {
+						"transType": 'psnInfoHandle', 
+						"infoSetCode": this.infoSetCode,
+						"way": data[0]
+					}, (res) => {   
+						this.btnsBase1 = false;
+						this.editBase1 = false;
+						this.btnsBase2 = false;
+						this.editBase2 = false;
+						this.loadInfoData();
+					});
+				}
 			},
 			//点击头像区域 右上角图标显示操作按钮区
 			showBtnsBase1(){
@@ -248,6 +255,7 @@
 			//点击头像区域 取消按钮
 			cancleBase1() {
 				this.formData = deepCopyObj(this.formDataInit ); 
+				
 				this.btnsBase1 = false;
 				this.editBase1 = false;
 			},

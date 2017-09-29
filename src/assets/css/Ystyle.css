@@ -293,7 +293,7 @@
 .y-baseinfo-form .y-input .el-input.is-disabled .el-input__icon{
 	display: none;
 }  
-.y-alter-item .el-form-item__label{
+.y-baseinfo-form .y-alter-item .el-form-item__label{
 	color: red;
 } 
 .y-operate .el-button--text{
@@ -612,6 +612,13 @@
 .y-dialog-border1{
 	border-left: none;
 }
+.y-btn-search {
+	background: #CC2123;
+	border: none;
+}
+.y-btn-search:hover{
+	background: #E6282A;
+}
 .y-btn-searchp {
 	background: #CC2123;
 	border: none;
@@ -627,6 +634,13 @@
 	background: #999999;
 	border: none;
 }
+.y-btn-searchj:hover{
+	background: #E6282A;
+}
+.y-btn-searchb:hover{
+	background: #E6282A;
+}
+
 .y-dialog-line {
 	line-height: 28px;
 }

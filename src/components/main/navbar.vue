@@ -43,9 +43,7 @@
 			menudata(){//计算菜单的数据
 				var navdata=this.navdata;
 				var newnavdata=[];
-				
-				
-				
+
 //				console.log(newnavdata)
 				return this.navdata
 			}

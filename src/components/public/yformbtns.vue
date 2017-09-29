@@ -11,7 +11,6 @@
 	</div>
 	<div v-else-if=" status== statusArry[1] ">
 		<el-button type="text">{{statusMsg[1]}}</el-button>
-		<el-button class="y-btn-danger" type="danger" size="small" @click="save">保存</el-button>
 		<el-button size="small" @click="submit">提交</el-button>
   		<el-button size="small" @click="revert">还原</el-button> 
   		<el-button class="y-btn-default" size="small" @click="cancle">取消</el-button> 
@@ -60,6 +59,9 @@
 			},
 			callback(){
 				this.$emit('handle', ['callback']);
+			},
+			modify(){
+				this.$emit('handle', ['modify']);
 			}
 		}
 	};
