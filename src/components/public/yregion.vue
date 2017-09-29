@@ -55,7 +55,7 @@ export default {
 	},  
 	watch: {
 		visible( val ){
-			var _pk = this.getPk();  
+			var _pk = this.getPK_country();  
 			if( !this.dataCache[_pk] ){
 				this.loadCascader(); 
 			};   
@@ -70,7 +70,7 @@ export default {
 		ok(){
 			this.$refs['regionForm'].validate((valid) => {     
 				if (valid) {   
-						this.regionForm.country = this.getPk();
+						this.regionForm.country = this.getPK_country();
 						this.saveAddr( this.regionForm );  
 				} else {
 					return false;
@@ -81,7 +81,7 @@ export default {
 		cancle() {  
 	        this.$emit('close');
 	  	}, 
-	  	getPk(){
+	  	getPK_country(){
 	  		var _typedata = this.config.typedata[0]; 
     		var _prevkey = _typedata.prevkey;  
     		return this.source[_prevkey];
@@ -125,7 +125,7 @@ export default {
 	  	},
     	//加载级联类型数据
     	loadCascader(){ 
-    		var _pk = this.getPk();   
+    		var _pk = this.getPK_country();   
 				if( _pk == "" ){
 					alert('请先选择国籍地区');
 					return;
@@ -135,10 +135,10 @@ export default {
 					"pk_psndoc":UserInfo.pk_psndoc,
 			    	"cuserid":UserInfo.cuserid,
 			    	"pk_group":UserInfo.pk_group,
-			    	"param.pk_org": UserInfo.pk_org,
+			    	"pk_org": UserInfo.pk_org,
 					"transType": "region", 
 					"pk_country": _pk
-				},( res ) => {   
+				},( res ) => {
 					this.optionsdata = this.toTreeData( res.list ); 
 					this.dataCache[_pk] = this.optionsdata; 
 		    	}); 
