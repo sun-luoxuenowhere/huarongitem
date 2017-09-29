@@ -12,7 +12,7 @@
 				
 				<el-table-column type='expand'>
 					<template scope="props">
-						<el-form label-position="left" inline>
+						<el-form label-position="left" inline class='y-demo-table-expand'>
 							<template  v-for="item in theaddata">
 								<el-form-item  v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text+':'">
 								        <span :title="props.row[item.param]">{{props.row[item.param] | YNChinese}}</span>
@@ -31,6 +31,7 @@
 					</template>
 				</el-table-column> 
 
+			
 				<template  v-for="item in theaddata.slice(0,5)">
 					<el-table-column  v-if="!item.required && typeof item.param == 'string'" :prop="item.param" :label="item.text">
 					        <template scope="scope">
@@ -53,6 +54,7 @@
 					    </template>   
 					</el-table-column>
 				</template>
+					
 
 				<el-table-column v-if="editabled && ( status == -1 || status == 0 || status == 2)"  label="操作"  width="100">
 					<template scope="scope">   
