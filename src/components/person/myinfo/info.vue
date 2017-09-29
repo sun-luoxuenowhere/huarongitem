@@ -1,5 +1,5 @@
 <template>
-	<div class="y-maincontent">
+	<div class="y-maincontent" style="padding-bottom: 200px;">
 		<div class="y-breadcrumb-box">
 			<el-breadcrumb separator="/">  
 			  <el-breadcrumb-item>人事信息</el-breadcrumb-item>

@@ -113,9 +113,9 @@
 				formDataConfig1: {},
 				formDataConfig2: {},
 				editBase1: false, //默认不显示基本信息 头像区域的 编辑框
-				btnsBase1: false, //默认隐藏操作按钮
+				btnsBase1: true, //默认隐藏操作按钮
 				editBase2: false, //默认不显示基本信息 头像下方区域的 编辑框
-				btnsBase2: false, //默认隐藏操作按钮
+				btnsBase2: true, //默认隐藏操作按钮
 				status: -1,
 				infoSetCode: '', //信息集编码(保存操作的时候需要传给后台)
 				alterFields: '', //被修改的字段名称(后台传入)
@@ -210,11 +210,14 @@
 								"transType": "psnInfoSave",  
 								"infoSetCode": this.infoSetCode,
 								"jsonStr": JSON.stringify( _param ) 
-							}, (res) => {   
-								this.btnsBase1 = false;
+							}, (res) => {  
+								
+								
+								this.btnsBase1 = true;
 								this.editBase1 = false;
-								this.btnsBase2 = false;
+								this.btnsBase2 = true;
 								this.editBase2 = false;
+								
 								this.loadInfoData();
 							});
 						};

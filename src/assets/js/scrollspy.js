@@ -24,7 +24,7 @@ export function scrollSpy( el ){
 		scrollPosition: function(){
 			var _scroll = []; 
 			for(var i = 0, l = contentEls.length; i < l; i++){
-				var _top = contentEls[i].offsetTop -100; //20为列表的高度
+				var _top = contentEls[i].offsetTop +50; //20为列表的高度
 				_scroll.push( _top );
 			};  
 			return _scroll;
@@ -37,7 +37,7 @@ export function scrollSpy( el ){
          	
          	var interval = setInterval(function () {
 			   	count++;
-			   	document.documentElement.scrollTop = document.body.scrollTop = (scrollTo - scrollFrom) / time * count + scrollFrom-200;
+			   	document.documentElement.scrollTop = document.body.scrollTop = (scrollTo - scrollFrom) / time * count + scrollFrom;
 			   	if (count >= time) {
 			     	clearInterval(interval);
 			   	}
