@@ -13,7 +13,7 @@
 		<el-button type="text">{{statusMsg[1]}}</el-button>
 		<el-button size="small" @click="submit">提交</el-button>
   		<el-button size="small" @click="revert">还原</el-button> 
-  		<el-button class="y-btn-default" size="small" @click="showBtnsBase2">修改</el-button> 
+  		<el-button class="y-btn-default" size="small" @click="edit">修改</el-button> 
 	</div>
 	<div v-else-if=" status== statusArry[2] ">
 		<el-button type="text">{{statusMsg[2]}}</el-button>
@@ -43,9 +43,8 @@
 		},
 		methods: {
 			//点击头像下方区域 右上角图标显示操作按钮区
-			showBtnsBase2(){
-				this.btnsBase2 = true;
-				this.showEditBase2();
+			edit(){ 
+				this.$emit('edit');
 			},
 			save(){
 				this.$emit('save');

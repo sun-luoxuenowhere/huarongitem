@@ -8,6 +8,7 @@
 				
 				<yFormBtns v-show="btnsBase1" 
 					:status="status" 
+					@edit="editBase1"
 					@save="saveBase"
 					@cancle="cancleBase1"
 					@handle="handleBase"></yFormBtns>
@@ -246,6 +247,9 @@
 						this.loadInfoData();
 					});
 				}
+			},
+			editBase1(){
+				this.editBase1 = true;
 			},
 			//点击头像区域 右上角图标显示操作按钮区
 			showBtnsBase1(){
