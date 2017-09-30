@@ -187,15 +187,21 @@
 				<!-- 语言能力 end -->
 				
 				<!-- 附件开始 -->
-				<subList
-					data-scroll="yuyan"
-					title='附件添加' 
-					:ref="subDialogConfig.yuyan.infoSetCode"
-					:infoSetCode="subDialogConfig.yuyan.infoSetCode"
-					:editabled="true"  
-					:theaddata='yuyanTheadData'
-					@add="openyuyanDialog"
-					></subList>
+				<div class="y-module"> 
+					
+					<div class="y-title" style="border-bottom: none;"> 
+						<el-upload
+						  class="upload-demo"
+						   ref="newupload"
+						  action="service/EHRWebSmServlet"
+						  :on-success="handleSuccess"
+						  :file-list="fileList3"
+						  :before-upload="beforeAvatarUpload">
+						  <el-button size="small" type="text" class="y-title" style='border-bottom: none;'>附件上传&nbsp;<i style="color: #CC2123;" class="iconfont icon-tianjia"></i></el-button>
+						  <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
+						</el-upload>
+					</div>
+				</div>
 				<!-- 附件结束 -->
 			</div> 
 		</div>
@@ -268,6 +274,7 @@
 	</div>
 </template>
 <script>
+import Qs from 'qs';
 import {scrollSpy} from '@/assets/js/scrollspy.js'; 
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 
@@ -289,7 +296,7 @@ export default {
 			jinjiFormData: '', //紧急联系人初始数据 
 			yuyanFormData: '', //语言初始数据 
 			
-			
+			fileList3: [],
 			currentDialog: { //当前显示的子集弹窗相关数据
 				infoSetCode: '',  //弹窗类型
 				operate: '', //弹窗操作
@@ -376,7 +383,16 @@ export default {
 		subList, //人员子集列表 
 		subDialog //人员子集弹窗 
 	}, 
-	methods: {  
+	methods: {
+		//附件上传
+		beforeAvatarUpload(file){
+			//上传之前判断格式及大小；成功之后可以继续上传;
+		},
+		handleSuccess(response,file, fileList) {
+			console.log(response)
+			console.log(fileList.slice(-3));
+       	 	this.fileList3 = fileList.slice(-3);
+      },
 		//获取 stroe中存的静态数据
 		getData( key ){
 			return this.$store.state.Information[key];
