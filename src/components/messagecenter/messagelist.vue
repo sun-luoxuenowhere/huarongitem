@@ -12,7 +12,7 @@
 		   	<el-table-column prop="sender" label="发件人" width="150"></el-table-column>
 		  	<el-table-column prop="sendtime" label="发送时间" width="200"></el-table-column>
 		</el-table> 
-		<div class="y-pagination" v-show='totalcount > pagesize'>   
+		<div class="y-pagination" >   
 			<el-pagination layout="total, sizes, prev, pager, next, jumper"
 				:page-size="pagesize"
 				:page-sizes="[5, 10, 15, 20]" 
