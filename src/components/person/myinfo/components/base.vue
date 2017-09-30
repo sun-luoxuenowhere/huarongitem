@@ -8,6 +8,7 @@
 				
 				<yFormBtns v-show="btnsBase1" 
 					:status="status" 
+					@edit="editBase1"
 					@save="saveBase"
 					@cancle="cancleBase1"
 					@handle="handleBase"></yFormBtns>
@@ -64,18 +65,18 @@
 		<!-- 基本信息表单 [头像下方区域]-->
 		<div class="y-module y-module-baseinfo2" data-scroll="jibenxinxi">
 			<div class="y-title">
-				<!--<div class="y-operate">
+				<div class="y-operate">
 					<i @click="showBtnsBase2" v-show="!btnsBase2" class="iconfont icon-ai-edit y-text-bianji"></i>
 					<yFormBtns v-show="btnsBase2" 
 						:status="status" 
 						@save="saveBase"
 						@cancle="cancleBase2"
 						@handle="handleBase"></yFormBtns>
-				</div>-->
+				</div>
 				基本信息
 			</div>
 			<div class="y-content">
-				<el-row v-show="editBase1" :gutter="5">
+				<el-row v-show="editBase2" :gutter="5">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" v-for="(val,key) in formDataConfig2">
 						<yInput  v-model="formData[key]" 
 							:class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" 
@@ -84,7 +85,7 @@
 							:inputData="formDataConfig2[key]" ></yInput>
 					</el-col>
 				</el-row>
-				<el-row v-show="!editBase1" :gutter="5">
+				<el-row v-show="!editBase2" :gutter="5">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" v-for="(val,key) in formDataConfig2">
 						<el-form-item :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" :label="val.text">
 							<el-input v-model="formDataConfig2[key].typedata[0][formData[key]]" v-if="formDataConfig2[key].type == 'radio'" :disabled="true"> </el-input>
@@ -201,8 +202,8 @@
 				if( _formdatastr == JSON.stringify( this.formDataInit ) ){ //没有修改
 					this.btnsBase1 = false;
 					this.editBase1 = false;
-//					this.btnsBase2 = false;
-//					this.editBase2 = false;
+					this.btnsBase2 = false;
+					this.editBase2 = false;
 				}else{
 					this.$refs['myForm'].validate((valid) => {   
 						if (valid) {   
@@ -246,6 +247,9 @@
 						this.loadInfoData();
 					});
 				}
+			},
+			editBase1(){
+				this.editBase1 = true;
 			},
 			//点击头像区域 右上角图标显示操作按钮区
 			showBtnsBase1(){
