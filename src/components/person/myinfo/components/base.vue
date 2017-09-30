@@ -3,20 +3,21 @@
 		<!-- y-module-baseinfo begin 基本信息表单 [头像区域]-->
 		<div class="y-module y-module-baseinfo clearfix">
 			<!-- 按钮操作区域 begin -->
-			<div class="y-operate">
-				<i @click="showBtnsBase1" v-show="!btnsBase1" class="iconfont icon-ai-edit y-text-bianji"></i>
+			<!--<div class="y-operate">
+				<i @click="edit0" v-show="showButnEdit0" class="iconfont icon-ai-edit y-text-bianji"></i>
 				
-				<yFormBtns v-show="btnsBase1" 
-					:status="status" 
-					@edit="editBase1"
-					@save="saveBase"
-					@cancle="cancleBase1"
-					@handle="handleBase"></yFormBtns>
-			</div>
+				<yFormBtns v-show="showButnsSave0" 
+						:status="status" 
+						@edit00="editBase10"
+						@save="saveBase"
+						@cancel="cancel0"
+						@handle="handleBase">
+				</yFormBtns>
+			</div>-->
 			<!-- 按钮操作区域 end -->
 			<div class="y-content">
 				<!-- 表单区域 begin -->
-				<el-row v-show="editBase1" :gutter="5">
+				<el-row v-show="editStatus0" :gutter="5">
 					<template v-for="(val,key) in formDataConfig1"> 
 						<el-col v-if="iconForm.indexOf(val.id) > -1" :xs="24" :sm="12" :md="8" :lg="8"> 
 							<div class="y-icon-item">
@@ -36,7 +37,7 @@
 				<!-- 表单区域 end -->
 				
 				<!-- 视图区域 begin -->
-				<el-row v-show="!editBase1" :gutter="5">
+				<el-row v-show="!editStatus0" :gutter="5">
 					<template v-for="(val,key) in formDataConfig1"> 
 						<el-col v-if="iconForm.indexOf(val.id) > -1" :xs="24" :sm="12" :md="12" :lg="12"> 
 							<div class="y-baseinfo-tel">
@@ -62,21 +63,27 @@
 			</div>
 		</div>
 		<!-- y-module-baseinfo end -->
+		
+		
 		<!-- 基本信息表单 [头像下方区域]-->
 		<div class="y-module y-module-baseinfo2" data-scroll="jibenxinxi">
 			<div class="y-title">
+				<!-- 按钮操作区域 begin -->
 				<div class="y-operate">
-					<i @click="showBtnsBase2" v-show="!btnsBase2" class="iconfont icon-ai-edit y-text-bianji"></i>
-					<yFormBtns v-show="btnsBase2" 
-						:status="status" 
-						@save="saveBase"
-						@cancle="cancleBase2"
-						@handle="handleBase"></yFormBtns>
+					<i @click="edit" v-show="showButnEdit" class="iconfont icon-ai-edit y-text-bianji"></i>
+					
+					<yFormBtns v-show="!showButnEdit" 
+							:status="status" 
+							@edit="edit"
+							@save="saveBase"
+							@cancel="cancel"
+							@handle="handle">
+					</yFormBtns>
 				</div>
 				基本信息
 			</div>
 			<div class="y-content">
-				<el-row v-show="editBase2" :gutter="5">
+				<el-row v-show="editStatus1" :gutter="5">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" v-for="(val,key) in formDataConfig2">
 						<yInput  v-model="formData[key]" 
 							:class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" 
@@ -85,7 +92,7 @@
 							:inputData="formDataConfig2[key]" ></yInput>
 					</el-col>
 				</el-row>
-				<el-row v-show="!editBase2" :gutter="5">
+				<el-row v-show="!editStatus1" :gutter="5">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" v-for="(val,key) in formDataConfig2">
 						<el-form-item :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" :label="val.text">
 							<el-input v-model="formDataConfig2[key].typedata[0][formData[key]]" v-if="formDataConfig2[key].type == 'radio'" :disabled="true"> </el-input>
@@ -110,18 +117,19 @@
 		props: ['editabled'],
 		data() {
 			return {
-				aa: {},
 				rules: {},
 				formDataInit: {}, //初始状态的表单数据 
 				formData: {}, //当前表单数据
 				formDataConfig1: {},
 				formDataConfig2: {},
-				editBase1: false, //默认不显示基本信息 头像区域的 编辑框
-				btnsBase1: true, //默认隐藏操作按钮
-				editBase2: false, //默认不显示基本信息 头像下方区域的 编辑框
-				btnsBase2: true, //默认隐藏操作按钮
+				
+				showButnEdit : true,	// 默认显示编辑按钮
+				showButnsSave : false ,	// 默认不显示保存、取消按钮
+				
+				editStatus0 : false, // 编辑状态-头像区域-默认不可编辑
+				editStatus1 : false, // 编辑状态-头像以下区域-默认不可编辑
+				
 				status: -1,
-				status1:'0',
 				infoSetCode: '', //信息集编码(保存操作的时候需要传给后台)
 				alterFields: '', //被修改的字段名称(后台传入)
 				iconForm: 'officephone,mobile,email',
@@ -151,7 +159,6 @@
 			this.transferData(this.$store.state.BaseInfo.baseInfo1, this.formDataConfig1);
 			this.transferData(this.$store.state.BaseInfo.baseInfo2, this.formDataConfig2);  
 			
-//			console.log('ddd'+this.formDataConfig1)
 		},
 		methods: {
 			//批量数据处理，转换成能自动生成表单的数据格式
@@ -168,6 +175,7 @@
 					};
 				};
 			},
+			
 			//动态加载基本信息数据
 			loadInfoData() {
 				ajaxData(this.$store.state.Interface.information, {
@@ -179,7 +187,12 @@
 					"transType": 'psnInfoQuery' 
 				}, (res) => {  
 					var _dataobj = res.list[0]; 
-					this.status = res.status;   
+					this.status = res.status;  
+					if( res.status != -1 ){
+						this.showButnEdit = false;
+					}else{
+						this.showButnEdit = true;
+					};
 					this.alterFields = (res.alterFields ? res.alterFields : ''); 
 					this.infoSetCode = res.infoSetCode;
 					 
@@ -196,14 +209,13 @@
 					this.formData = deepCopyObj(_dataobj);  
 				});
 			},
+			
 			//点击保存按钮
 			saveBase(){ 
 				var _formdatastr = JSON.stringify( this.formData );  
-				if( _formdatastr == JSON.stringify( this.formDataInit ) ){ //没有修改
-					this.btnsBase1 = false;
-					this.editBase1 = false;
-					this.btnsBase2 = false;
-					this.editBase2 = false;
+				if( _formdatastr == JSON.stringify( this.formDataInit ) ){ //没有实际修改
+					this.editStatus0 = false;
+					this.editStatus1 = false;
 				}else{
 					this.$refs['myForm'].validate((valid) => {   
 						if (valid) {   
@@ -217,11 +229,9 @@
 								"jsonStr": JSON.stringify( _param ) 
 							}, (res) => {  
 								
-								
-								this.btnsBase1 = true;
-								this.editBase1 = false;
-								this.btnsBase2 = true;
-								this.editBase2 = false;
+								this.showButnEdit = false;
+								this.editStatus0 = false;
+								this.editStatus1 = false;
 								
 								this.loadInfoData();
 							});
@@ -229,63 +239,43 @@
 			       }); 
 				}; 
 			},
+			
 			//点击提交、还原、收回按钮
-			handleBase( data ){  
-				if(data[0]=='modify'){
-					this.editBase1 = true;
-					this.editBase2 = true;
-				}else{
-					ajaxData(this.$store.state.Interface.information, {
-						"transType": 'psnInfoHandle', 
-						"infoSetCode": this.infoSetCode,
-						"way": data[0]
-					}, (res) => {   
-						this.btnsBase1 = false;
-						this.editBase1 = false;
-						this.btnsBase2 = false;
-						this.editBase2 = false;
-						this.loadInfoData();
-					});
-				}
+			handle( data ){  
+				ajaxData(this.$store.state.Interface.information, {
+					"transType": 'psnInfoHandle', 
+					"infoSetCode": this.infoSetCode,
+					"way": data[0]
+				}, (res) => {   
+					this.editStatus0 = false;
+					this.editStatus0 = false;
+					this.loadInfoData();
+				});
 			},
-			editBase1(){
-				this.editBase1 = true;
+			
+			// 编辑
+			edit(){
+				this.showButnEdit = false;
+				this.showButnsSave = true;
+				
+			 	this.editStatus0 = true;
+			 	this.editStatus1 = true;
 			},
-			//点击头像区域 右上角图标显示操作按钮区
-			showBtnsBase1(){
-				this.btnsBase1 = true; 
-				this.showEditBase1();
-			},
-			//点击头像区域 取消按钮
-			cancleBase1() {
+			
+			// 取消
+			cancel(){
 				this.formData = deepCopyObj(this.formDataInit ); 
 				
-				this.btnsBase1 = false;
-				this.editBase1 = false;
-			},
-			//点击头像下方区域 右上角图标显示操作按钮区
-			showBtnsBase2(){
-				this.btnsBase2 = true;
-				this.showEditBase2();
-			},
-			//点击头像下方区域 取消按钮
-			cancleBase2() {
-				this.formData = deepCopyObj(this.formDataInit ); 
-				this.btnsBase2 = false;
-				this.editBase2 = false;
-			},
-			//展示基本信息头像编辑区域
-			showEditBase1( ){ 
-				if( this.status == -1 || this.status == 0 ){
-				 	this.editBase1 = true;
+				if( this.status == -1 ){
+				 	this.showButnEdit = true;
+					this.showButnsSave = false;
 				};
+				
+				this.editStatus0 = false;
+				this.editStatus1 = false;
 			},
-			//展示基本信息头像下方编辑区域
-			showEditBase2( ){ 
-				if( this.status == -1 || this.status == 0 ){
-					this.editBase2 = true;
-				}; 
-			}
+			
+			
 		}
 	}
 </script>
