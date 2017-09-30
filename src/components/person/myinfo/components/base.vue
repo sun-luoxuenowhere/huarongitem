@@ -64,14 +64,14 @@
 		<!-- 基本信息表单 [头像下方区域]-->
 		<div class="y-module y-module-baseinfo2" data-scroll="jibenxinxi">
 			<div class="y-title">
-				<!--<div class="y-operate">
+				<div class="y-operate">
 					<i @click="showBtnsBase2" v-show="!btnsBase2" class="iconfont icon-ai-edit y-text-bianji"></i>
 					<yFormBtns v-show="btnsBase2" 
 						:status="status" 
 						@save="saveBase"
 						@cancle="cancleBase2"
 						@handle="handleBase"></yFormBtns>
-				</div>-->
+				</div>
 				基本信息
 			</div>
 			<div class="y-content">
@@ -201,8 +201,8 @@
 				if( _formdatastr == JSON.stringify( this.formDataInit ) ){ //没有修改
 					this.btnsBase1 = false;
 					this.editBase1 = false;
-//					this.btnsBase2 = false;
-//					this.editBase2 = false;
+					this.btnsBase2 = false;
+					this.editBase2 = false;
 				}else{
 					this.$refs['myForm'].validate((valid) => {   
 						if (valid) {   
