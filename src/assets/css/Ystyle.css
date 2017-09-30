@@ -642,7 +642,10 @@
 }
 
 .y-dialog-line {
-	line-height: 28px;
+	  line-height: 32px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #333333;
 }
 /*== 通知消息内容 ==*/
 .y-info-list td{

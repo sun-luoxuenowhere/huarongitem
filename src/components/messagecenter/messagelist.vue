@@ -7,7 +7,11 @@
     		:data="tableData" 
     		:row-class-name='setunReadRow'
 			@row-click="onRowClick">
-			<el-table-column class-name="y-col-subject" prop="subject" label="主题" width="200"></el-table-column>
+			<el-table-column class-name="y-col-subject" prop="subject" label="主题" width="200">
+				<template  scope="scope">
+					<span :title="scope.row.subject">{{scope.row.subject}}</span>
+				</template>
+			</el-table-column>
 		  	<el-table-column prop="content" label="正文"></el-table-column>
 		   	<el-table-column prop="sender" label="发件人" width="150"></el-table-column>
 		  	<el-table-column prop="sendtime" label="发送时间" width="200"></el-table-column>

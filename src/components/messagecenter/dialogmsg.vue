@@ -48,7 +48,7 @@
 						</el-row>
 						<!--审批进度-->
 						<el-row :gutter="20">
-						  <el-col :span="4"><span>审批进度：</span></el-col>
+						  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
@@ -94,7 +94,7 @@
 						</el-row>
 						<!--审批进度-->
 						<el-row :gutter="20">
-						  <el-col :span="4"><span>审批进度：</span></el-col>
+						  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
@@ -140,7 +140,7 @@
 						</el-row>
 						<!--审批进度-->
 						<el-row :gutter="20">
-						  <el-col :span="4"><span>审批进度：</span></el-col>
+						  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
@@ -186,7 +186,7 @@
 						</el-row>
 						<!--审批进度-->
 						<el-row :gutter="20">
-						  <el-col :span="4"><span>审批进度：</span></el-col>
+						  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
@@ -232,7 +232,7 @@
 						</el-row>
 						<!--审批进度-->
 						<el-row :gutter="20">
-						  <el-col :span="4"><span>审批进度：</span></el-col>
+						  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 						  <el-col :span="20">
 						  	<div v-for="(val,key) in data.Hisapprove">
 						  		<!--y-dialog-border-->
@@ -326,7 +326,7 @@
 							</el-row>
 							<!--审批进度-->
 							<el-row :gutter="20">
-							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->
@@ -366,7 +366,7 @@
 							</el-row>
 							<!--审批进度-->
 							<el-row :gutter="20">
-							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->
@@ -406,7 +406,7 @@
 							</el-row>
 							<!--审批进度-->
 							<el-row :gutter="20">
-							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->
@@ -446,7 +446,7 @@
 							</el-row>
 							<!--审批进度-->
 							<el-row :gutter="20">
-							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->
@@ -486,7 +486,7 @@
 							</el-row>
 							<!--审批进度-->
 							<el-row :gutter="20">
-							  <el-col :span="4"><span>审批进度：</span></el-col>
+							  <el-col :span="4"><span class="y-dialog-line">审批进度：</span></el-col>
 							  <el-col :span="20">
 							  	<div v-for="(val,key) in data.Hisapprove">
 							  		<!--y-dialog-border-->

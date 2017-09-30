@@ -46,7 +46,7 @@
 						
 					    <el-tab-pane  name="first">
 					    	 <span slot="label">工作任务<i v-show="totalshow==0" class="iconfont iconfontmain icon-xiaoxi"><span class="messagetatal">{{listdata.totalcount}}</span></i></span>
-					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist" >
+					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist" @click="rowhand(index)">
 					    		<span class="L-order">{{index+1}}.</span>
 					    		<span class="L-listtitle">
 					    			{{item.subject}}
@@ -60,7 +60,7 @@
 					    </el-tab-pane>
 					    <el-tab-pane  name="second">
 					    	 <span slot="label">通知消息<i v-show="totalshow==1" class="iconfont iconfontmain icon-xiaoxi"><span class="messagetatal">{{listdata.totalcount}}</span></i></span>
-					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist">
+					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist" @click="rowhand(index)"> 
 					    		<span class="L-order">{{index+1}}.</span>
 					    		<span class="L-listtitle">
 					    			{{item.subject}}
@@ -72,7 +72,7 @@
 					    </el-tab-pane>
 					    <el-tab-pane  name="third">
 					    	<span slot="label">预警消息<i v-show="totalshow==2" class="iconfont iconfontmain icon-xiaoxi"><span class="messagetatal">{{listdata.totalcount}}</span></i></span>
-					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist" >
+					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist"  @click="rowhand(index)">
 					    		<span class="L-order">{{index+1}}.</span>
 					    		<span class="L-listtitle">
 					    			{{item.subject}}
@@ -162,54 +162,160 @@
 				</el-col>
 			</el-row>
 		</div>
+		
+		<MessageDialog :dialogvisible="openDialog" :data="msgdata" :judgedialog="judgedialog"
+			@close="openDialog = false"
+			@read="msgRead">
+		</MessageDialog>
 	</div>
 </template>
 
 <script>
 	
+import Qs from 'qs';
+
+import MessageDialog from '@/components/messagecenter/dialogmsg';
+
+var UserInfo;
 export default{
 	computed: {
 		url(){  
 			return this.$store.state.Interface.msglist;
 		} 
 	},
+	components: { 
+		MessageDialog
+	},
 	data(){
 		return { 
+			 openDialog: false, //默认关闭对话框
+			 judgedialog:'handle',//初始是工作任务
+			
 			 activeName: 'first',
 			 activeName1: 'first',
 			 activeName2: 'first',
 			 totalshow:0,
 			 msgparam: {
-				sendstr: '',
-				isread: 'N',
-				user_code: '00030',
-				transtype: 'msglist',
-				msgtype: '', 
-				pageindex: 0,
-				ishandled: 'N',
-				pagesize: 4
+				sendStr: '',
+				isRead: 'N',
+				receiver:'',
+				transType: 'msglist',
+				msgType:'',
+				pageIndex: 0,
+				isHandled: 'N',
+				pageSize: 4
 			},
-			listdata:''
+			listdata:'',
+			msgdata:''
 		}
 	},
 	mounted(){
+		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+		this.msgparam.receiver=UserInfo.cuserid;
 		this.loadMsg( 'worklist'); //初始显示流程消息数据
-		
 	},
+	
 	methods: {
+		//消息被置为已读
+	    msgRead(){  
+	    	this.openDialog = false;
+	    	this.loadMsg(this.msgparam.msgType);  
+	    },
       handleClick(tab, event) {
       	if(tab.index=="0"){
+      		this.msgparam.msgType='worklist';
+      		this.judgedialog='handle';
       		this.loadMsg( 'worklist');
       		this.totalshow=0;
       		
       	}else if(tab.index=="1"){
+      		this.msgparam.msgType='notice';
+      		this.judgedialog='inform';
       		this.loadMsg('notice');
       		this.totalshow=1;
       	}else if(tab.index=="2"){
+      		this.msgparam.msgType='prealert';
+      		this.judgedialog='warning';
       		this.loadMsg('prealert');
       		this.totalshow=2;
       	}
         
+      },
+      rowhand(index){
+      	//判断是通知消息还是代办消息
+      		var row=this.listdata.msglist[index]
+	    	if(this.msgparam.msgType=='worklist'){
+	    		//判断单据的类型，是离职、转正、等
+	    		this.$http.post( this.url, Qs.stringify ({
+					transType:'msgBill',
+					pk_psndoc:UserInfo.pk_psndoc,
+					billId:row.billId,
+					billType:row.billType
+				}), {
+		          	headers: {
+		                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+		          	}
+		      	}).then(( response ) => {  
+					var _data = response.data; 
+					if( _data.flag == "1" ){ //操作失败
+						this.$message.error( _data.des );
+					}else{
+						console.log(_data)
+						this.openDialog = true; 
+						this.msgdata = row;
+		    			this.msgdata.Datalist = JSON.parse(_data.data).headMsg;
+		    			this.msgdata.Hisapprove = _data.hisapprove;
+					}; 
+				}).catch((err) => { 
+					this.$message.error( err );
+				}); 
+	    		
+	    		
+	    		
+	    	}else if(this.msgparam.msgType=='notice'){
+	    		//如果是通知需要判断通知的类型，是消息还是单据
+	    		if(row.msgsourcetype=='notice'){
+	    			//通知判断为空的时候
+	    			this.openDialog = true; 
+			    	this.msgdata = row;
+//			    	this.msgdata.msgType = this.param.msgType;
+			    	 
+	    		}else if(row.msgsourcetype=='worklist' || row.msgsourcetype=='pfbizmsg'){
+	    			//不为空的时候需要向后端发送请求显示字段的详细信息；
+	    			//获取列表数据；
+					this.$http.post( this.url, Qs.stringify ({
+						transType:'msgBill',
+						pk_psndoc:UserInfo.pk_psndoc,
+						billId:row.billId,
+						billType:row.billType
+					}), {
+			          	headers: {
+			                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+			          	}
+			      	}).then(( response ) => {  
+						var _data = response.data; 
+						if( _data.flag == "1" ){ //操作失败
+							this.$message.error( _data.des );
+						}else{
+							console.log(_data)
+							this.openDialog = true; 
+							this.msgdata = row;
+			    			this.msgdata.msgType = this.param.msgType;
+			    			this.msgdata.Datalist = JSON.parse(_data.data).headMsg;
+			    			this.msgdata.Hisapprove = _data.hisapprove;
+			    			console.log(this.msgdata)
+						}; 
+					}).catch((err) => { 
+						this.$message.error( err );
+					}); 
+	    		}
+	    		
+	    		
+	    	}else if(this.msgparam.msgType=='prealert'){
+	    		this.openDialog = true; 
+		    	this.msgdata = row;
+	    	}
+	    	
       },
       temporary(){
       	this.$message('开发中敬请期待！！！');
@@ -231,25 +337,29 @@ export default{
       },
       loadMsg( type ){
       	
-      	this.msgparam.msgtype = type;
+      	this.msgparam.msgType = type;
       	var _param = this.msgparam;
-		this.$http.get( this.url, {
-				params: _param
-			}).then((response) => {  
-				Loading.service(options);
-				var _data = response.data;
-				console.log(_data)
-				this.listdata=_data
+		//获取列表数据；
+		this.$http.post( this.url, Qs.stringify ( _param ), { 
+          	headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+          	}
+      	}).then(( response ) => {  
+			var _data = response.data; 
+			
+			if( _data.flag == "0" ){ //操作失败
+//				this.loadingFlag=false;
+//				this.tableData = _data.msglist;
+//				this.totalcount = parseInt( _data.totalcount ); 
+
+				this.listdata = _data;
 				
-				if( _data.flag == "1" ){ //操作失败
-					this.$message.error( _data.des );
-				}else{
-					
-				};  
-	    	}).catch((err) => { 
-	    		 
-//	    		this.$message.error( '待办事项加载数据失败' );  
-			});        	
+			}else{
+				this.$message.error( _data.des );
+			}; 
+		}).catch((err) => { 
+			this.$message.error( err );
+		}); 
       }
       
    } 
