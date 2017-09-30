@@ -185,6 +185,18 @@
 					@delete="deleteList"
 					@handle="handleList"></subList>
 				<!-- 语言能力 end -->
+				
+				<!-- 附件开始 -->
+				<subList
+					data-scroll="yuyan"
+					title='附件添加' 
+					:ref="subDialogConfig.yuyan.infoSetCode"
+					:infoSetCode="subDialogConfig.yuyan.infoSetCode"
+					:editabled="true"  
+					:theaddata='yuyanTheadData'
+					@add="openyuyanDialog"
+					></subList>
+				<!-- 附件结束 -->
 			</div> 
 		</div>
 		<subDialog 

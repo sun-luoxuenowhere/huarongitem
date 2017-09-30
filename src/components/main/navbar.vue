@@ -1,5 +1,5 @@
 <template>
-	<el-menu default-active="a" unique-opened class="el-menu-vertical-demo">
+	<el-menu default-active="a" unique-opened class="el-menu-vertical-demo" @select="handleSelect">
 		<router-link to='/Index'>
 			<el-menu-item index="a">
 				<span class="y-icon-box">
@@ -47,6 +47,15 @@
 //				console.log(newnavdata)
 				return this.navdata
 			}
+		},
+		methods:{
+			handleSelect(key, keyPath) {//解决重新刷新的问题
+//		        console.log(key, keyPath);
+//		        window.location.reload();
+		        this.$router.push({
+		  			name:'/Index'
+		  		});
+		    }
 		}
 	}
 </script> 
