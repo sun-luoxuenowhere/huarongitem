@@ -75,7 +75,7 @@
 				基本信息
 			</div>
 			<div class="y-content">
-				<el-row v-show="editBase1" :gutter="5">
+				<el-row v-show="editBase2" :gutter="5">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" v-for="(val,key) in formDataConfig2">
 						<yInput  v-model="formData[key]" 
 							:class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" 
@@ -84,7 +84,7 @@
 							:inputData="formDataConfig2[key]" ></yInput>
 					</el-col>
 				</el-row>
-				<el-row v-show="!editBase1" :gutter="5">
+				<el-row v-show="!editBase2" :gutter="5">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" v-for="(val,key) in formDataConfig2">
 						<el-form-item :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" :label="val.text">
 							<el-input v-model="formDataConfig2[key].typedata[0][formData[key]]" v-if="formDataConfig2[key].type == 'radio'" :disabled="true"> </el-input>
