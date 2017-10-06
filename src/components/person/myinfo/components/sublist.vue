@@ -79,9 +79,9 @@ import yListBtns from '@/components/public/ylistbtns';
 var UserInfo;
 export default { 
 	//infoSetCode: 数据源
-	 //editabled:是否可编辑 Boolean(true)
-	 //title: 模块标题 
-	 //theaddata: 表头显示
+	//editabled:是否可编辑 Boolean(true)
+	//title: 模块标题 
+	//theaddata: 表头显示
 	props: ['editabled', 'title', 'theaddata', 'infoSetCode'],
 	data() {
 		return {  
@@ -120,7 +120,7 @@ export default {
 	},
 	methods: {  
 		//动态加载数据
-		loadData(){ 
+		loadData(){
 			ajaxData(this.$store.state.Interface.information, {
 				"pk_psndoc":UserInfo.pk_psndoc,
 		    	"cuserid":UserInfo.cuserid,
@@ -128,7 +128,7 @@ export default {
 		    	"pk_org": UserInfo.pk_org,
 				"infoSetCode": this.infoSetCode,
 				"transType": 'psnInfoQuery' 
-			}, ( res ) => {    
+			}, ( res ) => {   
 				this.status = res.status;  
 				this.listdata = res.list; 
 	    	});  

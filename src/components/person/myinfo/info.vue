@@ -382,114 +382,123 @@ export default {
 		baseInfo, //基本信息
 		subList, //人员子集列表 
 		subDialog //人员子集弹窗 
-	}, 
+	},
 	methods: {
 		//附件上传
-		beforeAvatarUpload(file){
+		beforeAvatarUpload(file) {
 			//上传之前判断格式及大小；成功之后可以继续上传;
 		},
-		handleSuccess(response,file, fileList) {
+		handleSuccess(response, file, fileList) {
 			console.log(response)
 			console.log(fileList.slice(-3));
-       	 	this.fileList3 = fileList.slice(-3);
-      },
+			this.fileList3 = fileList.slice(-3);
+		},
+		
 		//获取 stroe中存的静态数据
-		getData( key ){
+		getData(key) {
 			return this.$store.state.Information[key];
-		}, 
-		//设置当前备操作弹窗的操作类型、被编辑或者修改的列 行号
-		setCurrentDialog( data ){ 
-			if( data[2] ){
-				this.currentDialog.index = data[2].recordnum;
-			}; 
-			this.currentDialog.operate = data[0]; 
-			this.currentDialog.infoSetCode = data[1]; 
-		}, 
-		//保存履历 | 工作| 教育等信息
-		savePersonInfo( data ){     
-			var _data = data;  
-			var _code = this.currentDialog.infoSetCode;  
-			var _paramData = {
-				
-				"pk_psndoc":UserInfo.pk_psndoc,
-		    	"cuserid":UserInfo.cuserid,
-		    	"pk_group":UserInfo.pk_group,
-		    	"pk_org": UserInfo.pk_org,
-				"transType": "psnInfoSave",  
-				"infoSetCode": _code,
-				"jsonStr": JSON.stringify( _data ) 
+		},
+		
+		//设置当前被操作弹窗的操作类型、被编辑或者修改的列行号
+		setCurrentDialog(data) {
+			if(data[2]) {
+				if(data[2].pk_psndoc_sub) {
+					this.currentDialog.index = data[2].pk_psndoc_sub;
+				} else {
+					this.currentDialog.index = data[2].index;
+				}
+
 			};
-			switch( this.currentDialog.operate ){
+			this.currentDialog.operate = data[0];
+			this.currentDialog.infoSetCode = data[1];
+		},
+		
+		//子集-新增、编辑的保存操作
+		savePersonInfo(data) {
+			var _data = data;
+			var _code = this.currentDialog.infoSetCode;
+			var _paramData = {
+
+				"pk_psndoc": UserInfo.pk_psndoc,
+				"cuserid": UserInfo.cuserid,
+				"pk_group": UserInfo.pk_group,
+				"pk_org": UserInfo.pk_org,
+				"transType": "psnInfoSave",
+				"infoSetCode": _code,
+				"jsonStr": JSON.stringify(_data)
+			};
+			switch(this.currentDialog.operate) {
 				case 'add':
 					_paramData.status = 2;
 					break;
 				case 'edit':
 					_paramData.status = 1;
-					_paramData.recordnum = this.currentDialog.index; 
+					_paramData.pk_psndoc_sub = this.currentDialog.index;
 					break;
 				case 'remove':
 					_paramData.status = 3;
-					_paramData.recordnum = this.currentDialog.index; 
+					_paramData.pk_psndoc_sub = this.currentDialog.index;
 					break;
-			};   
-			ajaxData( this.$store.state.Interface.information, _paramData, (res) => {   
-				this.hideDialog( _code ); 
-				this.$refs[ _code ].loadData(); 
-			}); 
-		}, 
-		//隐藏弹窗
-		hideDialog( code ){  
-			switch( code ){
-				case 'hi_psndoc_work':
-					this.subDialogConfig.lvLi.visible = false; 
-				break;
-				case 'hi_psndoc_edu':
-					this.subDialogConfig.xueli.visible = false; 
-				break;
-				case 'hi_psndoc_cert':
-					this.subDialogConfig.shenfenzheng.visible = false; 
-				break;
-				case 'hi_psndoc_family':
-					this.subDialogConfig.jiating.visible = false; 
-				break;
-				case 'hi_psndoc_title':
-					this.subDialogConfig.zhicheng.visible = false; 
-				break;
-				case 'hi_psndoc_partylog':
-					this.subDialogConfig.dangpai.visible = false; 
-				break;
-				case 'hi_psndoc_enc':
-					this.subDialogConfig.jiangli.visible = false; 
-				break;
-				case 'hi_psndoc_linkman':
-					this.subDialogConfig.jinji.visible = false; 
-				break;
-				case 'hi_psndoc_langability':
-					this.subDialogConfig.yuyan.visible = false; 
-				break;
-				
 			};
-			
+			ajaxData(this.$store.state.Interface.information, _paramData, (res) => {
+				this.hideDialog(_code);
+				this.$refs[_code].loadData();
+			});
 		},
-		//还原提交收回履历 | 工作| 教育等信息
-		handleList( data ){  
+		//隐藏弹窗
+		hideDialog(code) {
+			switch(code) {
+				case 'hi_psndoc_work':
+					this.subDialogConfig.lvLi.visible = false;
+					break;
+				case 'hi_psndoc_edu':
+					this.subDialogConfig.xueli.visible = false;
+					break;
+				case 'hi_psndoc_cert':
+					this.subDialogConfig.shenfenzheng.visible = false;
+					break;
+				case 'hi_psndoc_family':
+					this.subDialogConfig.jiating.visible = false;
+					break;
+				case 'hi_psndoc_title':
+					this.subDialogConfig.zhicheng.visible = false;
+					break;
+				case 'hi_psndoc_partylog':
+					this.subDialogConfig.dangpai.visible = false;
+					break;
+				case 'hi_psndoc_enc':
+					this.subDialogConfig.jiangli.visible = false;
+					break;
+				case 'hi_psndoc_linkman':
+					this.subDialogConfig.jinji.visible = false;
+					break;
+				case 'hi_psndoc_langability':
+					this.subDialogConfig.yuyan.visible = false;
+					break;
+
+			};
+
+		},
+		//子集-还原提交收回等操作
+		handleList(data) {
 			var _code = data[1];
 			ajaxData(this.$store.state.Interface.information, {
-				"transType": 'psnInfoHandle', 
+				"transType": 'psnInfoHandle',
 				"infoSetCode": _code,
 				"way": data[0]
-			}, (res) => {   
-				this.$refs[_code].loadData();  
+			}, (res) => {
+				this.$refs[_code].loadData();
 			});
-			
+
 		},
-		//删除履历 | 工作| 教育等信息
-		deleteList( data ){ 
-			this.setCurrentDialog( data );
-			this.savePersonInfo( data[2] );
+		//子集-删除
+		deleteList(data) {
+			this.setCurrentDialog(data);
+			this.savePersonInfo(data[2]);
 		},
+
 		//打开履历操作弹窗
-		openLvliDialog( data ){
+		openLvliDialog(data) {
 			var initData = {
 				"begindate": "",
 				"enddate": "",
@@ -499,28 +508,29 @@ export default {
 				"workjob": "",
 				"certifier": "",
 				"memo": "",
-				"workduty":"",
-				"glbdef2":"",
-				"glbdef3":"",
-				"workachive":"",
-				"work_addr":"",
-				"dimission_reason":"",
-				"linkphone":"",
-				"certiphone":""
+				"workduty": "",
+				"glbdef2": "",
+				"glbdef3": "",
+				"workachive": "",
+				"work_addr": "",
+				"dimission_reason": "",
+				"linkphone": "",
+				"certiphone": ""
 			};
-			switch( data[0] ){
+			switch(data[0]) {
 				case "add":
+					initData.glbdef2 = 'N';
 					this.lvliFormData = initData;
 					break;
-				case 'edit':  
-					this.lvliFormData = this.editFormData( initData,  data[2]);  
+				case 'edit':
+					this.lvliFormData = this.editFormData(initData, data[2]);
 					break;
-			};  
-			this.setCurrentDialog( data );
-			this.subDialogConfig.lvLi.visible = true; 
-		}, 
+			};
+			this.setCurrentDialog(data);
+			this.subDialogConfig.lvLi.visible = true;
+		},
 		//打开学历操作弹窗
-		openXueliDialog( data ){
+		openXueliDialog(data) {
 			var initData = {
 				"enddate": "",
 				"begindate": "",
@@ -542,46 +552,49 @@ export default {
 				"glbdef5": "",
 				"glbdef3": "",
 				"glbdef4": "",
-				"glbdef1": "",}; 
-			switch( data[0] ){
-				case "add": 
+				"glbdef1": "",
+			};
+			switch(data[0]) {
+				case "add":
 					initData.lasteducation = 'N';
 					initData.glbdef5 = 'N';
 					initData.glbdef1 = 'N';
 					this.xueliFormData = initData;
 					break;
-				case 'edit': 
-					this.xueliFormData = this.editFormData( initData,  data[2]);  
+				case 'edit':
+					this.xueliFormData = this.editFormData(initData, data[2]);
 					break;
-			};  
-			this.setCurrentDialog( data );
-			this.subDialogConfig.xueli.visible = true; 
+			};
+			this.setCurrentDialog(data);
+			this.subDialogConfig.xueli.visible = true;
 		},
 		//打开身份证弹窗
-		openPsncertDialog( data ){
+		openPsncertDialog(data) {
 			var initData = {
 				"idtype": "",
 				"id": "",
 				"begindate": "",
 				"enddate": "",
-				"extend_org": "" ,
+				"extend_org": "",
 				"iseffect": "",
 				"isstart": "",
 				"memo": ""
 			};
-			switch( data[0] ){
+			switch(data[0]) {
 				case "add":
+					initData.iseffect = 'N';
+					initData.isstart = 'N';
 					this.psncertFormData = initData;
 					break;
-				case 'edit': 
-					this.psncertFormData = this.editFormData( initData,  data[2]);  
+				case 'edit':
+					this.psncertFormData = this.editFormData(initData, data[2]);
 					break;
-			}; 
-			this.setCurrentDialog( data );
-			this.subDialogConfig.shenfenzheng.visible = true; 
+			};
+			this.setCurrentDialog(data);
+			this.subDialogConfig.shenfenzheng.visible = true;
 		},
 		//打开家庭弹窗
-		openJiatingDialog( data ){
+		openJiatingDialog(data) {
 			var initData = {
 				"mem_relation": "",
 				"mem_name": "",
@@ -603,96 +616,96 @@ export default {
 				"glbdef7": "",
 				"memo": ""
 			};
-			switch( data[0] ){
+			switch(data[0]) {
 				case "add":
 					this.jiatingFormData = initData;
 					break;
-				case 'edit': 
-					this.jiatingFormData = this.editFormData( initData,  data[2]); 
+				case 'edit':
+					this.jiatingFormData = this.editFormData(initData, data[2]);
 					break;
-			}; 
-			this.setCurrentDialog( data );
-			this.subDialogConfig.jiating.visible = true;  
+			};
+			this.setCurrentDialog(data);
+			this.subDialogConfig.jiating.visible = true;
 		},
 		//打开职称弹窗
-		openZhichenDialog( data ){
+		openZhichenDialog(data) {
 			var initData = {
 				"begindate": "",
 				"enddate": "",
 				"pk_techposttitle": "",
 				"titlerank": "",
-				"assorg": "", 
-				"certifcode": "", 
+				"assorg": "",
+				"certifcode": "",
 				"tiptop_flag": "",
 				"achive": "",
 				"strongsuit": "",
 				"summ": "",
 				"glbdef1": ""
 			};
-			switch( data[0] ){
+			switch(data[0]) {
 				case "add":
 					this.zhichenFormData = initData;
 					break;
-				case 'edit': 
-					this.zhichenFormData = this.editFormData( initData,  data[2]); 
+				case 'edit':
+					this.zhichenFormData = this.editFormData(initData, data[2]);
 					break;
-			}; 
-			this.setCurrentDialog( data );
-			this.subDialogConfig.zhicheng.visible = true;  
+			};
+			this.setCurrentDialog(data);
+			this.subDialogConfig.zhicheng.visible = true;
 		},
 		//打开党派弹窗
-		openDangpaiDialog( data ){
+		openDangpaiDialog(data) {
 			var initData = {
 				"begindate": "",
 				"enddate": "",
 				"partydate": "",
 				"partyname": "",
-				"partyunit": "", 
-				"partypsn": "", 
-				"partyduedate": "", 
-				"exreason": "", 
-				"exsort": "", 
-				"glbdef4": "", 
-				"glbdef1": "", 
-				"glbdef2": "", 
+				"partyunit": "",
+				"partypsn": "",
+				"partyduedate": "",
+				"exreason": "",
+				"exsort": "",
+				"glbdef4": "",
+				"glbdef1": "",
+				"glbdef2": "",
 				"glbdef3": ""
 			};
-			switch( data[0] ){
+			switch(data[0]) {
 				case "add":
 					this.dangpaiFormData = initData;
 					break;
-				case 'edit': 
-					this.dangpaiFormData = this.editFormData( initData,  data[2]); 
+				case 'edit':
+					this.dangpaiFormData = this.editFormData(initData, data[2]);
 					break;
-			}; 
-			this.setCurrentDialog( data );
-			this.subDialogConfig.dangpai.visible = true; 
+			};
+			this.setCurrentDialog(data);
+			this.subDialogConfig.dangpai.visible = true;
 		},
 		//打开奖励弹窗
-		openJiangliDialog( data ){
-			
+		openJiangliDialog(data) {
+
 			var initData = {
 				"encourdate": "",
 				"encourtype": "",
 				"encourrank": "",
 				"encourorg": "",
 				"encourmatter": "",
-				"encourmeas": ""				
+				"encourmeas": ""
 			};
-			switch( data[0] ){
+			switch(data[0]) {
 				case "add":
 					this.jiangliFormData = initData;
 					break;
-				case 'edit': 
-					this.jiangliFormData = this.editFormData( initData,  data[2]); 
+				case 'edit':
+					this.jiangliFormData = this.editFormData(initData, data[2]);
 					break;
-			}; 
-			this.setCurrentDialog( data );
-			this.subDialogConfig.jiangli.visible = true;  
+			};
+			this.setCurrentDialog(data);
+			this.subDialogConfig.jiangli.visible = true;
 		},
 		//打开紧急弹窗
-		openjinjiDialog( data ){
-			
+		openjinjiDialog(data) {
+
 			var initData = {
 				"linkman": "",
 				"relation": "",
@@ -704,51 +717,51 @@ export default {
 				"mobile": "",
 				"fax": "",
 				"email": ""
-				
+
 			};
-			switch( data[0] ){
+			switch(data[0]) {
 				case "add":
 					this.jinjiFormData = initData;
 					break;
-				case 'edit': 
-					this.jinjiFormData = this.editFormData( initData,  data[2]); 
+				case 'edit':
+					this.jinjiFormData = this.editFormData(initData, data[2]);
 					break;
-			}; 
-			this.setCurrentDialog( data );
-			this.subDialogConfig.jinji.visible = true;  
+			};
+			this.setCurrentDialog(data);
+			this.subDialogConfig.jinji.visible = true;
 		},
 		//打开语言弹窗
-		openyuyanDialog( data ){
-			
+		openyuyanDialog(data) {
+
 			var initData = {
 				"langsort": "",
 				"langskill": "",
 				"langlev": "",
 				"certifname": "",
 				"certifcode": "",
-				"certifdate": "",	
+				"certifdate": "",
 				"memo": ""
 			};
-			switch( data[0] ){
+			switch(data[0]) {
 				case "add":
 					this.yuyanFormData = initData;
 					break;
-				case 'edit': 
-					this.yuyanFormData = this.editFormData( initData,  data[2]); 
+				case 'edit':
+					this.yuyanFormData = this.editFormData(initData, data[2]);
 					break;
-			}; 
-			this.setCurrentDialog( data );
-			this.subDialogConfig.yuyan.visible = true;  
+			};
+			this.setCurrentDialog(data);
+			this.subDialogConfig.yuyan.visible = true;
 		},
-		
+
 		//编辑子集信息表单时候的数据补全
-		editFormData( sdata, cdata ){
+		editFormData(sdata, cdata) {
 			var _obj = {};
-			for( var i in sdata ){
-				_obj[i] = ( cdata[i] ? cdata[i] : sdata[i] );
+			for(var i in sdata) {
+				_obj[i] = (cdata[i] ? cdata[i] : sdata[i]);
 			};
 			return _obj;
 		}
 	}
-}
+	}
 </script> 
