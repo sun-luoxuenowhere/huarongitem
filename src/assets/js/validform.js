@@ -1,63 +1,74 @@
 export const validForm = { 
 	//手机号
-	phone: (rule, value, callback) => { 
-		if( !rule.required) {
+	phone: (rule, value, callback) => {
+		if(!rule.required&&value=="") {
 			callback();
-			return;
+			return;	
+		} else {
+			if(!validForm.pattresult["phone"].test(value)) {
+				callback(new Error('请输入有效的手机号码'));
+			} else {
+				callback();
+			}
 		}
-        if( !validForm.pattresult["phone"].test(value) ){
-            callback(new Error('请输入有效的手机号码'));
-        }else{
-            callback();
-        };
-    },
+
+	},
     //电话号码
-	tel: (rule, value, callback) => {   
-		if( !rule.required) {
+	tel: (rule, value, callback) => {
+		debugger
+	if(!rule.required && value=="") {
+		callback();
+		return;
+	} else {
+		if(!validForm.pattresult["tel"].test(value)) {
+			callback(new Error('请输入有效的电话号码'));
+		} else {
 			callback();
-			return;
 		}
-        if( !validForm.pattresult["tel"].test(value) ){
-            callback(new Error('请输入有效的电话号码'));
-        }else{
-            callback();
-        };
-    },
+	}
+
+},
     //邮箱
     email: (rule, value, callback) => { 
-    	if( !rule.required) {
+    	if( !rule.required && value=="") {
 			callback();
 			return;
-		}
-        if( !validForm.pattresult["email"].test(value) ){
+		}else{
+			if( !validForm.pattresult["email"].test(value) ){
             callback(new Error('请输入正确的邮箱'));
         }else{
             callback();
-        };
+        }
+		}
+        
     },
     //汉字
     chinese: (rule, value, callback) => {   
-    	if( !rule.required) {
+    	if( !rule.required && value =="") {
 			callback();
 			return;
-		}
-        if( !validForm.pattresult["chinese"].test(value) ){
+		}else{
+			if( !validForm.pattresult["chinese"].test(value) ){
             callback(new Error('只能输入汉字'));
         }else{
             callback();
-        };
+        }
+		}
+        
     }, 
     //数字
     num: (rule, value, callback) => {  
-    	if( !rule.required) {
+    	if( !rule.required && value=="") {
 			callback();
 			return;
-		}
-        if( !validForm.pattresult["num"].test(value) ){
+		}else{
+			if( !validForm.pattresult["num"].test(value) ){
             callback(new Error('只能输入数字'));
         }else{
             callback();
-        };
+        }
+		}
+        
     },
     
     //年月日 yyyy-mm-dd格式 
@@ -78,15 +89,17 @@ export const validForm = {
     }, 
     //证件号：只能输数字和字母
     cardno: (rule, value, callback) => { 
-    	if( !rule.required) {
+    	if( !rule.required && value =="") {
 			callback();
 			return;
-		}
-    	if( !validForm.pattresult["cardno"].test(value) ){  
+		}else{
+			if( !validForm.pattresult["cardno"].test(value) ){  
             callback(new Error('请输入有效的证件号'));
         }else{
             callback();
-        }; 
+        }
+		}
+    	 
     }, 
     pattresult: {
         "email": /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
