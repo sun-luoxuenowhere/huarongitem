@@ -46,7 +46,7 @@ export default {
 			{ "id": "id", "text": "证件号码:", "disabled": true },
 			{ "id": "glbdef1", "text": "集团邮箱:", "disabled": true },
     		{ "id": "glbdef2", "text": "单位邮箱:", "disabled": true },
-			{ "id": "officephone", "text": "电话:", "valid": [{ validator: validForm.tel, required: true, trigger: 'change' }] },
+			{ "id": "officephone", "text": "电话:","valid": [{ validator: validForm.tel,required: true, trigger: 'change' }] },
 			{ "id": "mobile", "text": "手机:", "valid": [{ validator: validForm.phone, required: true, trigger: 'change' }] },
 			//{ "id": "email", "text": "邮箱", /*"valid": [{ validator: validForm.email, required: true, trigger: 'change' }] */}
 			],
