@@ -30,7 +30,7 @@ export default {
 	    jobTheadData: [{ param: ['begindate','enddate'], text: '起止时间', required: true },
 	    	{ param: 'workcorp', text: '工作单位', required: true },
 	    	{ param: 'workdept', text: '部门', required: true },
-	    	{ param: 'workpost', text: '岗位' , required: true},
+	    	{ param: 'workpost', text: '岗位' },
 	    	{ param: 'workjob', text: '职务' },
 	    	{ param: 'workduty', text: '主要职责' },
 	    	{ param: 'glbdef2', text: '是否兼职' },
