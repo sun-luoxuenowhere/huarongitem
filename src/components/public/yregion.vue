@@ -98,7 +98,7 @@ export default {
 				"infoSetCode": "addr",
 				"jsonStr": JSON.stringify( _sdata )
 	  		}; 
-			axios.post( this.$store.state.Interface.information, Qs.stringify ( param ), { 
+			axios.post( this.$store.state.Interface.hi, Qs.stringify ( param ), { 
 	          	headers: {
 	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
 	          	}
@@ -131,7 +131,7 @@ export default {
 					return;
 				}; 
 				
-				ajaxData( this.$store.state.Interface.smserverlet, { 
+				ajaxData( this.$store.state.Interface.sm, { 
 					"pk_psndoc":UserInfo.pk_psndoc,
 			    	"cuserid":UserInfo.cuserid,
 			    	"pk_group":UserInfo.pk_group,
