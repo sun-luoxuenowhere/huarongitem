@@ -364,6 +364,7 @@
 	background-color: transparent;
 	border-color: transparent;
 	color: #333;
+	font-family: "微软雅黑";
 }
 
 .y-baseinfo-form .y-input .el-input.is-disabled .el-input__icon {
@@ -495,6 +496,7 @@
 	border-color: transparent;
 	color: #333;
 	cursor: default;
+	font-family: "微软雅黑";
 }
 
 .y-module-baseinfo2 .y-input .el-input.is-disabled .el-input__inner,
@@ -504,6 +506,7 @@
 	border: 1px solid #CCCCCC;
 	border-radius: 4px;
 	cursor: not-allowed;
+	font-family: "微软雅黑";
 }
 
 .y-operate {
@@ -529,7 +532,7 @@
 	position: absolute;
 	width: 120px;
 	left: 0;
-	font-family: MicrosoftYaHei;
+	font-family: "微软雅黑";
 	font-size: 14px;
 	color: #666;
 }
@@ -538,7 +541,7 @@
 	position: absolute;
 	width: 215px;
 	text-align: right;
-	font-family: MicrosoftYaHei;
+	font-family: '微软雅黑';
 	font-size: 14px;
 	color: #666;
 }
@@ -580,7 +583,7 @@
 }
 
 .y-info-dialog .y-input {
-	float: left;
+	display: inline-block;
 	width: 50%;
 }
 
@@ -639,7 +642,7 @@
 .y-table .el-table__header-wrapper thead div {
 	font-size: 14px;
 	background-color: inherit;
-	font-family: MicrosoftYaHei;
+	font-family: "微软雅黑";
 	color: #333333;
 }
 
@@ -803,7 +806,7 @@
 
 .y-dialog-line {
 	line-height: 32px;
-	font-family: PingFangSC-Regular;
+	font-family: "微软雅黑";
 	font-size: 14px;
 	color: #333333;
 }
