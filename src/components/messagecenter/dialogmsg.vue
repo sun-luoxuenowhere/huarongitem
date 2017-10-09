@@ -3,7 +3,7 @@
 		<!--<el-dialog :title="title" :show-close="false" :visible="dialogvisible" size="tiny">-->
 		<!--预警消息弹框-->
 		<div v-if="judgedialog=='warning'">
-			<el-dialog :title="title"  :show-close="false" :visible="dialogvisible" size="tiny">
+			<el-dialog :title="title"  :show-close="true" :before-close="handleClose" :visible="dialogvisible" size="tiny">
 				<div v-show="true">
 					<div class="y-dialog-body">
 						<table class="y-info-list">
@@ -40,7 +40,7 @@
 		</div>
 		<!--待办消息弹框-->
 		<div v-else-if="judgedialog=='handle'">
-			<el-dialog :title="title"  :show-close="false" :visible="dialogvisible" size="tiny">
+			<el-dialog :title="title"  :show-close="true" :before-close="handleClose" :visible="dialogvisible" size="tiny">
 				<div v-if="billType=='6111'">
 					<div class="y-dialog-body">
 						<el-row :gutter="20">
@@ -284,7 +284,7 @@
 		<!--通知消息弹框-->
 		<div v-else-if="judgedialog=='inform'">
 			
-			<el-dialog :title="title"  :show-close="false" :visible="dialogvisible" size="tiny">
+			<el-dialog :title="title"  :show-close="true" :before-close="handleClose" :visible="dialogvisible" size="tiny">
 				<div v-if="data.msgsourcetype=='notice'">
 					<div class="y-dialog-body">
 						<table class="y-info-list">
@@ -772,6 +772,9 @@ export default {
 			}
 		},
 		dialognone(){//取消按钮
+			this.$emit('close');
+		},
+		handleClose(){
 			this.$emit('close');
 		},
 		beRead(){ 
