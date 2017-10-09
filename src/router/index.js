@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Login from '@/components/login/login';//登录引用
 import Index from '@/components/main/index';//公共部分
 import homepage from '@/components/main/homepage';//主页内容
+import refresh from '@/components/public/refresh';//菜单刷新
 //我的信息部分
 import myInfo from '@/components/person/myinfo/info';
 import Employeelist from '@/components/person/employee/list';  
@@ -67,6 +68,11 @@ export default new Router({
 		    	path: "/Employeeinfo/:id",
 		    	name: '/Employeeinfo',
 		    	component: Employeeinfo 
+		    },
+		    {
+		    	path: "/refresh",
+		    	name: '/refresh',
+		    	component: refresh 
 		    },
 		    {
 		    	path: "/Warningmessagelist",

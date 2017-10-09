@@ -15,7 +15,7 @@
 				<span class="el-cus-menu-text">{{itemmenu.text}}</span>
 			</template>
 			<el-menu-item-group>
-				<router-link v-for="(itemchildren,index) in itemmenu.children" :to="itemchildren.url"  >
+				<router-link v-for="(itemchildren,index) in itemmenu.children" :to="itemchildren.url" >
 					<el-menu-item :index="itemchildren.id">
 						{{itemchildren.text}}
 					</el-menu-item> 
@@ -30,13 +30,7 @@
 		props:['navdata'],
 		data(){
 			return {   
-				 navres:[
-				 	{
-				 		"pid":1.1,
-				 	},{
-				 		"pid":1.2
-				 	}
-				 ]
+				
 			}
 		},
 		computed:{
@@ -48,14 +42,18 @@
 				return this.navdata
 			}
 		},
+		
 		methods:{
 			handleSelect(key, keyPath) {//解决重新刷新的问题
 //		        console.log(key, keyPath);
-//		        window.location.reload();
-		        this.$router.push({
-		  			name:'/Index'
-		  		});
-		    }
+//		        this.$router.options.routes = []
+//		        console.log( this.$router)
+//		        this.$router.options.routes='Informmessage'
+//				this.$router.push({
+//		  			name:'/refresh'
+//		  		});
+		  }
+			
 		}
 	}
 </script> 
