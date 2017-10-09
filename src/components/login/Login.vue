@@ -92,7 +92,7 @@
         },
         computed: {
 			url(){  
-				return this.$store.state.Interface.msglogin;
+				return this.$store.state.Interface.sm;
 			} 
 		}
        

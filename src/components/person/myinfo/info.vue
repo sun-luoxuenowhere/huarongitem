@@ -440,7 +440,7 @@ export default {
 					_paramData.pk_psndoc_sub = this.currentDialog.index;
 					break;
 			};
-			ajaxData(this.$store.state.Interface.information, _paramData, (res) => {
+			ajaxData(this.$store.state.Interface.hi, _paramData, (res) => {
 				this.hideDialog(_code);
 				this.$refs[_code].loadData();
 			});
@@ -482,7 +482,7 @@ export default {
 		//子集-还原提交收回等操作
 		handleList(data) {
 			var _code = data[1];
-			ajaxData(this.$store.state.Interface.information, {
+			ajaxData(this.$store.state.Interface.hi, {
 				"transType": 'psnInfoHandle',
 				"infoSetCode": _code,
 				"way": data[0]

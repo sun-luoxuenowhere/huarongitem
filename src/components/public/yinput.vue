@@ -116,7 +116,7 @@ export default {
     			var _name = this.name; 
 				this.currentValue = this.formData[_name]; 
     		}else if( _code == 'country' ){ //国籍地区
-    			ajaxData( this.$store.state.Interface.smserverlet, { 
+    			ajaxData( this.$store.state.Interface.sm, { 
 	    			"pk_psndoc":UserInfo.pk_psndoc,
 			    	"cuserid":UserInfo.cuserid,
 			    	"pk_group":UserInfo.pk_group,
@@ -128,7 +128,7 @@ export default {
 					this.currentValue = this.formData[_name]; 
 		    	}); 
     		}else{ //从后台取数据的参照类型
-    			ajaxData( this.$store.state.Interface.smserverlet, {
+    			ajaxData( this.$store.state.Interface.sm, {
     				"pk_psndoc":UserInfo.pk_psndoc,
 			    	"cuserid":UserInfo.cuserid,
 			    	"pk_group":UserInfo.pk_group,

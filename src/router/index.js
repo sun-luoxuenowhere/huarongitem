@@ -4,7 +4,7 @@ import Login from '@/components/login/login';//登录引用
 import Index from '@/components/main/index';//公共部分
 import homepage from '@/components/main/homepage';//主页内容
 //我的信息部分
-import Myinfo from '@/components/person/myinfo/info';
+import myInfo from '@/components/person/myinfo/info';
 import Employeelist from '@/components/person/employee/list';  
 import Employeeinfo from '@/components/person/employee/info';   
 //业务办理部分
@@ -54,9 +54,9 @@ export default new Router({
 		    	component: homepage 
 		    },
 		    {
-		    	path: "/Information",
-		    	name: '/Myinfo',
-		    	component: Myinfo 
+		    	path: "/myInfo",
+		    	name: '/myInfo',
+		    	component: myInfo 
 		    },
 		    {
 		    	path: "/Employeelist",

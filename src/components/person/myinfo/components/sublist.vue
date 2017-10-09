@@ -121,7 +121,7 @@ export default {
 	methods: {  
 		//动态加载数据
 		loadData(){
-			ajaxData(this.$store.state.Interface.information, {
+			ajaxData(this.$store.state.Interface.hi, {
 				"pk_psndoc":UserInfo.pk_psndoc,
 		    	"cuserid":UserInfo.cuserid,
 		    	"pk_group":UserInfo.pk_group,

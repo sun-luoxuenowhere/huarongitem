@@ -178,7 +178,7 @@
 			
 			//动态加载基本信息数据
 			loadInfoData() {
-				ajaxData(this.$store.state.Interface.information, {
+				ajaxData(this.$store.state.Interface.hi, {
 					"pk_psndoc":UserInfo.pk_psndoc,
 			    	"cuserid":UserInfo.cuserid,
 			    	"pk_group":UserInfo.pk_group,
@@ -223,7 +223,7 @@
 							if( _param.addr_show ){
 								delete _param.addr_show;
 							}; 
-							ajaxData(this.$store.state.Interface.information, {
+							ajaxData(this.$store.state.Interface.hi, {
 								"transType": "psnInfoSave",  
 								"infoSetCode": this.infoSetCode,
 								"jsonStr": JSON.stringify( _param ) 
@@ -242,7 +242,7 @@
 			
 			//点击提交、还原、收回按钮
 			handle( data ){  
-				ajaxData(this.$store.state.Interface.information, {
+				ajaxData(this.$store.state.Interface.hi, {
 					"transType": 'psnInfoHandle', 
 					"infoSetCode": this.infoSetCode,
 					"way": data[0]
