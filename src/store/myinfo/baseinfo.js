@@ -71,9 +71,9 @@ export default {
 			{ "id": "marriagedate", "text": "结/离婚日期:", "type": "date" },
     		{ "id": "glbdef14", "text": "出生地:", "disabled": true, "type": "region", "typedata": [{ "prevkey": "pk_country" }] },
     		
-    		{ "id": "glbdef3", "text": "个人邮箱:" },
-    		{ "id": "homephone", "text": "家庭电话:" },
-    		{ "id": "postalcode", "text": "邮政编码:" },
+    		{ "id": "glbdef3", "text": "个人邮箱:", "valid": [{ validator: validForm.email, trigger: 'change' }] },
+    		{ "id": "homephone", "text": "家庭电话:", "valid": [{ validator: validForm.tel, trigger: 'change' }] },
+    		{ "id": "postalcode", "text": "邮政编码:", "valid": [{ validator: validForm.num, trigger: 'change' }] },
     		{ "id": "usedname", "text": "曾用名:" },
     		{ "id": "penelauth", "text": "个人身份:", "type": "refer", "typedata": [{"code": "HR004_0xx"}] },
     		{ "id": "age", "text": "年龄（身份证）:", "disabled": true },
