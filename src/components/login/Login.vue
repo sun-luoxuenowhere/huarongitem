@@ -94,6 +94,9 @@
 			url(){  
 				return this.$store.state.Interface.sm;
 			} 
+		},
+		created(){
+			
 		}
        
     }
