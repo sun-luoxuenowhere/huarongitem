@@ -126,32 +126,44 @@
 					<el-tabs v-model="activeName2" >
 					    <el-tab-pane label="我的应用" name="first">
 					    	<el-row >
-					    		<el-col :span="8" class="system">
-					    			<div class="systemback  L-qianblue"><i class="iconfont iconfontsize icon-youjian"></i>
-					    				<span class="systembackmsg">12</span>
-					    			</div>
-					    			<div class="systemcolor">邮件系统</div>
+					    		<el-col :span="8" class="system" >
+				    				<div @click="mailhref()">
+				    					<div  class="systemback  L-qianblue"><i class="iconfont iconfontsize icon-youjian"></i>
+						    				<!--<span class="systembackmsg">12</span>-->
+						    			</div>
+						    			<div class="systemcolor">邮件系统</div>
+				    				</div>
 					    		</el-col>
 					    		
 					    		<el-col :span="8" class="system">
-					    			<div class="systemback  L-qianyellow"><i class="iconfont iconfontsize icon-gonggao"></i></div>
-					    			<div class="systemcolor">公共通知</div>
+					    			<div @click="publichref()">
+					    				<div class="systemback  L-qianyellow"><i class="iconfont iconfontsize icon-gonggao"></i></div>
+					    				<div class="systemcolor">公共通知</div>
+					    			</div>
 					    		</el-col>
 					    		<el-col :span="8" class="system ">
-					    			<div class="systemback L-shenred"><i class="iconfont iconfontsize icon-wenjian"></i></div>
-					    			<div class="systemcolor">文件系统</div>
+					    			<div @click="filehref()">
+					    				<div class="systemback L-shenred"><i class="iconfont iconfontsize icon-wenjian"></i></div>
+					    				<div class="systemcolor">文件系统</div>
+					    			</div>
 					    		</el-col>
 					    		<el-col :span="8" class="system">
-					    			<div class="systemback  L-green"><i class="iconfont iconfontsize icon-daiban"></i></div>
-					    			<div class="systemcolor">办公待办</div>
+					    			<div @click="handlehref()">
+					    				<div class="systemback  L-green"><i class="iconfont iconfontsize icon-daiban"></i></div>
+					    				<div class="systemcolor">办公待办</div>
+					    			</div>
 					    		</el-col>
 					    		<el-col :span="8" class="system">
-					    			<div class="systemback  L-yellew"><i class="iconfont iconfontsize icon-yewu"></i></div>
-					    			<div class="systemcolor">业务待办</div>
+					    			<div @click="businesshref()">
+					    				<div class="systemback  L-yellew"><i class="iconfont iconfontsize icon-yewu"></i></div>
+					    				<div class="systemcolor">业务待办</div>
+					    			</div>
 					    		</el-col>
 					    		<el-col :span="8" class="system">
-					    			<div class="systemback L-blue"><i class="iconfont iconfontsize icon-huiyiziliao"></i></div>
-					    			<div class="systemcolor">会议资料</div>
+					    			<div @click="meethref()">
+					    				<div class="systemback L-blue"><i class="iconfont iconfontsize icon-huiyiziliao"></i></div>
+					    				<div class="systemcolor">会议资料</div>
+					    			</div>
 					    		</el-col>
 					    		
 					    	</el-row>
@@ -360,7 +372,25 @@ export default{
 		}).catch((err) => { 
 			this.$message.error( err );
 		}); 
-      }
+     },
+     mailhref(){
+     	window.open('https://mail.chamc.com.cn:4443/owa');
+     },
+     publichref(){
+     	window.open('http://kms.chamc.com.cn/WebPub/Office.html');
+     },
+     filehref(){
+     	window.open('http://kms.chamc.com.cn/WebDoc');
+     },
+     handlehref(){
+     	window.open('http://kms.chamc.com.cn/WebPub/Office.html');
+     },
+     businesshref(){
+     	window.open('http://idmchamc.com.cn/portal');
+     },
+     meethref(){
+     	window.open('http://kms.chamc.com.cn/meetingdoc');
+     }
       
    } 
 }

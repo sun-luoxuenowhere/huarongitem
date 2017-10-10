@@ -76,6 +76,7 @@
 import { deepCopyObj, deepCopyArry } from '@/assets/js/v-extend.js'; 
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 import yListBtns from '@/components/public/ylistbtns';
+import Qs from 'qs';
 var UserInfo;
 export default { 
 	//infoSetCode: 数据源
@@ -98,7 +99,7 @@ export default {
 	    // 如果 listdata 发生改变，这个函数就会运行
 	    listdata: function ( data ) { 
 	    	this.tempData = deepCopyArry( data );
-	    	console.log(this.tempData)
+//	    	console.log(this.tempData)
 	    }
 	},
 	created(){
@@ -121,17 +122,24 @@ export default {
 	methods: {  
 		//动态加载数据
 		loadData(){
-			ajaxData(this.$store.state.Interface.hi, {
+			this.$http.post( this.$store.state.Interface.hi, Qs.stringify ({
 				"pk_psndoc":UserInfo.pk_psndoc,
 		    	"cuserid":UserInfo.cuserid,
 		    	"pk_group":UserInfo.pk_group,
 		    	"pk_org": UserInfo.pk_org,
 				"infoSetCode": this.infoSetCode,
 				"transType": 'psnInfoQuery' 
-			}, ( res ) => {   
-				this.status = res.status;  
-				this.listdata = res.list; 
-	    	});  
+			})).then(( res) => {
+				if(res.data.flag=='0'){
+					this.status = res.data.data.status;  
+					this.listdata = res.data.data.list;
+				}else if(res.data.flag=='-1'){
+					this.status = '-1';  
+					this.listdata =[];
+				}
+			}).catch((err) => { 
+				this.$message.error( err );
+			})
 		}, 
 		//调用父组件的提交方法,弹出新增窗口
 		handleList( data ){
