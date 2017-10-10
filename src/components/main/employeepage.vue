@@ -36,7 +36,7 @@
 		<div id="L-mainuserlist">
 			<el-row type="flex" :gutter="16">
 				<el-col :span="11" style='position: relative;'>
-					<div v-show="listdata==''" style="text-align: center;width:135px;height:84px;position: absolute;z-index: 999;top: 40%;left: 50%;margin-left: -70px;">
+					<div v-show="!listdata.msglist" style="text-align: center;width:135px;height:84px;position: absolute;z-index: 999;top: 40%;left: 50%;margin-left: -70px;">
 						<img  src="../../assets/img/nodata.png"/>
 						<span>暂无数据哦</span>
 					</div>
@@ -295,6 +295,7 @@ export default{
 	    		}else if(row.msgsourcetype=='worklist' || row.msgsourcetype=='pfbizmsg'){
 	    			//不为空的时候需要向后端发送请求显示字段的详细信息；
 	    			//获取列表数据；
+	    			
 					this.$http.post( this.url, Qs.stringify ({
 						transType:'msgBill',
 						pk_psndoc:UserInfo.pk_psndoc,
@@ -309,10 +310,10 @@ export default{
 						if( _data.flag == "1" ){ //操作失败
 							this.$message.error( _data.des );
 						}else{
-							console.log(_data)
+							console.log(JSON.stringify(_data))
 							this.openDialog = true; 
 							this.msgdata = row;
-			    			this.msgdata.msgType = this.param.msgType;
+//			    			this.msgdata.msgType = this.param.msgType;
 			    			this.msgdata.Datalist = JSON.parse(_data.data).headMsg;
 			    			this.msgdata.Hisapprove = _data.hisapprove;
 			    			console.log(this.msgdata)
@@ -365,6 +366,7 @@ export default{
 //				this.totalcount = parseInt( _data.totalcount ); 
 
 				this.listdata = _data;
+				console.log(this.listdata)
 				
 			}else{
 				this.$message.error( _data.des );

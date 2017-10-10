@@ -11,6 +11,9 @@
 		border: none;
 		resize: none;
 }
+
+
+
 .L_noborder .el-input__inner {
 	border: none;
 	padding: 0px;
@@ -23,7 +26,7 @@
 .iconfontmain {
 	position: relative;
 	top: -2px;
-	color:#F88962;
+	color:#CC2123;
 	z-index: 10;
 	font-size: 24px;
 	line-height: 24px;
@@ -245,7 +248,7 @@ header {
 #L-mainuserlist .el-tabs__active-bar {
 	top: 0px;
 	height: 2.3px;
-	background-color: #F88962;
+	background-color: #CC2123;
 }
 #L-mainuserlist .el-tabs__content {
 	background-color: #fff;

@@ -9,7 +9,7 @@ export default {
     		"deptname":"申请部门",
     		"postname":"申请岗位",
     		"jobname":"入职职务",
-			"trnstypename":"人员类别",
+			"psntype":"人员类别",
 			"begindate":"入职日期"
     	},
     	becomerequest:{
@@ -24,7 +24,7 @@ export default {
 			"postname": "转正后岗位",
 			"jobname":"转正后职务",
 			"jobgradename":"转正后职级",
-			"psnName":"转正后人员类别"
+			"psntype":"转正后人员类别"
     	},
     	tunerequest:{
     		"billCode":"申请单编码",

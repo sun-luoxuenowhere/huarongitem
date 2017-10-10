@@ -171,7 +171,13 @@
 	border-color: #CC2123;
 	background: #CC2123;
 }
-
+.y-dialog .el-textarea__inner {
+	resize: none;
+	overflow-y: hidden;
+}
+.y-dialog .el-textarea__inner:focus{
+	border-color: #CC2123;
+}
 .el-dialog__headerbtn .el-dialog__close {
 	color: #fff;
 	margin-top: 13px;

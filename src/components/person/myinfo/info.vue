@@ -208,6 +208,7 @@
 		<subDialog 
 			title="履历记录"
 			:visible="subDialogConfig.lvLi.visible" 
+			:subDialogtype="subDialogConfig.lvli"
 			:formConfig="jobFormConfig"
 			:formData="lvliFormData" 
 			@close="subDialogConfig.lvLi.visible = false" 
@@ -215,6 +216,7 @@
 		<subDialog 
 			title="学历信息"
 			:visible="subDialogConfig.xueli.visible" 
+			:subDialogtype="subDialogConfig.xueli"
 			:formConfig="xueliFormConfig"
 			:formData="xueliFormData"
 			@close="subDialogConfig.xueli.visible = false" 
@@ -222,6 +224,7 @@
 		<subDialog 
 			title="身份证"
 			:visible="subDialogConfig.shenfenzheng.visible" 
+			:subDialogtype="subDialogConfig.shenfenzheng"
 			:formConfig="psncertFormConfig"
 			:formData="psncertFormData"
 			@close="subDialogConfig.shenfenzheng.visible = false" 
@@ -229,6 +232,7 @@
 		<subDialog 
 			title="家庭信息"
 			:visible="subDialogConfig.jiating.visible" 
+			:subDialogtype="subDialogConfig.jiating"
 			:formConfig="jiatingFormConfig"
 			:formData="jiatingFormData"
 			@close="subDialogConfig.jiating.visible = false" 
@@ -236,6 +240,7 @@
 		<subDialog 
 			title="职称信息"
 			:visible="subDialogConfig.zhicheng.visible" 
+			:subDialogtype="subDialogConfig.zhicheng"
 			:formConfig="zhichenFormConfig"
 			:formData="zhichenFormData"
 			@close="subDialogConfig.zhicheng.visible = false" 
@@ -243,6 +248,7 @@
 		<subDialog 
 			title="党派信息"
 			:visible="subDialogConfig.dangpai.visible" 
+			:subDialogtype="subDialogConfig.dangpai"
 			:formConfig="dangpaiFormConfig"
 			:formData="dangpaiFormData"
 			@close="subDialogConfig.dangpai.visible = false" 
@@ -250,6 +256,7 @@
 		<subDialog 
 			title="奖励信息"
 			:visible="subDialogConfig.jiangli.visible" 
+			:subDialogtype="subDialogConfig.jiangli"
 			:formConfig="jiangliFormConfig"
 			:formData="jiangliFormData" 
 			@close="subDialogConfig.jiangli.visible = false" 
@@ -258,6 +265,7 @@
 		<subDialog 
 			title="紧急联系人"
 			:visible="subDialogConfig.jinji.visible" 
+			:subDialogtype="subDialogConfig.jinji"
 			:formConfig="jinjiFormConfig"
 			:formData="jinjiFormData" 
 			@close="subDialogConfig.jinji.visible = false" 
@@ -266,6 +274,7 @@
 		<subDialog 
 			title="语言能力"
 			:visible="subDialogConfig.yuyan.visible" 
+			:subDialogtype="subDialogConfig.yuyan"
 			:formConfig="yuyanFormConfig"
 			:formData="yuyanFormData" 
 			@close="subDialogConfig.yuyan.visible = false" 

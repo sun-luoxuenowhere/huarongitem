@@ -57,6 +57,17 @@
 		<el-input :disabled="inputData.disabled" :title="currentValue" :readonly="true" v-model="currentValue" icon="caret-bottom" @click="selectCascader"></el-input>  
 	</el-form-item> 
 	
+	<!-- textarea begin -->
+	<el-form-item class="y-input" v-else-if="inputData.type == inputType[5]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
+		<el-input
+		  type="textarea"
+		  :autosize="{ minRows: 1, maxRows: 10}"
+		  style='resize: none;'
+		  wrap="off"
+		  placeholder="" :title="currentValue" :disabled="inputData.disabled" v-model="currentValue" @blur="inputChange">
+	  	</el-input>
+	</el-form-item> 
+	
 	<!-- 文本框 begin -->
 	<el-form-item class="y-input" v-else :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">  
 		<el-input :title="currentValue" :disabled="inputData.disabled" v-model="currentValue" @blur="inputChange"></el-input>  
@@ -71,7 +82,7 @@ export default {
 	data(){
 		return { 
 			showCasc: false,
-			inputType: ['date', 'refer', 'radio', 'checkbox', 'region'],
+			inputType: ['date', 'refer', 'radio', 'checkbox', 'region','textarea'],
 			referCusStr: 'idtype,bloodtype', //自定义的参照字段集合
 			cascFormData: {}, //级联菜单中使用的当前表单数据
 			cascPrev: '', //级联菜单的前置条件(例：国籍)

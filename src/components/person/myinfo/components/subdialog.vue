@@ -21,7 +21,7 @@ import { deepCopyObj } from '@/assets/js/v-extend.js';
 import Cookies from 'js-cookie';
 import yInput from '@/components/public/yinput';
 export default {
-	props: ["visible", "title", "formConfig", "formData"],  
+	props: ["visible", "title", "formConfig", "formData","subDialogtype"],  
 	data() {
 		return {   
 			showClose: true, //隐藏右上角关闭按钮     
@@ -52,6 +52,26 @@ export default {
 		 		var _postdata = this.postFormData(); 
 				if (valid) {   
 					if( _postdata ){    
+						console.log(_postdata)
+						if(_postdata.begindate&&_postdata.enddate){
+							if(_postdata.begindate>=_postdata.enddate){
+								if(this.subDialogtype.infoSetCode=='hi_psndoc_edu'){
+									this.$message.error('入学日期不能早于毕业日期');
+								}else if(this.subDialogtype.infoSetCode=='hi_psndoc_title'){
+									this.$message.error('评定日期不能早于结束日期');
+								}else {
+									this.$message.error('开始日期不能早于结束日期');
+								}
+								return;
+							}
+						}
+						if(_postdata.partydate&&_postdata.partyduedate){
+							if(_postdata.partydate>=_postdata.partyduedate){
+								this.$message.error('参加时间不能早于转正时间');
+								return;
+							}
+
+						}
 						this.initFormData = "";
 						this.$emit('submit', _postdata );  
 						this.resetForm();
@@ -103,7 +123,7 @@ export default {
 	    //表单数据批量处理
 		transferData(){ 
 			var _formconfig = this.formConfig;
-			
+//			console.log(JSON.stringify(_formconfig))
 			for( let i in _formconfig ){
 				var _d = _formconfig[i];
 				var _id = _d.id; 
@@ -112,7 +132,8 @@ export default {
 				if( _d.valid ){
 					this.rules[ _id ] = _d.valid;
 				};
-			};   
+			};  
+//			console.log(JSON.stringify(this.rules))
 		} 
 	}
 }

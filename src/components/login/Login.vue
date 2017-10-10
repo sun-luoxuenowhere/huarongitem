@@ -20,6 +20,7 @@
 
 <script>
 	import Cookies from 'js-cookie';
+	import Qs from 'qs';
 	
     export default {
         data: function(){
@@ -53,17 +54,18 @@
                     return;  
                 }
                 //发送请求
-                 this.$http.get(this.url,{
-			    	params:{
+                 this.$http.post(this.url,Qs.stringify ({
 			    		'transType':'login',
 			    		"userCode":username,
 						"password":password
-			    	}
-		    	}).then(function (response) {
+		    	}), {
+		          	headers: {
+		                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+		          	}
+	      		}).then(function (response) {
 					//返回数据成功跳转到首页
 					var _data=JSON.stringify(response.data)
 					if(response.data.flag==0){
-//						window.localStorage.setItem("usermsg",_data) 
 //						console.log(window.localStorage.getItem("usermsg"));
 						Cookies.set('usermsg',_data)
 						console.log(Cookies.get('usermsg'))

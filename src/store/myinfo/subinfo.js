@@ -60,8 +60,8 @@ export default {
 	    	{ param: 'glbdef1', text: '称谓' },
 	    	{ param: 'glbdef2', text: '年龄' },
 	    	{ param: 'glbdef3', text: '文化程度' },
-	    	{ param: 'glbdef4', text: '配偶是否移居国外' },
-	    	{ param: 'glbdef5', text: '子女是否移居国外' },
+	    	{ param: 'glbdef4', text: '配偶移居国外' },
+	    	{ param: 'glbdef5', text: '子女移居国外' },
 	    	{ param: 'glbdef9', text: '子女婚姻状况' },
 	    	{ param: 'glbdef8', text: '子女婚配国籍' },
 	    	{ param: 'glbdef6', text: '民族' },
@@ -252,7 +252,7 @@ export default {
 		    { id: 'glbdef3', text: '非全日制最高学历', "type": "refer", "typedata": [{"code": "HR008_0xx"}] },
 		    { id: 'glbdef4', text: '非全日制最高学位', "type": "refer", "typedata": [{"code": "HR009_0xx"}] },
 		    { id: 'glbdef1', text: '非全日制最高', "type": "radio", "typedata": [{"Y": "是", "N": "否" }] },
-		    { id: 'memo', text: '备注' }
+		    { id: 'memo', text: '备注' ,"type": "textarea"}
 	    ],
 	    //身份证表单配置
 	    psncertFormConfig: [{ "id": "idtype", "text": "证件类型", "type": "refer", "typedata": [{"code": "idtype"}], "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
@@ -262,7 +262,7 @@ export default {
 	    	{ "id": "enddate", "text": "有限期限", "type": "date" },
 		    { "id": "iseffect", "text": "有效", "type": "radio", "typedata": [{"Y": "是", "N": "否" }]  },
 		    { "id": "isstart", "text": "默认", "type": "radio", "typedata": [{"Y": "是", "N": "否" }]  },
-		    { "id": "memo", "text": "说明" }],
+		    { "id": "memo", "text": "说明" ,"type": "textarea"}],
 	    //家庭信息表单配置
 	    jiatingFormConfig: [{ "id": "mem_relation", "text": "与本人关系", "type": "refer", "typedata": [{"code": "HR024_0xx"}], "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
 	    	{ "id": "mem_name", "text": "家庭成员姓名", "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
@@ -271,8 +271,8 @@ export default {
 	    	{ id: 'glbdef1', text: '称谓' },
 	    	{ id: 'glbdef2', text: '年龄',"valid": [{ validator: validForm.num, required: true, trigger: 'change' }] },
 	    	{ id: 'glbdef3', text: '文化程度' },
-	    	{ id: 'glbdef4', text: '配偶是否移居国外', "type": "radio", "typedata": [{"Y": "是", "N": "否" }]  },
-	    	{ id: 'glbdef5', text: '子女是否移居国外', "type": "radio", "typedata": [{"Y": "是", "N": "否" }]  },
+	    	{ id: 'glbdef4', text: '配偶移居国外', "type": "radio", "typedata": [{"Y": "是", "N": "否" }]  },
+	    	{ id: 'glbdef5', text: '子女移居国外', "type": "radio", "typedata": [{"Y": "是", "N": "否" }]  },
 	    	{ id: 'glbdef9', text: '子女婚姻状况', "type": "refer", "typedata": [{"code": "HR001_0xx"}]},
 	    	{ id: 'glbdef8', text: '子女婚配国籍', "type": "refer", "typedata": [{"code": "country", "cascPrevKey": 'pk_country'}] },
 	    	{ id: 'glbdef6', text: '民族',"type": "refer", "typedata": [{"code": "HR002_0xx"}] },
@@ -282,7 +282,7 @@ export default {
 	    	{ id: 'profession', text: '职业' },
 	    	{ id: 'politics', text: '政治面貌', "type": "refer", "typedata": [{"code": "HR011_0xx"}] },
 	    	{ id: 'glbdef7', text: '司法状况' },
-	    	{ id: 'memo', text: '备注' }],
+	    	{ id: 'memo', text: '备注',"type": "textarea" }],
 	    //职称表单配置
 	    zhichenFormConfig: [{ "id": "begindate", "text": "评定日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }] },
 	    	{ "id": "enddate", "text": "结束时间", "type": "date", "valid": [{ validator: validForm.ymd, trigger: 'blur' }] },
@@ -293,7 +293,7 @@ export default {
 	    	{ "id": "tiptop_flag", "text": "最高", "type": "radio", "typedata": [{"Y": "是", "N": "否" }] },
 	    	{ id: 'achive', text: '获得成就' },
 		    { id: 'strongsuit', text: '专长' },
-		    { id: 'summ', text: '简要说明' },
+		    { id: 'summ', text: '简要说明',"type": "textarea" },
 		    { id: 'glbdef1', text: '是否符合岗位要求', "type": "radio", "typedata": [{"Y": "是", "N": "否" }] }],
 	    //党派表单配置
 	    dangpaiFormConfig: [{ "id": "begindate", "text": "开始时间", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }] },
@@ -336,7 +336,7 @@ export default {
 		    { id: 'certifname', text: '证书名称' },
 		    { id: 'certifcode', text: '证书编号', "valid": [{ validator: validForm.cardno, trigger: 'change' }] },
 		    { id: 'certifdate', text: '获证日期',"type": "date" },
-		    { id: 'memo', text: '备注' }]
+		    { id: 'memo', text: '备注' ,"type": "textarea"}]
     },
     
     mutations: { 

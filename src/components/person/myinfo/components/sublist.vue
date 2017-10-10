@@ -67,7 +67,7 @@
 			</el-table>
 			
 			<div v-if="editabled && ( status == -1 || status == 0 || status == 2)" class="text-center">
-				<span style="color: #CC2123;" @click="addRow"><i class="iconfont icon-tianjia"></i>新增{{title}}</span> 
+				<span style="color: #CC2123;cursor: pointer;" @click="addRow"><i class="iconfont icon-tianjia"></i>新增{{title}}</span> 
 			</div>
 		</div>
 	</div> 
