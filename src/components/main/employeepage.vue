@@ -185,7 +185,7 @@
 <script>
 	
 import Qs from 'qs';
-
+import Cookies from 'js-cookie';
 import MessageDialog from '@/components/messagecenter/dialogmsg';
 
 var UserInfo;
@@ -222,7 +222,7 @@ export default{
 		}
 	},
 	mounted(){
-		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 		this.msgparam.receiver=UserInfo.cuserid;
 		this.loadMsg( 'worklist'); //初始显示流程消息数据
 	},
@@ -374,6 +374,7 @@ export default{
 		}); 
      },
      mailhref(){
+     	
      	window.open('https://mail.chamc.com.cn:4443/owa');
      },
      publichref(){

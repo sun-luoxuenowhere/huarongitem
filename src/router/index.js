@@ -21,16 +21,16 @@ import Handlemessagelist from '@/components/messagecenter/handle/handlelist';
 //薪资查询
 import Mysalary from '@/components/salary/mysalary';
 
-//考核测评
-import Assessmentlist from '@/components/assessment/assessmentlist';
-import Assessmentmsg from '@/components/assessment/assessmentmsg';
-import ldpjlist from '@/components/assessment/ldlist';
-import zzpflist from '@/components/assessment/zzpflist';
-import zzpfmsg from '@/components/assessment/zzpfmsg';
-import zzpfmsgls from '@/components/assessment/zzpfmsgls';
-import zzpfyg from '@/components/assessment/zzpfyg';
-import hbgxlist from '@/components/assessment/hbgxlist';
-import mdshlist from '@/components/assessment/mdshlist';
+////考核测评
+//import Assessmentlist from '@/components/assessment/assessmentlist';
+//import Assessmentmsg from '@/components/assessment/assessmentmsg';
+//import ldpjlist from '@/components/assessment/ldlist';
+//import zzpflist from '@/components/assessment/zzpflist';
+//import zzpfmsg from '@/components/assessment/zzpfmsg';
+//import zzpfmsgls from '@/components/assessment/zzpfmsgls';
+//import zzpfyg from '@/components/assessment/zzpfyg';
+//import hbgxlist from '@/components/assessment/hbgxlist';
+//import mdshlist from '@/components/assessment/mdshlist';
 
 
 
@@ -70,11 +70,6 @@ export default new Router({
 		    	component: Employeeinfo 
 		    },
 		    {
-		    	path: "/refresh",
-		    	name: '/refresh',
-		    	component: refresh 
-		    },
-		    {
 		    	path: "/Warningmessagelist",
 		    	name: '/Warningmessagelist',
 		    	component: Warningmessagelist 
@@ -93,51 +88,6 @@ export default new Router({
 		    	path: "/Mysalary",
 		    	name: '/Mysalary',
 		    	component: Mysalary 
-		    },
-		    {
-		    	path: "/Assessmentlist",
-		    	name: '/Assessmentlist',
-		    	component: Assessmentlist
-		    },
-		    {
-		    	path: "/Assessmentmsg",
-		    	name: '/Assessmentmsg',
-		    	component: Assessmentmsg 
-		    },
-		    {
-		    	path: "/ldpjlist",
-		    	name: '/ldpjlist',
-		    	component: ldpjlist 
-		    },
-		    {
-		    	path: "/zzpflist",
-		    	name: '/zzpflist',
-		    	component: zzpflist 
-		    },
-		    {
-		    	path: "/zzpfmsg",
-		    	name: '/zzpfmsg',
-		    	component: zzpfmsg 
-		    },
-		    {
-		    	path: "/zzpfmsgls",
-		    	name: '/zzpfmsgls',
-		    	component: zzpfmsgls 
-		    },
-		    {
-		    	path: "/zzpfyg",
-		    	name: '/zzpfyg',
-		    	component: zzpfyg
-		    },
-		    {
-		    	path: "/hbgxlist",
-		    	name: '/hbgxlist',
-		    	component: hbgxlist
-		    },
-		    {
-		    	path: "/mdshlist",
-		    	name: '/mdshlist',
-		    	component: mdshlist
 		    }
 		    
 		  ]  

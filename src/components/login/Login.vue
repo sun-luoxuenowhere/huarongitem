@@ -19,7 +19,7 @@
 </template>
 
 <script>
-	
+	import Cookies from 'js-cookie';
 	
     export default {
         data: function(){
@@ -53,8 +53,6 @@
                     return;  
                 }
                 //发送请求
-//             this.$http.get("static/datalogin.json",{
-//              this.$http.get("service/EHRWebSmServlet",{
                  this.$http.get(this.url,{
 			    	params:{
 			    		'transType':'login',
@@ -62,16 +60,15 @@
 						"password":password
 			    	}
 		    	}).then(function (response) {
-					console.log(response);
 					//返回数据成功跳转到首页
 					var _data=JSON.stringify(response.data)
-					 
 					if(response.data.flag==0){
-						window.localStorage.setItem("usermsg",_data) 
-						console.log(window.localStorage.getItem("usermsg"))
+//						window.localStorage.setItem("usermsg",_data) 
+//						console.log(window.localStorage.getItem("usermsg"));
+						Cookies.set('usermsg',_data)
+						console.log(Cookies.get('usermsg'))
 						this.$router.push({
 				  			name:'/Index'
-
 				  		});
 					}else if(response.data.flag==-1){
 						this.$message({  
@@ -84,7 +81,6 @@
 	                        type : 'error'  
 	                    }) 
 					}
-//					console.log(this.$route.params)调到首页可以把里面的值打印出来
 			   	}.bind(this)).catch(function (error1) {
 			         this.$message.error('请求数据失败');
 			    }.bind(this));

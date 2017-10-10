@@ -64,6 +64,7 @@
 </template>
 <script>  
 import { ajaxData } from '@/assets/js/ajaxdata.js';
+import Cookies from 'js-cookie';
 import yRegion from './yregion'; //省市区弹窗 
 var UserInfo;
 export default {  
@@ -99,7 +100,7 @@ export default {
 		}
 	},
 	created(){
-		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 	},
 	mounted() {   
 		if( this.inputData.type == this.inputType[1] ){  //参照类型数据格式 

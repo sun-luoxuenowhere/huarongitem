@@ -5,8 +5,9 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 import App from './App';
 import router from './router'; 
-import store from './store/'
-
+import store from './store/';
+//import Cookies from 'js-cookie';//全局引入不好用bug
+import Qs from 'qs';
 import 'babel-polyfill';
 import './assets/css/iconfont.css';
 //import Store from 'store';

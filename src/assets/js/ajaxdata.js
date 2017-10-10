@@ -4,6 +4,7 @@
  * @param: call 请求成功之后的回调
  * */
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import Qs from 'qs';
 import store from 'store';
 
@@ -33,7 +34,7 @@ export function ajaxData(url, param, call) {
 
 	} else { //有参数的时候发post请求     
 //		if(UserInfo.pk_psndoc) {
-			var UserInfo = JSON.parse(window.localStorage.getItem("usermsg"));
+			var UserInfo = JSON.parse(Cookies.get('usermsg'));
 			param.pk_psndoc = UserInfo.pk_psndoc;
 			param.cuserid = UserInfo.cuserid;
 			param.pk_group = UserInfo.pk_group;

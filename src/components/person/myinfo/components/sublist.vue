@@ -77,6 +77,7 @@ import { deepCopyObj, deepCopyArry } from '@/assets/js/v-extend.js';
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 import yListBtns from '@/components/public/ylistbtns';
 import Qs from 'qs';
+import Cookies from 'js-cookie';
 var UserInfo;
 export default { 
 	//infoSetCode: 数据源
@@ -103,7 +104,7 @@ export default {
 	    }
 	},
 	created(){
-		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 		this.loadData();
 		
 	},

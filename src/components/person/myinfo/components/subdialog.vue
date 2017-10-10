@@ -18,6 +18,7 @@
 </template>
 <script>  
 import { deepCopyObj } from '@/assets/js/v-extend.js';
+import Cookies from 'js-cookie';
 import yInput from '@/components/public/yinput';
 export default {
 	props: ["visible", "title", "formConfig", "formData"],  

@@ -275,6 +275,7 @@
 </template>
 <script>
 import Qs from 'qs';
+import Cookies from 'js-cookie';
 import {scrollSpy} from '@/assets/js/scrollspy.js'; 
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 
@@ -321,7 +322,7 @@ export default {
 		}
 	},
 	created(){
-		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+		UserInfo = JSON.parse( Cookies.get('usermsg'));//获取人员信息
 	},
 	mounted(){
 		var _interface = this.$store.state.Interface.information;  

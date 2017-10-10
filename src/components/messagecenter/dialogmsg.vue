@@ -600,6 +600,7 @@
 	
 import Qs from 'qs';
 import Image from '@/assets/img/peple.png';
+import Cookies from 'js-cookie';
 
 var UserInfo;
 export default {  
@@ -662,8 +663,7 @@ export default {
 		
 	},
 	mounted(){
-		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
-		
+		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 	},
 	data(){
 		return {

@@ -6,6 +6,7 @@
 
 <script> 	
 import employeePage from './employeepage';
+import Cookies from 'js-cookie';
 export default{ 
 	data(){
 		return {
@@ -17,7 +18,7 @@ export default{
 		employeePage
 	},
    created() {
-   	var userid=window.localStorage.getItem('usermsg');
+   	var userid=Cookies.get('usermsg');
    		//判断是领导还是员工还是经理。。。。。。
      	if(userid){
      		this.judgeyg=true;

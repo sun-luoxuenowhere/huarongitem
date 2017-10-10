@@ -106,6 +106,7 @@
 </template>
 <script>
 	import Qs from 'qs';
+	import Cookies from 'js-cookie';
 	import { deepCopyObj, deepCopyArry } from '@/assets/js/v-extend.js';
 	import { ajaxData, getUpdateParam } from '@/assets/js/ajaxdata.js';
 	import photoSrc from '../../../../assets/img/user.png';
@@ -151,8 +152,8 @@
 			}
 		},
 		created() { 
-			UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
-			
+			UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
+			console.log('ddd'+UserInfo)
 			this.formDataInit = deepCopyObj( this.baseFormInit );//数据深拷贝
 			this.formData = deepCopyObj( this.baseFormInit ); 
 			this.loadInfoData();

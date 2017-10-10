@@ -34,8 +34,9 @@
 </template> 
 <script>   
 import Qs from 'qs';
-
+import Cookies from 'js-cookie';
 import MessageDialog from '@/components/messagecenter/dialogmsg';
+
 var UserInfo;
 export default { 
 	props: ['url', 'param','judgedialog'],  
@@ -43,7 +44,7 @@ export default {
 		MessageDialog
 	}, 
 	mounted(){ 
-		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 		this.param.pageSize = this.pagesize;
 		this.loadData( this.param );
 	}, 

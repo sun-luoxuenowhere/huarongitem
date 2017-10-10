@@ -41,6 +41,7 @@
 </template> 
 <script>   
 	import MessageTable from '@/components/messagecenter/messagelist';
+	import Cookies from 'js-cookie';
 	export default { 
 		components: { 
 			MessageTable
@@ -98,7 +99,7 @@
 		    } 
 		},
 		created(){ 
-			var UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+			var UserInfo = JSON.parse( Cookies.get('usermsg'));//获取人员信息
 			this.searchform.receiver=UserInfo.cuserid;
 		}
 	}

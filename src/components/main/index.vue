@@ -19,6 +19,7 @@
 <script>
 import myHeader from './header';
 import navBar from './navbar';
+import Cookies from 'js-cookie';
 //	var store=require('store')
 export default {
   	name: 'index',
@@ -37,7 +38,7 @@ export default {
 	created(){ 
 		
 		//权限判断
-		var userid=JSON.parse(window.localStorage.getItem('usermsg'));
+		var userid=JSON.parse(Cookies.get('usermsg'));
 //		console.log(userid)
 //		if(!userid.cuserid){
 //			this.$router.push({

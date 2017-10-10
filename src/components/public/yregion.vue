@@ -33,12 +33,13 @@
 <script>  
 import axios from 'axios';  
 import Qs from 'qs';
+import Cookies from 'js-cookie';
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 var UserInfo;
 export default {  
 	data(){
 		return {   
-			userInfo: JSON.parse( window.localStorage.getItem("usermsg") ),
+			userInfo: JSON.parse( Cookies.get('usermsg') ),
 			dataCache: {}, //缓存已经请求过的菜单数据 
 			props: { "value": 'pk_region', "label": 'name' }, //级联菜单的显示映射关系
 			regionForm: {
@@ -64,7 +65,7 @@ export default {
 	},
 	props: ["visible", "source", "config" ],
 	created(){
-		UserInfo = JSON.parse( window.localStorage.getItem("usermsg") );//获取人员信息
+		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 	},
 	methods: {  
 		ok(){
