@@ -446,6 +446,8 @@ color: #CC2123;
 	margin-left: 24px;
 	background: #fff;
 	float: left;
+	color: #333;
+	font-size: 12px;
 	border-radius: 5px;
 	position: relative;
 }
