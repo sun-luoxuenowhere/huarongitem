@@ -230,7 +230,7 @@
 							ajaxData(this.$store.state.Interface.hi, {
 								"transType": "psnInfoSave",  
 								"infoSetCode": this.infoSetCode,
-								"jsonStr": JSON.stringify( _param ) 
+								"jsonStr": encodeURIComponent(JSON.stringify(_param))
 							}, (res) => {  
 								this.showButnEdit = false;
 								this.editStatus0 = false;
