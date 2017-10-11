@@ -213,10 +213,13 @@
 			saveBase(){ 
 				var _formdatastr = JSON.stringify( this.formData );  
 				if( _formdatastr == JSON.stringify( this.formDataInit ) ){ //没有实际修改
-					this.showButnEdit = true;
-					
-					this.editStatus0 = false;
-					this.editStatus1 = false;
+					this.$refs['myForm'].validate((valid) => {
+						if (valid) {
+							this.showButnEdit = true;
+							this.editStatus0 = false;
+							this.editStatus1 = false;
+						};
+					});
 				}else{
 					this.$refs['myForm'].validate((valid) => {   
 						if (valid) {   
@@ -229,11 +232,9 @@
 								"infoSetCode": this.infoSetCode,
 								"jsonStr": JSON.stringify( _param ) 
 							}, (res) => {  
-								
 								this.showButnEdit = false;
 								this.editStatus0 = false;
 								this.editStatus1 = false;
-								
 								this.loadInfoData();
 							});
 						};
