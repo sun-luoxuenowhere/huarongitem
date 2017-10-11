@@ -89,7 +89,6 @@ header {
 .headerdesgiter .el-input__inner {
 	height: 30px;
 	width: 232.5px;
-	border-radius: 15px;
 	background: #FAFAFA;
 	border: 1px solid #F6F6F6;
 	font-family: "微软雅黑";
@@ -114,9 +113,10 @@ header {
 }
 .y-header { 
 	    min-width: 1200px;
-  -webkit-box-shadow:0 0 10px 0px #efefef;  
+	    border-bottom: 2px solid #C7000B;
+  /*-webkit-box-shadow:0 0 10px 0px #efefef;  
   -moz-box-shadow:0 0 10px 0px #efefef;  
-  box-shadow:0px 0 10px 0px #efefef;   
+  box-shadow:0px 0 10px 0px #efefef;   */
 }
 .y-navbar{
 	/*width:220px;*/
@@ -140,7 +140,7 @@ header {
 
 
 .y-navbar .el-menu-item{
-	border-left: 2px solid transparent;
+	border-left: 6px solid transparent;
 }
 .y-navbar .el-menu-item.is-active{
 	border-left-color:#CC2123;

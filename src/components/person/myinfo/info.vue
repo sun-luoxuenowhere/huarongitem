@@ -189,17 +189,36 @@
 				<!-- 附件开始 -->
 				<div class="y-module"> 
 					
-					<div class="y-title" style="border-bottom: none;"> 
+					<div class="y-title" > 
 						<el-upload
 						  class="upload-demo"
 						   ref="newupload"
 						  action="service/hrweb/sm"
+						  :show-file-list='false'
 						  :on-success="handleSuccess"
 						  :file-list="fileList3"
 						  :before-upload="beforeAvatarUpload">
 						  <el-button size="small" type="text" class="y-title" style='border-bottom: none;'>附件上传&nbsp;<i style="color: #CC2123;" class="iconfont icon-tianjia"></i></el-button>
 						  <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
 						</el-upload>
+					</div>
+					<div class="y-content">
+						<el-table class="y-table y-table-baseinfo" :data="fileList3" style="width: 100%">
+							
+							<el-table-column
+						      prop="name"
+						      label="文件名">
+						    </el-table-column>
+							<el-table-column  label="操作"  width='100'>
+								<template scope="scope">   
+									<i style="color: #50CC7A;" class="iconfont icon-xiazai"  
+									@click="downloadRow(scope.$index, scope.row)"></i>  
+									<i  style="color: #49A7F5;" class="iconfont icon-shanchu"  
+									@click="filedeleteRow(scope.$index, scope.row)"></i>  
+								</template>
+							</el-table-column>
+						</el-table>
+						
 					</div>
 				</div>
 				<!-- 附件结束 -->
@@ -400,10 +419,19 @@ export default {
 		},
 		handleSuccess(response, file, fileList) {
 			console.log(response)
-			console.log(fileList.slice(-3));
-			this.fileList3 = fileList.slice(-3);
+			console.log(file)
+			console.log(fileList)
+//			this.fileList3 = fileList.slice(-3);
+			this.fileList3 = fileList;
 		},
-		
+		downloadRow(row1,row2){
+			//附件的下载
+			console.log(row1,row2)
+		},
+		filedeleteRow(row1,row2){
+			//附件的删除
+			console.log(row1,row2)
+		},
 		//获取 stroe中存的静态数据
 		getData(key) {
 			return this.$store.state.Information[key];
@@ -434,7 +462,7 @@ export default {
 //				"pk_org": UserInfo.pk_org,
 				"transType": "psnInfoSave",
 				"infoSetCode": _code,
-				"jsonStr": JSON.stringify(_data)
+				"jsonStr": encodeURIComponent(JSON.stringify(_data))
 			};
 			switch(this.currentDialog.operate) {
 				case 'add':
@@ -452,7 +480,7 @@ export default {
 			
 			this.$http.post(this.$store.state.Interface.hi,Qs.stringify (_paramData), {
 		          	headers: {
-		                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+//		                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
 		          	}
 	      		}).then(function (response) {
 //	      			console.log(response)
