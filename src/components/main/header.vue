@@ -20,7 +20,7 @@
 					<el-col>
 						<el-dropdown trigger="click" @command="handleCommand"> 
 							<span class="el-dropdown-link">
-								<img class="userlogo" src="../../assets/img/user.jpg"/>
+								<img class="userlogo" src="../../assets/img/peple.png"/>
 								<i class="el-icon-arrow-down "></i>
 							</span>
 							<el-dropdown-menu slot="dropdown">

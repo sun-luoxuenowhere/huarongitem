@@ -11,6 +11,7 @@ export default new Vuex.Store({
     state: {
     	//数据接口   获取方法：[this.$store.state.Interface.information] 
     	Interface: {
+    		'login': '/service/hrweb/login',//登录
     		'sm': '/service/hrweb/sm',//系统管理
     		'msglist': '/service/hrweb/msg',//消息中心接口
     		'hi': '/service/hrweb/hi',//人员信息

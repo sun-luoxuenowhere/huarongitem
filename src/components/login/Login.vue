@@ -55,7 +55,6 @@
                 }
                 //发送请求
                  this.$http.post(this.url,Qs.stringify ({
-			    		'transType':'login',
 			    		"userCode":username,
 						"password":password
 		    	}), {
@@ -90,7 +89,7 @@
         },
         computed: {
 			url(){  
-				return this.$store.state.Interface.sm;
+				return this.$store.state.Interface.login;
 			} 
 		},
 		created(){

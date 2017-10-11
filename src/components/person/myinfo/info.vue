@@ -428,7 +428,6 @@ export default {
 			var _data = data;
 			var _code = this.currentDialog.infoSetCode;
 			var _paramData = {
-
 //				"pk_psndoc": UserInfo.pk_psndoc,
 //				"cuserid": UserInfo.cuserid,
 //				"pk_group": UserInfo.pk_group,
@@ -450,10 +449,29 @@ export default {
 					_paramData.pk_psndoc_sub = this.currentDialog.index;
 					break;
 			};
-			ajaxData(this.$store.state.Interface.hi, _paramData, (res) => {
-				this.hideDialog(_code);
-				this.$refs[_code].loadData();
-			});
+			
+			this.$http.post(this.$store.state.Interface.hi,Qs.stringify (_paramData), {
+		          	headers: {
+		                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+		          	}
+	      		}).then(function (response) {
+//	      			console.log(response)
+					if(response.data.flag==0){
+						this.hideDialog(_code);
+						this.$refs[_code].loadData();
+					}else {
+						this.$message({  
+	                        message : response.data.des,  
+	                        type : 'error'  
+	                    }) 
+					}
+			   	}.bind(this)).catch(function (error1) {
+			         this.$message.error('请求数据失败');
+			    }.bind(this));
+//			ajaxData(this.$store.state.Interface.hi, _paramData, (res) => {
+//				this.hideDialog(_code);
+//				this.$refs[_code].loadData();
+//			});
 		},
 		//隐藏弹窗
 		hideDialog(code) {
@@ -492,13 +510,34 @@ export default {
 		//子集-还原提交收回等操作
 		handleList(data) {
 			var _code = data[1];
-			ajaxData(this.$store.state.Interface.hi, {
+			
+			this.$http.post(this.$store.state.Interface.hi,Qs.stringify ({
 				"transType": 'psnInfoHandle',
 				"infoSetCode": _code,
 				"way": data[0]
-			}, (res) => {
-				this.$refs[_code].loadData();
-			});
+			}), {
+	          	headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+	          	}
+      	}).then(function (response) {
+				if(response.data.flag==0){
+					this.$refs[_code].loadData();
+				}else {
+					this.$message({  
+                        message : response.data.des,  
+                        type : 'error'  
+                    }) 
+				}
+		   	}.bind(this)).catch(function (error1) {
+		         this.$message.error('请求数据失败');
+		    }.bind(this));
+//			ajaxData(this.$store.state.Interface.hi, {
+//				"transType": 'psnInfoHandle',
+//				"infoSetCode": _code,
+//				"way": data[0]
+//			}, (res) => {
+//				this.$refs[_code].loadData();
+//			});
 
 		},
 		//子集-删除
