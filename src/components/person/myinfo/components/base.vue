@@ -125,7 +125,6 @@
 				formDataConfig2: {},
 				
 				showButnEdit : true,	// 默认显示编辑按钮
-				showButnsSave : false ,	// 默认不显示保存、取消按钮
 				
 				editStatus0 : false, // 编辑状态-头像区域-默认不可编辑
 				editStatus1 : false, // 编辑状态-头像以下区域-默认不可编辑
@@ -214,6 +213,8 @@
 			saveBase(){ 
 				var _formdatastr = JSON.stringify( this.formData );  
 				if( _formdatastr == JSON.stringify( this.formDataInit ) ){ //没有实际修改
+					this.showButnEdit = true;
+					
 					this.editStatus0 = false;
 					this.editStatus1 = false;
 				}else{
@@ -256,7 +257,6 @@
 			// 编辑
 			edit(){
 				this.showButnEdit = false;
-				this.showButnsSave = true;
 				
 			 	this.editStatus0 = true;
 			 	this.editStatus1 = true;
@@ -268,7 +268,6 @@
 				
 				if( this.status == -1 ){
 				 	this.showButnEdit = true;
-					this.showButnsSave = false;
 				};
 				
 				this.editStatus0 = false;
