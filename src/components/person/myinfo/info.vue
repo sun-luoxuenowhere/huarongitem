@@ -667,6 +667,8 @@ export default {
 			};
 			switch(data[0]) {
 				case "add":
+					initData.glbdef4 = 'N';
+					initData.glbdef5 = 'N';
 					this.jiatingFormData = initData;
 					break;
 				case 'edit':
