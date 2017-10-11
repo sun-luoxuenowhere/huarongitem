@@ -75,6 +75,10 @@
 	height: 36px;
 	float: left;
 }
+.y-baseinfo-form .el-input:focus,
+.y-baseinfo-form .el-input__inner:focus {
+	border-color: #8391a5;
+}
 
 .y-baseinfo-form .el-select>.el-input {
 	display: inline-block;

@@ -193,7 +193,7 @@
 						<el-upload
 						  class="upload-demo"
 						   ref="newupload"
-						  action="service/EHRWebSmServlet"
+						  action="service/hrweb/sm"
 						  :on-success="handleSuccess"
 						  :file-list="fileList3"
 						  :before-upload="beforeAvatarUpload">
