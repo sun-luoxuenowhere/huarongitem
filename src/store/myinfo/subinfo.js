@@ -78,7 +78,7 @@ export default {
 	    	{ param: 'signdate', text: '业务发生日期' },
 	    	{ param: 'termtype', text: '合同期限类型' },
 	    	{ param: ['begindate','enddate'], text: '合同起止日期' },
-	    	{ param: ['probegindate ', 'probenddate'], text: '试用起止日期' },
+	    	{ param: ['probegindate', 'probenddate'], text: '试用起止日期' },
 	    	{ param: 'pk_majorcorp', text: '合同主体单位' },
 	    	{ param: 'signaddr', text: '签订地点' },
 		    { param: 'contractnum', text: '合同编号', "valid": [{ validator: validForm.cardno, trigger: 'change' }] },
