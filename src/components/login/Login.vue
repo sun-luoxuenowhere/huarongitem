@@ -67,8 +67,8 @@
 					var _data=JSON.stringify(response.data)
 					if(response.data.flag==0){
 //						console.log(window.localStorage.getItem("usermsg"));
-						Cookies.set('usermsg',_data)
-						console.log(Cookies.get('usermsg'))
+//						Cookies.set('usermsg',_data)
+//						console.log(Cookies.get('usermsg'))
 						this.$router.push({
 				  			name:'/Index'
 				  		});

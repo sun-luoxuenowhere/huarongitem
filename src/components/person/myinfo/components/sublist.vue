@@ -104,7 +104,7 @@ export default {
 	    }
 	},
 	created(){
-		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
+//		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 		this.loadData();
 		
 	},
@@ -124,10 +124,10 @@ export default {
 		//动态加载数据
 		loadData(){
 			this.$http.post( this.$store.state.Interface.hi, Qs.stringify ({
-				"pk_psndoc":UserInfo.pk_psndoc,
-		    	"cuserid":UserInfo.cuserid,
-		    	"pk_group":UserInfo.pk_group,
-		    	"pk_org": UserInfo.pk_org,
+//				"pk_psndoc":UserInfo.pk_psndoc,
+//		    	"cuserid":UserInfo.cuserid,
+//		    	"pk_group":UserInfo.pk_group,
+//		    	"pk_org": UserInfo.pk_org,
 				"infoSetCode": this.infoSetCode,
 				"transType": 'psnInfoQuery' 
 			})).then(( res) => {

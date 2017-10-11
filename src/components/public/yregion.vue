@@ -39,7 +39,7 @@ var UserInfo;
 export default {  
 	data(){
 		return {   
-			userInfo: JSON.parse( Cookies.get('usermsg') ),
+//			userInfo: JSON.parse( Cookies.get('usermsg') ),
 			dataCache: {}, //缓存已经请求过的菜单数据 
 			props: { "value": 'pk_region', "label": 'name' }, //级联菜单的显示映射关系
 			regionForm: {
@@ -65,7 +65,7 @@ export default {
 	},
 	props: ["visible", "source", "config" ],
 	created(){
-		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
+//		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 	},
 	methods: {  
 		ok(){
@@ -91,10 +91,10 @@ export default {
 	  		var _sdata = JSON.parse(JSON.stringify(data)); 
 	  		_sdata.pks = _sdata.pks.join(','); 
 	  		var param = {
-	  			"pk_psndoc": this.userInfo.pk_psndoc,
-	  			"cuserid": this.userInfo.cuserid,
-	  			"pk_group": this.userInfo.pk_group,
-	  			"pk_org": this.userInfo.pk_org,
+//	  			"pk_psndoc": this.userInfo.pk_psndoc,
+//	  			"cuserid": this.userInfo.cuserid,
+//	  			"pk_group": this.userInfo.pk_group,
+//	  			"pk_org": this.userInfo.pk_org,
 	  			"transType": "psnInfoSave", 
 				"infoSetCode": "addr",
 				"jsonStr": JSON.stringify( _sdata )
@@ -133,10 +133,10 @@ export default {
 				}; 
 				
 				ajaxData( this.$store.state.Interface.sm, { 
-					"pk_psndoc":UserInfo.pk_psndoc,
-			    	"cuserid":UserInfo.cuserid,
-			    	"pk_group":UserInfo.pk_group,
-			    	"pk_org": UserInfo.pk_org,
+//					"pk_psndoc":UserInfo.pk_psndoc,
+//			    	"cuserid":UserInfo.cuserid,
+//			    	"pk_group":UserInfo.pk_group,
+//			    	"pk_org": UserInfo.pk_org,
 					"transType": "region", 
 					"pk_country": _pk
 				},( res ) => {

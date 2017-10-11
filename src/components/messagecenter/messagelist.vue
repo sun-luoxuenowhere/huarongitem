@@ -44,7 +44,7 @@ export default {
 		MessageDialog
 	}, 
 	mounted(){ 
-		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
+//		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 		this.param.pageSize = this.pagesize;
 		this.loadData( this.param );
 	}, 
@@ -134,7 +134,7 @@ export default {
 	    		//判断单据的类型，是离职、转正、等
 	    		this.$http.post( this.url, Qs.stringify ({
 					transType:'msgBill',
-					pk_psndoc:UserInfo.pk_psndoc,
+//					pk_psndoc:UserInfo.pk_psndoc,
 					billId:row.billId,
 					billType:row.billType
 				}), {
@@ -173,7 +173,7 @@ export default {
 	    			//获取列表数据；
 					this.$http.post( this.url, Qs.stringify ({
 						transType:'msgBill',
-						pk_psndoc:UserInfo.pk_psndoc,
+//						pk_psndoc:UserInfo.pk_psndoc,
 						billId:row.billId,
 						billType:row.billType
 					}), {

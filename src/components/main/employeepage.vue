@@ -188,7 +188,7 @@ import Qs from 'qs';
 import Cookies from 'js-cookie';
 import MessageDialog from '@/components/messagecenter/dialogmsg';
 
-var UserInfo;
+//var UserInfo;
 export default{
 	computed: {
 		url(){  
@@ -210,7 +210,7 @@ export default{
 			 msgparam: {
 				sendStr: '',
 				isRead: 'N',
-				receiver:'',
+//				receiver:'',
 				transType: 'msglist',
 				msgType:'',
 				pageIndex: 0,
@@ -222,8 +222,8 @@ export default{
 		}
 	},
 	mounted(){
-		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
-		this.msgparam.receiver=UserInfo.cuserid;
+//		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
+//		this.msgparam.receiver=UserInfo.cuserid;
 		this.loadMsg( 'worklist'); //初始显示流程消息数据
 	},
 	
@@ -260,7 +260,7 @@ export default{
 	    		//判断单据的类型，是离职、转正、等
 	    		this.$http.post( this.url, Qs.stringify ({
 					transType:'msgBill',
-					pk_psndoc:UserInfo.pk_psndoc,
+//					pk_psndoc:UserInfo.pk_psndoc,
 					billId:row.billId,
 					billType:row.billType
 				}), {
@@ -298,7 +298,7 @@ export default{
 	    			
 					this.$http.post( this.url, Qs.stringify ({
 						transType:'msgBill',
-						pk_psndoc:UserInfo.pk_psndoc,
+//						pk_psndoc:UserInfo.pk_psndoc,
 						billId:row.billId,
 						billType:row.billType
 					}), {

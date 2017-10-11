@@ -111,7 +111,7 @@ export default {
 		}
 	},
 	created(){
-		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
+//		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 	},
 	mounted() {   
 		if( this.inputData.type == this.inputType[1] ){  //参照类型数据格式 
@@ -129,10 +129,10 @@ export default {
 				this.currentValue = this.formData[_name]; 
     		}else if( _code == 'country' ){ //国籍地区
     			ajaxData( this.$store.state.Interface.sm, { 
-	    			"pk_psndoc":UserInfo.pk_psndoc,
-			    	"cuserid":UserInfo.cuserid,
-			    	"pk_group":UserInfo.pk_group,
-			    	"pk_org": UserInfo.pk_org,
+//	    			"pk_psndoc":UserInfo.pk_psndoc,
+//			    	"cuserid":UserInfo.cuserid,
+//			    	"pk_group":UserInfo.pk_group,
+//			    	"pk_org": UserInfo.pk_org,
 					"transType": 'country' 
 				},( res ) => {   
 					this.optionsdata =  res.list;  
@@ -141,10 +141,10 @@ export default {
 		    	}); 
     		}else{ //从后台取数据的参照类型
     			ajaxData( this.$store.state.Interface.sm, {
-    				"pk_psndoc":UserInfo.pk_psndoc,
-			    	"cuserid":UserInfo.cuserid,
-			    	"pk_group":UserInfo.pk_group,
-			    	"pk_org": UserInfo.pk_org,
+//  				"pk_psndoc":UserInfo.pk_psndoc,
+//			    	"cuserid":UserInfo.cuserid,
+//			    	"pk_group":UserInfo.pk_group,
+//			    	"pk_org": UserInfo.pk_org,
 					"transType": 'defdoc', 
 					"defdoclistCode": this.inputData.typedata[0].code
 				},( res ) => {   

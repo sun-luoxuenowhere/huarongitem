@@ -34,11 +34,11 @@ export function ajaxData(url, param, call) {
 
 	} else { //有参数的时候发post请求     
 //		if(UserInfo.pk_psndoc) {
-			var UserInfo = JSON.parse(Cookies.get('usermsg'));
-			param.pk_psndoc = UserInfo.pk_psndoc;
-			param.cuserid = UserInfo.cuserid;
-			param.pk_group = UserInfo.pk_group;
-			param.pk_org = UserInfo.pk_org;
+//			var UserInfo = JSON.parse(Cookies.get('usermsg'));
+//			param.pk_psndoc = UserInfo.pk_psndoc;
+//			param.cuserid = UserInfo.cuserid;
+//			param.pk_group = UserInfo.pk_group;
+//			param.pk_org = UserInfo.pk_org;
 			axios.post(url, Qs.stringify(param), {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'

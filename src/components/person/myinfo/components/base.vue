@@ -152,8 +152,7 @@
 			}
 		},
 		created() { 
-			UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
-			console.log('ddd'+UserInfo)
+//			UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 			this.formDataInit = deepCopyObj( this.baseFormInit );//数据深拷贝
 			this.formData = deepCopyObj( this.baseFormInit ); 
 			this.loadInfoData();
@@ -180,10 +179,10 @@
 			//动态加载基本信息数据
 			loadInfoData() {
 				ajaxData(this.$store.state.Interface.hi, {
-					"pk_psndoc":UserInfo.pk_psndoc,
-			    	"cuserid":UserInfo.cuserid,
-			    	"pk_group":UserInfo.pk_group,
-			    	"pk_org": UserInfo.pk_org,
+//					"pk_psndoc":UserInfo.pk_psndoc,
+//			    	"cuserid":UserInfo.cuserid,
+//			    	"pk_group":UserInfo.pk_group,
+//			    	"pk_org": UserInfo.pk_org,
 					"infoSetCode": "bd_psndoc",
 					"transType": 'psnInfoQuery' 
 				}, (res) => {  

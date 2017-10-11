@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 export default{ 
 	data(){
 		return {
-			judgeyg:false,
+			judgeyg:true,
 			judgeld:false 
 		}
 	},
@@ -18,11 +18,11 @@ export default{
 		employeePage
 	},
    created() {
-   	var userid=Cookies.get('usermsg');
-   		//判断是领导还是员工还是经理。。。。。。
-     	if(userid){
-     		this.judgeyg=true;
-     	}	
+// 		var userid=Cookies.get('usermsg');
+// 		//判断是领导还是员工还是经理。。。。。。
+//   	if(userid){
+//   		this.judgeyg=true;
+//   	}	
    }
 }
 </script>

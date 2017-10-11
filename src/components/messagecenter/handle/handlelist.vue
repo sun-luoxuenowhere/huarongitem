@@ -104,8 +104,8 @@
 		    } 
 		},
 		created(){ 
-			var UserInfo = JSON.parse(Cookies.get('usermsg'));//获取人员信息
-			this.searchform.receiver=UserInfo.cuserid;
+//			var UserInfo = JSON.parse(Cookies.get('usermsg'));//获取人员信息
+//			this.searchform.receiver=UserInfo.cuserid;
 		}
 	}
 </script> 

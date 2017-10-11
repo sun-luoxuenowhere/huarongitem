@@ -331,7 +331,7 @@ export default {
 		}
 	},
 	created(){
-		UserInfo = JSON.parse( Cookies.get('usermsg'));//获取人员信息
+//		UserInfo = JSON.parse( Cookies.get('usermsg'));//获取人员信息
 	},
 	mounted(){
 		var _interface = this.$store.state.Interface.information;  
@@ -429,10 +429,10 @@ export default {
 			var _code = this.currentDialog.infoSetCode;
 			var _paramData = {
 
-				"pk_psndoc": UserInfo.pk_psndoc,
-				"cuserid": UserInfo.cuserid,
-				"pk_group": UserInfo.pk_group,
-				"pk_org": UserInfo.pk_org,
+//				"pk_psndoc": UserInfo.pk_psndoc,
+//				"cuserid": UserInfo.cuserid,
+//				"pk_group": UserInfo.pk_group,
+//				"pk_org": UserInfo.pk_org,
 				"transType": "psnInfoSave",
 				"infoSetCode": _code,
 				"jsonStr": JSON.stringify(_data)

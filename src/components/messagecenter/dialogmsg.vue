@@ -663,7 +663,7 @@ export default {
 		
 	},
 	mounted(){
-		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
+//		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 	},
 	data(){
 		return {
@@ -708,8 +708,8 @@ export default {
 		abandoned(){
 			this.$http.post( this.url, Qs.stringify ({
 				transType:'approveBack',
-				pk_group:UserInfo.pk_group,
-				cuserid:UserInfo.cuserid,
+//				pk_group:UserInfo.pk_group,
+//				cuserid:UserInfo.cuserid,
 				taskId:this.data.pk_detail
 			}), {
 	          	headers: {
@@ -803,9 +803,9 @@ export default {
 		assignman(arg){
 			this.$http.post( this.url, Qs.stringify ({
 				transType:'dispatch',
-				pk_group:UserInfo.pk_group,
+//				pk_group:UserInfo.pk_group,
 				billId:this.data.billId,
-				cuserid:UserInfo.cuserid,
+//				cuserid:UserInfo.cuserid,
 				opflag:arg,
 				taskId:this.data.pk_detail
 			}), {
@@ -826,11 +826,11 @@ export default {
 			this.$http.post( this.url, Qs.stringify ({
 				transType:'billHandler',
 				billId:this.data.billId,
-				cuserid:UserInfo.cuserid,
-				pk_group:UserInfo.pk_group,
+//				cuserid:UserInfo.cuserid,
+//				pk_group:UserInfo.pk_group,
 				taskId:this.data.pk_detail,
 				isflag:flag,
-				pk_org:UserInfo.pk_org,
+//				pk_org:UserInfo.pk_org,
 				opflag:arg,
 				dispatchId:asg,//指派人
 				checkNote:rea,//审批意见
