@@ -65,6 +65,15 @@ export default {
 								return;
 							}
 						}
+						
+						if(_postdata.lasteducation&&_postdata.glbdef1){
+							if(_postdata.lasteducation==_postdata.glbdef1){
+								if(this.subDialogtype.infoSetCode=='hi_psndoc_edu'){
+									this.$message.error('全日制最高学历与非全日制最高不能同时为最高');
+								}
+								return;
+							}
+						}
 						if(_postdata.partydate&&_postdata.partyduedate){
 							if(_postdata.partydate>=_postdata.partyduedate){
 								this.$message.error('参加时间不能早于转正时间');

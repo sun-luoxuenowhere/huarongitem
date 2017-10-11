@@ -88,6 +88,11 @@ export default {
 					this.loadingFlag=false;
 					this.tableData = _data.msglist;
 					this.totalcount = parseInt( _data.totalcount );  
+					if(!_data.totalcount){
+						this.totalcount=0;
+					}else{
+						this.totalcount = parseInt( _data.totalcount );  
+					}
 					
 				}else{
 					this.$message.error( _data.des );
