@@ -200,7 +200,7 @@ export default {
 	    	{ "id": "workpost", "text": "岗位" }, 
 	    	{ "id": "workjob", "text": "职务" }, 
 	    	{ "id": "certifier", "text": "证明人" }, 
-	    	{ "id": "memo", "text": "备注" },
+	    	
 	    	{ "id": "workduty", "text": "主要职责" },
 	    	{ "id": "glbdef2", "text": "是否兼职", "type": "radio", "typedata": [{"Y": "是", "N": "否" }] },
 	    	{ "id": "glbdef3", "text": "兼职所在机构" },
@@ -208,7 +208,8 @@ export default {
 	    	{ "id": "work_addr", "text": "工作地址" },
 	    	{ "id": "dimission_reason", "text": "离职原因" },
 	   	 	{ "id": "linkphone", "text": "联系电话", "valid": [{ validator: validForm.tel, trigger: 'change' }] },
-	    	{ "id": "certiphone", "text": "证明人电话", "valid": [{ validator: validForm.tel, trigger: 'change' }] }],
+	    	{ "id": "certiphone", "text": "证明人电话", "valid": [{ validator: validForm.tel, trigger: 'change' }] },
+	    	{ "id": "memo", "text": "备注","type": "textarea" }],
 	    //合同表单配置
 	    hetongFormConfig: [{ "id": "conttype", "text": "业务类型" },
 	    	{ "id": "begindate", "text": "合同开始日期", "type": "date", "valid": [{ validator: validForm.ymd, trigger: 'blur' }] },
@@ -216,7 +217,7 @@ export default {
 	    	{ "id": "signdate", "text": "业务发生日期", "type": "date", "valid": [{ validator: validForm.ymd, trigger: 'blur' }]  }, 
 	    	{ "id": "pk_majorcorp", "text": "合同主体单位" }, 
 	    	{ "id": "termtype", "text": "合同期限类型" },
-	    	{ "id": "memo", "text": "备注" },
+	    	{ "id": "memo", "text": "备注","type": "textarea" },
 	    	{ "id": "probegindate", "text": "试用结束日期", "type": "date", "valid": [{ validator: validForm.ymd, trigger: 'blur' }]  },
 	    	{ "id": "probenddate ", "text": "试用结束日期", "type": "date", "valid": [{ validator: validForm.ymd, trigger: 'blur' }]  },
 	    	{ "id": "signaddr", "text": "签订地点" },

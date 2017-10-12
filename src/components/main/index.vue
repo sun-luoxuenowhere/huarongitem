@@ -1,6 +1,6 @@
 <template>
 	<div class="index">
-		<my-Header></my-Header> 
+		<my-Header :photodata='photo'></my-Header> 
 		<!--content begin --> 
 		<div class="y-main">
 		<el-row type="flex" :gutter="20" >
@@ -31,7 +31,8 @@ export default {
 	data () {
 	    return { 
 	    	navdata:"",
-	    	data:''
+	    	data:'',
+	    	photo:''
 	    }
 	},
 	methods:{ 
@@ -107,6 +108,7 @@ export default {
 			//返回数据成功跳转到首页
 //			var _data=JSON.stringify(response.data)
 			if(response.data.flag==0){
+				this.photo=response.data;
 				this.data=response.data.func;
 				this.navfunc();
 				console.log(this.data)

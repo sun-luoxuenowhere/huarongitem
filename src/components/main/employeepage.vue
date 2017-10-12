@@ -5,34 +5,63 @@
 		</div>
 		
 		<div id="L-mainmange">
-			<el-row>
-			  <el-col :span="6" class="L-mainmangestyle">
-				<div @click="temporary()">	
-				  	<div class="circle L-green"><i class="iconfont iconfontsize icon-xinzi"></i></div>
-				  	<div id="fontstyle">薪资查询</div>
-			  	</div>
-			  </el-col>
-			  <el-col :span="6" class="L-mainmangestyle" >
-			  	<div @click="temporary()">
-			  		<div class="circle L-yellew " ><i class="iconfont iconfontsize icon-shenqing1"></i></div>
-			  		<div id="fontstyle">请假申请</div>
-			  	</div>
-			  </el-col>
-			  <el-col :span="6" class="L-mainmangestyle">
-			  	<div @click="temporary()">
-				  	<div class="circle L-shenred"><i class="iconfont iconfontsize icon-icon7"></i></div>
-				  	<div id="fontstyle">开具证明</div>
-				</div>
-			  </el-col>
-			  <el-col :span="6" class="L-mainmangestyle">
-			  	<div @click="temporary()">
-				  	<div class="circle L-blue"><i class="iconfont iconfontsize icon-guoqi_flag"></i></div>
-				  	<div id="fontstyle">考核测评</div>
-			  	</div>
-			  </el-col>
-
+			<el-row :gutter="15">
+				<el-col :span="6">
+					<div class="grid-content bg-purple">
+						<div @click="temporary()" class="L-mainmangestyle">	
+						  	<div id="fontstyle">薪资查询</div>
+						  	<div class="clearfix">
+						  		<div class="L-img"><img src="../../assets/img/mainimg/xzcx.png"/></div>
+						  		<div class="L-reasons">
+						  			每月工资明细、社保、公积金等福利随心查
+						  		</div>
+						  	</div>
+					  	</div>
+					</div>
+				</el-col>
+				<el-col :span="6">
+					<div class="grid-content bg-purple">
+						<div @click="temporary()" class="L-mainmangestyle">	
+						  	<div id="fontstyle">请假申请</div>
+						  	<div class="clearfix">
+						  		<div class="L-img"><img src="../../assets/img/mainimg/qjsq.png"/></div>
+						  		<div class="L-reasons">
+						  			快速填写申请单，实时更新审批流程，高效便捷
+						  		</div>
+						  	</div>
+					  	</div>
+					</div>
+				</el-col>
+				<el-col :span="6">
+					<div class="grid-content bg-purple">
+						<div @click="temporary()" class="L-mainmangestyle">	
+						  	<div id="fontstyle">开具证明</div>
+						  	<div class="clearfix">
+						  		<div class="L-img"><img src="../../assets/img/mainimg/kjzm.png"/></div>
+						  		<div class="L-reasons">
+						  			开具各种证明，如工作证明、离职证明等等
+						  		</div>
+						  	</div>
+					  	</div>
+					</div>
+				</el-col>
+				<el-col :span="6">
+					<div class="grid-content bg-purple">
+						<div @click="temporary()" class="L-mainmangestyle">	
+						  	<div id="fontstyle">考核测评</div>
+						  	<div class="clearfix">
+						  		<div class="L-img"><img src="../../assets/img/mainimg/khcp.png"/></div>
+						  		<div class="L-reasons">
+						  			参与考核、查看个人考核历史评分及个人考核结果
+						  		</div>
+						  	</div>
+					  	</div>
+					</div>
+				</el-col>
+				
 			</el-row>
 		</div>
+		
 		<div id="L-mainuserlist">
 			<el-row type="flex" :gutter="16">
 				<el-col :span="11" style='position: relative;'>
@@ -45,7 +74,7 @@
 					<el-tabs v-model="activeName" @tab-click="handleClick">
 						
 					    <el-tab-pane  name="first">
-					    	 <span slot="label">工作任务<i v-show="totalshow==0" class="iconfont iconfontmain icon-xiaoxi"><span class="messagetatal">{{listdata.totalcount}}</span></i></span>
+					    	<span slot="label">工作任务<span v-show="totalshow==0"><span class="messagetatal" v-if="listdata.totalcount">({{listdata.totalcount}})</span><span class="messagetatal" v-else='!listdata.totalcount'>(0)</span></span></span>
 					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist" @click="rowhand(index)">
 					    		<span class="L-order">{{index+1}}.</span>
 					    		<span class="L-listtitle">
@@ -59,7 +88,8 @@
 					    	
 					    </el-tab-pane>
 					    <el-tab-pane  name="second">
-					    	 <span slot="label">通知消息<i v-show="totalshow==1" class="iconfont iconfontmain icon-xiaoxi"><span class="messagetatal">{{listdata.totalcount}}</span></i></span>
+					    	<span slot="label">通知消息<span v-show="totalshow==1"><span class="messagetatal" v-if="listdata.totalcount">({{listdata.totalcount}})</span><span class="messagetatal" v-else='!listdata.totalcount'>(0)</span></span></span>
+					    	
 					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist" @click="rowhand(index)"> 
 					    		<span class="L-order">{{index+1}}.</span>
 					    		<span class="L-listtitle">
@@ -71,7 +101,8 @@
 					    	
 					    </el-tab-pane>
 					    <el-tab-pane  name="third">
-					    	<span slot="label">预警消息<i v-show="totalshow==2" class="iconfont iconfontmain icon-xiaoxi"><span class="messagetatal">{{listdata.totalcount}}</span></i></span>
+					    	<span slot="label">预警消息<span v-show="totalshow==2"><span class="messagetatal" v-if="listdata.totalcount">({{listdata.totalcount}})</span><span class="messagetatal" v-else='!listdata.totalcount'>(0)</span></span></span>
+					    	
 					    	<li class="L-list clearfix" v-for="(item, index) in listdata.msglist"  @click="rowhand(index)">
 					    		<span class="L-order">{{index+1}}.</span>
 					    		<span class="L-listtitle">
@@ -83,6 +114,7 @@
 					    </el-tab-pane>
 					</el-tabs>
 				</el-col>
+				<!--规章制度开始-->
 				<el-col :span="7">
 					<el-tabs v-model="activeName1" >
 					    <el-tab-pane label="规章制度" name="first">

@@ -6,8 +6,8 @@ export default {
     	entryrequest: {//入职申请字段
     		"billCode":"申请单编码",
     		"name":'入职人',
-    		"deptname":"申请部门",
-    		"postname":"申请岗位",
+    		"deptname":"入职部门",
+    		"postname":"入职岗位",
     		"jobname":"入职职务",
 			"psntype":"人员类别",
 			"begindate":"入职日期"

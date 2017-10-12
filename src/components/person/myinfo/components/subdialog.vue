@@ -56,6 +56,7 @@ export default {
 						if(_postdata.begindate&&_postdata.enddate){
 							if(_postdata.begindate>=_postdata.enddate){
 								if(this.subDialogtype.infoSetCode=='hi_psndoc_edu'){
+									
 									this.$message.error('入学日期不能早于毕业日期');
 								}else if(this.subDialogtype.infoSetCode=='hi_psndoc_title'){
 									this.$message.error('评定日期不能早于结束日期');

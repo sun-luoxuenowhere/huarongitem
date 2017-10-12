@@ -20,8 +20,9 @@
 					<el-col>
 						<el-dropdown trigger="click" @command="handleCommand"> 
 							<span class="el-dropdown-link">
-								<img class="userlogo" src="../../assets/img/peple.png"/>
-								<i class="el-icon-arrow-down "></i>
+								<img class="userlogo" v-if="!photodata.photo" src="../../assets/img/peple.png"/>
+								<img class="userlogo" v-else :src="'data:image/png;base64,'+photodata.photo"/>
+								<i class="el-icon-caret-bottom el-icon--right" style="color:#838A94;"></i>
 							</span>
 							<el-dropdown-menu slot="dropdown">
 								<el-dropdown-item command="a">个人信息</el-dropdown-item>
@@ -37,7 +38,9 @@
 
 <script>
 export default{
+	props:['photodata'],
 	data(){
+		
 		return { 
 			searchinner: ''
 		}
