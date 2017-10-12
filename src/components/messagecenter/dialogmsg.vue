@@ -717,7 +717,7 @@ export default {
 	          	}
 	      	}).then(( response ) => {  
 				
-				console.log(response);
+//				console.log(response);
 				if(response.data.flag=='0'){
 					this.$message({
 			          message: response.data.des,
@@ -836,7 +836,7 @@ export default {
 				checkNote:rea,//审批意见
 				nodeId:ject//驳回传驳回节点
 			})).then(( response ) => {
-				console.log(response)
+//				console.log(response)
 				if(response.data.flag=='0'){//提交数据成功函数
 					this.$message({
 			          message: response.data.des,

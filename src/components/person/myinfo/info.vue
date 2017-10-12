@@ -188,11 +188,13 @@
 				
 				<!-- 附件开始 -->
 				<div class="y-module"> 
-					
+					<!--:data="sendStr"
+					 action="service/hrweb/sm"-->
+					 
 					<div class="y-title" > 
 						<el-upload
 						  class="upload-demo"
-						   ref="newupload"
+						  name='file'
 						  action="service/hrweb/sm"
 						  :show-file-list='false'
 						  :on-success="handleSuccess"
@@ -206,8 +208,13 @@
 						<el-table class="y-table y-table-baseinfo" :data="fileList3" style="width: 100%">
 							
 							<el-table-column
-						      prop="name"
+						      prop="filename"
 						      label="文件名">
+						    </el-table-column>
+						    <el-table-column
+						      width='200'
+						      prop="uploadtime"
+						      label="上传时间">
 						    </el-table-column>
 							<el-table-column  label="操作"  width='100'>
 								<template scope="scope">   
@@ -306,11 +313,11 @@ import Qs from 'qs';
 import Cookies from 'js-cookie';
 import {scrollSpy} from '@/assets/js/scrollspy.js'; 
 import { ajaxData } from '@/assets/js/ajaxdata.js';
-
+import Base64 from 'js-base64'; 
 import baseInfo from './components/base';
 import subList from './components/sublist'; 
 import subDialog from './components/subdialog'; //弹窗 
-var UserInfo;
+
 export default {
 	data() {
 		return {    
@@ -346,11 +353,15 @@ export default {
 				zhiye: { infoSetCode: "hi_psndoc_nationduty"},
 				jinji: { infoSetCode: "hi_psndoc_linkman", visible: false},
 				yuyan: { infoSetCode: "hi_psndoc_langability", visible: false}
-			}
+			},
+			sendStr:{
+				"transType":"fileManage"
+			}//上传文件传参
 		}
 	},
 	created(){
 //		UserInfo = JSON.parse( Cookies.get('usermsg'));//获取人员信息
+		this.fileinit();
 	},
 	mounted(){
 		var _interface = this.$store.state.Interface.information;  
@@ -413,24 +424,81 @@ export default {
 		subDialog //人员子集弹窗 
 	},
 	methods: {
+		fileinit(){
+			this.$http.post( 'service/hrweb/sm', Qs.stringify ({
+				transType:"fileManage",
+				handleType:"queryFileTree"
+			})).then(( res) => {
+				console.log(res)
+				if(res.data.flag=='0'){
+					this.fileList3=res.data.data.files;
+				}
+			}).catch((err) => { 
+				this.$message.error( err );
+			})
+		},
 		//附件上传
 		beforeAvatarUpload(file) {
 			//上传之前判断格式及大小；成功之后可以继续上传;
+//			var fd=new FormData();
+//				fd.append('ddd', file)
+//			this.$http.post( 'service/hrweb/sm', Qs.stringify (fd)).then(( res) => {
+//				console.log(res)
+//			}).catch((err) => { 
+//				this.$message.error( err );
+//			})
 		},
 		handleSuccess(response, file, fileList) {
 			console.log(response)
-			console.log(file)
-			console.log(fileList)
-//			this.fileList3 = fileList.slice(-3);
-			this.fileList3 = fileList;
+			if(response.flag=='0'){
+				this.fileinit();
+			}else{
+				this.$message.error( response.des);
+			}
 		},
 		downloadRow(row1,row2){
 			//附件的下载
 			console.log(row1,row2)
+			
+			this.$http.post( 'service/hrweb/sm', Qs.stringify ({
+				transType:"fileManage",
+				handleType:"downLoadFile"
+//				pk_doc:row2.pk_doc
+			})).then(( res) => {
+				console.log(res)
+				
+				if(res.data.flag=='0'){
+					res.data.filebyte
+					
+					//ddddddddddddddddddddddddddddddddddddd下载
+					
+				}else{
+					this.$message.error( res.data.des );
+				}
+			}).catch((err) => { 
+				this.$message.error( err );
+			})
+			
 		},
 		filedeleteRow(row1,row2){
 			//附件的删除
 			console.log(row1,row2)
+			this.$http.post( 'service/hrweb/sm', Qs.stringify ({
+				transType:"fileManage",
+				handleType:"deleteFile",
+				pk_doc:row2.pk_doc
+			})).then(( res) => {
+				console.log(res)
+				if(res.data.flag=='0'){
+					this.fileinit();
+				}else{
+					this.$message.error( res.data.des );
+				}
+			}).catch((err) => { 
+				this.$message.error( err );
+			})
+
+			
 		},
 		//获取 stroe中存的静态数据
 		getData(key) {

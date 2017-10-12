@@ -304,7 +304,7 @@ export default{
 					if( _data.flag == "1" ){ //操作失败
 						this.$message.error( _data.des );
 					}else{
-						console.log(_data)
+//						console.log(_data)
 						this.openDialog = true; 
 						this.msgdata = row;
 		    			this.msgdata.Datalist = JSON.parse(_data.data).headMsg;
@@ -342,13 +342,13 @@ export default{
 						if( _data.flag == "1" ){ //操作失败
 							this.$message.error( _data.des );
 						}else{
-							console.log(JSON.stringify(_data))
+//							console.log(JSON.stringify(_data))
 							this.openDialog = true; 
 							this.msgdata = row;
 //			    			this.msgdata.msgType = this.param.msgType;
 			    			this.msgdata.Datalist = JSON.parse(_data.data).headMsg;
 			    			this.msgdata.Hisapprove = _data.hisapprove;
-			    			console.log(this.msgdata)
+//			    			console.log(this.msgdata)
 						}; 
 					}).catch((err) => { 
 						this.$message.error( err );
@@ -398,7 +398,7 @@ export default{
 //				this.totalcount = parseInt( _data.totalcount ); 
 
 				this.listdata = _data;
-				console.log(this.listdata)
+//				console.log(this.listdata)
 				
 			}else{
 				this.$message.error( _data.des );

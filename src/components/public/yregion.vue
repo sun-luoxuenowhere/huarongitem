@@ -97,7 +97,7 @@ export default {
 //	  			"pk_org": this.userInfo.pk_org,
 	  			"transType": "psnInfoSave", 
 				"infoSetCode": "addr",
-				"jsonStr": JSON.stringify( _sdata )
+				"jsonStr":encodeURIComponent(JSON.stringify( _sdata ))
 	  		}; 
 			axios.post( this.$store.state.Interface.hi, Qs.stringify ( param ), { 
 	          	headers: {
@@ -105,6 +105,7 @@ export default {
 	          	}
 	      	}).then(( response ) => {  
 	      		var _data = response.data;
+	      		console.log(_data)
 	      		if( _data.flag == 0 ){ 
 	      			var _id = this.config.id; 
 	      			var _valkey = this.config.typedata[0].valkey; 
@@ -114,11 +115,10 @@ export default {
 	      			if( _valkey ){
 	      				this.source[_valkey] = _data.addr;
 	      			};
-	      			
-	      			
+
 	      			this.$emit('close');
 	      		}else{
-	      			alert(_data.msg);
+	      			alert(_data.des);
 	      		}; 
 			}).catch((err) => { //网络异常
 				 
