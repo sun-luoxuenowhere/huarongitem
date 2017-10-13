@@ -5,7 +5,7 @@
 -->
 <template>  
 	<div class="y-dialog"> 
-		<el-dialog class="y-info-dialog y-cascader-dialog" title="选择城市地区" :show-close="false" :visible="visible">   
+		<el-dialog class="y-info-dialog y-cascader-dialog" title="选择城市地区" :before-close="handleClose" :show-close="true" :visible="visible">   
 		 	<el-form :model="regionForm" :rules="rules" ref="regionForm" label-width="110px" class="clearfix"> 
 		 		<el-form-item class="y-input" prop="pks" label="城市地区">   
 					<el-cascader
@@ -78,6 +78,9 @@ export default {
 				};
 	      	});  
 		},
+		handleClose(){//点击×取消
+			this.$emit('close');
+		},
 		//取消操作
 		cancle() {  
 	        this.$emit('close');
@@ -106,7 +109,7 @@ export default {
 	      	}).then(( response ) => {  
 	      		var _data = response.data;
 	      		console.log(_data)
-	      		if( _data.flag == 0 ){ 
+	      		if( _data.flag == '0' ){ 
 	      			var _id = this.config.id; 
 	      			var _valkey = this.config.typedata[0].valkey; 
 	      			
@@ -118,7 +121,7 @@ export default {
 
 	      			this.$emit('close');
 	      		}else{
-	      			alert(_data.des);
+	      			this.$message.error(_data.des);
 	      		}; 
 			}).catch((err) => { //网络异常
 				 

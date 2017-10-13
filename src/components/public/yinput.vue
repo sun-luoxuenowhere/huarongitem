@@ -92,14 +92,16 @@ export default {
 	components: { 
 		yRegion //省市区弹窗
 	}, 
-	props:['name', 'value', 'inputData', 'formData'],// 设置value为props属性-必须
+	props:['name', 'value', 'inputData', 'formData','subtype'],// 设置value为props属性-必须
 	computed:{ 
 		currentValue: {// 动态计算currentValue的值
 			get:function() {
 				var _val = this.value;
+				
 				if( this.inputData.type == this.inputType[3] ){ 
 					_val = ( _val == "" ? [] : _val.split(',') );   
 				};
+
   				return _val;
   			},
   			set:function( val ) {  
@@ -117,6 +119,11 @@ export default {
 		if( this.inputData.type == this.inputType[1] ){  //参照类型数据格式 
 			this.loadData();   
 		};
+    },
+    watch:{
+    	formData:function(data){
+    		
+    	}
     },
 	methods: { 
 		//加载参照类型数据
@@ -154,8 +161,64 @@ export default {
 		    	}); 
     		}; 
     	}, 
+    	systime(){
+    		var date = new Date();
+			var year = date.getFullYear();
+			var month = (date.getMonth() + 1);
+			month = month > 9 ? month : "0" + month;
+			var day = date.getDate();
+			day = day > 9 ? day : "0" + day;
+			var hours = date.getHours();
+			hours = hours > 9 ? hours : "0" + hours;
+			var minutes = date.getMinutes();
+			minutes = minutes > 9 ? minutes : "0" + minutes;
+			var seconds = date.getSeconds();
+			seconds = seconds > 9 ? seconds : "0" + seconds;
+			return year + '-' + month + '-' + day;
+    	},
+    	systimetran(date){
+    		var date = new Date(date);
+			var year = date.getFullYear();
+			var month = (date.getMonth() + 1);
+			month = month > 9 ? month : "0" + month;
+			var day = date.getDate();
+			day = day > 9 ? day : "0" + day;
+			var hours = date.getHours();
+			hours = hours > 9 ? hours : "0" + hours;
+			var minutes = date.getMinutes();
+			minutes = minutes > 9 ? minutes : "0" + minutes;
+			var seconds = date.getSeconds();
+			seconds = seconds > 9 ? seconds : "0" + seconds;
+			return year + '-' + month + '-' + day;
+    	},
+    	sysdays(sDate1,  sDate2){
+	        var  aDate,  oDate1,  oDate2,  iDays;
+	        aDate  =  sDate1.split("-"); 
+	        oDate1  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0]);
+	        aDate  =  sDate2.split("-");
+	        oDate2  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0]); 
+	        iDays  =  parseInt(Math.abs(oDate1  -  oDate2)  /  1000  /  60  /  60  /24); 
+	        return  iDays;
+    	},
     	dateChange( val ){
-    		this.currentValue = val;    
+    		this.currentValue = val;   
+    		if(this.subtype!=''){
+    			if(this.subtype.infoSetCode=="hi_psndoc_partylog"){
+					if(this.formData.partyduedate==''){
+						this.formData.glbdef4='0';
+					}else {
+						if(this.systime()<this.systimetran(this.currentValue)){
+							this.$message.error('转正日期不能大于系统日期');
+							this.formData.partyduedate='';
+							this.formData.glbdef4='0';
+						}else{
+							var days=this.sysdays(this.systime(),this.systimetran(this.currentValue));
+							var _glbdef4=(days/365).toFixed(2);
+							this.formData.glbdef4=_glbdef4;
+						}
+					}
+	    		}
+    		}
     		this.$emit('inputChange', this.name ); 
     	},
     	selectChange( val ){

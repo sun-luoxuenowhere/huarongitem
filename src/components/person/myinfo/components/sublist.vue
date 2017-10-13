@@ -58,9 +58,9 @@
 
 				<el-table-column v-if="editabled && ( status == -1 || status == 0 || status == 2)"  label="操作"  width="100">
 					<template scope="scope">   
-						<i style="color: #50CC7A;" class="iconfont icon-bianji1"  
+						<i style="color: #50CC7A;cursor: pointer;" class="iconfont icon-bianji1"  
 						@click="editRow(scope.$index, scope.row)"></i>  
-						<i  style="color: #49A7F5;" class="iconfont icon-shanchu"  
+						<i  style="color: #49A7F5;cursor: pointer;" class="iconfont icon-shanchu"  
 						@click="deleteRow(scope.$index, scope.row)"></i>  
 					</template>
 				</el-table-column>

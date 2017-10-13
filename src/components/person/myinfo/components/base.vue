@@ -22,7 +22,7 @@
 						<el-col v-if="iconForm.indexOf(val.id) > -1" :xs="24" :sm="12" :md="8" :lg="8"> 
 							<div class="y-icon-item">
 								<i class="iconfont" :class="iconCls[val.id]"></i>
-								<yInput :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" v-model="formData[key]" :inputData="formDataConfig1[key]" :initVal="formData[key]"></yInput>
+								<yInput :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" v-model="formData[key]" :inputData="formDataConfig1[key]" :initVal="formData[key]" :subtype="subDialogtype"></yInput>
 							</div>
 						</el-col>
 						<el-col v-else :xs="24" :sm="12" :md="12" :lg="12" >
@@ -30,7 +30,7 @@
 								<img class="dialogimg" v-if="!formData[key]" :src="Img"/>
 						  		<img v-else :src="'data:image/png;base64,'+formData[key]"/>
 							</div> 
-							<yInput v-else :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" v-model="formData[key]" :inputData="formDataConfig1[key]" :initVal="formData[key]"></yInput>
+							<yInput v-else :class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" v-model="formData[key]" :inputData="formDataConfig1[key]" :initVal="formData[key]" :subtype="subDialogtype"></yInput>
 						</el-col>	
 					</template> 
 				</el-row>
@@ -89,6 +89,7 @@
 							:class="alterFields.indexOf(val.id) > -1 ? 'y-alter-item' : ''" 
 							:name="key"
 							:formData="formData"
+							:subtype="subDialogtype"
 							:inputData="formDataConfig2[key]" ></yInput>
 					</el-col>
 				</el-row>
@@ -118,6 +119,9 @@
 		props: ['editabled'],
 		data() {
 			return {
+				subDialogtype:{
+					infoSetCode:''
+				},
 				rules: {},
 				formDataInit: {}, //初始状态的表单数据 
 				formData: {}, //当前表单数据

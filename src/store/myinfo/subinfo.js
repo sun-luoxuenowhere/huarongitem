@@ -306,7 +306,7 @@ export default {
 	    	{ "id": "partypsn", "text": "介绍人","valid": { required: true, message: '不能为空'}},
 	    	{ id: 'exreason', text: '异常原因' },
 		    { id: 'exsort', text: '异常类别',"type": "refer", "typedata": [{"code": "HR013_0xx"}]},
-		    { id: 'glbdef4', text: '党龄', "valid": [{ required: false,validator: validForm.num, trigger: 'change' }]},
+		    { id: 'glbdef4', text: '党龄',"disabled": true},
 		    { id: 'glbdef1', text: '介绍人1' },
 		    { id: 'glbdef2', text: '介绍人2' },
 		    { id: 'glbdef3', text: '介绍人3' }],

@@ -7,7 +7,9 @@
 					:class="formDataConfig[key].type == 'date' ? 'y-date-formitem' : ''"  
 					:name="key" 
 					:formData="formData"
-					:inputData="formDataConfig[key]"></yInput>  
+					:subtype="subDialogtype"
+					:inputData="formDataConfig[key]">
+				</yInput>  
 			</el-form>
 			<div class="y-btn-box">
 				<el-button class="y-btn-danger" type="danger" @click="submitForm()">保存</el-button>

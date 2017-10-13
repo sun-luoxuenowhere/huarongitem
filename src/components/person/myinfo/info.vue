@@ -218,9 +218,9 @@
 						    </el-table-column>
 							<el-table-column  label="操作"  width='100'>
 								<template scope="scope">   
-									<i style="color: #50CC7A;" class="iconfont icon-xiazai"  
+									<i style="color: #50CC7A;cursor: pointer;" class="iconfont icon-xiazai"  
 									@click="downloadRow(scope.$index, scope.row)"></i>  
-									<i  style="color: #49A7F5;" class="iconfont icon-shanchu"  
+									<i  style="color: #49A7F5;cursor: pointer;" class="iconfont icon-shanchu"  
 									@click="filedeleteRow(scope.$index, scope.row)"></i>  
 								</template>
 							</el-table-column>
@@ -432,6 +432,8 @@ export default {
 				console.log(res)
 				if(res.data.flag=='0'){
 					this.fileList3=res.data.data.files;
+				}else{
+					this.$message.error( res.data.des );
 				}
 			}).catch((err) => { 
 				this.$message.error( err );
@@ -459,26 +461,22 @@ export default {
 		downloadRow(row1,row2){
 			//附件的下载
 			console.log(row1,row2)
-			
-			this.$http.post( 'service/hrweb/sm', Qs.stringify ({
-				transType:"fileManage",
-				handleType:"downLoadFile"
-//				pk_doc:row2.pk_doc
-			})).then(( res) => {
-				console.log(res)
-				
-				if(res.data.flag=='0'){
-					res.data.filebyte
-					
-					//ddddddddddddddddddddddddddddddddddddd下载
-					
-				}else{
-					this.$message.error( res.data.des );
-				}
-			}).catch((err) => { 
-				this.$message.error( err );
-			})
-			
+			window.location.href=row2.url;
+//			this.$http.post( 'service/hrweb/sm', Qs.stringify ({
+//				transType:"fileManage",
+//				handleType:"downLoadFile"
+////				pk_doc:row2.pk_doc
+//			})).then(( res) => {
+//				console.log(res)
+//				if(res.data.flag=='0'){
+//					res.data.filebyte
+//					//ddddddddddddddddddddddddddddddddddddd下载
+//				}else{
+//					this.$message.error( res.data.des );
+//				}
+//			}).catch((err) => { 
+//				this.$message.error( err );
+//			})
 		},
 		filedeleteRow(row1,row2){
 			//附件的删除
