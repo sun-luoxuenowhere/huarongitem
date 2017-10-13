@@ -234,7 +234,6 @@ export default{
 		return { 
 			 openDialog: false, //默认关闭对话框
 			 judgedialog:'handle',//初始是工作任务
-			
 			 activeName: 'first',
 			 activeName1: 'first',
 			 activeName2: 'first',
@@ -257,6 +256,30 @@ export default{
 //		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 //		this.msgparam.receiver=UserInfo.cuserid;
 		this.loadMsg( 'worklist'); //初始显示流程消息数据
+		
+		//初始化获取我的应用的信息数量
+		
+//		this.$http.post('http://v.juhe.cn/patent/search.php',{
+//			params:{
+//				ds:'',
+//				q:'',
+//				p:'',
+//				ps:"",
+//				s:"",
+//				hl:"",
+//				key:"c7ead64fc2501605a43e9aff7ba1fdb7"
+//			}
+//		}).then(function(res){
+//			console.log(res)
+//		}).catch(function(res){
+//			
+//		})
+//		var scriptWaitingCount = document.createElement("script");
+//      scriptWaitingCount.type = "text/javascript";
+//      scriptWaitingCount.src = 'http://v.juhe.cn/patent/search.php?ds=&q=&p=&ps=&s=&hl=&key=c7ead64fc2501605a43e9aff7ba1fdb7';
+//      document.body.appendChild(scriptWaitingCount);
+//		console.log(scriptWaitingCount)
+	
 	},
 	
 	methods: {
