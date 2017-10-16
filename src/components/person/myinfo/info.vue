@@ -360,7 +360,7 @@ export default {
 		this.fileinit();
 	},
 	mounted(){
-		var _interface = this.$store.state.Interface.information;  
+		var _interface = this.$store.state.Interface.hi;  
 		scrollSpy( document.querySelectorAll('#userInfo') );
 	},
 	computed:{   
