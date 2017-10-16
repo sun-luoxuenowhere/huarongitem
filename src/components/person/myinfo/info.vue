@@ -189,17 +189,7 @@
 				<!-- 附件开始 -->
 				<div class="y-module"> 
 					<div class="y-title" > 
-						<el-upload
-						  class="upload-demo"
-						  name='file'
-						  :action="fileUploadURL"
-						  :show-file-list='false'
-						  :on-success="handleSuccess"
-						  :file-list="fileList3"
-						  :before-upload="beforeAvatarUpload">
-						  <el-button size="small" type="text" class="y-title" style='border-bottom: none;'>附件上传&nbsp;<i style="color: #CC2123;" class="iconfont icon-tianjia"></i></el-button>
-						  <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
-						</el-upload>
+						附件上传
 					</div>
 					<div class="y-content">
 						<el-table class="y-table y-table-baseinfo" :data="fileList3" style="width: 100%">
@@ -222,6 +212,19 @@
 								</template>
 							</el-table-column>
 						</el-table>
+						<el-upload
+						  style='text-align: center;'
+						  class="upload-demo"
+						  name='file'
+						  :action="fileUploadURL"
+						  :show-file-list='false'
+						  :on-success="handleSuccess"
+						  :file-list="fileList3"
+						  :before-upload="beforeAvatarUpload">
+						  <span style="color: #CC2123;cursor: pointer;"><i class="iconfont icon-tianjia"></i>附件上传</span> 
+						  <!--<el-button size="small" type="text" class="y-title" style='border-bottom: none;color: #CC2123;cursor: pointer;'><i class="iconfont icon-tianjia"></i>附件上传</el-button>-->
+						  <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
+						</el-upload>
 					</div>
 				</div>
 				<!-- 附件结束 -->
@@ -431,7 +434,7 @@ export default {
 				if(res.data.flag=='0'){
 					this.fileList3=res.data.data.files;
 				}else if(res.data.flag=='-1'){
-					
+					this.fileList3=[];
 				}else{
 					this.$message.error( res.data.des );
 				}
