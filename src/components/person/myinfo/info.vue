@@ -431,7 +431,7 @@ export default {
 				if(res.data.flag=='0'){
 					this.fileList3=res.data.data.files;
 				}else if(res.data.flag=='-1'){
-					
+					this.fileList3=[];
 				}else{
 					this.$message.error( res.data.des );
 				}
