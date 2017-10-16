@@ -59,6 +59,9 @@ export default {
 		}
 	},
 	methods:{  
+		
+		
+		
 		//改变当前页码
 		pageChange( page ){ 
 			this.param.pageIndex = page - 1;

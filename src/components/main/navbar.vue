@@ -37,21 +37,21 @@
 			menudata(){//计算菜单的数据
 				var navdata=this.navdata;
 				var newnavdata=[];
-
-//				console.log(newnavdata)
 				return this.navdata
 			}
 		},
 		
 		methods:{
 			handleSelect(key, keyPath) {//解决重新刷新的问题
-//		        console.log(key, keyPath);
+		        console.log(key, keyPath);
+//		        this.$router.go(0)
 //		        this.$router.options.routes = []
 //		        console.log( this.$router)
 //		        this.$router.options.routes='Informmessage'
 //				this.$router.push({
 //		  			name:'/refresh'
 //		  		});
+         this.$emit("refresh",args);
 		  }
 			
 		}

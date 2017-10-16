@@ -432,6 +432,8 @@ export default {
 				console.log(res)
 				if(res.data.flag=='0'){
 					this.fileList3=res.data.data.files;
+				}else if(res.data.flag=='-1'){
+					
 				}else{
 					this.$message.error( res.data.des );
 				}
