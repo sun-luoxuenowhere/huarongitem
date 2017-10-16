@@ -189,7 +189,7 @@
 				<!-- 附件开始 -->
 				<div class="y-module"> 
 					<div class="y-title" > 
-						附件上传
+						附件管理
 					</div>
 					<div class="y-content">
 						<el-table class="y-table y-table-baseinfo" :data="fileList3" style="width: 100%">
@@ -221,7 +221,7 @@
 						  :on-success="handleSuccess"
 						  :file-list="fileList3"
 						  :before-upload="beforeAvatarUpload">
-						  <span style="color: #CC2123;cursor: pointer;"><i class="iconfont icon-tianjia"></i>附件上传</span> 
+						  <span style="color: #CC2123;cursor: pointer;"><i class="iconfont icon-tianjia"></i>上传附件</span> 
 						  <!--<el-button size="small" type="text" class="y-title" style='border-bottom: none;color: #CC2123;cursor: pointer;'><i class="iconfont icon-tianjia"></i>附件上传</el-button>-->
 						  <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
 						</el-upload>
