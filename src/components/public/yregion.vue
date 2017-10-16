@@ -94,15 +94,11 @@ export default {
 	  		var _sdata = JSON.parse(JSON.stringify(data)); 
 	  		_sdata.pks = _sdata.pks.join(','); 
 	  		var param = {
-//	  			"pk_psndoc": this.userInfo.pk_psndoc,
-//	  			"cuserid": this.userInfo.cuserid,
-//	  			"pk_group": this.userInfo.pk_group,
-//	  			"pk_org": this.userInfo.pk_org,
 	  			"transType": "psnInfoSave", 
 				"infoSetCode": "addr",
 				"jsonStr":encodeURIComponent(JSON.stringify( _sdata ))
 	  		}; 
-			axios.post( this.$store.state.Interface.hi, Qs.stringify ( param ), { 
+			this.$http.post( this.$store.state.Interface.hi, Qs.stringify ( param ), { 
 	          	headers: {
 	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
 	          	}
@@ -112,13 +108,10 @@ export default {
 	      		if( _data.flag == '0' ){ 
 	      			var _id = this.config.id; 
 	      			var _valkey = this.config.typedata[0].valkey; 
-	      			
 					this.source[_id] = document.querySelector('.el-cascader .el-cascader__label').innerHTML.replace(/[^\u4e00-\u9fa5]/gi,"");
-	      			
 	      			if( _valkey ){
 	      				this.source[_valkey] = _data.addr;
 	      			};
-
 	      			this.$emit('close');
 	      		}else{
 	      			this.$message.error(_data.des);
@@ -130,23 +123,18 @@ export default {
     	//加载级联类型数据
     	loadCascader(){ 
     		var _pk = this.getPK_country();   
-				if( _pk == "" ){
-					alert('请先选择国籍地区');
-					return;
-				}; 
-				
-				ajaxData( this.$store.state.Interface.sm, { 
-//					"pk_psndoc":UserInfo.pk_psndoc,
-//			    	"cuserid":UserInfo.cuserid,
-//			    	"pk_group":UserInfo.pk_group,
-//			    	"pk_org": UserInfo.pk_org,
-					"transType": "region", 
-					"pk_country": _pk
-				},( res ) => {
-					this.optionsdata = this.toTreeData( res.list ); 
-					this.dataCache[_pk] = this.optionsdata; 
-		    	}); 
-		    	
+			if( _pk == "" ){
+				alert('请先选择国籍地区');
+				return;
+			}; 
+			ajaxData( this.$store.state.Interface.sm, { 
+				"transType": "region", 
+				"pk_country": _pk
+			},( res ) => {
+				console.log(res)
+				this.optionsdata = this.toTreeData( res.list ); 
+				this.dataCache[_pk] = this.optionsdata; 
+	    	}); 
     	},
     	//json格式转成树结构
     	toTreeData( data, config ){ 
