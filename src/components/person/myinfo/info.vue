@@ -355,7 +355,7 @@ export default {
 				"transType":"fileManage"
 			}//上传文件传参
 		}
-	},
+	}, 
 	created(){
 //		UserInfo = JSON.parse( Cookies.get('usermsg'));//获取人员信息
 		this.fileUploadURL=window.location.origin+'/service/hrweb/sm';

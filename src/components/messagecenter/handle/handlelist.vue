@@ -35,7 +35,9 @@
 				<el-form-item>
 					<el-button  class="y-btn-searchp" type="danger" @click="onSearch">查询</el-button>
 				</el-form-item>
+				<el-button class=' y-btn-refresh' @click="onRefresh"><i class="iconfont icon-shuaxin"></i>&nbsp;刷新</el-button>
 			</el-form>	 
+			
 			<!-- y-search-form end --> 			
 			<MessageTable ref="InfoMsg" :url="url" :param="searchform" :judgedialog="judgedialog"></MessageTable>  
 		</div>
@@ -88,6 +90,19 @@
 			}
 		},
 		methods:{  
+		    //点击刷新
+		    onRefresh(){
+		    	this.searchform.sendStr=this.value;//查询的时间
+		    	this.searchform.isHandled=this.isHandled;//查询的时候将设置是否为处理状态
+		    	
+		    	if(this.searchform.isHandled==true){
+		    		this.searchform.isRead=true
+		    		console.log(this.searchform.isRead)
+		    	}else if(this.searchform.isHandled==false){
+		    		this.searchform.isRead=false
+		    	}
+		    	this.$refs.InfoMsg.loadData( this.searchform );  //调用子组件的加载方法
+		    },
 		    //点击“查询”
 		    onSearch(){ 
 		    	this.searchform.sendStr=this.value;//查询的时间

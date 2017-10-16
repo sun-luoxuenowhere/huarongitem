@@ -157,6 +157,7 @@
 /*==== 列表页-查询条件区域 ====*/
 
 .y-search-form {
+	position: relative;
 	padding: 20px 20px 0 20px;
 	margin-bottom: 20px;
 	background-color: #fff;
@@ -795,7 +796,27 @@
 .y-btn-searchp:hover {
 	background: #E6282A;
 }
+.y-inner .y-btn-refresh {
+	position: absolute;
+	height: 34px;
+	right: 20px;
+}
+.y-btn-refresh {
+	color:#E6282A ;
+	border: 1px solid #E6282A;
+}
 
+.y-btn-refresh:hover {
+	border: 1px solid #E6282A;
+	color:#E6282A ;
+	background: rgba(204,33,35,0.11);
+}
+
+.y-btn-refresh:focus {
+	border: 1px solid #E6282A;
+	color:#E6282A ;
+	background: rgba(204,33,35,0.11);
+}
 .y-btn-searchb {
 	background: #999999;
 	border: none;
