@@ -188,9 +188,6 @@
 				
 				<!-- 附件开始 -->
 				<div class="y-module"> 
-					<!--:data="sendStr"
-					 action="service/hrweb/sm"-->
-					 
 					<div class="y-title" > 
 						<el-upload
 						  class="upload-demo"
@@ -225,7 +222,6 @@
 								</template>
 							</el-table-column>
 						</el-table>
-						
 					</div>
 				</div>
 				<!-- 附件结束 -->
@@ -424,85 +420,83 @@ export default {
 		subDialog //人员子集弹窗 
 	},
 	methods: {
-		fileinit(){
-			this.$http.post( 'service/hrweb/sm', Qs.stringify ({
-				transType:"fileManage",
-				handleType:"queryFileTree"
-			})).then(( res) => {
+		fileinit() {
+			this.$http.post(this.$store.state.Interface.sm, Qs.stringify({
+				transType: "fileManage",
+				handleType: "queryFileTree"
+			})).then((res) => {
 				console.log(res)
-				if(res.data.flag=='0'){
-					this.fileList3=res.data.data.files;
-				}else{
-					this.$message.error( res.data.des );
+				if(res.data.flag == '0') {
+					this.fileList3 = res.data.data.files;
+				} else {
+					this.$message.error(res.data.des);
 				}
-			}).catch((err) => { 
-				this.$message.error( err );
+			}).catch((err) => {
+				this.$message.error(err);
 			})
-		},
-		//附件上传
+		}, //附件上传
 		beforeAvatarUpload(file) {
 			//上传之前判断格式及大小；成功之后可以继续上传;
-//			var fd=new FormData();
-//				fd.append('ddd', file)
-//			this.$http.post( 'service/hrweb/sm', Qs.stringify (fd)).then(( res) => {
-//				console.log(res)
-//			}).catch((err) => { 
-//				this.$message.error( err );
-//			})
+			//			var fd=new FormData();
+			//				fd.append('ddd', file)
+			//			this.$http.post( 'service/hrweb/sm', Qs.stringify (fd)).then(( res) => {
+			//				console.log(res)
+			//			}).catch((err) => { 
+			//				this.$message.error( err );
+			//			})
 		},
 		handleSuccess(response, file, fileList) {
 			console.log(response)
-			if(response.flag=='0'){
+			if(response.flag == '0') {
 				this.fileinit();
-			}else{
-				this.$message.error( response.des);
+			} else {
+				this.$message.error(response.des);
 			}
 		},
-		downloadRow(row1,row2){
+		downloadRow(row1, row2) {
 			//附件的下载
-			console.log(row1,row2)
-			window.location.href=row2.url;
-//			this.$http.post( 'service/hrweb/sm', Qs.stringify ({
-//				transType:"fileManage",
-//				handleType:"downLoadFile"
-////				pk_doc:row2.pk_doc
-//			})).then(( res) => {
-//				console.log(res)
-//				if(res.data.flag=='0'){
-//					res.data.filebyte
-//					//ddddddddddddddddddddddddddddddddddddd下载
-//				}else{
-//					this.$message.error( res.data.des );
-//				}
-//			}).catch((err) => { 
-//				this.$message.error( err );
-//			})
+			console.log(row1, row2)
+			window.location.href = row2.url;
+			//			this.$http.post( 'service/hrweb/sm', Qs.stringify ({
+			//				transType:"fileManage",
+			//				handleType:"downLoadFile"
+			////				pk_doc:row2.pk_doc
+			//			})).then(( res) => {
+			//				console.log(res)
+			//				if(res.data.flag=='0'){
+			//					res.data.filebyte
+			//					//ddddddddddddddddddddddddddddddddddddd下载
+			//				}else{
+			//					this.$message.error( res.data.des );
+			//				}
+			//			}).catch((err) => { 
+			//				this.$message.error( err );
+			//			})
 		},
-		filedeleteRow(row1,row2){
+		filedeleteRow(row1, row2) {
 			//附件的删除
-			console.log(row1,row2)
-			this.$http.post( 'service/hrweb/sm', Qs.stringify ({
-				transType:"fileManage",
-				handleType:"deleteFile",
-				pk_doc:row2.pk_doc
-			})).then(( res) => {
+			console.log(row1, row2)
+			this.$http.post(this.$store.state.Interface.sm, Qs.stringify({
+				transType: "fileManage",
+				handleType: "deleteFile",
+				pk_doc: row2.pk_doc
+			})).then((res) => {
 				console.log(res)
-				if(res.data.flag=='0'){
+				if(res.data.flag == '0') {
 					this.fileinit();
-				}else{
-					this.$message.error( res.data.des );
+				} else {
+					this.$message.error(res.data.des);
 				}
-			}).catch((err) => { 
-				this.$message.error( err );
+			}).catch((err) => {
+				this.$message.error(err);
 			})
 
-			
 		},
 		//获取 stroe中存的静态数据
 		getData(key) {
 			return this.$store.state.Information[key];
 		},
-		
+
 		//设置当前被操作弹窗的操作类型、被编辑或者修改的列行号
 		setCurrentDialog(data) {
 			if(data[2]) {
@@ -516,7 +510,7 @@ export default {
 			this.currentDialog.operate = data[0];
 			this.currentDialog.infoSetCode = data[1];
 		},
-		
+
 		//子集-新增、编辑的保存操作
 		savePersonInfo(data) {
 			var _data = data;
@@ -543,29 +537,25 @@ export default {
 					_paramData.pk_psndoc_sub = this.currentDialog.index;
 					break;
 			};
+
+			this.$http.post(this.$store.state.Interface.hi, Qs.stringify(_paramData), {
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+				}
+			}).then(function(response) {
+				if(response.data.flag == 0) {
+					this.hideDialog(_code);
+					this.$refs[_code].loadData();
+				} else {
+					this.$message({
+						message: response.data.des,
+						type: 'error'
+					})
+				}
+			}.bind(this)).catch(function(error1) {
+				this.$message.error('请求数据失败');
+			}.bind(this));
 			
-			this.$http.post(this.$store.state.Interface.hi,Qs.stringify (_paramData), {
-		          	headers: {
-//		                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
-		          	}
-	      		}).then(function (response) {
-//	      			console.log(response)
-					if(response.data.flag==0){
-						this.hideDialog(_code);
-						this.$refs[_code].loadData();
-					}else {
-						this.$message({  
-	                        message : response.data.des,  
-	                        type : 'error'  
-	                    }) 
-					}
-			   	}.bind(this)).catch(function (error1) {
-			         this.$message.error('请求数据失败');
-			    }.bind(this));
-//			ajaxData(this.$store.state.Interface.hi, _paramData, (res) => {
-//				this.hideDialog(_code);
-//				this.$refs[_code].loadData();
-//			});
 		},
 		//隐藏弹窗
 		hideDialog(code) {
@@ -604,34 +594,27 @@ export default {
 		//子集-还原提交收回等操作
 		handleList(data) {
 			var _code = data[1];
-			
-			this.$http.post(this.$store.state.Interface.hi,Qs.stringify ({
+
+			this.$http.post(this.$store.state.Interface.hi, Qs.stringify({
 				"transType": 'psnInfoHandle',
 				"infoSetCode": _code,
 				"way": data[0]
 			}), {
-	          	headers: {
-	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
-	          	}
-      	}).then(function (response) {
-				if(response.data.flag==0){
-					this.$refs[_code].loadData();
-				}else {
-					this.$message({  
-                        message : response.data.des,  
-                        type : 'error'  
-                    }) 
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
 				}
-		   	}.bind(this)).catch(function (error1) {
-		         this.$message.error('请求数据失败');
-		    }.bind(this));
-//			ajaxData(this.$store.state.Interface.hi, {
-//				"transType": 'psnInfoHandle',
-//				"infoSetCode": _code,
-//				"way": data[0]
-//			}, (res) => {
-//				this.$refs[_code].loadData();
-//			});
+			}).then(function(response) {
+				if(response.data.flag == 0) {
+					this.$refs[_code].loadData();
+				} else {
+					this.$message({
+						message: response.data.des,
+						type: 'error'
+					})
+				}
+			}.bind(this)).catch(function(error1) {
+				this.$message.error('请求数据失败');
+			}.bind(this));
 
 		},
 		//子集-删除
@@ -908,5 +891,4 @@ export default {
 			return _obj;
 		}
 	}
-	}
-</script> 
+	}</script> 
