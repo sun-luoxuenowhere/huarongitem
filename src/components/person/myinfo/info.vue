@@ -317,7 +317,7 @@ import subDialog from './components/subdialog'; //弹窗
 export default {
 	data() {
 		return { 
-			fileUploadURL:'service/hrweb/sm',//附件上传地址
+			fileUploadURL:'',//附件上传地址
 			lvliFormData: '', //履历初始数据 
 			hetongFormData: '', //合同初始数据 
 			xueliFormData: '', //合同初始数据 
@@ -358,6 +358,7 @@ export default {
 	},
 	created(){
 //		UserInfo = JSON.parse( Cookies.get('usermsg'));//获取人员信息
+		this.fileUploadURL=window.location.origin+'/service/hrweb/sm';
 		this.fileinit();
 	},
 	mounted(){
