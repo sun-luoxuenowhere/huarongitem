@@ -48,7 +48,7 @@
 		</el-checkbox-group>
 	</el-form-item> 
 	
-	<!-- 级联菜单 begin -->
+	<!--省级联 begin -->
 	<el-form-item class="y-input" v-else-if="inputData.type == inputType[4]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
 		<yRegion 
 			:visible="showCasc" 
@@ -56,9 +56,14 @@
 			:config="inputData" @close="showCasc = false"></yRegion> 
 		<el-input :disabled="inputData.disabled" :title="currentValue" :readonly="true" v-model="currentValue" icon="caret-bottom" @click="selectCascader"></el-input>  
 	</el-form-item> 
+	<!-- 职称级联菜单 begin -->
+	<el-form-item class="y-input" v-else-if="inputData.type == inputType[5]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
+		 
+		 
+	</el-form-item> 
 	
 	<!-- textarea begin -->
-	<el-form-item class="y-input" v-else-if="inputData.type == inputType[5]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
+	<el-form-item class="y-input" v-else-if="inputData.type == inputType[6]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
 		<el-input
 		  type="textarea"
 		  :autosize="{ minRows: 1, maxRows: 10}"
@@ -82,7 +87,7 @@ export default {
 	data(){
 		return { 
 			showCasc: false,
-			inputType: ['date', 'refer', 'radio', 'checkbox', 'region','textarea'],
+			inputType: ['date', 'refer', 'radio', 'checkbox', 'region','tech','textarea'],
 			referCusStr: 'idtype,bloodtype', //自定义的参照字段集合
 			cascFormData: {}, //级联菜单中使用的当前表单数据
 			cascPrev: '', //级联菜单的前置条件(例：国籍)
@@ -129,17 +134,13 @@ export default {
 		//加载参照类型数据
     	loadData(){   
     		var _code = this.inputData.typedata[0].code;  
-    		
     		if( this.referCusStr.indexOf(_code) > -1 ){ //自定义的参照类型 
     			this.optionsdata = this.$store.state.ReferInit[ _code ];   
     			var _name = this.name; 
 				this.currentValue = this.formData[_name]; 
     		}else if( _code == 'country' ){ //国籍地区
+    			
     			ajaxData( this.$store.state.Interface.sm, { 
-//	    			"pk_psndoc":UserInfo.pk_psndoc,
-//			    	"cuserid":UserInfo.cuserid,
-//			    	"pk_group":UserInfo.pk_group,
-//			    	"pk_org": UserInfo.pk_org,
 					"transType": 'country' 
 				},( res ) => {   
 					this.optionsdata =  res.list;  
@@ -148,10 +149,6 @@ export default {
 		    	}); 
     		}else{ //从后台取数据的参照类型
     			ajaxData( this.$store.state.Interface.sm, {
-//  				"pk_psndoc":UserInfo.pk_psndoc,
-//			    	"cuserid":UserInfo.cuserid,
-//			    	"pk_group":UserInfo.pk_group,
-//			    	"pk_org": UserInfo.pk_org,
 					"transType": 'defdoc', 
 					"defdoclistCode": this.inputData.typedata[0].code
 				},( res ) => {   
