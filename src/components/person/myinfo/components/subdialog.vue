@@ -50,8 +50,10 @@ export default {
 	methods: {  
 		//确定操作
 		submitForm(){   
-		 	this.$refs['myForm'].validate((valid) => {    
+		 	this.$refs['myForm'].validate((valid) => {   
 		 		var _postdata = this.postFormData(); 
+//		 		console.log(_postdata)
+//		 		return;
 				if (valid) {   
 					if( _postdata ){    
 						console.log(_postdata)
@@ -100,7 +102,7 @@ export default {
 		//被提交到后台的表单数据
 		postFormData(){ 
 			var _postdata = {};
-			var _initdata = JSON.parse( this.initFormData ); 
+			var _initdata = JSON.parse( this.initFormData );
 			for(var i in _initdata){
 				var _val = this.formData[i];
 				if( _initdata[i] != _val ){

@@ -9,6 +9,7 @@
 		 	<el-form :model="regionForm" :rules="rules" ref="regionForm" label-width="110px" class="clearfix"> 
 		 		<el-form-item class="y-input" prop="pks" label="城市地区">   
 					<el-cascader
+						expand-trigger='click'
 						v-model="regionForm.pks"
 					    :options="optionsdata"
 					    :props="props" 
@@ -117,7 +118,7 @@ export default {
 	      			this.$message.error(_data.des);
 	      		}; 
 			}).catch((err) => { //网络异常
-				 
+				 this.$message.error(err);
 			});  
 	  	},
     	//加载级联类型数据
@@ -127,20 +128,32 @@ export default {
 				alert('请先选择国籍地区');
 				return;
 			}; 
-			ajaxData( this.$store.state.Interface.sm, { 
+			
+			this.$http.post( this.$store.state.Interface.sm, Qs.stringify ({
 				"transType": "region", 
 				"pk_country": _pk
-			},( res ) => {
-				console.log(res)
-				this.optionsdata = this.toTreeData( res.list ); 
-				this.dataCache[_pk] = this.optionsdata; 
-	    	}); 
+			}), {
+	          	headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'
+	          	}
+	      	}).then(( res ) => { 
+	      		console.log(res.data.data.list)
+	      		if(res.data.flag=='0'){
+	      			this.optionsdata = this.toTreeData( res.data.data.list );
+					this.dataCache[_pk] = this.optionsdata; 
+	      		}else{
+	      			this.$message.error(res.data.des);
+	      		}
+			}).catch((err) => { //网络异常
+				 this.$message.error(err);
+			});
     	},
     	//json格式转成树结构
     	toTreeData( data, config ){ 
 	    	var _id = "pk_region";
 	    	var _pid = "pk_father"; 
 	    	var _children = "children";
+	    	
 	    	if( config ){
 	    		_id = config.id; 
 	    	};

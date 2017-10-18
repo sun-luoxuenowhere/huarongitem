@@ -58,8 +58,15 @@
 	</el-form-item> 
 	<!-- 职称级联菜单 begin -->
 	<el-form-item class="y-input" v-else-if="inputData.type == inputType[5]" :label="inputData.text" :prop="inputData.valid ? inputData.id : ''">   
-		 
-		 
+		 <el-cascader
+		    :options="optionsdata"
+		    v-model="techValue"
+		    :props="props1" 
+		    :show-all-levels='false'
+		    filterable
+		    change-on-select
+		    @change="techCascader()">
+		</el-cascader>
 	</el-form-item> 
 	
 	<!-- textarea begin -->
@@ -82,6 +89,7 @@
 import { ajaxData } from '@/assets/js/ajaxdata.js';
 import Cookies from 'js-cookie';
 import yRegion from './yregion'; //省市区弹窗 
+
 var UserInfo;
 export default {  
 	data(){
@@ -91,7 +99,9 @@ export default {
 			referCusStr: 'idtype,bloodtype', //自定义的参照字段集合
 			cascFormData: {}, //级联菜单中使用的当前表单数据
 			cascPrev: '', //级联菜单的前置条件(例：国籍)
-			optionsdata: []
+			optionsdata: [],
+			props1:{ "value":'pk_defdoc', "label": 'name' }, //职称级联菜单的显示映射关系
+			techValue:[]
 		}
 	},
 	components: { 
@@ -121,14 +131,12 @@ export default {
 //		UserInfo = JSON.parse( Cookies.get('usermsg') );//获取人员信息
 	},
 	mounted() {   
-		if( this.inputData.type == this.inputType[1] ){  //参照类型数据格式 
-			this.loadData();   
+		if( this.inputData.type == this.inputType[1]||this.inputData.type == this.inputType[5] ){  //参照类型数据格式 
+			this.loadData();
 		};
     },
     watch:{
-    	formData:function(data){
-    		
-    	}
+    	
     },
 	methods: { 
 		//加载参照类型数据
@@ -147,6 +155,17 @@ export default {
 					var _name = this.name; 
 					this.currentValue = this.formData[_name]; 
 		    	}); 
+    		}else if(_code == 'HR019_0xx'){//获取职称
+    			ajaxData( this.$store.state.Interface.sm, { 
+					"transType": 'defdoc', 
+					"defdoclistCode": this.inputData.typedata[0].code
+				},( res ) => { 
+					this.optionsdata =  this.toTreeData(res.list); 
+					var _name = this.name; 
+					this.currentValue = this.formData[_name]; 
+					console.log(this.toTreeData( res.list))
+		    	}); 
+		    	
     		}else{ //从后台取数据的参照类型
     			ajaxData( this.$store.state.Interface.sm, {
 					"transType": 'defdoc', 
@@ -226,13 +245,48 @@ export default {
     		};
     		this.$emit('inputChange', this.name ); 
     	},
-    	inputChange( val ){   
+    	inputChange( val ){  
     		this.$emit('inputChange', this.name ); 
     	}, 
+    	techCascader(val){
+    		var num=this.techValue.length-1;
+    		this.formData.pk_techposttitle=this.techValue[num];
+    		this.$emit('inputChange', this.name ); 
+    	},
     	selectCascader(){
     		this.cascFormData = this.formData;  
     		this.showCasc = true;
-    	}
+    	},
+    	//json格式转成树结构
+    	toTreeData( data, config ){ 
+	    	var _id = "pk_defdoc";
+	    	var _pid = "pid"; 
+	    	var _children = "children";
+	    	if( config ){
+	    		_id = config.id; 
+	    	};
+	        var map = {}; //缓存当前数据的id object对应关系
+	        
+	        data.forEach(function (item) {
+	        	if( !item[_pid] ){
+	        		item[_pid] = '~';
+	        	};
+	        	var _idval = item[_id].toString(); 
+	            map[_idval] = item;
+	        });  
+	        var val = []; 
+	        data.forEach(function (item) { 
+	        	var _pidval = item[_pid].toString(); 
+	            var parent = map[ _pidval ]; 
+	            
+	            if (parent) { 
+	                (parent[_children] || ( parent[_children] = [] )).push(item); 
+	            } else { 
+	                val.push(item);
+	            };
+	        });  
+	        return val;
+	    } 
     }
 }
 </script>

@@ -67,7 +67,7 @@ export default {
 					_descdata.push( _pdata );
 				}; 
 			};
-			console.log(_descdata)
+//			console.log(_descdata)
 			var navdata=[];
 			for(var i = 0; i < _descdata.length; i++){
 				if(_descdata[i].pid==0){
@@ -111,7 +111,7 @@ export default {
 				this.photo=response.data;
 				this.data=response.data.func;
 				this.navfunc();
-				console.log(this.data)
+//				console.log(this.data)
 			}else if(response.data.flag==-1){
 				this.$message({  
                     message : response.data.des,  
