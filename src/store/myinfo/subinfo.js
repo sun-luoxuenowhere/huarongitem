@@ -287,7 +287,7 @@ export default {
 	    //职称表单配置
 	    zhichenFormConfig: [{ "id": "begindate", "text": "评定日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }] },
 	    	{ "id": "enddate", "text": "结束时间", "type": "date", "valid": [{ validator: validForm.ymd, trigger: 'blur' }] },
-	    	{ "id": "pk_techposttitle", "text": "获得职称", "type": "refer", "typedata": [{"code": "HR019_0xx"}], "valid": [{ required: true, message: '不能为空', trigger: 'change' }] },
+	    	{ "id": "pk_techposttitle", "text": "获得职称", "type": "tech", "typedata": [{"code": "HR019_0xx"}], "valid": [{ validator: validForm.array,required: true, message: '不能为空', trigger: 'change' }] },
 	    	{ "id": "titlerank", "text": "职称等级", "type": "refer", "typedata": [{"code": "HR025_0xx"}] },
 	    	{ "id": "assorg", "text": "评定机构" },
 	    	{ "id": "certifcode", "text": "证书编号", "valid": [{ validator: validForm.cardno, trigger: 'change' }] },

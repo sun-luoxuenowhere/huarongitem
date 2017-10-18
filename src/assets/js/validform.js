@@ -55,6 +55,20 @@ export const validForm = {
 		}
 
 	},
+	//数组
+	array: (rule, value, callback) => {
+		if(!rule.required && value == "") {
+			callback();
+			return;
+		} else {
+			if(!validForm.pattresult["chinese"] instanceof Array) {
+				callback(new Error('不能为空哦'));
+			} else {
+				callback();
+			}
+		}
+
+	},
 	//数字
 	num: (rule, value, callback) => {
 		if(!rule.required && value == "") {
@@ -98,7 +112,6 @@ export const validForm = {
 				callback();
 			}
 		}
-
 	},
 	pattresult: {
 		"email": /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
