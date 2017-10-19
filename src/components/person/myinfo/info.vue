@@ -780,6 +780,8 @@ export default {
 			};
 			switch(data[0]) {
 				case "add":
+					initData.tiptop_flag = 'N';
+					initData.glbdef1 = 'N';
 					this.zhichenFormData = initData;
 					break;
 				case 'edit':
@@ -839,7 +841,7 @@ export default {
 			this.setCurrentDialog(data);
 			this.subDialogConfig.jiangli.visible = true;
 		},
-		//打开紧急弹窗
+		//打开紧急联系人弹窗
 		openjinjiDialog(data) {
 
 			var initData = {
@@ -857,6 +859,7 @@ export default {
 			};
 			switch(data[0]) {
 				case "add":
+					initData.ismain = 'N';
 					this.jinjiFormData = initData;
 					break;
 				case 'edit':
