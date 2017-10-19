@@ -2,7 +2,8 @@
 	<div class="y-maincontent" style="padding-bottom: 200px;">
 		<div class="y-breadcrumb-box">
 			<el-breadcrumb separator="/">  
-			  <el-breadcrumb-item>人事信息</el-breadcrumb-item>
+			  <el-breadcrumb-item>人员信息</el-breadcrumb-item>
+			  <el-breadcrumb-item>我的信息</el-breadcrumb-item> 
 			</el-breadcrumb>
 		</div>
 		<div class="y-row-box"> 
