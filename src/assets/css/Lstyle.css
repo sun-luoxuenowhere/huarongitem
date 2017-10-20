@@ -405,12 +405,13 @@ header {
 	border: 1px solid #;
 	background-color: #fff;
 	margin-bottom: 2px;
+	color: #CC2123;
 	padding-left: 20px;
 }
 .L-salarylisttittle .date {
 	font-family: "微软雅黑";
 	font-size: 16px;
-	color: #333333;
+	color: #CC2123;
 	font-weight: bold;
 	padding-right: 10px;
 }
@@ -423,7 +424,10 @@ header {
 }
 .L-salarylistinner {
 	background-color: #fff;
-	padding: 20px 20px 20px 20px;
+	padding: 0px 20px 20px 20px;
+}
+.L-salarylistinner .L-tittle {
+	font:bold 14px/40px "微软雅黑";
 }
 .L-salarylistborder {
 	border-left: 1px solid #EEEEEE;
@@ -471,6 +475,35 @@ header {
 color: #CC2123;
 	font-weight: bold;
 }
+
+/*薪资查询登录页面样式开始*/
+.L-salarylogin {
+	min-height: 500px;
+	background-color: #fff;
+}
+.L-salarywrap {
+	width: 350px;
+	margin: auto;
+}
+.L-salarywrap .el-input__inner:focus {
+	border-color:#CC2123;
+}
+.L-salarywrap .el-button--primary {
+	background:#CC2123;
+	border-color:#CC2123;
+}
+.L-salarywrap .el-button--text {
+	color: #CC2123;
+}
+.L-salarywrap .salarytext {
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #333333;
+}
+
+/*薪资查询登录页面样式结束*/
+
+
 
 /*消息中心*/
 /*消息中心弹框样式*/
