@@ -12,11 +12,11 @@
 		<div class="L-salaryinner">
 			<div class="L-salarytittle">
 				<span class="block">
-				    <!--<span class="demonstration">默认</span>-->
 				    <el-date-picker
 				      v-model="value1"
 				      type="month"
-				      placeholder="选择日期"
+				      placeholder="选择查询日期"
+				      @change="date1"
 				      >
 				    </el-date-picker>
 				</span>
@@ -24,11 +24,11 @@
 				<span class="L-to">to</span>
 				
 				<span class="block">
-				    <!--<span class="demonstration">默认</span>-->
 				    <el-date-picker
 				      v-model="value2"
 				      type="month"
-				      placeholder="选择日期"
+				      placeholder="选择查询日期"
+				      @change="date2"
 				     >
 				    </el-date-picker>
 				</span>
@@ -39,14 +39,14 @@
 				<li class="L-salarylist"  v-for="item in salarydata">
 					<div class="L-salarylisttittle">
 						<span class="date">{{item.date}}</span>
-						<span class="date">{{item.conmany}}</span>
-						<span class="date">{{item.type}}</span>
 						<span @click.stop="seeingbtn()" class="biao"><i v-if="seeing==true" class="iconfont icon-yanjing"></i><i v-else="seeing==false" class="iconfont icon-biyan"></i></span>
 					</div>
-					<div class="L-salarylistinner">
+					
+					<div class="L-salarylistinner" v-for="value in item.type">
+						<div class="L-tittle">{{value.type1}}</div>
 						<div class="L-salarylistborder clearfix">
 							<el-row>
-								<el-col :span="3" class="inner" v-for="list in item.data">
+								<el-col :span="3" class="inner" v-for="list in value.data">
 									<p class="sizatop">{{list.name}}</p>
 									<p class="sizacon"><span v-if="seeing==true">{{list.value}}</span><span v-if="seeing==false">----</span></p>
 								</el-col>
@@ -54,6 +54,10 @@
 						</div>
 					</div>
 				</li>
+				
+				
+				
+				
 				
 				<!--合计-->
 				<li class="L-salarylist">
@@ -110,20 +114,23 @@
 			}
 		},
 		methods:{
+			date1(res){
+				this.value1=res;
+			},
+			date2(res){
+				this.value2=res;
+			},
 			search(){
-				var date1=this.datahandle(this.value1);
-				var date2=this.datahandle(this.value2);
-				if(date1>date2){
+
+				if(this.value1>this.value2){
 					 this.$message('开始时间不能大于结束时间');
-				}else if(date1=='NaN-NaN'){
+				}else if(this.value1==''){
 					 this.$message('开始时间不能为空');
-					
-				}else if(date2=='NaN-NaN'){
+				}else if(this.value2==''){
 					 this.$message('结束时间不能为空');
-					
 				}else {
 					//发送请求获取查询的数据
-					console.log(date1+'to'+date2)
+					console.log(this.value1+'to'+this.value2)
 				}
 
 				
@@ -135,7 +142,7 @@
 		},
 		
 		created(){
-			 this.$http.get("static/salarydata.json",{
+			 this.$http.get("static/salarydata1.json",{
 		    	params:{
 		    		
 		    	}
