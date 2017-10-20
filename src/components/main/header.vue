@@ -24,11 +24,11 @@
 								<img class="userlogo" v-else :src="'data:image/png;base64,'+photodata.photo"/>
 								<i class="el-icon-caret-bottom el-icon--right" style="color:#838A94;"></i>
 							</span>
-							<el-dropdown-menu slot="dropdown">
+							<!--<el-dropdown-menu slot="dropdown">
 								<el-dropdown-item command="a">暂无开发</el-dropdown-item>
-								<!--<el-dropdown-item command="b">账户设置</el-dropdown-item>
-								<el-dropdown-item command="c">退出登录</el-dropdown-item>-->
-							</el-dropdown-menu>
+								<el-dropdown-item command="b">账户设置</el-dropdown-item>
+								<el-dropdown-item command="c">退出登录</el-dropdown-item>
+							</el-dropdown-menu>-->
 						</el-dropdown>
 					</el-col>
 				</div>

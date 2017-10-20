@@ -224,7 +224,7 @@ export default {
 						this.formData.glbdef4='0';
 					}else {
 						if(this.systime()<this.systimetran(this.currentValue)){
-							this.$message.error('转正日期不能大于系统日期');
+//							this.$message.error('转正日期不能大于系统日期');
 							this.formData.partyduedate='';
 							this.formData.glbdef4='0';
 						}else{

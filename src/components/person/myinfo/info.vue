@@ -25,6 +25,7 @@
 						<li> <a scroll-href="#zhiye">职业资格</a> </li>
 						<li> <a scroll-href="#jinji">紧急联系人</a> </li>
 						<li> <a scroll-href="#yuyan">语言能力</a> </li>
+						<li> <a scroll-href="#fujian">附件管理</a> </li>
 					</ul>
 				</div>
 				<!-- 基本信息 begin -->
@@ -188,7 +189,7 @@
 				<!-- 语言能力 end -->
 				
 				<!-- 附件开始 -->
-				<div class="y-module"> 
+				<div class="y-module" data-scroll="fujian"> 
 					<div class="y-title" > 
 						附件管理
 					</div>
