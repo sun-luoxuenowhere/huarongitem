@@ -187,7 +187,7 @@
 //			    	"pk_group":UserInfo.pk_group,
 //			    	"pk_org": UserInfo.pk_org,
 					"infoSetCode": "bd_psndoc",
-					"transType": 'psnInfoQuery' 
+					"transType": 'queryPsnInfo' 
 				}, (res) => {  
 					var _dataobj = res.list[0]; 
 					this.status = res.status;  
@@ -234,7 +234,7 @@
 								delete _param.addr_show;
 							}; 
 							ajaxData(this.$store.state.Interface.hi, {
-								"transType": "psnInfoSave",  
+								"transType": "savePsnInfo",  
 								"infoSetCode": this.infoSetCode,
 								"jsonStr": encodeURIComponent(JSON.stringify(_param))
 							}, (res) => {  
@@ -251,7 +251,7 @@
 			//点击提交、还原、收回按钮
 			handle( data ){  
 				ajaxData(this.$store.state.Interface.hi, {
-					"transType": 'psnInfoHandle', 
+					"transType": 'handlePsnInfo', 
 					"infoSetCode": this.infoSetCode,
 					"way": data[0]
 				}, (res) => {   

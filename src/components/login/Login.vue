@@ -56,7 +56,7 @@
                 //发送请求
                  this.$http.post(this.url,Qs.stringify ({
 			    		"userCode":username,
-						"password":password
+						"passWord":password
 		    	}), {
 		          	headers: {
 		                'Content-Type': 'application/x-www-form-urlencoded;charset=gbk'

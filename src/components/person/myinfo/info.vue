@@ -529,7 +529,7 @@ export default {
 //				"cuserid": UserInfo.cuserid,
 //				"pk_group": UserInfo.pk_group,
 //				"pk_org": UserInfo.pk_org,
-				"transType": "psnInfoSave",
+				"transType": "savePsnInfo",
 				"infoSetCode": _code,
 				"jsonStr": encodeURIComponent(JSON.stringify(_data))
 			};
@@ -605,7 +605,7 @@ export default {
 			var _code = data[1];
 
 			this.$http.post(this.$store.state.Interface.hi, Qs.stringify({
-				"transType": 'psnInfoHandle',
+				"transType": 'handlePsnInfo',
 				"infoSetCode": _code,
 				"way": data[0]
 			}), {

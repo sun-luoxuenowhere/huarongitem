@@ -129,7 +129,7 @@ export default {
 //		    	"pk_group":UserInfo.pk_group,
 //		    	"pk_org": UserInfo.pk_org,
 				"infoSetCode": this.infoSetCode,
-				"transType": 'psnInfoQuery' 
+				"transType": 'queryPsnInfo' 
 			})).then(( res) => {
 				if(res.data.flag=='0'){
 					this.status = res.data.data.status;  
