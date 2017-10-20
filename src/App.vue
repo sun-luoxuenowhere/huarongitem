@@ -83,7 +83,6 @@ export default {
 	}
 	html,
 	body{
-		
 		height: 100%;
 		background: #fafafa;
 	}
