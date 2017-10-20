@@ -49,7 +49,12 @@ export default {
 				"E9010204":{"icon":"iconfont icon-renshihangzhengshi","url":"/Handlemessagelist", id: 'E9010204', pid: 'E90102',text:'工作任务'},
 				"E9010206":{"icon":"iconfont icon-renshihangzhengshi","url":"/Warningmessagelist", id: 'E9010206', pid: 'E90102',text:'预警消息'},
 				"E90104":{"icon":"iconfont icon-renshihangzhengshi","url":"", id: 'E90104', pid: '0',text:'人员信息'},
-				"E9010402":{"icon":"","url":"/myInfo", id:'E9010402', pid: 'E90104',text:'我的信息'}
+				"E9010402":{"icon":"","url":"/myInfo", id:'E9010402', pid: 'E90104',text:'我的信息'},
+				"E90106":{"icon":"iconfont icon-renshihangzhengshi","url":"", id: 'E90106', pid: '0',text:'我的薪资'},
+				"E9010602":{"icon":"","url":"/mySalary", id:'E9010602', pid: 'E90106',text:'薪资查询'},
+				"E90108":{"icon":"iconfont icon-renshihangzhengshi","url":"", id: 'E90108', pid: '0',text:'绩效考核'},
+				"E9010802":{"icon":"","url":"", id:'E9010802', pid: 'E90108',text:'评测打分'},
+				"E9010804":{"icon":"","url":"", id:'E9010804', pid: 'E90108',text:'领导定级'}
 				
 			};
 			var _cachepid = [];
