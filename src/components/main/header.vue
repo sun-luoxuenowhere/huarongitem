@@ -22,7 +22,7 @@
 							<span class="el-dropdown-link">
 								<img class="userlogo" v-if="!photodata.photo" src="../../assets/img/peple.png"/>
 								<img class="userlogo" v-else :src="'data:image/png;base64,'+photodata.photo"/>
-								<i class="el-icon-caret-bottom el-icon--right" style="color:#838A94;"></i>
+								<!--<i class="el-icon-caret-bottom el-icon--right" style="color:#838A94;"></i>-->
 							</span>
 							<!--<el-dropdown-menu slot="dropdown">
 								<el-dropdown-item command="a">暂无开发</el-dropdown-item>
