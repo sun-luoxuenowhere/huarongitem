@@ -194,7 +194,7 @@ export default {
 		//--------以下是弹框卡片--------    
 	    //履历表单配置
 	    jobFormConfig: [{ "id": "begindate", "text": "开始日期", "type": "date", "valid": [{ validator: validForm.ymd, required: true, trigger: 'blur' }]},
-	    	{ "id": "enddate", "text": "结束日期", "type": "date", "valid": [{ validator: validForm.ymd, trigger: 'blur' }]},
+	    	{ "id": "enddate", "text": "结束日期", "type": "date", "valid": [{ required: true,validator: validForm.ymd, trigger: 'blur' }]},
 	    	{ "id": "workcorp", "text": "工作单位", "valid": [{ required: true, message: '不能为空', trigger: 'change' }]},
 	    	{ "id": "workdept", "text": "部门", "valid": [{ required: true, message: '不能为空', trigger: 'change' }] }, 
 	    	{ "id": "workpost", "text": "岗位" }, 

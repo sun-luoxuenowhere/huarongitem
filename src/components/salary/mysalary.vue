@@ -89,17 +89,17 @@
 		<!--查询界面结束-->
 		
 		<!--查询登录界面开始-->
-		<div class="L-salarylogin" :style="{height:loginheight+'px'}">
+		<div class="L-salarylogin" :style="{height:loginheight+'px'}" v-show="login">
 			<div class="L-salarywrap">
 				<el-form :model="numberValidateForm" ref="numberValidateForm" style="margin-left: -50px;padding-top: 50%;" label-width="100px" class="demo-ruleForm">
 				  <el-form-item
 				    label="密码:"
-				    prop="age"
+				    prop="pass"
 				    :rules="[
 				      { required: true, message: '密码不能为空'}
 				    ]"
 				  >
-				    <el-input type="age" v-model.number="numberValidateForm.age" placeholder='请输入工资查询密码'  auto-complete="off"></el-input>
+				    <el-input type="age" v-model.number="numberValidateForm.pass" placeholder='请输入工资查询密码'  auto-complete="off"></el-input>
 				  </el-form-item>
 				  <el-form-item>
 				    <el-button type="primary" class='' @click="submitForm('numberValidateForm')">查询</el-button>
@@ -123,11 +123,13 @@
 
 <script>
 import modifyPass from '@/components/public/modifypass';
+import Qs from 'qs';
 	export default {
 		
 		data(){
 			return {
-				salaryshow:false,
+				salaryshow:true,
+				login:false,
 				showdialog:false,//修改密码弹框
 				seeing:true,//眼睛闭合
 		        value1:'',
@@ -135,7 +137,7 @@ import modifyPass from '@/components/public/modifypass';
 				salarydata:"",
 				loginheight:'',
 				numberValidateForm: {
-		          age: ''
+		          pass: ''
 		        }
 			}
 		},
@@ -149,12 +151,24 @@ import modifyPass from '@/components/public/modifypass';
 			date2(res){
 				this.value2=res;
 			},
-			reset(){
-				this.$message('重置密码');
+			reset(){//重置密码
+				this.$http.post(this.$store.state.Interface.wa, Qs.stringify({
+					transType: "handleWAPSWD",
+					way: "reset"
+				})).then((res) => {
+					if(res.data.flag=='0'){
+						if(res.data.result[0].flag=='0'){
+							this.$message(res.data.result[0].des);
+						}
+					}else{
+						this.$message.error( res.data.des );
+					}
+				}).catch((err) => {
+					this.$message.error(err);
+				})
 			},
 			modifypass(){
 				this.showdialog=true;
-				
 			},
 			search(){
 				if(this.value1>this.value2){
@@ -177,8 +191,27 @@ import modifyPass from '@/components/public/modifypass';
 				
 		        this.$refs[formName].validate((valid) => {
 		          if (valid) {
-		            alert('submit!');
 //		            this.salaryshow=true;
+					this.$http.post(this.$store.state.Interface.wa, Qs.stringify({
+						transType: "handleWAPSWD",
+						way: "check",
+						passWord:this.numberValidateForm.pass
+					})).then((res) => {
+						console.log(res)
+      					if(res.data.flag=='0'){
+      						if(res.data.result==false){
+      							this.$message.error('薪资查询密码不正确');
+      						}else if(res.data.result==true){
+      							this.salaryshow=true;
+      							this.login=false;
+      						}
+						}else{
+							this.$message.error( res.data.des );
+						}
+					}).catch((err) => {
+						this.$message.error(err);
+					})
+
 		          } else {
 		            console.log('error submit!!');
 		            return false;
@@ -189,6 +222,7 @@ import modifyPass from '@/components/public/modifypass';
 		},
 		
 		created(){
+			//右侧内容高度自适应的设置
 			var winHeight='';
 			if (window.innerHeight){
 				winHeight = window.innerHeight;
@@ -197,18 +231,8 @@ import modifyPass from '@/components/public/modifypass';
 			}
 			this.loginheight=winHeight-123;
 			
-			
-//			 this.$http.get("static/salarydata1.json",{
-//		    	params:{
-//		    		
-//		    	}
-//	    	}).then(function (response) {
-//				console.log(response);
-//				this.salarydata=response.data.salarydata;
-//				
-//		   	}.bind(this)).catch(function (error1) {
-//		         this.$message.error('请求数据失败');
-//		    }.bind(this));
+			this.login=true;//初始需要登录才能查询薪资
+			this.salaryshow=false;//初始不显示查询
 		}
 		
 	}

@@ -235,7 +235,7 @@
 		<subDialog 
 			title="履历记录"
 			:visible="subDialogConfig.lvLi.visible" 
-			:subDialogtype="subDialogConfig.lvli"
+			:subDialogtype="subDialogConfig.lvLi"
 			:formConfig="jobFormConfig"
 			:formData="lvliFormData" 
 			@close="subDialogConfig.lvLi.visible = false" 

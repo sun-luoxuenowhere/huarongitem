@@ -10,6 +10,7 @@
 		<el-date-picker
 	      	v-model="currentValue"
 	      	placeholder="选择日期"
+	      	:clearable="false"
 	      	:editable="false"
 	      	:disabled="inputData.disabled"
 	      	:type="( inputData.typedata ? inputData.typedata[0].type : 'date')"
@@ -112,16 +113,17 @@ export default {
 		currentValue: {// 动态计算currentValue的值
 			get:function() {
 				var _val = this.value;
-				
 				if( this.inputData.type == this.inputType[3] ){ 
 					_val = ( _val == "" ? [] : _val.split(',') );   
 				};
-
   				return _val;
   			},
   			set:function( val ) {  
   				if( this.inputData.type == this.inputType[3] ){
 					val = val.join(',');  
+				}; 
+				if( this.inputData.type == this.inputType[0] ){
+					val = this.systimetran(val);  
 				}; 
   				this.$emit('input', val);
   			}
@@ -217,7 +219,8 @@ export default {
 	        return  iDays;
     	},
     	dateChange( val ){
-    		this.currentValue = val;   
+    		this.currentValue = val; 
+    		console.log(this.subtype)
     		if(this.subtype!=''){
     			if(this.subtype.infoSetCode=="hi_psndoc_partylog"){
 					if(this.formData.partyduedate==''){

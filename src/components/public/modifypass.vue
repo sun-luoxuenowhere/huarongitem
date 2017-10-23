@@ -11,10 +11,10 @@
 			    <el-input type="password" v-model="ruleForm2.passinit"placeholder='请输入原始密码' auto-complete="off"></el-input>
 			  </el-form-item>
 			  <el-form-item label="新密码:" prop="pass">
-			    <el-input type="password" v-model="ruleForm2.pass" placeholder='(6-16个字符，需要字母和数字)' auto-complete="off"></el-input>
+			    <el-input type="password" v-model="ruleForm2.pass" placeholder='(6-8位之间的数字)' auto-complete="off"></el-input>
 			  </el-form-item>
 			  <el-form-item label="确认新密码:" prop="checkPass">
-			    <el-input type="password" v-model="ruleForm2.checkPass" placeholder='(6-16个字符，需要字母和数字)' auto-complete="off"></el-input>
+			    <el-input type="password" v-model="ruleForm2.checkPass" placeholder='(6-8位之间的数字)' auto-complete="off"></el-input>
 			  </el-form-item>
 			  <el-form-item>
 			    <el-button type="primary" style=' width: 250px;border-color:#CC2123;background: #CC2123;margin-left: -100px;'  @click="submitForm('ruleForm2')">提交</el-button>
@@ -31,14 +31,16 @@ import { ajaxData } from '@/assets/js/ajaxdata.js';
 var UserInfo;
 export default {  
 	data(){
-		var res=/^[a-zA-Z0-9]{6,10}$/;
+		var res=/^\d{6,8}$/;
 		 
 	      var validatePass = (rule, value, callback) => {
 	        if (value === '') {
 	          callback(new Error('请输入密码'));
-	        } else {
+	        }else if(!res.test(value)) {
+	        	 callback(new Error('请输入6-8位之间的数字'));
+	        }else {
 	          if (this.ruleForm2.checkPass !== '') {
-	            this.$refs.ruleForm2.validateField('checkPass');
+	             this.$refs.ruleForm2.validateField('checkPass');
 	          }
 	          callback();
 	        }
@@ -47,7 +49,7 @@ export default {
 	        if (value === '') {
 	          callback(new Error('请再次输入密码'));
 	        }else if(!res.test(value)) {
-	        	 callback(new Error('请输入6-16个字符，需要字母和数字'));
+	        	 callback(new Error('请输入6-8位之间的数字'));
 	        }else if (value !== this.ruleForm2.pass) {
 	          callback(new Error('两次输入密码不一致!'));
 	        } else {
@@ -62,13 +64,13 @@ export default {
 		    },
 	        rules2: {
 	          passinit: [
-	            { validator: validatePass, trigger: 'blur' }
+	            { validator: validatePass, trigger: 'change' }
 	          ],
 	          pass: [
-	            { validator: validatePass2, trigger: 'blur' }
+	            { validator: validatePass2, trigger: 'change' }
 	          ],
 	          checkPass: [
-	            { validator: validatePass2, trigger: 'blur' }
+	            { validator: validatePass2, trigger: 'change' }
 	          ]
 	        }
 		};
@@ -84,7 +86,26 @@ export default {
 		submitForm(formName) {
 	        this.$refs[formName].validate((valid) => {
 	          if (valid) {
-	            alert('submit!');
+	            
+		            this.$http.post(this.$store.state.Interface.wa, Qs.stringify({
+						transType: "handleWAPSWD",
+						way: "modify",
+						oldPswd:this.ruleForm2.passinit,
+						newPswd:this.ruleForm2.checkPass
+					})).then((res) => {
+						if(res.data.flag=='0'){
+							if(res.data.result[0].flag=='0'){
+								this.$emit('close');
+								this.$message(res.data.result[0].des);
+							}else{
+								this.$message.error( res.data.result[0].des );
+							}
+						}else{
+							this.$message.error( res.data.des );
+						}
+					}).catch((err) => {
+						this.$message.error(err);
+					})
 	          } else {
 	            console.log('error submit!!');
 	            return false;

@@ -15,6 +15,7 @@ export default new Vuex.Store({
     		'sm': '/service/hrweb/sm',//系统管理
     		'msglist': '/service/hrweb/msg',//消息中心接口
     		'hi': '/service/hrweb/hi',//人员信息
+    		'wa':'/service/hrweb/wa' //薪资   	
     	},
     	
     	//固定的参照类型数据
